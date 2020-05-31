@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.test.demo">
+    package="com.test.internship">
 
     <application
         android:allowBackup="true"
@@ -9,19 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Setting_Activity"></activity>
-        <activity android:name=".EmergencyRoom_Activity" />
-        <activity android:name=".SkinSub_Activity" />
-        <activity android:name=".DentalSub_Activity" />
-        <activity android:name=".ChildSub_Activity" />
-        <activity android:name=".NeuroSub_Activity" />
-        <activity android:name=".BoneSub_Activity" />
-        <activity android:name=".EyeSub_Activity" />
-        <activity android:name=".ObstSub_Activity" />
-        <activity android:name=".InternalSub_Activity" />
-        <activity android:name=".ENTSub_Activity" />
-        <activity android:name=".NearbyHospital_Activity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.test.internship.Setting_Activity"></activity>
+        <activity android:name="com.test.internship.EmergencyRoom_Activity" />
+        <activity android:name="com.test.internship.SkinSub_Activity" />
+        <activity android:name="com.test.internship.DentalSub_Activity" />
+        <activity android:name="com.test.internship.ChildSub_Activity" />
+        <activity android:name="com.test.internship.NeuroSub_Activity" />
+        <activity android:name="com.test.internship.BoneSub_Activity" />
+        <activity android:name="com.test.internship.EyeSub_Activity" />
+        <activity android:name="com.test.internship.ObstSub_Activity" />
+        <activity android:name="com.test.internship.InternalSub_Activity" />
+        <activity android:name="com.test.internship.ENTSub_Activity" />
+        <activity android:name="com.test.internship.NearbyHospital_Activity" />
+        <activity android:name="com.test.internship.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

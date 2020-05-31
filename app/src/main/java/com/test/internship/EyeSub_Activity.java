@@ -1,13 +1,13 @@
-package com.test.demo;
+package com.test.internship;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class NeuroSub_Activity extends AppCompatActivity {
+public class EyeSub_Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.neuro_sub);
+        setContentView(R.layout.eye_sub);
     }
 }
