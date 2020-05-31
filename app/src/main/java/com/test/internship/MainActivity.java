@@ -1,5 +1,5 @@
 package com.test.internship;
-
+// 소연 테스트 완료 !
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
