@@ -7,6 +7,8 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+<!--    요고슨테슷트!!-->
+
     <Button
         android:id="@+id/nearbyHospital"
         android:layout_width="match_parent"
