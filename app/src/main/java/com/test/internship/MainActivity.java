@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+// 나는 제이 ㄹ위에 해야지 치킨 냠냠
 public class MainActivity extends AppCompatActivity {
 
     Button nearbyHospital, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub
