@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-// 나는 제이 ㄹ위에 해야지 치킨 냠냠
 public class MainActivity extends AppCompatActivity {
 
     Button nearbyHospital, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub
@@ -107,11 +106,3 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 }
-
-//희정.test
-//나타나랏
-//난 오늘 쮜낀 먹었지롱~.~
-
-
-//난 냉면이랑 갈비~~~~~~~
-//에....고건 저녁에 먹었지롱~.~
