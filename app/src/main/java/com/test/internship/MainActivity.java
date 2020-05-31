@@ -114,3 +114,4 @@ public class MainActivity extends AppCompatActivity {
 
 
 //난 냉면이랑 갈비~~~~~~~
+//에....고건 저녁에 먹었지롱~.~
