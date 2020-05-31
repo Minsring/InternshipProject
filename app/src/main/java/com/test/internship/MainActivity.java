@@ -110,3 +110,4 @@ public class MainActivity extends AppCompatActivity {
 
 //희정.test
 //나타나랏
+//난 오늘 쮜낀 먹었지롱~.~
