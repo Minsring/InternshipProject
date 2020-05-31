@@ -109,5 +109,5 @@
         android:text="추가 기능 체크"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"/>
-
+//윤모 확인
 </LinearLayout>
