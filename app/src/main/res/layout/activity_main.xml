@@ -114,7 +114,7 @@
         android:id="@+id/testHospitalInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="병원 정보"
+        android:text="Test 병원 정보"
         android:layout_margin="20dp"/>
 
 </LinearLayout>
