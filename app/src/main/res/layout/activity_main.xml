@@ -8,10 +8,10 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/nearbyHospital"
+        android:id="@+id/allSub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="주변 병원 보기"
+        android:text="전체 병원 보기"
         android:layout_margin="20dp" />
 
 <!--    TODO: 그리드 뷰(Demo 19 참고)로 아이콘 + 진료과목 나타낼 수 있게 수정-->

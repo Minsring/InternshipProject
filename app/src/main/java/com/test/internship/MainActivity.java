@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = null;
             switch (v.getId()){
                 case R.id.nearbyHospital:
-                    intent = new Intent(getApplicationContext(), NearbyHospital_Activity.class);
+                    intent = new Intent(getApplicationContext(), AllSub_Activity.class);
 //                    startActivity(intent);
                     break;
                 case R.id.entSub:
