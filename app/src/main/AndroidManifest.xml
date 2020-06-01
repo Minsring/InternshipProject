@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AllSub_Map"></activity>
+        <activity android:name=".TestHospitalInfo"></activity>
+        <activity android:name=".AllSub_Map" />
         <activity android:name=".Setting_Activity" />
         <activity android:name=".EmergencyRoom_Activity" />
         <activity android:name=".SkinSub_Activity" />

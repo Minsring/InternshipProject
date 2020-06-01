@@ -9,7 +9,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     Button allSub, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub
-            , emergencyRoom, setting;
+            , emergencyRoom, setting, testHospitalInfo;
 
 //    TODO: 위치 기반 동의, 개인정보 보호 약관..?
     @Override
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         skinSub = findViewById(R.id.skinSub);
         emergencyRoom = findViewById(R.id.emergencyRoom);
         setting = findViewById(R.id.setting);
+        testHospitalInfo = findViewById(R.id.testHospitalInfo);
 
         // 리스너
         allSub.setOnClickListener(listener);
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         skinSub.setOnClickListener(listener);
         emergencyRoom.setOnClickListener(listener);
         setting.setOnClickListener(listener);
+        testHospitalInfo.setOnClickListener(listener);
     }
 
     // TODO: 각 버튼 별 처리
@@ -99,6 +101,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.setting:
                     intent = new Intent(getApplicationContext(), Setting_Activity.class);
+//                    startActivity(intent);
+                    break;
+                case R.id.testHospitalInfo:
+                    intent = new Intent(getApplicationContext(), TestHospitalInfo.class);
 //                    startActivity(intent);
                     break;
             }
