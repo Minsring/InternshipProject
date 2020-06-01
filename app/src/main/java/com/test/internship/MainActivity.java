@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button nearbyHospital, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub
+    Button allSub, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub
             , emergencyRoom, setting;
 
 //    TODO: 위치 기반 동의, 개인정보 보호 약관..?
@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // 버튼 연결
-        nearbyHospital = findViewById(R.id.nearbyHospital);
+        allSub = findViewById(R.id.allSub);
         entSub = findViewById(R.id.entSub);
         internalSub = findViewById(R.id.internalSub);
         obstSub = findViewById(R.id.obstSub);
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setting = findViewById(R.id.setting);
 
         // 리스너
-        nearbyHospital.setOnClickListener(listener);
+        allSub.setOnClickListener(listener);
         entSub.setOnClickListener(listener);
         internalSub.setOnClickListener(listener);
         obstSub.setOnClickListener(listener);
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent = null;
             switch (v.getId()){
-                case R.id.nearbyHospital:
+                case R.id.allSub:
                     intent = new Intent(getApplicationContext(), AllSub_Activity.class);
 //                    startActivity(intent);
                     break;
