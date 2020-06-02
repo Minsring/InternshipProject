@@ -43,6 +43,7 @@
                 android:text="정형외과"/>
 
             <Button
+                android:id="@+id/hanSub"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

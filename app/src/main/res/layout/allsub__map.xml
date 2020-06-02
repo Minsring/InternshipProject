@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.test.internship.AllSub_Map">
+    tools:context="com.test.internship.AllSub_Map_Activity">
 
     <TextView
         android:layout_width="wrap_content"

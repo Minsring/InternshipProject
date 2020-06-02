@@ -24,7 +24,7 @@ public class AllSub_Activity extends AppCompatActivity {
             Intent intent = null;
             switch (v.getId()){
                 case R.id.mapBtn:
-                    intent = new Intent(getApplicationContext(), AllSub_Map.class);
+                    intent = new Intent(getApplicationContext(), AllSub_Map_Activity.class);
 //                    startActivity(intent);
                     break;
             }

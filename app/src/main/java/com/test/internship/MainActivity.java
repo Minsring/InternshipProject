@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 //                    startActivity(intent);
                     break;
                 case R.id.testHospitalInfo:
-                    intent = new Intent(getApplicationContext(), TestHospitalInfo.class);
+                    intent = new Intent(getApplicationContext(), TestHospitalInfo_Activity.class);
 //                    startActivity(intent);
                     break;
             }
