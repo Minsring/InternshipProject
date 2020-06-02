@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class User extends AppCompatActivity {
 
     Button allSub, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub
             ,hanSub, binyoSub, bogun, chkCenter, emergencyRoom, setting, testHospitalInfo;

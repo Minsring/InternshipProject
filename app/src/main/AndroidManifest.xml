@@ -27,7 +27,7 @@
         <activity android:name=".InternalSub_Activity" />
         <activity android:name=".ENTSub_Activity" />
         <activity android:name=".AllSub_Activity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".User">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
