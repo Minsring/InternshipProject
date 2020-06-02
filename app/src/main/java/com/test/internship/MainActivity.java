@@ -9,7 +9,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     Button allSub, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub
-            , emergencyRoom, setting, testHospitalInfo;
+            ,hanSub, binyoSub, bogun, chkCenter, emergencyRoom, setting, testHospitalInfo;
 
 //    TODO: 위치 기반 동의, 개인정보 보호 약관..?
     @Override
@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
         // 버튼 연결
         allSub = findViewById(R.id.allSub);
+        hanSub = findViewById(R.id.hanSub);
+        binyoSub = findViewById(R.id.binyoSub);
         entSub = findViewById(R.id.entSub);
         internalSub = findViewById(R.id.internalSub);
         obstSub = findViewById(R.id.obstSub);
@@ -28,12 +30,16 @@ public class MainActivity extends AppCompatActivity {
         childSub = findViewById(R.id.childSub);
         dentalSub = findViewById(R.id.dentalSub);
         skinSub = findViewById(R.id.skinSub);
+        bogun = findViewById(R.id.bogun);
+        chkCenter = findViewById(R.id.chkCenter);
         emergencyRoom = findViewById(R.id.emergencyRoom);
         setting = findViewById(R.id.setting);
         testHospitalInfo = findViewById(R.id.testHospitalInfo);
 
         // 리스너
         allSub.setOnClickListener(listener);
+        hanSub.setOnClickListener(listener);
+        binyoSub.setOnClickListener(listener);
         entSub.setOnClickListener(listener);
         internalSub.setOnClickListener(listener);
         obstSub.setOnClickListener(listener);
@@ -43,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         childSub.setOnClickListener(listener);
         dentalSub.setOnClickListener(listener);
         skinSub.setOnClickListener(listener);
+        bogun.setOnClickListener(listener);
+        chkCenter.setOnClickListener(listener);
         emergencyRoom.setOnClickListener(listener);
         setting.setOnClickListener(listener);
         testHospitalInfo.setOnClickListener(listener);
@@ -58,6 +66,13 @@ public class MainActivity extends AppCompatActivity {
                     intent = new Intent(getApplicationContext(), AllSub_Activity.class);
 //                    startActivity(intent);
                     break;
+                case R.id.hanSub:
+                    intent = new Intent(getApplicationContext(), HanSub_Activity.class);
+//                    startActivity(intent);
+                    break;
+                case R.id.binyoSub:
+                    intent = new Intent(getApplicationContext(), BinyoSub_Activity.class);
+//                    startActivity(intent);
                 case R.id.entSub:
                     intent = new Intent(getApplicationContext(), ENTSub_Activity.class);
 //                    startActivity(intent);
@@ -92,6 +107,14 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.skinSub:
                     intent = new Intent(getApplicationContext(), SkinSub_Activity.class);
+//                    startActivity(intent);
+                    break;
+                case R.id.bogun:
+                    intent = new Intent(getApplicationContext(), Bogun_Activity.class);
+//                    startActivity(intent);
+                    break;
+                case R.id.chkCenter:
+                    intent = new Intent(getApplicationContext(), ChkCenter_Activity.class);
 //                    startActivity(intent);
                     break;
                 case R.id.emergencyRoom:
