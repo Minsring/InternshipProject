@@ -8,13 +8,12 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
-public class Register_Activity extends AppCompatActivity{
-    Button addInfo;
-
+public class Register_Activity<listener> extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
+        Button addInfo;
         addInfo = findViewById(R.id.confirm);
         addInfo.setOnClickListener(listener);
     }
@@ -27,6 +26,7 @@ public class Register_Activity extends AppCompatActivity{
 
     /// ArrayList에 보호자정보(이름, 번호) 넣는 부분
     int index=0;
+
     ArrayList<String> protectorName = new ArrayList<String>();
     ArrayList<String> protectorPhone = new ArrayList<String>();
 
@@ -43,10 +43,8 @@ public class Register_Activity extends AppCompatActivity{
             switch (v.getId()) {
                 case R.id.confirm:
                    getProtectorInfo();
-                   System.out.println(protectorName.get(index - 1) + protectorPhone.get(index-1));
                     break;
             }
         }
     };
-
 }
