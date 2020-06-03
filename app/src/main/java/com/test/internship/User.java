@@ -63,7 +63,7 @@ public class User extends AppCompatActivity {
             Intent intent = null;
             switch (v.getId()){
                 case R.id.allSub:
-                    intent = new Intent(getApplicationContext(), AllSub_Activity.class);
+                    intent = new Intent(getApplicationContext(), SubjectList.class);
 //                    startActivity(intent);
                     break;
                 case R.id.hanSub:

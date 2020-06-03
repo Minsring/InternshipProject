@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class AllSub_Activity extends AppCompatActivity {
+public class SubjectList extends AppCompatActivity {
     Button mapBtn;
 
     @Override
@@ -24,7 +24,7 @@ public class AllSub_Activity extends AppCompatActivity {
             Intent intent = null;
             switch (v.getId()){
                 case R.id.mapBtn:
-                    intent = new Intent(getApplicationContext(), AllSub_Map_Activity.class);
+                    intent = new Intent(getApplicationContext(), SubjectListMap.class);
 //                    startActivity(intent);
                     break;
             }
