@@ -152,8 +152,8 @@
         android:id="@+id/setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="추가 기능 체크"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20dp"
+        android:text="보호자 연락 기능" />
 
     <Button
         android:id="@+id/testHospitalInfo"

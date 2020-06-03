@@ -24,9 +24,9 @@
             android:id="@+id/switch1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="배터리 20% 이하시 보호자 연락"
-            android:textSize="20sp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:text="배터리 20% 이하일 경우보호자 연락"
+            android:textSize="20sp" />
 
         <Switch
             android:id="@+id/switch2"
@@ -36,12 +36,6 @@
             android:textSize="20sp"
             android:layout_marginBottom="10dp"/>
 
-        <Switch
-            android:id="@+id/switch3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="치매 노인을 위한 보호 기능"
-            android:textSize="20sp"/>
 
     </LinearLayout>
 
