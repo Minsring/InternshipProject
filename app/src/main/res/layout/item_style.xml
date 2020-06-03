@@ -10,7 +10,8 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="30dp">
+        android:padding="30dp"
+        android:background="#ffffff">
 
         <TextView
             android:id="@+id/itemHospitalName"
