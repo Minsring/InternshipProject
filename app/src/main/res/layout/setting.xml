@@ -32,9 +32,9 @@
             android:id="@+id/switch2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:text="떨림 없을 시 보호자 연락"
-            android:textSize="20sp"
-            android:layout_marginBottom="10dp"/>
+            android:textSize="20sp" />
 
 
     </LinearLayout>
