@@ -67,59 +67,59 @@ public class User extends AppCompatActivity {
 //                    startActivity(intent);
                     break;
                 case R.id.hanSub:
-                    intent = new Intent(getApplicationContext(), HanSub_Activity.class);
+//                    intent = new Intent(getApplicationContext(), HanSub_Activity.class);
 //                    startActivity(intent);
                     break;
                 case R.id.binyoSub:
-                    intent = new Intent(getApplicationContext(), BinyoSub_Activity.class);
+//                    intent = new Intent(getApplicationContext(), BinyoSub_Activity.class);
 //                    startActivity(intent);
                 case R.id.entSub:
-                    intent = new Intent(getApplicationContext(), ENTSub_Activity.class);
+//                    intent = new Intent(getApplicationContext(), ENTSub_Activity.class);
 //                    startActivity(intent);
                     break;
                 case R.id.internalSub:
-                    intent = new Intent(getApplicationContext(), InternalSub_Activity.class);
+//                    intent = new Intent(getApplicationContext(), InternalSub_Activity.class);
 //                    startActivity(intent);
                     break;
                 case R.id.obstSub:
-                    intent = new Intent(getApplicationContext(), ObstSub_Activity.class);
+//                    intent = new Intent(getApplicationContext(), ObstSub_Activity.class);
 //                    startActivity(intent);
                     break;
                 case R.id.eyeSub:
-                    intent = new Intent(getApplicationContext(), EyeSub_Activity.class);
+//                    intent = new Intent(getApplicationContext(), EyeSub_Activity.class);
 //                    startActivity(intent);
                     break;
                 case R.id.boneSub:
-                    intent = new Intent(getApplicationContext(), BoneSub_Activity.class);
+//                    intent = new Intent(getApplicationContext(), BoneSub_Activity.class);
 //                    startActivity(intent);
                     break;
                 case R.id.neuroSub:
-                    intent = new Intent(getApplicationContext(), NeuroSub_Activity.class);
+//                    intent = new Intent(getApplicationContext(), NeuroSub_Activity.class);
 //                    startActivity(intent);
                     break;
                 case R.id.childSub:
-                    intent = new Intent(getApplicationContext(), ChildSub_Activity.class);
+//                    intent = new Intent(getApplicationContext(), ChildSub_Activity.class);
 //                    startActivity(intent);
                     break;
                 case R.id.dentalSub:
-                    intent = new Intent(getApplicationContext(), DentalSub_Activity.class);
+//                    intent = new Intent(getApplicationContext(), DentalSub_Activity.class);
 //                    startActivity(intent);
                     break;
                 case R.id.skinSub:
-                    intent = new Intent(getApplicationContext(), SkinSub_Activity.class);
+//                    intent = new Intent(getApplicationContext(), SkinSub_Activity.class);
 //                    startActivity(intent);
                     break;
                 case R.id.bogun:
-                    intent = new Intent(getApplicationContext(), Bogun_Activity.class);
+//                    intent = new Intent(getApplicationContext(), Bogun_Activity.class);
 //                    startActivity(intent);
                     break;
                 case R.id.chkCenter:
-                    intent = new Intent(getApplicationContext(), ChkCenter_Activity.class);
+//                    intent = new Intent(getApplicationContext(), ChkCenter_Activity.class);
 //                    startActivity(intent);
                     break;
                 case R.id.emergencyRoom:
                     // 화면 전환 or 대화상자로 바로 연결할까영? 한번 물은 뒤 연결
-                    intent = new Intent(getApplicationContext(), EmergencyRoom_Activity.class);
+//                    intent = new Intent(getApplicationContext(), EmergencyRoom_Activity.class);
 //                    startActivity(intent);
                     break;
                 case R.id.setting:
