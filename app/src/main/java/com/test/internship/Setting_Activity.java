@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 public class Setting_Activity extends AppCompatActivity {
     Button btnregister;
     @Override

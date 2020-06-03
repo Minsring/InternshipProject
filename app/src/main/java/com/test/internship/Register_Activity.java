@@ -1,6 +1,5 @@
 package com.test.internship;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +13,9 @@ public class Register_Activity<listener> extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
+        Button addInfo;
+        addInfo = findViewById(R.id.confirm);
+        addInfo.setOnClickListener(listener);
     }
     // 보호자가 입력한 정보를 받아서 변수에 넣는 부분
     EditText idEdit_n = (EditText)findViewById(R.id.pName);
@@ -24,6 +26,7 @@ public class Register_Activity<listener> extends AppCompatActivity{
 
     /// ArrayList에 보호자정보(이름, 번호) 넣는 부분
     int index=0;
+
     ArrayList<String> protectorName = new ArrayList<String>();
     ArrayList<String> protectorPhone = new ArrayList<String>();
 
@@ -33,9 +36,6 @@ public class Register_Activity<listener> extends AppCompatActivity{
         index++;
         return;
     }
-
-    Button addInfo = findViewById(R.id.confirm);
-    addInfo.setOnClickListener(listener);
 
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
