@@ -12,7 +12,8 @@
         <activity android:name=".HospitalScreen"></activity>
         <activity android:name=".TestHospitalInfo_Activity" />
         <activity android:name=".SubjectListMap" />
-        <activity android:name=".Setting_Activity" />
+        <activity android:name=".Setting_Activity"/>
+
         <activity android:name=".Register_Activity"/>
         <activity android:name=".SubjectList" />
         <activity android:name=".User">

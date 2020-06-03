@@ -8,12 +8,12 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
-public class Register_Activity<listener> extends AppCompatActivity{
+public class Register_Activity extends AppCompatActivity{
+    Button addInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
-        Button addInfo;
         addInfo = findViewById(R.id.confirm);
         addInfo.setOnClickListener(listener);
     }
