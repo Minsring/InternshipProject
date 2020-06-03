@@ -8,6 +8,6 @@ public class SubjectListMap extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.allsub__map);
+        setContentView(R.layout.subject_list_map);
     }
 }

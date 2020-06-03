@@ -12,7 +12,7 @@ public class SubjectList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.all_sub);
+        setContentView(R.layout.subject_list);
 
         mapBtn = findViewById(R.id.mapBtn);
         mapBtn.setOnClickListener(listener);

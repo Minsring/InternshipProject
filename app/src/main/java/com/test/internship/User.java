@@ -15,7 +15,7 @@ public class User extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.user);
 
         // 버튼 연결
         allSub = findViewById(R.id.allSub);                     // 전체
