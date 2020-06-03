@@ -31,7 +31,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         public ViewHolder(View itemView){
             super(itemView);
             itemHospitalName = itemView.findViewById(R.id.itemHospitalName);
-            itemSubject = itemView.findViewById(R.id.itemDistance);
+            itemSubject = itemView.findViewById(R.id.itemSubject);
             // distance, openclosed 부분
             itemDistance = itemView.findViewById(R.id.itemDistance);
             itemOpenClosed = itemView.findViewById(R.id.itemOpenClosed);

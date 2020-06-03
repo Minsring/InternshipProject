@@ -24,7 +24,7 @@ public class Setting_Activity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.btnregister:
                     intent = new Intent(getApplicationContext(), Register_Activity.class);
-                    // startActivity(intent);
+                    /// startActivity(intent);
                     break;
             }
             if(intent!=null) startActivity(intent);
