@@ -31,6 +31,7 @@ public class SubjectList extends AppCompatActivity {
         // 리사이클러뷰, 레이아웃 매니저
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
 
         Adapter adapter = new Adapter();
         xmlParser(adapter);
@@ -59,7 +60,6 @@ public class SubjectList extends AppCompatActivity {
             parser.setInput(new InputStreamReader(is, "UTF-8"));
             int eventType = parser.getEventType();
             HospitalInformation hospital = null;
-            String name="";String opentime="";String closedtime="";String address="";String callnumber="";String subject="";
             while (eventType != XmlPullParser.END_DOCUMENT) {
                 switch (eventType) {
                     case XmlPullParser.START_TAG:
@@ -68,27 +68,21 @@ public class SubjectList extends AppCompatActivity {
                             hospital = new HospitalInformation();
                         }
                         if (startTag.equals("name")) {
-                            name=parser.nextText();
                             hospital.setHospitalName(parser.nextText());
                         }
                         if (startTag.equals("opentime")) {
-                            opentime=parser.nextText();
                             hospital.setOpenTime(parser.nextText());
                         }
                         if (startTag.equals("closedtime")) {
-                            closedtime=parser.nextText();
                             hospital.setClosedTime(parser.nextText());
                         }
                         if (startTag.equals("address")) {
-                            address=parser.nextText();
                             hospital.setAddress(parser.nextText());
                         }
                         if (startTag.equals("callnumber")) {
-                            callnumber=parser.nextText();
                             hospital.setCallNumber(parser.nextText());
                         }
                         if (startTag.equals("subject")) {
-                            subject=parser.nextText();
                             hospital.setSubject(parser.nextText());
                         }
                         break;
