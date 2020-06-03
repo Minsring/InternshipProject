@@ -17,6 +17,7 @@ public class Register_Activity<listener> extends AppCompatActivity{
         addInfo = findViewById(R.id.confirm);
         addInfo.setOnClickListener(listener);
     }
+    //테스트중입니다
     // 보호자가 입력한 정보를 받아서 변수에 넣는 부분
     EditText idEdit_n = (EditText)findViewById(R.id.pName);
     String value_n = idEdit_n.getText().toString();
@@ -29,7 +30,6 @@ public class Register_Activity<listener> extends AppCompatActivity{
 
     ArrayList<String> protectorName = new ArrayList<String>();
     ArrayList<String> protectorPhone = new ArrayList<String>();
-
     public void getProtectorInfo() {
         protectorName.add(index,value_n);
         protectorPhone.add(index,value_p);
@@ -42,7 +42,7 @@ public class Register_Activity<listener> extends AppCompatActivity{
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.confirm:
-                   getProtectorInfo();
+                    getProtectorInfo();
                     break;
             }
         }
