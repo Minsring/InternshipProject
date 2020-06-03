@@ -1,16 +1,27 @@
 package com.test.internship;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Reader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
-    ArrayList<HospitalInformation> items = new ArrayList<HospitalInformation>();
+    ArrayList<HospitalInformation> items =new ArrayList<HospitalInformation>();
+    Context context;
 
     // item으로 만든 itemView를 담아두는 뷰 홀더
     // 일단 필요한 객체의 수만 ViewHolder에 담아서 화면에 뿌려준다
@@ -66,8 +77,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     @Override       // ViewHolder객체가 재사용될 때 자동으로 호출
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        HospitalInformation item = items.get(i);
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+
+        HospitalInformation item = items.get(position);
         viewHolder.setItem(item);
     }
 }

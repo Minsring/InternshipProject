@@ -13,6 +13,7 @@ public class HospitalInformation {
 
     // 생성자 -> 사용할지는 모르게씀
     // 일단 distance와 openClosed는 제외하고 만듬
+    public HospitalInformation(){}
     public HospitalInformation(String hospitalName, String openTime, String closedTime, String address,
                                String callNumber, String subject, String openDay){
         this.hospitalName = hospitalName;
@@ -40,4 +41,13 @@ public class HospitalInformation {
         // TODO: 영업중인지 아닌지 판단하기
         return openClosed;
     }
+    public void setHospitalName(String name){ hospitalName=name; }
+    public void setOpenTime(String openTime){ this.openTime=openTime; }
+    public void setAddress(String address){ this.address=address; }
+    public void setCallNumber(String callNumber){ this.callNumber=callNumber; }
+    public void setClosedTime(String closedTime){ this.closedTime=closedTime; }
+    public void setSubject(String subject){ this.subject=subject; }
+    public void setOpenDay(String openDay){this.openDay=openDay;}
+    public void setDistance(String distance){this.distance=distance;}
+    public void setOpenClosed(String openClosed){this.openClosed=openClosed;}
 }

@@ -63,6 +63,7 @@ public class User extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = null;
+
             switch (v.getId()){
                 case R.id.allSub:
                     intent = new Intent(getApplicationContext(), SubjectList.class);

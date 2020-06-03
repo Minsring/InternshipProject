@@ -1,6 +1,7 @@
 package com.test.internship;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class SubjectList extends AppCompatActivity {
     Button mapBtn;
@@ -24,19 +32,85 @@ public class SubjectList extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
-        recyclerView.setLayoutManager(layoutManager);
-
-        // Adapter 세팅
         Adapter adapter = new Adapter();
-        adapter.addItem(new HospitalInformation("민슬 병원", "9:00", "17:00", "민슬집"
-                                                        , "010-1234-5678", "진료과", "일요일"));
-        adapter.addItem(new HospitalInformation("희정 병원", "11:00", "20:00", "희정집"
-                , "010-1122-5566", "희정과", "토요일"));
-        adapter.addItem(new HospitalInformation("민옥 병원", "0:00", "24:00", "민옥집"
-                , "010-1234-1234", "민옥과", "매일"));
+        xmlParser(adapter);
+        // Adapter 세팅
+        //ArrayList<HospitalInformation> list=xmlParser();
+
+//        adapter.addItem(new HospitalInformation("민슬 병원", "9:00", "17:00", "민슬집"
+//                                                        , "010-1234-5678", "진료과", "일요일"));
+//        adapter.addItem(new HospitalInformation("희정 병원", "11:00", "20:00", "희정집"
+//                , "010-1122-5566", "희정과", "토요일"));
+//        adapter.addItem(new HospitalInformation("민옥 병원", "0:00", "24:00", "민옥집"
+//                , "010-1234-1234", "민옥과", "매일"));
+
 
         recyclerView.setAdapter(adapter);
     }
+
+
+    private void xmlParser(Adapter adapter) {
+        ArrayList<HospitalInformation> items = new ArrayList<>();
+        InputStream is = getResources().openRawResource(R.raw.hospitaldata);
+        try {
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            XmlPullParser parser = factory.newPullParser();
+
+            parser.setInput(new InputStreamReader(is, "UTF-8"));
+            int eventType = parser.getEventType();
+            HospitalInformation hospital = null;
+            String name="";String opentime="";String closedtime="";String address="";String callnumber="";String subject="";
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                switch (eventType) {
+                    case XmlPullParser.START_TAG:
+                        String startTag = parser.getName();
+                        if (startTag.equals("hospital")) {
+                            hospital = new HospitalInformation();
+                        }
+                        if (startTag.equals("name")) {
+                            name=parser.nextText();
+                            hospital.setHospitalName(parser.nextText());
+                        }
+                        if (startTag.equals("opentime")) {
+                            opentime=parser.nextText();
+                            hospital.setOpenTime(parser.nextText());
+                        }
+                        if (startTag.equals("closedtime")) {
+                            closedtime=parser.nextText();
+                            hospital.setClosedTime(parser.nextText());
+                        }
+                        if (startTag.equals("address")) {
+                            address=parser.nextText();
+                            hospital.setAddress(parser.nextText());
+                        }
+                        if (startTag.equals("callnumber")) {
+                            callnumber=parser.nextText();
+                            hospital.setCallNumber(parser.nextText());
+                        }
+                        if (startTag.equals("subject")) {
+                            subject=parser.nextText();
+                            hospital.setSubject(parser.nextText());
+                        }
+                        break;
+                    case XmlPullParser.END_TAG:
+                        String endTag = parser.getName();
+                        if (endTag.equals("hospital")) {
+                            hospital.setDistance("0");
+                            hospital.setOpenClosed("영업중");
+                            hospital.setOpenDay("매일");
+                            adapter.addItem(hospital);
+                        }
+                        break;
+                }
+                eventType = parser.next();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -45,6 +119,7 @@ public class SubjectList extends AppCompatActivity {
             switch (v.getId()){
                 case R.id.mapBtn:
                     intent = new Intent(getApplicationContext(), SubjectListMap.class);
+
 //                    startActivity(intent);
                     break;
             }
