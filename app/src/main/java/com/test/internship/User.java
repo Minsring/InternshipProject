@@ -18,23 +18,24 @@ public class User extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // 버튼 연결
-        allSub = findViewById(R.id.allSub);
-        hanSub = findViewById(R.id.hanSub);
-        binyoSub = findViewById(R.id.binyoSub);
-        entSub = findViewById(R.id.entSub);
-        internalSub = findViewById(R.id.internalSub);
-        obstSub = findViewById(R.id.obstSub);
-        eyeSub = findViewById(R.id.eyeSub);
-        boneSub = findViewById(R.id.boneSub);
-        neuroSub = findViewById(R.id.neuroSub);
-        childSub = findViewById(R.id.childSub);
-        dentalSub = findViewById(R.id.dentalSub);
-        skinSub = findViewById(R.id.skinSub);
-        bogun = findViewById(R.id.bogun);
-        chkCenter = findViewById(R.id.chkCenter);
-        emergencyRoom = findViewById(R.id.emergencyRoom);
-        setting = findViewById(R.id.setting);
-        testHospitalInfo = findViewById(R.id.testHospitalInfo);
+        allSub = findViewById(R.id.allSub);                     // 전체
+        hanSub = findViewById(R.id.hanSub);                     // 한의원
+        binyoSub = findViewById(R.id.binyoSub);                 // 비뇨기과
+        entSub = findViewById(R.id.entSub);                     // 이비인후과
+        internalSub = findViewById(R.id.internalSub);           // 내과
+        obstSub = findViewById(R.id.obstSub);                   // 산부인과
+        eyeSub = findViewById(R.id.eyeSub);                     // 안과
+        boneSub = findViewById(R.id.boneSub);                   // 정형외과
+        neuroSub = findViewById(R.id.neuroSub);                 // 신경외과
+        childSub = findViewById(R.id.childSub);                 // 소아청소년과
+        dentalSub = findViewById(R.id.dentalSub);               // 치과
+        skinSub = findViewById(R.id.skinSub);                   // 피부과
+        bogun = findViewById(R.id.bogun);                       // 보건소
+        chkCenter = findViewById(R.id.chkCenter);               // 건강검진센터
+        emergencyRoom = findViewById(R.id.emergencyRoom);       // 응급실
+
+        setting = findViewById(R.id.setting);                   // 설정
+        testHospitalInfo = findViewById(R.id.testHospitalInfo); // Test용
 
         // 리스너
         allSub.setOnClickListener(listener);
