@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     ArrayList<HospitalInformation> items = new ArrayList<HospitalInformation>();
 
+    // 확인
     // item으로 만든 itemView를 담아두는 뷰 홀더
     // 일단 필요한 객체의 수만 ViewHolder에 담아서 화면에 뿌려준다
     static class ViewHolder extends RecyclerView.ViewHolder{
