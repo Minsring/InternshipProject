@@ -9,7 +9,7 @@ import android.widget.Button;
 public class User extends AppCompatActivity {
 
     Button allSub, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub
-            ,hanSub, binyoSub, bogun, chkCenter, emergencyRoom, setting, testHospitalInfo;
+            ,hanSub, binyoSub, bogun, chkCenter, emergencyRoom, setting, testHospitalInfo, btnregister;
 
 //    TODO: 위치 기반 동의, 개인정보 보호 약관..?
     @Override
@@ -37,7 +37,6 @@ public class User extends AppCompatActivity {
         setting = findViewById(R.id.setting);                   // 설정
         testHospitalInfo = findViewById(R.id.testHospitalInfo); // Test용
 
-
         // 리스너
         allSub.setOnClickListener(listener);
         hanSub.setOnClickListener(listener);
@@ -56,6 +55,7 @@ public class User extends AppCompatActivity {
         emergencyRoom.setOnClickListener(listener);
         setting.setOnClickListener(listener);
         testHospitalInfo.setOnClickListener(listener);
+
     }
 
     // TODO: 각 버튼 별 처리
@@ -133,6 +133,7 @@ public class User extends AppCompatActivity {
                     intent = new Intent(getApplicationContext(), TestHospitalInfo_Activity.class);
 //                    startActivity(intent);
                     break;
+
             }
             if(intent != null) startActivity(intent);    // 다른 처리 없다면 여기서 한번에 화면 전환
         }
