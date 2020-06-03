@@ -40,6 +40,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btnregister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="보호자 연락처 등록"
