@@ -49,6 +49,8 @@ public class Register_Activity<listener> extends AppCompatActivity{
                     value_n = idEdit_n.getText().toString();
                     value_p = idEdit_p.getText().toString();
                     getProtectorInfo();
+                    System.out.println(protectorPhone.get(index-1));
+                    System.out.println(protectorName.get(index-1));
                     break;
             }
         }
