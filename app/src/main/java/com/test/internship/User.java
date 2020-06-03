@@ -36,6 +36,7 @@ public class User extends AppCompatActivity {
         setting = findViewById(R.id.setting);
         testHospitalInfo = findViewById(R.id.testHospitalInfo);
 
+
         // 리스너
         allSub.setOnClickListener(listener);
         hanSub.setOnClickListener(listener);
