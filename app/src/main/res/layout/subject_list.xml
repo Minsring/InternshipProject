@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SubjectList">
+    tools:context=".SubjectList"
+    android:id="@+id/linearLayout">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +17,7 @@
             android:id="@+id/subjectName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="모든 병원"
+            android:text=""
             android:textSize="30sp" />
 
         <Button
@@ -29,11 +30,11 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#22ff0000"/>
+<!--    <android.support.v7.widget.RecyclerView-->
+<!--        android:id="@+id/recyclerView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="#22ff0000"/>-->
 
 
 </LinearLayout>

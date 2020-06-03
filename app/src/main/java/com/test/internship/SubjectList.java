@@ -2,13 +2,16 @@ package com.test.internship;
 
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -19,6 +22,8 @@ import java.util.ArrayList;
 
 public class SubjectList extends AppCompatActivity {
     Button mapBtn;
+    TextView subjectTitle;
+    LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +33,15 @@ public class SubjectList extends AppCompatActivity {
         mapBtn = findViewById(R.id.mapBtn);
         mapBtn.setOnClickListener(listener);
 
+        // 과목 제목 달기
+        subjectTitle = findViewById(R.id.subjectName);
+        subjectTitle.setText(User.subject.toString());
+
         // 리사이클러뷰, 레이아웃 매니저
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = new RecyclerView(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
+
 
         Adapter adapter = new Adapter();
         xmlParser(adapter);
@@ -45,13 +55,32 @@ public class SubjectList extends AppCompatActivity {
 //        adapter.addItem(new HospitalInformation("민옥 병원", "0:00", "24:00", "민옥집"
 //                , "010-1234-1234", "민옥과", "매일"));
 
+        // 해당 과목의 병원이 있으면 리스트 동적제공, 없으면 "해당 병원 없습니다." 텍스트 동적 제공
+        linearLayout = findViewById(R.id.linearLayout);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
+        );
+        if(adapter.getItemCount()!=0){
+            recyclerView.setLayoutParams(params);
+            recyclerView.setBackgroundColor(Color.parseColor("#22ff0000"));
+            linearLayout.addView(recyclerView);
+            recyclerView.setAdapter(adapter);
+        } else{
+            TextView textView = new TextView(this);
+            textView.setBackgroundColor(Color.parseColor("#22ff0000"));
+            textView.setText("선택하신 과목의 병원이 없습니다.");
+            textView.setTextSize(25);
+            textView.setGravity(Gravity.CENTER);
+            textView.setLayoutParams(params);
+            linearLayout.addView(textView);
+        }
 
-        recyclerView.setAdapter(adapter);
     }
 
 
     private void xmlParser(Adapter adapter) {
-        ArrayList<HospitalInformation> items = new ArrayList<>();
+        ArrayList<HospitalInformation> items = new ArrayList<HospitalInformation>();
         InputStream is = getResources().openRawResource(R.raw.hospitaldata);
         try {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -88,11 +117,13 @@ public class SubjectList extends AppCompatActivity {
                         break;
                     case XmlPullParser.END_TAG:
                         String endTag = parser.getName();
-                        if (endTag.equals("hospital")) {
-                            hospital.setDistance("0");
-                            hospital.setOpenClosed("영업중");
-                            hospital.setOpenDay("매일");
-                            adapter.addItem(hospital);
+                        if((hospital.getSubject().equals(User.subject.toString())||User.subject.toString().equals("모든 병원"))==true) {
+                            if (endTag.equals("hospital")) {
+                                hospital.setDistance("0");
+                                hospital.setOpenClosed("영업중");
+                                hospital.setOpenDay("매일");
+                                adapter.addItem(hospital);
+                            }
                         }
                         break;
                 }
