@@ -13,6 +13,7 @@
         android:layout_margin="20dp">
 
         <TextView
+            android:id="@+id/subjectName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="모든 병원"

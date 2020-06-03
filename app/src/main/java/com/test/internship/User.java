@@ -70,6 +70,7 @@ public class User extends AppCompatActivity {
                     break;
                 case R.id.hanSub:
 //                    intent = new Intent(getApplicationContext(), HanSub_Activity.class);
+                    // intent에 정보 담아서 넘기기
 //                    startActivity(intent);
                     break;
                 case R.id.binyoSub:
