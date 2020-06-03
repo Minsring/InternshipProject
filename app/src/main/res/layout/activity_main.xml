@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".User">
 
     <Button
-        android:id="@+id/nearbyHospital"
+        android:id="@+id/allSub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="주변 병원 보기"
+        android:text="전체 병원 보기"
         android:layout_margin="20dp" />
 
 <!--    TODO: 그리드 뷰(Demo 19 참고)로 아이콘 + 진료과목 나타낼 수 있게 수정-->
@@ -27,72 +27,117 @@
             android:id="@+id/medicalSubjects1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/entSub"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="이비인후과"/>
+
             <Button
                 android:id="@+id/internalSub"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="내과"/>
-            <Button
-                android:id="@+id/obstSub"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="산부인과"/>
-        </TableRow>
-        <TableRow
-            android:id="@+id/medicalSubjects2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/eyeSub"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="안과"/>
+
             <Button
                 android:id="@+id/boneSub"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="정형외과"/>
+
             <Button
-                android:id="@+id/neuroSub"
+                android:id="@+id/hanSub"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="신경정신과"/>
+                android:text="한의원"/>
+
         </TableRow>
         <TableRow
-            android:id="@+id/medicalSubjects3"
+            android:id="@+id/medicalSubjects2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/childSub"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="소아과"/>
+
             <Button
                 android:id="@+id/dentalSub"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="치과"/>
+
+            <Button
+                android:id="@+id/entSub"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="이비인후과"/>
+
+
+            <Button
+                android:id="@+id/eyeSub"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="안과"/>
+
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/medicalSubjects3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <Button
                 android:id="@+id/skinSub"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="피부과"/>
+            <Button
+                android:id="@+id/childSub"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="소아청소년과"/>
+
+            <Button
+                android:id="@+id/obstSub"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="산부인과"/>
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/medicalSubjects4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/neuroSub"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="신경외과"/>
+            <Button
+                android:id="@+id/binyoSub"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="비뇨기과"/>
+            <Button
+                android:id="@+id/bogun"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="보건소"
+                android:textColor="#0000ff"/>
+
         </TableRow>
     </TableLayout>
+
+    <Button
+        android:id="@+id/chkCenter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#3300ff00"
+        android:layout_margin="20dp"
+        android:text="건강검진센터"/>
 
     <Button
         android:id="@+id/emergencyRoom"
@@ -100,13 +145,21 @@
         android:layout_height="wrap_content"
         android:background="#aaff0000"
         android:text="응급실"
-        android:layout_margin="20dp"/>
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
 
     <Button
         android:id="@+id/setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="추가 기능 체크"
+        android:layout_margin="20dp"/>
+
+    <Button
+        android:id="@+id/testHospitalInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Test 병원 정보 화면"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"/>
 
