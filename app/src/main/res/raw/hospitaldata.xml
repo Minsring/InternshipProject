@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hospitals>
+    <hospital>
+        <name>민슬병원</name>
+        <opentime>9</opentime>
+        <closedtime>17</closedtime>
+        <address>울산광역시</address>
+        <callnumber>010-1111-1111</callnumber>
+        <subject>한의원</subject>
+    </hospital>
+    <hospital>
+        <name>희정병원</name>
+        <opentime>9</opentime>
+        <closedtime>18</closedtime>
+        <address>대구광역시</address>
+        <callnumber>010-2222-2222</callnumber>
+        <subject>이비인후과</subject>
+    </hospital>
+    <hospital>
+        <name>민옥병원</name>
+        <opentime>9</opentime>
+        <closedtime>17</closedtime>
+        <address>경북 안동시</address>
+        <callnumber>010-3333-3333</callnumber>
+        <subject>내과</subject>
+    </hospital>
+    <hospital>
+        <name>소연병원</name>
+        <opentime>10</opentime>
+        <closedtime>19</closedtime>
+        <address>부산광역시</address>
+        <callnumber>010-5555-5555</callnumber>
+        <subject>안과</subject>
+    </hospital>
+    <hospital>
+        <name>윤모병원</name>
+        <opentime>9</opentime>
+        <closedtime>20</closedtime>
+        <address>경북 구미시</address>
+        <callnumber>010-6666-6666</callnumber>
+        <subject>정형외과</subject>
+    </hospital>
+    <hospital>
+        <name>병섭병원</name>
+        <opentime>8</opentime>
+        <closedtime>15</closedtime>
+        <address>대구광역시</address>
+        <callnumber>010-7777-7777</callnumber>
+        <subject>소아청소년과</subject>
+    </hospital>
+</hospitals>
