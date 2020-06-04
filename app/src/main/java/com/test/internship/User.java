@@ -11,6 +11,8 @@ public class User extends AppCompatActivity {
     Button allSub, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub
             ,hanSub, binyoSub, bogun, chkCenter, emergencyRoom, setting, testHospitalInfo, btnregister;
 
+    static String subject;
+
 //    TODO: 위치 기반 동의, 개인정보 보호 약관..?
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,62 +65,75 @@ public class User extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = null;
-
             switch (v.getId()){
                 case R.id.allSub:
+                    subject="모든 병원";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
 //                    startActivity(intent);
                     break;
                 case R.id.hanSub:
-//                    intent = new Intent(getApplicationContext(), HanSub_Activity.class);
+                    subject = "한의원";
+                    intent = new Intent(getApplicationContext(), SubjectList.class);
                     // intent에 정보 담아서 넘기기
 //                    startActivity(intent);
                     break;
                 case R.id.binyoSub:
-//                    intent = new Intent(getApplicationContext(), BinyoSub_Activity.class);
+                    subject = "비뇨기과";
+                    intent = new Intent(getApplicationContext(), SubjectList.class);
 //                    startActivity(intent);
                 case R.id.entSub:
-//                    intent = new Intent(getApplicationContext(), ENTSub_Activity.class);
+                    subject = "이비인후과";
+                    intent = new Intent(getApplicationContext(), SubjectList.class);
 //                    startActivity(intent);
                     break;
                 case R.id.internalSub:
-//                    intent = new Intent(getApplicationContext(), InternalSub_Activity.class);
+                    subject = "내과";
+                    intent = new Intent(getApplicationContext(), SubjectList.class);
 //                    startActivity(intent);
                     break;
                 case R.id.obstSub:
-//                    intent = new Intent(getApplicationContext(), ObstSub_Activity.class);
+                    subject = "산부인과";
+                    intent = new Intent(getApplicationContext(), SubjectList.class);
 //                    startActivity(intent);
                     break;
                 case R.id.eyeSub:
-//                    intent = new Intent(getApplicationContext(), EyeSub_Activity.class);
+                    subject = "안과";
+                    intent = new Intent(getApplicationContext(), SubjectList.class);
 //                    startActivity(intent);
                     break;
                 case R.id.boneSub:
-//                    intent = new Intent(getApplicationContext(), BoneSub_Activity.class);
+                    subject = "정형외과";
+                    intent = new Intent(getApplicationContext(), SubjectList.class);
 //                    startActivity(intent);
                     break;
                 case R.id.neuroSub:
-//                    intent = new Intent(getApplicationContext(), NeuroSub_Activity.class);
+                    subject = "신경외과";
+                    intent = new Intent(getApplicationContext(), SubjectList.class);
 //                    startActivity(intent);
                     break;
                 case R.id.childSub:
-//                    intent = new Intent(getApplicationContext(), ChildSub_Activity.class);
+                    subject = "소아청소년과";
+                    intent = new Intent(getApplicationContext(), SubjectList.class);
 //                    startActivity(intent);
                     break;
                 case R.id.dentalSub:
-//                    intent = new Intent(getApplicationContext(), DentalSub_Activity.class);
+                    subject = "치과";
+                    intent = new Intent(getApplicationContext(), SubjectList.class);
 //                    startActivity(intent);
                     break;
                 case R.id.skinSub:
-//                    intent = new Intent(getApplicationContext(), SkinSub_Activity.class);
+                    subject = "피부과";
+                    intent = new Intent(getApplicationContext(), SubjectList.class);
 //                    startActivity(intent);
                     break;
                 case R.id.bogun:
-//                    intent = new Intent(getApplicationContext(), Bogun_Activity.class);
+                    subject = "보건소";
+                    intent = new Intent(getApplicationContext(), SubjectList.class);
 //                    startActivity(intent);
                     break;
                 case R.id.chkCenter:
-//                    intent = new Intent(getApplicationContext(), ChkCenter_Activity.class);
+                    subject = "건강검진센터";
+                    intent = new Intent(getApplicationContext(), SubjectList.class);
 //                    startActivity(intent);
                     break;
                 case R.id.emergencyRoom:
