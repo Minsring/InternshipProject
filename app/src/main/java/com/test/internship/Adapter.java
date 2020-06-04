@@ -31,14 +31,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         public ViewHolder(View itemView){
             super(itemView);
             itemHospitalName = itemView.findViewById(R.id.itemHospitalName);
-            itemSubject = itemView.findViewById(R.id.itemSubject);
+//            itemSubject = itemView.findViewById(R.id.itemSubject);
             // distance, openclosed 부분
             itemDistance = itemView.findViewById(R.id.itemDistance);
             itemOpenClosed = itemView.findViewById(R.id.itemOpenClosed);
         }
         public void setItem(HospitalInformation hospital){
             itemHospitalName.setText(hospital.getHospitalName());
-            itemSubject.setText(hospital.getSubject());
+//            itemSubject.setText(hospital.getSubject());
             // distance, openclosed 부분
             itemDistance.setText(hospital.getDistance());
             itemOpenClosed.setText(hospital.getOpenClosed());
