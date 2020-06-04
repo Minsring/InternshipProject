@@ -112,12 +112,12 @@ public class SubjectList extends AppCompatActivity {
                             hospital.setCallNumber(parser.nextText());
                         }
                         if (startTag.equals("subject")) {
-                            hospital.setSubject(parser.nextText());
+                            hospital.addSubject(parser.nextText());
                         }
                         break;
                     case XmlPullParser.END_TAG:
                         String endTag = parser.getName();
-                        if((hospital.getSubject().equals(User.subject.toString())||User.subject.toString().equals("모든 병원"))==true) {
+                        if(((hospital.findSubject(User.subject.toString()))||User.subject.toString().equals("모든 병원"))==true) {
                             if (endTag.equals("hospital")) {
                                 hospital.setDistance("0");
                                 hospital.setOpenClosed("영업중");

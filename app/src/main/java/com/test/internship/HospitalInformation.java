@@ -1,12 +1,14 @@
 package com.test.internship;
 
+import java.util.ArrayList;
+
 public class HospitalInformation {
     private String hospitalName = "병원이름";
     private String openTime = "여는시간";
     private String closedTime = "닫는시간";
     private String address = "주소";
     private String callNumber = "전화번호";
-    private String subject = "진료과목";
+    private ArrayList<String> subjects = new ArrayList<String>();
     private String openDay = "여는요일";    // 요일마다 영업시간이 바뀐다면?
     private String distance = "0";         // 목록에 표시할 거라면 판단하는 함수 필요
     private String openClosed = "영업중";         // 목록에 표시할 거라면 판단하는 함수 필요
@@ -14,16 +16,16 @@ public class HospitalInformation {
     // 생성자 -> 사용할지는 모르게씀
     // 일단 distance와 openClosed는 제외하고 만듬
     public HospitalInformation(){}
-    public HospitalInformation(String hospitalName, String openTime, String closedTime, String address,
-                               String callNumber, String subject, String openDay){
-        this.hospitalName = hospitalName;
-        this.openTime = openTime;
-        this.closedTime = closedTime;
-        this.address = address;
-        this.callNumber = callNumber;
-        this.subject = subject;
-        this.openDay = openDay;
-    }
+//    public HospitalInformation(String hospitalName, String openTime, String closedTime, String address,
+//                               String callNumber, String subject, String openDay){
+//        this.hospitalName = hospitalName;
+//        this.openTime = openTime;
+//        this.closedTime = closedTime;
+//        this.address = address;
+//        this.callNumber = callNumber;
+//        this.subject = subject;
+//        this.openDay = openDay;
+//    }
 
     // getter()
     public String getHospitalName() { return hospitalName; }
@@ -31,7 +33,8 @@ public class HospitalInformation {
     public String getClosedTime() { return closedTime; }
     public String getAddress() { return address; }
     public String getCallNumber() { return callNumber; }
-    public String getSubject() { return subject; }
+    // 일단 ArrayList의 제일 앞의 진료과가 보이게
+    public String getSubject() { return subjects.get(0); }
     public String getOpenDay() { return openDay; }
     public String getDistance() {
         // TODO: 현재위치로 부터 병원과의 거리 구하기
@@ -46,8 +49,19 @@ public class HospitalInformation {
     public void setAddress(String address){ this.address=address; }
     public void setCallNumber(String callNumber){ this.callNumber=callNumber; }
     public void setClosedTime(String closedTime){ this.closedTime=closedTime; }
-    public void setSubject(String subject){ this.subject=subject; }
+//    public void setSubject(String subject){ this.subject=subject; }
     public void setOpenDay(String openDay){this.openDay=openDay;}
     public void setDistance(String distance){this.distance=distance;}
     public void setOpenClosed(String openClosed){this.openClosed=openClosed;}
+
+    // subject 추가 및 찾기
+    public void addSubject(String subject){
+        this.subjects.add(subject);
+    }
+    public boolean findSubject(String subject){
+        for(String temp: subjects){
+            if(temp.equals(subject)) return true;
+        }
+        return false;
+    }
 }
