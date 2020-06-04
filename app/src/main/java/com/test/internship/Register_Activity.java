@@ -9,6 +9,7 @@ import android.widget.EditText;
 import java.util.ArrayList;
 
 public class Register_Activity<listener> extends AppCompatActivity{
+
     // 보호자가 입력한 정보를 받아서 변수에 넣는 부분
     EditText idEdit_n;
     String value_n;
@@ -49,8 +50,10 @@ public class Register_Activity<listener> extends AppCompatActivity{
                     value_n = idEdit_n.getText().toString();
                     value_p = idEdit_p.getText().toString();
                     getProtectorInfo();
-                    System.out.println(protectorPhone.get(index-1));
-                    System.out.println(protectorName.get(index-1));
+                    for(int i=0;i<index;i++) {
+                        System.out.println(protectorPhone.get(i));
+                        System.out.println(protectorName.get(i));
+                    }
                     break;
             }
         }
