@@ -4,8 +4,10 @@
 <hospitals>
     <hospital>
         <name>의성경북의원</name>
-        <opentime>9</opentime>
-        <closedtime>17</closedtime>
+        <openweekday>09:00</openweekday>
+        <opensaturday>09:00</opensaturday>
+        <closeweekday>17:40</closeweekday>
+        <closesaturday>13:00</closesaturday>
         <address>경북 의성군 의성읍 동서2길 19</address>
         <callnumber>054-832-2177</callnumber>
         <subject>내과</subject>
@@ -16,9 +18,26 @@
         <subject>비뇨기과</subject>
     </hospital>
     <hospital>
+        <name>제남병원</name>
+        <openweekday>09:00</openweekday>
+        <opensaturday>09:00</opensaturday>
+        <opensunday>09:00</opensunday>
+        <closeweekday>21:40</closeweekday>
+        <closesaturday>21:00</closesaturday>
+        <closesunday>21:00</closesunday>
+        <address>경북 의성군 봉양면 화전리 90-21</address>
+        <callnumber>054-833-2036</callnumber>
+        <subject>내과</subject>
+        <subject>소아청소년과</subject>
+    </hospital>
+    <hospital>
         <name>공생병원</name>
-        <opentime>9</opentime>
-        <closedtime>18</closedtime>
+        <openweekday>08:00</openweekday>
+        <opensaturday>08:00</opensaturday>
+        <opensunday>08:00</opensunday>
+        <closeweekday>20:00</closeweekday>
+        <closesaturday>18:00</closesaturday>
+        <closesunday>18:00</closesunday>
         <address>경북 의성군 의성읍 문소3길 96</address>
         <callnumber>054-834-3881</callnumber>
         <subject>신경외과</subject>
@@ -27,11 +46,12 @@
         <subject>피부과</subject>
         <subject>비뇨기과</subject>
         <subject>건강검진센터</subject>
+        <subject>응급실</subject>
     </hospital>
     <hospital>
         <name>영남제일병원</name>
-        <opentime>9</opentime>
-        <closedtime>17</closedtime>
+        <openweekday>09:00</openweekday>
+        <closeweekday>18:00</closeweekday>
         <address>경북 의성군 안계면 용기4길 36</address>
         <callnumber>054-861-9111</callnumber>
         <subject>응급실</subject>
@@ -42,8 +62,10 @@
     </hospital>
     <hospital>
         <name>안동의료원</name>
-        <opentime>10</opentime>
-        <closedtime>19</closedtime>
+        <openweekday>09:00</openweekday>
+        <opensaturday>09:00</opensaturday>
+        <closeweekday>17:00</closeweekday>
+        <closesaturday>12:30</closesaturday>
         <address>경북 안동시 태사2길 55</address>
         <callnumber>054-850-6000</callnumber>
         <subject>응급실</subject>
@@ -59,8 +81,12 @@
     </hospital>
     <hospital>
         <name>진연합의원</name>
-        <opentime>9</opentime>
-        <closedtime>20</closedtime>
+        <openweekday>08:30</openweekday>
+        <opensaturday>08:30</opensaturday>
+        <opensunday>09:00</opensunday>
+        <closeweekday>20:00</closeweekday>
+        <closesaturday>16:00</closesaturday>
+        <closesunday>13:00</closesunday>
         <address>경북 의성군 의성읍 문소3길 109</address>
         <callnumber>054-832-7588</callnumber>
         <subject>내과</subject>
@@ -72,8 +98,12 @@
     </hospital>
     <hospital>
         <name>한길성내과의원</name>
-        <opentime>9</opentime>
-        <closedtime>20</closedtime>
+        <openweekday>09:00</openweekday>
+        <opensaturday>09:00</opensaturday>
+        <opensunday>09:00</opensunday>
+        <closeweekday>18:00</closeweekday>
+        <closesaturday>18:00</closesaturday>
+        <closesunday>15:00</closesunday>
         <address>경북 의성군 의성읍 문소3길 110-1</address>
         <callnumber>054-834-2100</callnumber>
         <subject>내과</subject>
@@ -83,8 +113,10 @@
     </hospital>
     <hospital>
         <name>의성제일병원</name>
-        <opentime>9</opentime>
-        <closedtime>20</closedtime>
+        <openweekday>09:00</openweekday>
+        <opensaturday>09:00</opensaturday>
+        <closeweekday>18:00</closeweekday>
+        <closesaturday>12:30</closesaturday>
         <address>경북 의성군 의성읍 홍술로 94</address>
         <callnumber>054-832-7575</callnumber>
         <subject>신경외과</subject>
@@ -95,8 +127,10 @@
     </hospital>
     <hospital>
         <name>의성튼튼연합병원</name>
-        <opentime>9</opentime>
-        <closedtime>20</closedtime>
+        <openweekday>08:30</openweekday>
+        <opensaturday>08:30</opensaturday>
+        <closeweekday>18:30</closeweekday>
+        <closesaturday>13:00</closesaturday>
         <address>경상북도 의성군 의성읍 북부길 1</address>
         <callnumber>054-834-7009</callnumber>
         <subject>내과</subject>
@@ -104,8 +138,10 @@
     </hospital>
     <hospital>
         <name>김일환내과의원</name>
-        <opentime>9</opentime>
-        <closedtime>20</closedtime>
+        <openweekday>09:30</openweekday>
+        <opensaturday>09:30</opensaturday>
+        <closeweekday>18:00</closeweekday>
+        <closesaturday>12:00</closesaturday>
         <address>경북 의성군 의성읍 문소3길 106</address>
         <callnumber>054-834-5102</callnumber>
         <subject>내과</subject>
@@ -113,8 +149,12 @@
     </hospital>
     <hospital>
         <name>한사랑의원</name>
-        <opentime>9</opentime>
-        <closedtime>20</closedtime>
+        <openweekday>08:30</openweekday>
+        <opensaturday>08:30</opensaturday>
+        <sunday>08:30</sunday>
+        <closeweekday>19:00</closeweekday>
+        <closesaturday>15:00</closesaturday>
+        <closesunday>14:00</closesunday>
         <address>경북 의성군 금성면 탑리길 10</address>
         <callnumber>054-834-8275</callnumber>
         <subject>내과</subject>
@@ -126,97 +166,135 @@
         <subject>안과</subject>
     </hospital>
     <hospital>
+        <name>의성아산의원</name>
+        <openweekday>08:30</openweekday>
+        <opensaturday>08:30</opensaturday>
+        <closeweekday>17:30</closeweekday>
+        <closesaturday>12:00</closesaturday>
+        <address>경북 의성군 의성읍 문소3길 103</address>
+        <callnumber>054-834-9999</callnumber>
+        <subject>내과</subject>
+        <subject>소아청소년과</subject>
+        <subject>피부과</subject>
+        <subject>정형외과</subject>
+        <subject>이비인후과</subject>
+    </hospital>
+    <hospital>
+        <name>의성신통의원</name>
+        <openweekday>08:00</openweekday>
+        <opensaturday>08:00</opensaturday>
+        <closeweekday>17:00</closeweekday>
+        <closesaturday>13:00</closesaturday>
+        <address>경북 의성군 의성읍 문소3길 110</address>
+        <callnumber>054-833-6733</callnumber>
+        <subject>정형외과</subject>
+    </hospital>
+    <hospital>
         <name>의성스마트치과의원</name>
-        <opentime>8</opentime>
-        <closedtime>15</closedtime>
+        <openweekday>09:00</openweekday>
+        <closeweekday>18:00</closeweekday>
         <address>경북 의성군 의성읍 문소3길 102-1</address>
         <callnumber>054-833-2804</callnumber>
         <subject>치과</subject>
     </hospital>
     <hospital>
         <name>김종수치과의원</name>
-        <opentime>8</opentime>
-        <closedtime>15</closedtime>
+        <openweekday>09:00</openweekday>
+        <opensaturday>09:00</opensaturday>
+        <closeweekday>18:00</closeweekday>
+        <closesaturday>13:00</closesaturday>
         <address>경북 의성군 의성읍 문소3길 104</address>
         <callnumber>054-833-7472</callnumber>
         <subject>치과</subject>
     </hospital>
     <hospital>
         <name>오복치과의원</name>
-        <opentime>8</opentime>
-        <closedtime>15</closedtime>
+        <openweekday>09:00</openweekday>
+        <closeweekday>18:00</closeweekday>
         <address>경북 의성군 의성읍 문소3길 110</address>
         <callnumber>054-833-7528</callnumber>
         <subject>치과</subject>
     </hospital>
     <hospital>
         <name>이종만치과의원</name>
-        <opentime>8</opentime>
-        <closedtime>15</closedtime>
+        <openweekday>08:30</openweekday>
+        <opensaturday>08:30</opensaturday>
+        <closeweekday>18:00</closeweekday>
+        <closesaturday>13:00</closesaturday>
         <address>경북 의성군 의성읍 문소3길 90</address>
         <callnumber>054-832-1070</callnumber>
         <subject>치과</subject>
     </hospital>
     <hospital>
         <name>정상현치과의원</name>
-        <opentime>8</opentime>
-        <closedtime>15</closedtime>
+        <openweekday>08:30</openweekday>
+        <closeweekday>18:00</closeweekday>
         <address>경북 의성군 의성읍 문소3길 106</address>
         <callnumber>054-833-2875</callnumber>
         <subject>치과</subject>
     </hospital>
     <hospital>
         <name>경희한의원</name>
-        <opentime>8</opentime>
-        <closedtime>15</closedtime>
+        <openweekday>08:00</openweekday>
+        <opensaturday>08:00</opensaturday>
+        <closeweekday>18:30</closeweekday>
+        <closesaturday>15:00</closesaturday>
         <address>경북 의성군 의성읍 군청길 12</address>
         <callnumber>054-832-1537</callnumber>
         <subject>한의원</subject>
     </hospital>
     <hospital>
         <name>대구한의원</name>
-        <opentime>8</opentime>
-        <closedtime>15</closedtime>
+        <openweekday>09:00</openweekday>
+        <closeweekday>18:00</closeweekday>
         <address>경북 의성군 의성읍 문소3길 92</address>
         <callnumber>054-833-1400</callnumber>
         <subject>한의원</subject>
     </hospital>
     <hospital>
         <name>화랑한의원</name>
-        <opentime>8</opentime>
-        <closedtime>15</closedtime>
+        <openweekday>09:00</openweekday>
+        <opensaturday>09:00</opensaturday>
+        <closeweekday>18:00</closeweekday>
+        <closesaturday>13:00</closesaturday>
         <address>경북 의성군 의성읍 군청길 32</address>
         <callnumber>054-834-5775</callnumber>
         <subject>한의원</subject>
     </hospital>
     <hospital>
         <name>백산한의원</name>
-        <opentime>8</opentime>
-        <closedtime>15</closedtime>
+        <openweekday>08:00</openweekday>
+        <opensaturday>08:00</opensaturday>
+        <closeweekday>18:00</closeweekday>
+        <closesaturday>14:00</closesaturday>
         <address>경북 의성군 의성읍 군청길 16</address>
         <callnumber>054-833-0151</callnumber>
         <subject>한의원</subject>
     </hospital>
     <hospital>
         <name>서울중앙안과의원</name>
-        <opentime>9</opentime>
-        <closedtime>17</closedtime>
+        <openweekday>09:00</openweekday>
+        <opensaturday>09:00</opensaturday>
+        <closeweekday>17:30</closeweekday>
+        <closesaturday>13:00</closesaturday>
         <address>경북 의성군 의성읍 후죽3길 8</address>
         <callnumber>054-833-8302</callnumber>
         <subject>안과</subject>
     </hospital>
     <hospital>
         <name>최이비인후과의원</name>
-        <opentime>9</opentime>
-        <closedtime>17</closedtime>
+        <openweekday>08:30</openweekday>
+        <opensaturday>08:30</opensaturday>
+        <closeweekday>17:30</closeweekday>
+        <closesaturday>12:30</closesaturday>
         <address>경북 의성군 의성읍 문소3길 102-1</address>
         <callnumber>054-833-1380</callnumber>
         <subject>이비인후과</subject>
     </hospital>
     <hospital>
         <name>의성군보건소</name>
-        <opentime>9</opentime>
-        <closedtime>17</closedtime>
+        <openweekday>09:00</openweekday>
+        <closeweekday>18:00</closeweekday>
         <address>경북 의성군 의성읍 구봉길 228</address>
         <callnumber>054-830-6672</callnumber>
         <subject>보건소</subject>
