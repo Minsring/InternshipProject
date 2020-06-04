@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -151,19 +152,28 @@ public class SubjectList extends AppCompatActivity {
                                 nowh=Integer.parseInt(array[0]);
                                 nowm=Integer.parseInt(array[1]); //현재시간 받아옴
 
+//                                long now=System.currentTimeMillis();
+//                                Date date=new Date(now);
+//                                SimpleDateFormat sdf=new SimpleDateFormat("HH:mm");
+//                                String nowString=sdf.format(date);
+//                                String[] array=nowString.split(":");
+//                                nowh=Integer.parseInt(array[0]);
+//                                nowm=Integer.parseInt(array[1]); //현재시간 받아옴
+//                                Log.d("로그", "현재시간"+nowString);      // 로그
+
                                 if(dayOfWeek==2||dayOfWeek==3||dayOfWeek==4||dayOfWeek==5||dayOfWeek==6){
                                     String startTime=hospital.getOpenTime(0);
                                     String endTime=hospital.getClosedTime(0);
                                     //병원 진료시간
-                                     array=startTime.split(":");
-                                    starth=Integer.parseInt(array[0]);
-                                    startm=Integer.parseInt(array[1]);
-                                    array=endTime.split(":");
-                                    endh=Integer.parseInt(array[0]);
-                                    endm=Integer.parseInt(array[1]);
+                                    String[] array1=startTime.split(":");
+                                    starth=Integer.parseInt(array1[0]);
+                                    startm=Integer.parseInt(array1[1]);
+                                    String[] array2=endTime.split(":");
+                                    endh=Integer.parseInt(array2[0]);
+                                    endm=Integer.parseInt(array2[1]);
 
                                     if((nowh<endh)||(nowh==endh&&nowm<endm)){
-                                        if((starth>nowh)||(starth==nowh&&startm<nowm)){
+                                        if((starth<nowh)||(starth==nowh&&startm<nowm)){
                                             hospital.setOpenClosed("진료중");
                                         }
                                         else{
@@ -188,7 +198,7 @@ public class SubjectList extends AppCompatActivity {
                                         endm=Integer.parseInt(array[1]);
 
                                         if((nowh<endh)||(nowh==endh&&nowm<endm)){
-                                            if((starth>nowh)||(starth==nowh&&startm<nowm)){
+                                            if((starth<nowh)||(starth==nowh&&startm<nowm)){
                                                 hospital.setOpenClosed("진료중");
                                             }
                                             else{
@@ -213,7 +223,7 @@ public class SubjectList extends AppCompatActivity {
                                         endm=Integer.parseInt(array[1]);
 
                                         if((nowh<endh)||(nowh==endh&&nowm<endm)){
-                                            if((starth>nowh)||(starth==nowh&&startm<nowm)){
+                                            if((starth<nowh)||(starth==nowh&&startm<nowm)){
                                                 hospital.setOpenClosed("진료중");
                                             }
                                             else{
