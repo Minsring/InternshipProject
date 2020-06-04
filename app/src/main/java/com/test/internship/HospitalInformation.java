@@ -33,7 +33,7 @@ public class HospitalInformation {
     public String getClosedTime() { return closedTime; }
     public String getAddress() { return address; }
     public String getCallNumber() { return callNumber; }
-    // 일단 ArrayList의 제일 앞의 진료과가 보이게
+    // 일단 첫번째 ArrayList 원소 보이게
     public String getSubject() { return subjects.get(0); }
     public String getOpenDay() { return openDay; }
     public String getDistance() {

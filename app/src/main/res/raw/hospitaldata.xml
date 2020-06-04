@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--열고 닫는 시간 설정x-->
 <!--응급실진료시간은 따로 있는 경우도 있으니 응급실이있다면 응급실시간 정보넣기-->
-<!--인포메이션에서 ArrayList에 진료과 정보를 담아야겠다.-->
 <hospitals>
     <hospital>
         <name>의성경북의원</name>
