@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.test.internship">
+    <uses-permission
+        android:name="android.permission.RECEIVE_SMS"/>
 
     <application
         android:allowBackup="true"
@@ -9,11 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HospitalScreen"></activity>
+
+        <receiver
+            android:name=".MyReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_LOW"/>
+                <action android:name="android.intent.action.BATTERY_OKAY"/>
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".HospitalScreen" />
         <activity android:name=".TestHospitalInfo_Activity" />
         <activity android:name=".SubjectListMap" />
-        <activity android:name=".Setting_Activity"/>
-        <activity android:name=".Register_Activity"/>
+        <activity android:name=".Setting_Activity" />
+        <activity android:name=".Register_Activity" />
         <activity android:name=".SubjectList" />
         <activity android:name=".User">
             <intent-filter>
@@ -23,4 +36,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
