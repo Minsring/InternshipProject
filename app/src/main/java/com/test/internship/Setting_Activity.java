@@ -16,12 +16,14 @@ import java.util.TimerTask;
 
 public class Setting_Activity extends AppCompatActivity {
     Button btnregister;
-    Switch switch1, switch2;
+    Switch switch1;
+    Switch switch2;
     IntentFilter ifilter;
     Handler handler;
     Timer timer;
     TimerTask task;
-    boolean flag =false;
+    static boolean flag =false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class Setting_Activity extends AppCompatActivity {
 
         switch1 = (Switch)findViewById(R.id.switch1);
         switch2 = (Switch)findViewById(R.id.switch2);
+
 
         handler = new Handler();
         timer = new Timer();

@@ -41,7 +41,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 //            itemSubject.setText(hospital.getSubject());
             // distance, openclosed 부분
             itemDistance.setText(hospital.getDistance());
-            itemOpenClosed.setText(hospital.getOpenClosed());
+            if(hospital.findSubject("응급실") && User.subject.toString().equals("응급실"))
+            {
+                itemOpenClosed.setText("");
+                itemOpenClosed.setBackgroundResource(R.drawable.telephone);
+            }else{
+                itemOpenClosed.setText(hospital.getOpenClosed());
+                }
         }
     }
 

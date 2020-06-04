@@ -146,7 +146,8 @@ public class User extends AppCompatActivity {
                     break;
                 case R.id.emergencyRoom:
                     // 화면 전환 or 대화상자로 바로 연결할까영? 한번 물은 뒤 연결
-//                    intent = new Intent(getApplicationContext(), EmergencyRoom_Activity.class);
+                    subject = "응급실";
+                    intent = new Intent(getApplicationContext(), SubjectList.class);
 //                    startActivity(intent);
                     break;
                 case R.id.setting:
