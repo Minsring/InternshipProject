@@ -12,16 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-<!--        <receiver-->
-<!--            android:name=".MyReceiver"-->
-<!--            android:enabled="true"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.BATTERY_LOW"/>-->
-<!--                <action android:name="android.intent.action.BATTERY_OKAY"/>-->
-<!--            </intent-filter>-->
-<!--        </receiver>-->
-
         <activity android:name=".HospitalScreen" />
         <activity android:name=".TestHospitalInfo_Activity" />
         <activity android:name=".SubjectListMap" />
