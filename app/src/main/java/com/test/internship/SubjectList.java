@@ -157,7 +157,7 @@ public class SubjectList extends AppCompatActivity {
 //                                SimpleDateFormat sdf=new SimpleDateFormat("HH:mm");
 //                                String nowString=sdf.format(date);
 //                                String[] array=nowString.split(":");
-
+//라라라라
 //                                Log.d("로그", "현재시간"+nowString);      // 로그
 
                                 if(dayOfWeek==2||dayOfWeek==3||dayOfWeek==4||dayOfWeek==5||dayOfWeek==6){
