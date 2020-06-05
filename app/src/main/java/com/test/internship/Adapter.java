@@ -53,9 +53,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             {
                 itemOpenClosed.setText("");
                 itemOpenClosed.setBackgroundResource(R.drawable.telephone);
-            }else{
+            }else{      // 정렬된 리스트의 진료중/준비중을 색으로 구분
                 itemOpenClosed.setText(hospital.getOpenClosed());
+                if(hospital.getOpenClosed()=="진료중"){
+                    itemOpenClosed.setTextColor(0x99FF0000);
+                    itemDistance.setTextColor(0xFF999999);
+                    itemHospitalName.setTextColor(0xFF000000);
+
+                }else if(hospital.getOpenClosed()=="준비중"){
+                    itemOpenClosed.setTextColor(0x44000000);
+                    itemDistance.setTextColor(0x44000000);
+                    itemHospitalName.setTextColor(0x44000000);
                 }
+            }
         }
     }
 
