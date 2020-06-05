@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+
 public class User extends AppCompatActivity {
 
     Button allSub, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub
@@ -165,7 +166,6 @@ public class User extends AppCompatActivity {
     };
 
 
-
     private static final String TAG = "Exam_MainActivity";
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -255,11 +255,8 @@ public class User extends AppCompatActivity {
         unregisterReceiver(receiver);
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
+    public void clickMethod(View v){
+        sendBroadcast(new Intent("ACTION_BATTERY_LOW"));
+    }
 
 }
