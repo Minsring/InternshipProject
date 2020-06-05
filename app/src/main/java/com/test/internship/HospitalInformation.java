@@ -7,7 +7,7 @@ public class HospitalInformation {
     private String address = "주소";
     private String callNumber = "전화번호";
 //    private String openDay = "여는요일";    // 요일마다 영업시간이 바뀐다면?
-    private String distance = "0";         // 목록에 표시할 거라면 판단하는 함수 필요
+    private String distance = "0km";         // 목록에 표시할 거라면 판단하는 함수 필요
     private String openClosed = "영업중";         // 목록에 표시할 거라면 판단하는 함수 필요
     private ArrayList<String> subjects = new ArrayList<String>();
     private ArrayList<String> openTime = new ArrayList<String>();
@@ -39,14 +39,8 @@ public class HospitalInformation {
     // 일단 첫번째 ArrayList 원소 보이게
     public String getSubject() { return subjects.get(0); }
 //    public String getOpenDay() { return openDay; }
-    public String getDistance() {
-        // TODO: 현재위치로 부터 병원과의 거리 구하기
-        return distance+"km";
-    }
-    public String getOpenClosed() {
-        // TODO: 영업중인지 아닌지 판단하기
-        return openClosed;
-    }
+    public String getDistance() { return distance; }
+    public String getOpenClosed() { return openClosed; }
     public void setHospitalName(String name){ hospitalName=name; }
     public void setAddress(String address){ this.address=address; }
     public void setCallNumber(String callNumber){ this.callNumber=callNumber; }

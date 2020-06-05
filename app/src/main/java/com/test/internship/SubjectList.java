@@ -1,19 +1,16 @@
 package com.test.internship;
 
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -79,7 +76,6 @@ public class SubjectList extends AppCompatActivity {
             textView.setLayoutParams(params);
             linearLayout.addView(textView);
         }
-
     }
 
 
@@ -137,6 +133,9 @@ public class SubjectList extends AppCompatActivity {
                         if (startTag.equals("subject")) {
                             hospital.addSubject(parser.nextText());
                         }
+                        if (startTag.equals("distance")) {
+                            hospital.setDistance(parser.nextText());
+                        }
                         break;
                     case XmlPullParser.END_TAG:
                         String endTag = parser.getName();
@@ -157,7 +156,6 @@ public class SubjectList extends AppCompatActivity {
 //                                SimpleDateFormat sdf=new SimpleDateFormat("HH:mm");
 //                                String nowString=sdf.format(date);
 //                                String[] array=nowString.split(":");
-//라라라라
 //                                Log.d("로그", "현재시간"+nowString);      // 로그
 
                                 if(dayOfWeek==2||dayOfWeek==3||dayOfWeek==4||dayOfWeek==5||dayOfWeek==6){
@@ -235,7 +233,7 @@ public class SubjectList extends AppCompatActivity {
                                     }
                                 } //일요일이다
 
-                                hospital.setDistance("0");
+//                                hospital.setDistance("0");
 //                                hospital.setOpenDay("매일");
                               //  hospital.setOpenClosed("진료중");
                                 adapter.addItem(hospital);
@@ -250,7 +248,6 @@ public class SubjectList extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
 
 
     View.OnClickListener listener = new View.OnClickListener() {
