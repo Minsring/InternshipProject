@@ -1,6 +1,7 @@
 package com.test.internship;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -31,23 +33,48 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         items.addAll(closedItems);
     }
 
+    // 커스텀 리스너 인터페이스 정의
+    public interface onItemClickListener{
+        void onItemClick(View v, int position);
+    }
+
+    // 리스너 객체 참조를 저장하는 변수
+    private onItemClickListener hosClickListener = null;
+
+    // onItemClickListener 리스너 객체 참조를 어댑터에 전달하는 메소드
+    public void setOnItemClickListener(onItemClickListener listener){
+        this.hosClickListener = listener;
+    }
+
     // item으로 만든 itemView를 담아두는 뷰 홀더
     // 일단 필요한 객체의 수만 ViewHolder에 담아서 화면에 뿌려준다
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    // 이벤트 처리를 위해 static -> public으로 변경 (items를 static으로 하기엔 찝찝해서..)
+    public class ViewHolder extends RecyclerView.ViewHolder{
         TextView itemHospitalName, itemSubject;
-        TextView itemDistance, itemOpenClosed;      // distance, openclosed 부분
-        public ViewHolder(View itemView){
+        TextView itemDistance, itemOpenClosed;
+        public ViewHolder(final View itemView){
             super(itemView);
             itemHospitalName = itemView.findViewById(R.id.itemHospitalName);
-//            itemSubject = itemView.findViewById(R.id.itemSubject);
-            // distance, openclosed 부분
             itemDistance = itemView.findViewById(R.id.itemDistance);
             itemOpenClosed = itemView.findViewById(R.id.itemOpenClosed);
+
+            // 아이템 클릭 이벤트 처리
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    Toast.makeText(itemView.getContext(), "아이템 클릭", Toast.LENGTH_SHORT).show();
+                    int position = getAdapterPosition();        // 클릭한 아이템의 위치
+                    if(position != RecyclerView.NO_POSITION){   // 아이템이 있으면
+                        // 아이템클릭 이벤트 핸들러 메소드에서 리스너 객체 메소드 호출
+                        if(hosClickListener != null){
+                            hosClickListener.onItemClick(v, position);  // Subject List에서 처리하기
+                        }
+                    }
+                }
+            });
         }
         public void setItem(HospitalInformation hospital){
             itemHospitalName.setText(hospital.getHospitalName());
-//            itemSubject.setText(hospital.getSubject());
-            // distance, openclosed 부분
             itemDistance.setText(hospital.getDistance());
             if(hospital.findSubject("응급실") && User.subject.toString().equals("응급실"))
             {

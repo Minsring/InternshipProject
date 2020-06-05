@@ -1,8 +1,13 @@
 package com.test.internship;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class HospitalInformation {
+// 객체를 직렬화해야 액티비티에 데이터 객체를 넘겨줄 수 있다.
+public class HospitalInformation implements Serializable {
+    // 클래스의 버전을 의미, 객체를 전달하고 수신할 때 사용하는 클래스 파일이 동일한지 체크하는 용도로 사용
+    private static final long serialVersionUID = 1L;
+
     private String hospitalName = "병원이름";
     private String address = "주소";
     private String callNumber = "전화번호";

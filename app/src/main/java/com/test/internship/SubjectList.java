@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -45,7 +46,7 @@ public class SubjectList extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
 
-        Adapter adapter = new Adapter();
+        final Adapter adapter = new Adapter();
         xmlParser(adapter);
         adapter.combineItems();     // 진료중-준비중 순서대로 들어가게 하는 메소드 호출
 
@@ -69,6 +70,19 @@ public class SubjectList extends AppCompatActivity {
             textView.setLayoutParams(params);
             linearLayout.addView(textView);
         }
+
+        // 액티비티에서 커스텀 리스너 객체 생성 및 전달
+        adapter.setOnItemClickListener(new Adapter.onItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                // 클릭시 이벤트를 SubjectList에서 처리
+                HospitalInformation hospital = adapter.getItem(position);
+//                Toast.makeText(getApplicationContext(), "클릭한 병원 이름: "+hospital.getHospitalName(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), HospitalScreen.class);
+                intent.putExtra("병원", hospital);
+                startActivity(intent);
+            }
+        });
     }
 
 

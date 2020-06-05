@@ -8,33 +8,33 @@
     tools:context=".SubjectList"
     android:id="@+id/linearLayout">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="20dp">
+
+    <TextView
+        android:id="@+id/subjectName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp">
+        android:text=""
+        android:textSize="30sp" />
 
-        <TextView
-            android:id="@+id/subjectName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="30sp" />
+    <Button
+        android:id="@+id/mapBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:text="지도"
+        android:textSize="20sp"/>
 
-        <Button
-            android:id="@+id/mapBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:text="지도"
-            android:textSize="20sp"/>
+  </LinearLayout>
 
-    </LinearLayout>
-
-<!--    <android.support.v7.widget.RecyclerView-->
-<!--        android:id="@+id/recyclerView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:background="#22ff0000"/>-->
+  <!--    <android.support.v7.widget.RecyclerView-->
+  <!--        android:id="@+id/recyclerView"-->
+  <!--        android:layout_width="match_parent"-->
+  <!--        android:layout_height="match_parent"-->
+  <!--        android:background="#22ff0000"/>-->
 
 
 </LinearLayout>
