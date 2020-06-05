@@ -1,5 +1,6 @@
 package com.test.internship;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
 
 public class User extends AppCompatActivity {
 
@@ -64,7 +66,6 @@ public class User extends AppCompatActivity {
         emergencyRoom.setOnClickListener(listener);
         setting.setOnClickListener(listener);
         testHospitalInfo.setOnClickListener(listener);
-
 
     }
 
@@ -146,7 +147,8 @@ public class User extends AppCompatActivity {
                     break;
                 case R.id.emergencyRoom:
                     // 화면 전환 or 대화상자로 바로 연결할까영? 한번 물은 뒤 연결
-//                    intent = new Intent(getApplicationContext(), EmergencyRoom_Activity.class);
+                    subject = "응급실";
+                    intent = new Intent(getApplicationContext(), SubjectList.class);
 //                    startActivity(intent);
                     break;
                 case R.id.setting:
@@ -164,6 +166,97 @@ public class User extends AppCompatActivity {
     };
 
 
+    private static final String TAG = "Exam_MainActivity";
 
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+
+            if(Intent.ACTION_BATTERY_CHANGED.equals(action)){
+                int health = intent.getIntExtra("health", BatteryManager.BATTERY_HEALTH_UNKNOWN);
+                int level = intent.getIntExtra("level", 0);
+                int plug = intent.getIntExtra("plugged", 0);
+                int scale = intent.getIntExtra("scale", 100);
+                int status = intent.getIntExtra("status", BatteryManager.BATTERY_STATUS_UNKNOWN);
+                String technology = intent.getStringExtra("technology");
+                int temperature = intent.getIntExtra("temperature", 0);
+                int voltage = intent.getIntExtra("voltage", 0);
+
+                // health
+                if(health == BatteryManager.BATTERY_HEALTH_COLD){
+                    Log.i(TAG, "health cold");
+                } else if(health == BatteryManager.BATTERY_HEALTH_DEAD){
+                    Log.i(TAG, "health dead");
+                } else if(health == BatteryManager.BATTERY_HEALTH_GOOD){
+                    Log.i(TAG, "health good");
+                } else if(health == BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE){
+                    Log.i(TAG, "health over voltage");
+                } else if(health == BatteryManager.BATTERY_HEALTH_OVERHEAT){
+                    Log.i(TAG, "health overheat");
+                } else if(health == BatteryManager.BATTERY_HEALTH_UNKNOWN){
+                    Log.i(TAG, "health unknown");
+                } else if(health == BatteryManager.BATTERY_HEALTH_UNSPECIFIED_FAILURE){
+                    Log.i(TAG, "health unspecified failure");
+                }
+
+                // 배터리 잔량 확인
+                Log.i(TAG, "Charge : " + (level * 100 / scale));
+
+                // 충전 방식
+                if(plug == 0){
+                    Log.i(TAG, "PlugType : unplugged");
+                } else {
+                    if((plug & BatteryManager.BATTERY_PLUGGED_AC) != 0){
+                        Log.i(TAG, "PlugType : AC");
+                    }
+
+                    if((plug & BatteryManager.BATTERY_PLUGGED_USB) != 0){
+                        Log.i(TAG, "PlugType : USB");
+                    }
+
+                    if((plug & BatteryManager.BATTERY_PLUGGED_WIRELESS) != 0){
+                        Log.i(TAG, "PlugType : WIRELESS");
+                    }
+                }
+
+                // 배터리 상태
+                if(status == BatteryManager.BATTERY_STATUS_CHARGING){
+                    Log.i(TAG, "Status : Charging");
+                } else if(status == BatteryManager.BATTERY_STATUS_DISCHARGING){
+                    Log.i(TAG, "Status : Discharging");
+                } else if(status == BatteryManager.BATTERY_STATUS_FULL){
+                    Log.i(TAG, "Status : Full");
+                } else if(status == BatteryManager.BATTERY_STATUS_NOT_CHARGING){
+                    Log.i(TAG, "Status : Not charging");
+                } else if(status == BatteryManager.BATTERY_STATUS_UNKNOWN){
+                    Log.i(TAG, "Status : Unknown");
+                }
+
+                // 배터리 기술에 대해 설명
+                Log.i(TAG, "Technology : " + technology);
+
+                // 배터리 온도
+                Log.i(TAG, "Temperature : " + temperature);
+
+                // 배터리 전압
+                Log.i(TAG, "Voltage : " + voltage);
+            }
+        }
+    };
+    protected void onResume(){
+        super.onResume();
+        // 배터리 상태 변화에 대한 receiver 등록
+        registerReceiver(receiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+    }
+
+    protected void onPause(){
+        super.onPause();
+        // receiver 해제
+        unregisterReceiver(receiver);
+    }
+
+    public void clickMethod(View v){
+        sendBroadcast(new Intent("ACTION_BATTERY_LOW"));
+    }
 
 }
