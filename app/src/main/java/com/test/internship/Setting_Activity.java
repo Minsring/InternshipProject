@@ -6,6 +6,7 @@ import android.os.BatteryManager;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -41,13 +42,14 @@ public class Setting_Activity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                 // 스위치 버튼이 체크되었는지 검사하여 텍스트뷰에 각 경우에 맞게 출력합니다.
-                if (isChecked) {
-                    flag=true;
-                    /*
-                    System.out.println("버튼 on확인");
-                    timer.schedule(task, 0, 5000);
-                    System.out.println("스타트됨");
-                    TimerTask addTask = new TimerTask() {
+                if (isChecked){
+                    System.out.println("실행");
+                     /*
+                        System.out.println("버튼 on확인");
+                        timer.schedule(task, 0, 5000);
+                        System.out.println("스타트됨");
+
+                        TimerTask addTask = new TimerTask() {
                         @Override
                         public void run() {
                             //주기적으로 실행할 작업 추가
@@ -58,17 +60,13 @@ public class Setting_Activity extends AppCompatActivity {
                             int batteryPct = (int) ((level / (float) scale) * 100);
                             System.out.println("배터리용량: " + batteryPct);
                         }
-                    };
-                    */
-                                     }
-                else {
-                    flag=false;
-                   // System.out.println("버튼 off 확인");
-                    // Stop_Period();
-                }
+                        */
+                }else{
 
+                }
             }
         });
+
 
         switch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -98,7 +96,6 @@ public class Setting_Activity extends AppCompatActivity {
         }
     };
 
-    /*
     public void Start_Period(){
         //timer.schedule(adTast , 5000);  // 5초후 실행하고 종료
         //timer.schedule(adTast, 0, 300000); // 0초후 첫실행, 3초마다 계속실행
@@ -108,7 +105,7 @@ public class Setting_Activity extends AppCompatActivity {
     public void Stop_Period(){
         //Timer 작업 종료
         if(timer != null) timer.cancel();
-    }*/
+    }
 }
 
 
