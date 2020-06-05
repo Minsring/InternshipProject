@@ -1,13 +1,11 @@
 package com.test.internship;
 
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -48,16 +46,9 @@ public class SubjectList extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
 
-        Adapter adapter = new Adapter();
+        final Adapter adapter = new Adapter();
         xmlParser(adapter);
-        // Adapter 세팅
-
-//        adapter.addItem(new HospitalInformation("민슬 병원", "9:00", "17:00", "민슬집"
-//                                                        , "010-1234-5678", "진료과", "일요일"));
-//        adapter.addItem(new HospitalInformation("희정 병원", "11:00", "20:00", "희정집"
-//                , "010-1122-5566", "희정과", "토요일"));
-//        adapter.addItem(new HospitalInformation("민옥 병원", "0:00", "24:00", "민옥집"
-//                , "010-1234-1234", "민옥과", "매일"));
+        adapter.combineItems();     // 진료중-준비중 순서대로 들어가게 하는 메소드 호출
 
         // 해당 과목의 병원이 있으면 리스트 동적제공, 없으면 "해당 병원 없습니다." 텍스트 동적 제공
         linearLayout = findViewById(R.id.linearLayout);
@@ -80,6 +71,18 @@ public class SubjectList extends AppCompatActivity {
             linearLayout.addView(textView);
         }
 
+        // 액티비티에서 커스텀 리스너 객체 생성 및 전달
+        adapter.setOnItemClickListener(new Adapter.onItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                // 클릭시 이벤트를 SubjectList에서 처리
+                HospitalInformation hospital = adapter.getItem(position);
+//                Toast.makeText(getApplicationContext(), "클릭한 병원 이름: "+hospital.getHospitalName(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), HospitalScreen.class);
+                intent.putExtra("병원", hospital);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -137,6 +140,9 @@ public class SubjectList extends AppCompatActivity {
                         if (startTag.equals("subject")) {
                             hospital.addSubject(parser.nextText());
                         }
+                        if (startTag.equals("distance")) {
+                            hospital.setDistance(parser.nextText());
+                        }
                         break;
                     case XmlPullParser.END_TAG:
                         String endTag = parser.getName();
@@ -151,14 +157,6 @@ public class SubjectList extends AppCompatActivity {
                                 String[] array=nowString.split(":");
                                 nowh=Integer.parseInt(array[0]);
                                 nowm=Integer.parseInt(array[1]); //현재시간 받아옴
-
-//                                long now=System.currentTimeMillis();
-//                                Date date=new Date(now);
-//                                SimpleDateFormat sdf=new SimpleDateFormat("HH:mm");
-//                                String nowString=sdf.format(date);
-//                                String[] array=nowString.split(":");
-//라라라라
-//                                Log.d("로그", "현재시간"+nowString);      // 로그
 
                                 if(dayOfWeek==2||dayOfWeek==3||dayOfWeek==4||dayOfWeek==5||dayOfWeek==6){
                                     String startTime=hospital.getOpenTime(0);
@@ -235,10 +233,12 @@ public class SubjectList extends AppCompatActivity {
                                     }
                                 } //일요일이다
 
-                                hospital.setDistance("0");
-//                                hospital.setOpenDay("매일");
-                              //  hospital.setOpenClosed("진료중");
-                                adapter.addItem(hospital);
+                                if(hospital.getOpenClosed()=="진료중"){
+                                    adapter.addOpenItem(hospital);
+                                }
+                                else if(hospital.getOpenClosed()=="준비중"){
+                                    adapter.addClosedItem(hospital);
+                                }
                             }
                         }
                         break;
@@ -252,7 +252,6 @@ public class SubjectList extends AppCompatActivity {
     }
 
 
-
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -260,7 +259,6 @@ public class SubjectList extends AppCompatActivity {
             switch (v.getId()){
                 case R.id.mapBtn:
                     intent = new Intent(getApplicationContext(), SubjectListMap.class);
-
 //                    startActivity(intent);
                     break;
             }
