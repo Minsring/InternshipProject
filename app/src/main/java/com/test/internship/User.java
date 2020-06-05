@@ -2,6 +2,7 @@ package com.test.internship;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -14,6 +15,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class User extends AppCompatActivity {
 
@@ -22,7 +26,8 @@ public class User extends AppCompatActivity {
 
     static String subject;
 
-//    TODO: 위치 기반 동의, 개인정보 보호 약관..?
+
+    //    TODO: 위치 기반 동의, 개인정보 보호 약관..?
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +69,16 @@ public class User extends AppCompatActivity {
         chkCenter.setOnClickListener(listener);
         emergencyRoom.setOnClickListener(listener);
         setting.setOnClickListener(listener);
+
+        // 윤모꺼
+//        TimerTask tt = new TimerTask() {
+//            @Override
+//            public void run() {
+//                System.out.println("1");
+//            }
+//        };
+//        Timer timer = new Timer();
+//        timer.schedule(tt, 0, 5000);
     }
 
     // TODO: 각 버튼 별 처리
