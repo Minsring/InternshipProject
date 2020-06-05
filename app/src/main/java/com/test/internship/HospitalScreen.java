@@ -28,7 +28,7 @@ public class HospitalScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+//라라라라라라라라
     }
 
 
