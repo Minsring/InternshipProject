@@ -28,7 +28,7 @@ public class SubjectList extends AppCompatActivity {
     Button mapBtn;
     TextView subjectTitle;
     LinearLayout linearLayout;
-    TextView openClosed;
+    Button openClosed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +98,6 @@ public class SubjectList extends AppCompatActivity {
                     Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+number)); //다이얼로 연결
                     startActivity(intent);
                 }
-
             });
         } //응급실이면 다이얼로 연결되는 리스너 연결하자
         else{

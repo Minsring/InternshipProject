@@ -41,7 +41,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     // 리스너 객체 참조를 저장하는 변수
     private OnItemClickListener hosClickListener = null;
-    private View.OnClickListener emergencyOpenclosedListener=null;
+    private View.OnClickListener emergencyOpenClosedListener=null;
     private View.OnClickListener openClosedListener=null;
 
     // onItemClickListener 리스너 객체 참조를 어댑터에 전달하는 메소드
@@ -49,7 +49,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         this.hosClickListener = listener;
     }
     public void setEROpenClosedClickListener(View.OnClickListener listener){
-        this.emergencyOpenclosedListener=listener;
+        this.emergencyOpenClosedListener=listener;
     }
     public void setOpenClosedClickListener(View.OnClickListener listener){
         this.openClosedListener=listener;
@@ -87,10 +87,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
           itemOpenClosed.setOnClickListener(new View.OnClickListener(){
               @Override
               public void onClick(View view) {
-                  if(emergencyOpenclosedListener!=null){
+                  if(emergencyOpenClosedListener!=null){
                       int position=getAdapterPosition();
                         view.setTag(position); //position을 전달해줘야 listener에서 병원번호 받을 수있음.
-                      emergencyOpenclosedListener.onClick(view);
+                      emergencyOpenClosedListener.onClick(view);
                   } //응급실 리스너가 붙어있다면 !
                   else if(openClosedListener!=null){
                       int position=getAdapterPosition();
