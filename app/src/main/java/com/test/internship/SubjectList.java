@@ -47,14 +47,7 @@ public class SubjectList extends AppCompatActivity {
 
         Adapter adapter = new Adapter();
         xmlParser(adapter);
-        // Adapter 세팅
-
-//        adapter.addItem(new HospitalInformation("민슬 병원", "9:00", "17:00", "민슬집"
-//                                                        , "010-1234-5678", "진료과", "일요일"));
-//        adapter.addItem(new HospitalInformation("희정 병원", "11:00", "20:00", "희정집"
-//                , "010-1122-5566", "희정과", "토요일"));
-//        adapter.addItem(new HospitalInformation("민옥 병원", "0:00", "24:00", "민옥집"
-//                , "010-1234-1234", "민옥과", "매일"));
+        adapter.combineItems();     // 진료중-준비중 순서대로 들어가게 하는 메소드 호출
 
         // 해당 과목의 병원이 있으면 리스트 동적제공, 없으면 "해당 병원 없습니다." 텍스트 동적 제공
         linearLayout = findViewById(R.id.linearLayout);
@@ -151,13 +144,6 @@ public class SubjectList extends AppCompatActivity {
                                 nowh=Integer.parseInt(array[0]);
                                 nowm=Integer.parseInt(array[1]); //현재시간 받아옴
 
-//                                long now=System.currentTimeMillis();
-//                                Date date=new Date(now);
-//                                SimpleDateFormat sdf=new SimpleDateFormat("HH:mm");
-//                                String nowString=sdf.format(date);
-//                                String[] array=nowString.split(":");
-//                                Log.d("로그", "현재시간"+nowString);      // 로그
-
                                 if(dayOfWeek==2||dayOfWeek==3||dayOfWeek==4||dayOfWeek==5||dayOfWeek==6){
                                     String startTime=hospital.getOpenTime(0);
                                     String endTime=hospital.getClosedTime(0);
@@ -233,10 +219,12 @@ public class SubjectList extends AppCompatActivity {
                                     }
                                 } //일요일이다
 
-//                                hospital.setDistance("0");
-//                                hospital.setOpenDay("매일");
-                              //  hospital.setOpenClosed("진료중");
-                                adapter.addItem(hospital);
+                                if(hospital.getOpenClosed()=="진료중"){
+                                    adapter.addOpenItem(hospital);
+                                }
+                                else if(hospital.getOpenClosed()=="준비중"){
+                                    adapter.addClosedItem(hospital);
+                                }
                             }
                         }
                         break;
@@ -257,7 +245,6 @@ public class SubjectList extends AppCompatActivity {
             switch (v.getId()){
                 case R.id.mapBtn:
                     intent = new Intent(getApplicationContext(), SubjectListMap.class);
-
 //                    startActivity(intent);
                     break;
             }

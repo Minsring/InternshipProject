@@ -21,7 +21,15 @@ import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     ArrayList<HospitalInformation> items =new ArrayList<HospitalInformation>();
+    ArrayList<HospitalInformation> openItems =new ArrayList<HospitalInformation>();      // 진료중인 병원 리스트
+    ArrayList<HospitalInformation> closedItems =new ArrayList<HospitalInformation>();     // 준비중인 병원 리스트
     Context context;
+
+    // items에 순차적으로 합쳐서 정렬되게 한다.
+    public void combineItems(){
+        items.addAll(openItems);
+        items.addAll(closedItems);
+    }
 
     // item으로 만든 itemView를 담아두는 뷰 홀더
     // 일단 필요한 객체의 수만 ViewHolder에 담아서 화면에 뿌려준다
@@ -52,8 +60,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     // 임시로 사용
-    public void addItem(HospitalInformation item){
-        items.add(item);
+    public void addOpenItem(HospitalInformation item){
+        openItems.add(item);
+    }
+    public void addClosedItem(HospitalInformation item){
+        closedItems.add(item);
     }
     public HospitalInformation getItem(int position){
         return items.get(position);
