@@ -2,6 +2,7 @@ package com.test.internship;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,6 +28,7 @@ public class SubjectList extends AppCompatActivity {
     Button mapBtn;
     TextView subjectTitle;
     LinearLayout linearLayout;
+    TextView openClosed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class SubjectList extends AppCompatActivity {
 
         mapBtn = findViewById(R.id.mapBtn);
         mapBtn.setOnClickListener(listener);
+        openClosed=findViewById(R.id.itemOpenClosed);
 
         // 과목 제목 달기
         subjectTitle = findViewById(R.id.subjectName);
@@ -72,7 +75,7 @@ public class SubjectList extends AppCompatActivity {
         }
 
         // 액티비티에서 커스텀 리스너 객체 생성 및 전달
-        adapter.setOnItemClickListener(new Adapter.onItemClickListener() {
+        adapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
                 // 클릭시 이벤트를 SubjectList에서 처리
@@ -83,6 +86,36 @@ public class SubjectList extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        if(subjectTitle.getText().equals("응급실")){
+            adapter.setEROpenClosedClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    //번호받아와서
+                    int position=(int)view.getTag(); //붙였던 position꼬리표 때오기
+                    HospitalInformation hospital=adapter.getItem(position);
+                    String number=hospital.getCallNumber();
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+number)); //다이얼로 연결
+                    startActivity(intent);
+                }
+
+            });
+        } //응급실이면 다이얼로 연결되는 리스너 연결하자
+        else{
+            adapter.setOpenClosedClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                 //  Toast.makeText(getApplicationContext(),"버튼눌림",Toast.LENGTH_LONG).show();
+                    int position=(int)view.getTag();
+                    HospitalInformation hospital = adapter.getItem(position);
+                    Intent intent = new Intent(getApplicationContext(), HospitalScreen.class);
+                    intent.putExtra("병원", hospital);
+                    startActivity(intent);
+
+                }
+            });
+        } //응급실 아니면 그냥 itemlistener와 같은 역할로 다음 화면으로 넘어가야한다.
+
     }
 
 

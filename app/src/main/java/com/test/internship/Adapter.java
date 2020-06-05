@@ -2,6 +2,7 @@ package com.test.internship;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -34,24 +35,34 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     // 커스텀 리스너 인터페이스 정의
-    public interface onItemClickListener{
+    public interface OnItemClickListener{
         void onItemClick(View v, int position);
     }
 
     // 리스너 객체 참조를 저장하는 변수
-    private onItemClickListener hosClickListener = null;
+    private OnItemClickListener hosClickListener = null;
+    private View.OnClickListener emergencyOpenclosedListener=null;
+    private View.OnClickListener openClosedListener=null;
 
     // onItemClickListener 리스너 객체 참조를 어댑터에 전달하는 메소드
-    public void setOnItemClickListener(onItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener){
         this.hosClickListener = listener;
     }
+    public void setEROpenClosedClickListener(View.OnClickListener listener){
+        this.emergencyOpenclosedListener=listener;
+    }
+    public void setOpenClosedClickListener(View.OnClickListener listener){
+        this.openClosedListener=listener;
+    }
+
 
     // item으로 만든 itemView를 담아두는 뷰 홀더
     // 일단 필요한 객체의 수만 ViewHolder에 담아서 화면에 뿌려준다
     // 이벤트 처리를 위해 static -> public으로 변경 (items를 static으로 하기엔 찝찝해서..)
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView itemHospitalName, itemSubject;
-        TextView itemDistance, itemOpenClosed;
+        TextView itemDistance;
+        Button itemOpenClosed;
         public ViewHolder(final View itemView){
             super(itemView);
             itemHospitalName = itemView.findViewById(R.id.itemHospitalName);
@@ -72,6 +83,23 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                     }
                 }
             });
+
+          itemOpenClosed.setOnClickListener(new View.OnClickListener(){
+              @Override
+              public void onClick(View view) {
+                  if(emergencyOpenclosedListener!=null){
+                      int position=getAdapterPosition();
+                        view.setTag(position); //position을 전달해줘야 listener에서 병원번호 받을 수있음.
+                      emergencyOpenclosedListener.onClick(view);
+                  } //응급실 리스너가 붙어있다면 !
+                  else if(openClosedListener!=null){
+                      int position=getAdapterPosition();
+                      view.setTag(position); //얘는 itemlistener와 같은 역할을 해야하므로 또 position이 필요함
+                      //tag는 꼬리표같은 느낌으로 전해주는것 같음.
+                      openClosedListener.onClick(view);
+                  }
+              }
+          });
         }
         public void setItem(HospitalInformation hospital){
             itemHospitalName.setText(hospital.getHospitalName());
@@ -80,6 +108,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             {
                 itemOpenClosed.setText("");
                 itemOpenClosed.setBackgroundResource(R.drawable.telephone);
+                itemDistance.setTextColor(0xFF999999);
+                itemHospitalName.setTextColor(0xFF000000);
             }else{      // 정렬된 리스트의 진료중/준비중을 색으로 구분
                 itemOpenClosed.setText(hospital.getOpenClosed());
                 if(hospital.getOpenClosed()=="진료중"){
