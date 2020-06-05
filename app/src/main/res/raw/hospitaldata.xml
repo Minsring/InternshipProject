@@ -33,7 +33,7 @@
         <name>진연합의원</name>
         <openweekday>08:30</openweekday>
         <opensaturday>08:30</opensaturday>
-        <opensunday>9:00</opensunday>
+        <opensunday>09:00</opensunday>
         <closeweekday>20:00</closeweekday>
         <closesaturday>16:00</closesaturday>
         <closesunday>13:00</closesunday>
@@ -241,7 +241,7 @@
         <name>한길성내과의원</name>
         <openweekday>09:00</openweekday>
         <opensaturday>09:00</opensaturday>
-        <opensunday>9:00</opensunday>
+        <opensunday>09:00</opensunday>
         <closeweekday>18:00</closeweekday>
         <closesaturday>18:00</closesaturday>
         <closesunday>15:00</closesunday>

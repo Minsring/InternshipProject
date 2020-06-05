@@ -17,6 +17,7 @@ public class HospitalInformation implements Serializable {
     private ArrayList<String> subjects = new ArrayList<String>();
     private ArrayList<String> openTime = new ArrayList<String>();
     private ArrayList<String> closedTime = new ArrayList<String>();
+    private int numSubjects = 0;
     //시간 0번째 -> 평일, (1번째 -> 토요일, 2번째 -> 일요일) -> 없을수도 있음
 
     // 생성자 -> 사용할지는 모르게씀
@@ -33,6 +34,12 @@ public class HospitalInformation implements Serializable {
 //        this.openDay = openDay;
 //    }
 
+
+    public boolean openTime_isEmpty(int num){
+        if(num > openTime.size()-1) return true;
+        else return false;
+    }
+
     // getter()
     public String getHospitalName() { return hospitalName; }
     public String getOpenTime(int num) { return openTime.get(num); }
@@ -42,7 +49,8 @@ public class HospitalInformation implements Serializable {
     public String getAddress() { return address; }
     public String getCallNumber() { return callNumber; }
     // 일단 첫번째 ArrayList 원소 보이게
-    public String getSubject() { return subjects.get(0); }
+    public String getSubject(int num) { return subjects.get(num); }
+    public int getNumSubjects() { return numSubjects;}
 //    public String getOpenDay() { return openDay; }
     public String getDistance() { return distance; }
     public String getOpenClosed() { return openClosed; }
@@ -53,9 +61,12 @@ public class HospitalInformation implements Serializable {
 //    public void setOpenDay(String openDay){this.openDay=openDay;}
     public void setDistance(String distance){this.distance=distance;}
     public void setOpenClosed(String openClosed){this.openClosed=openClosed;}
+    public void setNumSubjects(int numSubjects){ this.numSubjects = numSubjects;}
 
     public void addOpenTime(String openTime){ this.openTime.add(openTime); }
     public void addClosedTime(String closedTime){ this.closedTime.add(closedTime); }
+
+
 
     // subject 추가 및 찾기
     public void addSubject(String subject){

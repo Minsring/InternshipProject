@@ -7,48 +7,127 @@
     android:orientation="vertical"
     tools:context="com.test.internship.TestHospitalInfo_Activity">
 
+
     <TextView
+        android:id="@+id/Title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:text="병원 이름"
-        android:textSize="30sp"
-        android:layout_margin="20dp"/>
+        android:textSize="30sp" />
 
-    <LinearLayout
-        android:orientation="horizontal"
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="2">
 
-        <Button
-            android:layout_width="0dp"
+        <android.support.design.widget.TabItem
+            android:id="@+id/tab_item1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="정보"
-            android:background="#110000ff"
-            android:textSize="20sp"/>
+            android:text="병원 정보"
+            app:tabTextAppearance="@style/tab_text" />
 
-        <Button
-            android:layout_width="0dp"
+        <android.support.design.widget.TabItem
+            android:id="@+id/tab_item2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="지도"
-            android:textSize="20sp"/>
+            app:tabTextAppearance="@style/tab_text" />
 
-    </LinearLayout>
-    <TextView
+
+    </android.support.design.widget.TabLayout>
+
+    <FrameLayout
+        android:id="@+id/content1"
         android:layout_width="match_parent"
-        android:layout_height="480dp"
-        android:text="정보 또는 지도뜨는 공간"
-        android:textSize="20sp"
-        android:background="#110000ff"
-        android:gravity="center"/>
+        android:layout_height="0dp"
+        android:layout_weight="20">
+
+        <LinearLayout
+            android:id="@+id/content_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/info_Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"/>
+
+            <TextView
+                android:id="@+id/info_Address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"/>
+
+            <TextView
+                android:id="@+id/info_Call"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"/>
+
+            <TextView
+                android:id="@+id/info_Subject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"/>
+
+            <TextView
+                android:id="@+id/info_Distance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"/>
+
+            <TextView
+                android:id="@+id/info_Weekday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"/>
+
+            <TextView
+                android:id="@+id/info_Saturday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"/>
+
+            <TextView
+                android:id="@+id/info_Sunday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/content_map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+        </LinearLayout>
+
+
+
+    </FrameLayout>
+
+
 
     <Button
         android:id="@+id/callHospitalBtn"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="전화걸기 띠로롱"
+        android:layout_height="0dp"
+        android:layout_weight="2"
         android:background="#3300ff00"
-        android:textSize="20sp"/>
+        android:text="전화걸기 띠로롱"
+        android:textSize="20sp" />
 
 </LinearLayout>

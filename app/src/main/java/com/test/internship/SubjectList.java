@@ -171,6 +171,7 @@ public class SubjectList extends AppCompatActivity {
                         }
                         if (startTag.equals("subject")) {
                             hospital.addSubject(parser.nextText());
+                            hospital.setNumSubjects(hospital.getNumSubjects()+1);
                         }
                         if (startTag.equals("distance")) {
                             hospital.setDistance(parser.nextText());

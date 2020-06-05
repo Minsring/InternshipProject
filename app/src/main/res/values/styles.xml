@@ -9,4 +9,8 @@
 <item name="colorAccent">@color/colorAccent</item>
 </style>
 
-    </resources>
+    <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">30sp</item>
+    </style>
+
+</resources>
