@@ -18,15 +18,20 @@ import android.widget.Toast;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.CameraPosition;
+import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
+import com.naver.maps.map.util.FusedLocationSource;
 
 import java.util.Locale;
 
 public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallback {
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
+    private FusedLocationSource locationSource;
+    private NaverMap naverMap;
 
     HospitalInformation hospital = null;
     double lat = 0, lng = 0;
@@ -125,6 +130,9 @@ public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallb
 
         hosMapFragment.getMapAsync(this);
 
+        // 현재위치
+        locationSource =
+                new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
     }
     private void changeView(int index){
         LinearLayout linearLayout1 = (LinearLayout) findViewById(R.id.content_info);
@@ -142,8 +150,23 @@ public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallb
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,  @NonNull int[] grantResults) {
+        if (locationSource.onRequestPermissionsResult(
+                requestCode, permissions, grantResults)) {
+            if (!locationSource.isActivated()) {
+                naverMap.setLocationTrackingMode(LocationTrackingMode.Face);
+            }
+            return;
+        }
+        super.onRequestPermissionsResult(
+                requestCode, permissions, grantResults);
+    }
+
     @Override  // 네이버 맵에서 오버레이 추가, 상호작용하는 등 기능 대부분을 이 클래스 에서 제공
     public void onMapReady(@NonNull NaverMap naverMap) {
+        this.naverMap = naverMap;
         UiSettings uiSettings = naverMap.getUiSettings();
         LatLng hosCoord = new LatLng(lat,lng);     // 마커 찍어야할 경도, 위도
 //        Toast.makeText(this, "위도: "+hosCoord.latitude +" 경도: "+hosCoord.longitude, Toast.LENGTH_SHORT).show();
@@ -177,5 +200,6 @@ public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallb
 //        uiSettings.setLogoClickEnabled(false);
 
         naverMap.setCameraPosition(cameraPosition);
+        naverMap.setLocationSource(locationSource);
     }
 }
