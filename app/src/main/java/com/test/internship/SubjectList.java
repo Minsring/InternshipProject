@@ -3,32 +3,37 @@ package com.test.internship;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.naver.maps.geometry.LatLng;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 public class SubjectList extends AppCompatActivity {
+
     Button mapBtn;
     TextView subjectTitle;
     LinearLayout linearLayout;
     Button openClosed;
+    ArrayList<HospitalInformation> openHospital=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +57,7 @@ public class SubjectList extends AppCompatActivity {
         final Adapter adapter = new Adapter();
         xmlParser(adapter);
         adapter.combineItems();     // 진료중-준비중 순서대로 들어가게 하는 메소드 호출
+        openHospital=adapter.getOpenItem(); //얘가 어댑터에서 받아와야 Map에 전달해줄수있다 !
 
         // 해당 과목의 병원이 있으면 리스트 동적제공, 없으면 "해당 병원 없습니다." 텍스트 동적 제공
         linearLayout = findViewById(R.id.linearLayout);
@@ -82,7 +88,7 @@ public class SubjectList extends AppCompatActivity {
                 HospitalInformation hospital = adapter.getItem(position);
 //                Toast.makeText(getApplicationContext(), "클릭한 병원 이름: "+hospital.getHospitalName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), HospitalScreen.class);
-                intent.putExtra("병원", hospital);
+                intent.putExtra("병원", (Serializable)hospital);
                 startActivity(intent);
             }
         });
@@ -108,7 +114,7 @@ public class SubjectList extends AppCompatActivity {
                     int position=(int)view.getTag();
                     HospitalInformation hospital = adapter.getItem(position);
                     Intent intent = new Intent(getApplicationContext(), HospitalScreen.class);
-                    intent.putExtra("병원", hospital);
+                    intent.putExtra("병원", (Serializable)hospital);
                     startActivity(intent);
 
                 }
@@ -134,6 +140,7 @@ public class SubjectList extends AppCompatActivity {
             parser.setInput(new InputStreamReader(is, "UTF-8"));
             int eventType = parser.getEventType();
             HospitalInformation hospital = null;
+            double lat= 0.0f, lng = 0.0f;
 
             while (eventType != XmlPullParser.END_DOCUMENT) {
                 switch (eventType) {
@@ -177,10 +184,11 @@ public class SubjectList extends AppCompatActivity {
                             hospital.setDistance(parser.nextText());
                         }
                         if (startTag.equals("lat")) {
-                            hospital.setLat(Double.parseDouble(parser.nextText()));
+                            lat= Double.parseDouble(parser.nextText());
                         }
                         if (startTag.equals("lng")) {
-                            hospital.setLng(Double.parseDouble(parser.nextText()));
+                            lng= Double.parseDouble(parser.nextText());
+                            hospital.setLatLng(new LatLng(lat, lng));
                         }
                         break;
                     case XmlPullParser.END_TAG:
@@ -275,7 +283,9 @@ public class SubjectList extends AppCompatActivity {
             Intent intent = null;
             switch (v.getId()){
                 case R.id.mapBtn:
-                    intent = new Intent(getApplicationContext(), SubjectListMap.class);
+//                    intent = new Intent(getApplicationContext(), SubjectListMap.class);
+                    intent = new Intent(getApplicationContext(), CustomMarkerClusterClass.class);
+                     intent.putExtra("열린병원리스트",openHospital);
 //                    startActivity(intent);
                     break;
             }

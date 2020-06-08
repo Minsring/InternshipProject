@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <!--    병원이름, 거리, 진료과, 오픈여부-->
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="25dp"
@@ -65,7 +65,7 @@
             android:background="#ffffff"
             android:stateListAnimator="@null"/>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </LinearLayout>

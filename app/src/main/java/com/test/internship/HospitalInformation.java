@@ -1,10 +1,16 @@
 package com.test.internship;
 
+import com.naver.maps.geometry.LatLng;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import ted.gun0912.clustering.clustering.TedClusterItem;
+import ted.gun0912.clustering.geometry.TedLatLng;
+
 // 객체를 직렬화해야 액티비티에 데이터 객체를 넘겨줄 수 있다.
-public class HospitalInformation implements Serializable {
+// 클러스터링을 위한 라이브러리 추가
+public class HospitalInformation implements Serializable, TedClusterItem {
     // 클래스의 버전을 의미, 객체를 전달하고 수신할 때 사용하는 클래스 파일이 동일한지 체크하는 용도로 사용
     private static final long serialVersionUID = 1L;
 
@@ -19,12 +25,16 @@ public class HospitalInformation implements Serializable {
     private ArrayList<String> closedTime = new ArrayList<String>();
     private int numSubjects = 0;
     //시간 0번째 -> 평일, (1번째 -> 토요일, 2번째 -> 일요일) -> 없을수도 있음
-    private  double lat = 0.0f;     // 위도
-    private  double lng = 0.0f;     // 경도
+    private double lat = 0.0f;     // 위도
+    private double lng = 0.0f;     // 경도
 
     // 생성자 -> 사용할지는 모르게씀
     // 일단 distance와 openClosed는 제외하고 만듬
     public HospitalInformation(){}
+    public HospitalInformation(LatLng latLng){
+        this.lat = latLng.latitude;
+        this.lng = latLng.longitude;
+    }
 //    public HospitalInformation(String hospitalName, String openTime, String closedTime, String address,
 //                               String callNumber, String subject, String openDay){
 //        this.hospitalName = hospitalName;
@@ -69,10 +79,13 @@ public class HospitalInformation implements Serializable {
     public void addClosedTime(String closedTime){ this.closedTime.add(closedTime); }
 
     // 위도 경도
-    public double getLat() { return lat; }
-    public double getLng() { return lng; }
-    public void setLat(double lat) { this.lat = lat; }
-    public void setLng(double lng) { this.lng = lng; }
+    public LatLng getLatLng(){
+        return new LatLng(lat, lng);
+    }
+    public void setLatLng(LatLng latLng) {
+        this.lat = latLng.latitude;
+        this.lng = latLng.longitude;
+    }
 
     // subject 추가 및 찾기
     public void addSubject(String subject){
@@ -83,5 +96,10 @@ public class HospitalInformation implements Serializable {
             if(temp.equals(subject)) return true;
         }
         return false;
+    }
+
+    @Override
+    public TedLatLng getTedLatLng() {
+        return new TedLatLng(lat, lng);
     }
 }

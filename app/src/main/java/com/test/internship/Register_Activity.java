@@ -1,15 +1,16 @@
 package com.test.internship;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 
-public class Register_Activity<listener> extends AppCompatActivity{
+public class Register_Activity<listener> extends AppCompatActivity {
 
     // 보호자가 입력한 정보를 받아서 변수에 넣는 부분
     EditText idEdit_n;

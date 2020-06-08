@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.test.internship.TestHospitalInfo_Activity">
+    tools:context="com.test.internship.HospitalScreen">
 
 
     <TextView
@@ -20,20 +20,20 @@
         android:textSize="30sp" />
 
 
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2">
 
-        <android.support.design.widget.TabItem
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/tab_item1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="병원 정보"
             app:tabTextAppearance="@style/tab_text" />
 
-        <android.support.design.widget.TabItem
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/tab_item2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
             app:tabTextAppearance="@style/tab_text" />
 
 
-    </android.support.design.widget.TabLayout>
+    </com.google.android.material.tabs.TabLayout>
 
     <FrameLayout
         android:id="@+id/content1"

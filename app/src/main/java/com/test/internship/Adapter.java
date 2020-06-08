@@ -1,25 +1,15 @@
 package com.test.internship;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
@@ -144,7 +134,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public void setItems(ArrayList<HospitalInformation> items){
         this.items = items;
     }
-
+    public ArrayList<HospitalInformation> getOpenItem(){ return openItems; }
     @Override
     public int getItemCount() {
         return items.size();

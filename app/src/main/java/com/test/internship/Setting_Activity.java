@@ -3,28 +3,27 @@ package com.test.internship;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.BatteryManager;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import static com.test.internship.User.tt;
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class Setting_Activity extends AppCompatActivity {
+    private boolean saveData;
+    private boolean isCheck1;
+    private boolean isCheck2;
     Button btnregister;
     Switch switch1;
     Switch switch2;
     IntentFilter ifilter;
     Handler handler;
-
+    private SharedPreferences appData;
     Context context = this;
 
     @Override
@@ -37,6 +36,12 @@ public class Setting_Activity extends AppCompatActivity {
 
         switch1 = (Switch)findViewById(R.id.switch1);
         switch2 = (Switch)findViewById(R.id.switch2);
+        appData = getSharedPreferences("appData", MODE_PRIVATE);
+        load();
+        if(saveData){
+            switch1.setChecked(isCheck1);
+            switch2.setChecked(isCheck2);
+        }
 
 
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -44,12 +49,15 @@ public class Setting_Activity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                 // 스위치 버튼이 체크되었는지 검사하여 텍스트뷰에 각 경우에 맞게 출력합니다.
                 if (isChecked){
+                    save();
                     // 타이머 활성화 여기서 시켜야함(잘 돌아감)
                     //Log.d("버튼클릭확인","버튼 클릭됨");
-                    User.timer.schedule(tt, 0, 5000);
+                    //User.timer.schedule(tt, 0, 5000);
+                    System.out.println("1");
 
                 }else{
-                    //타이머 꺼두기
+                    System.out.println("2");
+                    save();
                 }
             }
         });
@@ -61,9 +69,9 @@ public class Setting_Activity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                 // 스위치 버튼이 체크되었는지 검사하여 텍스트뷰에 각 경우에 맞게 출력합니다.
                 if (isChecked){
-
+                    save();
                 }else{
-
+                    save();
                 }
             }
         });
@@ -82,6 +90,32 @@ public class Setting_Activity extends AppCompatActivity {
             if(intent!=null) startActivity(intent);
         }
     };
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+    private void save(){
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("SAVE_LOGIN_DATA", (switch1.isChecked()||switch2.isChecked()));
+        editor.putBoolean("CHECK1", switch1.isChecked());
+        editor.putBoolean("CHECK2", switch2.isChecked());
+
+        editor.apply();
+
+    }
+    private void load(){
+        saveData = appData.getBoolean("SAVE_LOGIN_DATA", false);
+        isCheck1=appData.getBoolean("CHECK1", false);
+        isCheck2=appData.getBoolean("CHECK2", false);
+    }
 }
 
 

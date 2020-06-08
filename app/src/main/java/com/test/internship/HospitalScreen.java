@@ -2,19 +2,18 @@ package com.test.internship;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+
+import com.google.android.material.tabs.TabLayout;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.CameraPosition;
@@ -24,9 +23,7 @@ import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
-import com.naver.maps.map.overlay.LocationOverlay;
 import com.naver.maps.map.overlay.Marker;
-import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
 
 import java.util.Locale;
@@ -37,7 +34,7 @@ public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallb
     private NaverMap naverMap;
 
     HospitalInformation hospital = null;
-    double lat = 0, lng = 0;
+    LatLng latLng = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,9 +112,8 @@ public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallb
 
         // 지도 테스뚜(민슬)
         // 표시해야할 위도, 경도
-        lat = hospital.getLat();
-        lng = hospital.getLng();
-        Toast.makeText(getApplicationContext(), "위도: " + lat+" 경도: "+lng, Toast.LENGTH_LONG).show();
+        latLng = hospital.getLatLng();
+        Toast.makeText(getApplicationContext(), "위도: " + latLng.latitude+" 경도: "+latLng.longitude, Toast.LENGTH_LONG).show();
         FragmentManager hosFm = getSupportFragmentManager();
         MapFragment hosMapFragment = (MapFragment) hosFm.findFragmentById(R.id.info_map);
 
@@ -158,7 +154,7 @@ public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallb
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,  @NonNull int[] grantResults) {
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (locationSource.onRequestPermissionsResult(
                 requestCode, permissions, grantResults)) {
             if (!locationSource.isActivated()) {
@@ -174,7 +170,6 @@ public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallb
     public void onMapReady(@NonNull NaverMap naverMap) {
         this.naverMap = naverMap;
         UiSettings uiSettings = naverMap.getUiSettings();
-        LatLng hosCoord = new LatLng(lat,lng);     // 마커 찍어야할 경도, 위도
 //        Toast.makeText(this, "위도: "+hosCoord.latitude +" 경도: "+hosCoord.longitude, Toast.LENGTH_SHORT).show();
 
         // 지도 타입 설정
@@ -193,7 +188,7 @@ public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallb
         naverMap.setExtent(new LatLngBounds(new LatLng(31.43, 122.37), new LatLng(44.35, 132)));
 
         // 초기 카메라 위치 신평면 사무소
-        CameraPosition cameraPosition = new CameraPosition(new LatLng(lat,lng), 16);
+        CameraPosition cameraPosition = new CameraPosition(latLng, 16);
         naverMap.setMinZoom(6.0);
         naverMap.setMaxZoom(18.0);
 
@@ -210,7 +205,7 @@ public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallb
 
         // 마커 생성
         Marker marker = new Marker();   // 마커객체 생성
-        marker.setPosition(new LatLng(lat,lng));
+        marker.setPosition(latLng);
         marker.setCaptionText(hospital.getHospitalName());
 //        marker.setIcon(OverlayImage.fromResource(R.drawable.ic_add_location_green_50dp));
         marker.setMap(naverMap);
