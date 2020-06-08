@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.test.internship.TestHospitalInfo_Activity">
+    tools:context="com.test.internship.HospitalScreen">
 
 
     <TextView

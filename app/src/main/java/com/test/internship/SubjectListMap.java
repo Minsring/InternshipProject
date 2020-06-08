@@ -1,13 +1,12 @@
 package com.test.internship;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.annotation.UiThread;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.UiThread;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
@@ -21,24 +20,25 @@ import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.util.FusedLocationSource;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Locale;
+
+import ted.gun0912.clustering.naver.TedNaverClustering;
 
 public class SubjectListMap extends FragmentActivity implements OnMapReadyCallback {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private FusedLocationSource locationSource;
     private NaverMap naverMap;
-    ArrayList<HospitalInformation>  hospitals=null;
-    double lat,lng;
+    ArrayList<HospitalInformation> hospitals = null;
+    LatLng latlng = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subject_list_map);
-        Intent getIntent=getIntent();
-        hospitals=(ArrayList<HospitalInformation>)getIntent().getSerializableExtra("열린병원리스트");
+        Intent getIntent = getIntent();
+        hospitals = (ArrayList<HospitalInformation>) getIntent().getSerializableExtra("열린병원리스트");
 //        if(hospitals==null){
 //            Toast.makeText(this,"아무것도 전달되지 않았다",Toast.LENGTH_LONG).show();
 //        }
@@ -52,20 +52,19 @@ public class SubjectListMap extends FragmentActivity implements OnMapReadyCallba
         //NaverMap 객체가 준비되면 onMapReady() 콜백 메서드가 호출됨
         FragmentManager fm = getSupportFragmentManager();
 
-        lat=hospitals.get(0).getLat();
-        lng=hospitals.get(0).getLng();
+        latlng = hospitals.get(0).getLatLng();
 
         // 초기 위치 및 맵 타입 설정 // 신평면사무소 근처
         NaverMapOptions options = new NaverMapOptions()
-                .camera(new CameraPosition(new LatLng(lat,lng), 15))
+                .camera(new CameraPosition(latlng, 15))
                 .mapType(NaverMap.MapType.Basic)
                 .locationButtonEnabled(true)
                 .compassEnabled(true)
                 .stopGesturesEnabled(false)
                 .tiltGesturesEnabled(false);
-        MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map);
+        MapFragment mapFragment = (MapFragment) fm.findFragmentById(R.id.map);
 
-        if(mapFragment == null){
+        if (mapFragment == null) {
             mapFragment = MapFragment.newInstance(options);
             fm.beginTransaction().add(R.id.map, mapFragment).commit();
         }
@@ -79,10 +78,10 @@ public class SubjectListMap extends FragmentActivity implements OnMapReadyCallba
 
     // 사용자 위치 받아오기
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
-        if(locationSource.onRequestPermissionsResult(
-                requestCode, permissions, grantResults)){
-            if(!locationSource.isActivated()){
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (locationSource.onRequestPermissionsResult(
+                requestCode, permissions, grantResults)) {
+            if (!locationSource.isActivated()) {
                 naverMap.setLocationTrackingMode(LocationTrackingMode.None);
             }
             return;
@@ -93,7 +92,7 @@ public class SubjectListMap extends FragmentActivity implements OnMapReadyCallba
 
     @UiThread
     @Override
-    public void onMapReady(@NonNull NaverMap naverMap){
+    public void onMapReady(@NonNull NaverMap naverMap) {
         this.naverMap = naverMap;
 
         // 지도 타입 설정
@@ -123,16 +122,31 @@ public class SubjectListMap extends FragmentActivity implements OnMapReadyCallba
         uiSettings.setCompassEnabled(true);
         uiSettings.setLocationButtonEnabled(true);
 
-        //돌면서 마커찍는 중 !
-        Iterator<HospitalInformation> it=hospitals.iterator();
-        while(it.hasNext()){
-            HospitalInformation hos=it.next();
-            double lat=hos.getLat();
-            double lng=hos.getLng();
-            Marker marker =new Marker();
-            marker.setPosition(new LatLng(lat,lng));
-            marker.setCaptionText(hos.getHospitalName());
-            marker.setMap(naverMap);
-        }
+        TedNaverClustering.with(this, naverMap)
+                .items(hospitals)
+//                .customMarker(new Marker().setPosition(HospitalInformation.get))
+                .make();
     }
+
+//    private ArrayList<HospitalInformation> getItems() {
+//        LatLngBounds bounds = naverMap.getContentBounds();
+//        ArrayList<HospitalInformation> items = new ArrayList<>();
+//
+//
+//    }
+//        //돌면서 마커찍는 중 !
+////        int i = 0;
+//        Iterator<HospitalInformation> it=hospitals.iterator();
+//        while(it.hasNext()){
+//            HospitalInformation hos=it.next();
+//            latlng = hos.getLatLng();
+//            Marker marker =new Marker();
+//            marker.setPosition(latlng);
+//            marker.setCaptionText(hos.getHospitalName());
+////            marker.setZIndex(hospitals.size()-i);
+////            marker.setHideCollidedCaptions(true);
+//            marker.setMap(naverMap);
+////            i++;
+//        }
+
 }

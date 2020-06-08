@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 28
@@ -17,6 +18,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
 }
 
 dependencies {
@@ -31,4 +35,7 @@ dependencies {
     implementation 'com.naver.maps:map-sdk:3.8.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     //implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'gun0912.ted:tedclustering-naver:1.0.2'
+
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.0.0'
 }

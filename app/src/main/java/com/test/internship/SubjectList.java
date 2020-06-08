@@ -4,16 +4,19 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Parcelable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.naver.maps.geometry.LatLng;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -139,6 +142,7 @@ public class SubjectList extends AppCompatActivity {
             parser.setInput(new InputStreamReader(is, "UTF-8"));
             int eventType = parser.getEventType();
             HospitalInformation hospital = null;
+            double lat= 0.0f, lng = 0.0f;
 
             while (eventType != XmlPullParser.END_DOCUMENT) {
                 switch (eventType) {
@@ -182,10 +186,11 @@ public class SubjectList extends AppCompatActivity {
                             hospital.setDistance(parser.nextText());
                         }
                         if (startTag.equals("lat")) {
-                            hospital.setLat(Double.parseDouble(parser.nextText()));
+                            lat= Double.parseDouble(parser.nextText());
                         }
                         if (startTag.equals("lng")) {
-                            hospital.setLng(Double.parseDouble(parser.nextText()));
+                            lng= Double.parseDouble(parser.nextText());
+                            hospital.setLatLng(new LatLng(lat, lng));
                         }
                         break;
                     case XmlPullParser.END_TAG:
@@ -280,7 +285,8 @@ public class SubjectList extends AppCompatActivity {
             Intent intent = null;
             switch (v.getId()){
                 case R.id.mapBtn:
-                    intent = new Intent(getApplicationContext(), SubjectListMap.class);
+//                    intent = new Intent(getApplicationContext(), SubjectListMap.class);
+                    intent = new Intent(getApplicationContext(), CustomMarkerClusterClass.class);
                      intent.putExtra("열린병원리스트",openHospital);
 //                    startActivity(intent);
                     break;
