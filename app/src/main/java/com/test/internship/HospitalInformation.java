@@ -1,10 +1,14 @@
 package com.test.internship;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 // 객체를 직렬화해야 액티비티에 데이터 객체를 넘겨줄 수 있다.
-public class HospitalInformation implements Serializable {
+public class HospitalInformation implements Serializable{
     // 클래스의 버전을 의미, 객체를 전달하고 수신할 때 사용하는 클래스 파일이 동일한지 체크하는 용도로 사용
     private static final long serialVersionUID = 1L;
 
@@ -84,4 +88,6 @@ public class HospitalInformation implements Serializable {
         }
         return false;
     }
+
+
 }
