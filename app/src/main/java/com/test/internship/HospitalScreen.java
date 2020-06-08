@@ -26,6 +26,7 @@ import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.LocationOverlay;
 import com.naver.maps.map.overlay.Marker;
+import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
 
 import java.util.Locale;
@@ -210,6 +211,8 @@ public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallb
         // 마커 생성
         Marker marker = new Marker();   // 마커객체 생성
         marker.setPosition(new LatLng(lat,lng));
+        marker.setCaptionText(hospital.getHospitalName());
+//        marker.setIcon(OverlayImage.fromResource(R.drawable.ic_add_location_green_50dp));
         marker.setMap(naverMap);
     }
 }
