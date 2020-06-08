@@ -24,6 +24,8 @@ import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
+import com.naver.maps.map.overlay.LocationOverlay;
+import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.util.FusedLocationSource;
 
 import java.util.Locale;
@@ -133,6 +135,9 @@ public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallb
         // 현재위치
         locationSource =
                 new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
+
+
+
     }
     private void changeView(int index){
         LinearLayout linearLayout1 = (LinearLayout) findViewById(R.id.content_info);
@@ -187,7 +192,7 @@ public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallb
         naverMap.setExtent(new LatLngBounds(new LatLng(31.43, 122.37), new LatLng(44.35, 132)));
 
         // 초기 카메라 위치 신평면 사무소
-        CameraPosition cameraPosition = new CameraPosition(new LatLng(36.473702,128.502493), 15);
+        CameraPosition cameraPosition = new CameraPosition(new LatLng(lat,lng), 16);
         naverMap.setMinZoom(6.0);
         naverMap.setMaxZoom(18.0);
 
@@ -201,5 +206,10 @@ public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallb
 
         naverMap.setCameraPosition(cameraPosition);
         naverMap.setLocationSource(locationSource);
+
+        // 마커 생성
+        Marker marker = new Marker();   // 마커객체 생성
+        marker.setPosition(new LatLng(lat,lng));
+        marker.setMap(naverMap);
     }
 }
