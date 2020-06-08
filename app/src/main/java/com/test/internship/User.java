@@ -6,7 +6,12 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.BatteryManager;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,11 +24,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class User extends AppCompatActivity {
+public class User extends AppCompatActivity implements SensorEventListener {
 
     Button allSub, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub
             ,hanSub, binyoSub, bogun, chkCenter, emergencyRoom, setting, btnregister;
-
+    private SensorManager sensorManager;
+    private Sensor stepsensor;
+    private int mStepDetector;
     static String subject;
     static Timer timer;
     static TimerTask tt;
@@ -35,7 +42,17 @@ public class User extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user);
-
+        sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+        stepsensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
+        System.out.println("3");
+        if(stepsensor==null){
+            Toast.makeText(this, "센서 없어", Toast.LENGTH_LONG).show();
+            System.out.println("센서 없어");
+        }
+        else{
+            Toast.makeText(this, "센서 있어", Toast.LENGTH_LONG).show();
+            System.out.println("센서 있어");
+        }
         // 버튼 연결
         allSub = findViewById(R.id.allSub);                     // 전체
         hanSub = findViewById(R.id.hanSub);                     // 한의원
@@ -77,18 +94,18 @@ public class User extends AppCompatActivity {
         tt = new TimerTask() {
             @Override
             public void run() {
-                System.out.println("1");
-                Intent intentBattery = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-                int level = intentBattery.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-                int scale = intentBattery.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-                float batteryPct = level / (float)scale;
-                int battery = (int)(batteryPct * 100);
-
-                if(battery<15) Log.d("배터리 부족알림","배터리 부족! 보호자에게 알림을 보냅니다");
+                System.out.println(mStepDetector);
+//                Intent intentBattery = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+//                int level = intentBattery.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+//                int scale = intentBattery.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+//                float batteryPct = level / (float)scale;
+//                int battery = (int)(batteryPct * 100);
+//
+//                if(battery<15) Log.d("배터리 부족알림","배터리 부족! 보호자에게 알림을 보냅니다");
             }
        };
         timer = new Timer();
-        //timer.schedule(tt, 0, 5000);
+        timer.schedule(tt, 0, 5000);
     }
 
     // TODO: 각 버튼 별 처리
@@ -181,4 +198,24 @@ public class User extends AppCompatActivity {
             if(intent != null) startActivity(intent);    // 다른 처리 없다면 여기서 한번에 화면 전환
         }
     };
+    public void onStart() {
+        super.onStart();
+        sensorManager.registerListener(this, stepsensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if(event.sensor.getType()==Sensor.TYPE_STEP_DETECTOR){
+            if(event.values[0]==1.0f){
+                mStepDetector++;
+                System.out.println(String.valueOf(mStepDetector));
+                Toast.makeText(getApplicationContext(), "걸음 수: "+String.valueOf(mStepDetector), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
 }
