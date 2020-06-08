@@ -1,7 +1,9 @@
 package com.test.internship
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.widget.TextView
 import androidx.annotation.UiThread
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
