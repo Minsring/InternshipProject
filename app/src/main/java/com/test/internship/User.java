@@ -1,17 +1,17 @@
 package com.test.internship;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.os.BatteryManager;
-import android.provider.Settings;
+import android.os.Build;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,35 +24,29 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class User extends AppCompatActivity implements SensorEventListener {
+public class User extends AppCompatActivity {
 
     Button allSub, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub
             ,hanSub, binyoSub, bogun, chkCenter, emergencyRoom, setting, btnregister;
-    private SensorManager sensorManager;
-    private Sensor stepsensor;
-    private int mStepDetector;
+
     static String subject;
     static Timer timer;
     static TimerTask tt;
 
     Context context = this;
+    NotificationManager manager;
+    NotificationCompat.Builder builder;
+
+    private static String CHANNEL_ID = "channel1";
+    private static String CHANEL_NAME = "Channel1";
+
 
     //    TODO: 위치 기반 동의, 개인정보 보호 약관..?
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user);
-        sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
-        stepsensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
-        System.out.println("3");
-        if(stepsensor==null){
-            Toast.makeText(this, "센서 없어", Toast.LENGTH_LONG).show();
-            System.out.println("센서 없어");
-        }
-        else{
-            Toast.makeText(this, "센서 있어", Toast.LENGTH_LONG).show();
-            System.out.println("센서 있어");
-        }
+
         // 버튼 연결
         allSub = findViewById(R.id.allSub);                     // 전체
         hanSub = findViewById(R.id.hanSub);                     // 한의원
@@ -94,18 +88,44 @@ public class User extends AppCompatActivity implements SensorEventListener {
         tt = new TimerTask() {
             @Override
             public void run() {
-                System.out.println(mStepDetector);
-//                Intent intentBattery = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-//                int level = intentBattery.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-//                int scale = intentBattery.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-//                float batteryPct = level / (float)scale;
-//                int battery = (int)(batteryPct * 100);
-//
-//                if(battery<15) Log.d("배터리 부족알림","배터리 부족! 보호자에게 알림을 보냅니다");
+//                System.out.println("1");
+                Intent intentBattery = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+                int level = intentBattery.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+                int scale = intentBattery.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+                float batteryPct = level / (float)scale;
+                int battery = (int)(batteryPct * 100);
+
+                if(battery<15) {
+                    Log.d("배터리 부족알림", "배터리 부족! 보호자에게 알림을 보냅니다.");
+                    showNoti();
+                }
             }
        };
         timer = new Timer();
-        timer.schedule(tt, 0, 5000);
+        //timer.schedule(tt, 0, 5000);
+    }
+
+    //알림창 실행
+    public void showNoti(){
+        builder = null;
+        manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        //버전 오레오 이상일 경우
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            manager.createNotificationChannel(
+                    new NotificationChannel(CHANNEL_ID, CHANEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
+            ); builder = new NotificationCompat.Builder(this,CHANNEL_ID);
+            //하위 버전일 경우
+        }else{ builder = new NotificationCompat.Builder(this)
+        ; }
+        //알림창 제목
+        builder.setContentTitle("배터리 부족 알림");
+        // 알림창 메시지
+        builder.setContentText("배터리 부족!! 보호자에 알림을 전송하겠습니다.");
+        //알림창 아이콘
+        builder.setSmallIcon(R.drawable.ic_launcher_foreground);
+        Notification notification = builder.build();
+        //알림창 실행
+        manager.notify(1,notification);
     }
 
     // TODO: 각 버튼 별 처리
@@ -198,24 +218,4 @@ public class User extends AppCompatActivity implements SensorEventListener {
             if(intent != null) startActivity(intent);    // 다른 처리 없다면 여기서 한번에 화면 전환
         }
     };
-    public void onStart() {
-        super.onStart();
-        sensorManager.registerListener(this, stepsensor, SensorManager.SENSOR_DELAY_NORMAL);
-    }
-
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        if(event.sensor.getType()==Sensor.TYPE_STEP_DETECTOR){
-            if(event.values[0]==1.0f){
-                mStepDetector++;
-                System.out.println(String.valueOf(mStepDetector));
-                Toast.makeText(getApplicationContext(), "걸음 수: "+String.valueOf(mStepDetector), Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
-    }
 }
