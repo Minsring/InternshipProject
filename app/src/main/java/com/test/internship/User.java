@@ -55,7 +55,6 @@ public class User extends AppCompatActivity implements SensorEventListener {
         setContentView(R.layout.user);
         sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         stepsensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
-        System.out.println("3");
         if(stepsensor==null){
             Toast.makeText(this, "센서 없어", Toast.LENGTH_LONG).show();
             System.out.println("센서 없어");
