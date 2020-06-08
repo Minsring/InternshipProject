@@ -25,6 +25,8 @@ public class User extends AppCompatActivity {
             ,hanSub, binyoSub, bogun, chkCenter, emergencyRoom, setting, btnregister;
 
     static String subject;
+    static Timer timer;
+    static TimerTask tt;
 
     Context context = this;
 
@@ -72,9 +74,7 @@ public class User extends AppCompatActivity {
         setting.setOnClickListener(listener);
 
         // 윤모꺼
-
-
-        TimerTask tt = new TimerTask() {
+        tt = new TimerTask() {
             @Override
             public void run() {
                 System.out.println("1");
@@ -84,11 +84,11 @@ public class User extends AppCompatActivity {
                 float batteryPct = level / (float)scale;
                 int battery = (int)(batteryPct * 100);
 
-                if(battery<15) Log.d("soyeon","배터리 부족! 보호자에게 알림을 보냅니다");
+                if(battery<15) Log.d("배터리 부족알림","배터리 부족! 보호자에게 알림을 보냅니다");
             }
        };
-        Timer timer = new Timer();
-        timer.schedule(tt, 0, 5000);
+        timer = new Timer();
+        //timer.schedule(tt, 0, 5000);
     }
 
     // TODO: 각 버튼 별 처리
