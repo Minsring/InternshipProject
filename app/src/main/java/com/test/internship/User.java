@@ -234,7 +234,16 @@ public class User extends AppCompatActivity implements SensorEventListener {
             if(intent != null) startActivity(intent);    // 다른 처리 없다면 여기서 한번에 화면 전환
         }
     };
-
+    @Override
+    public void onResume() {
+        super.onResume();
+    //    sensorManager.registerListener(this, stepsensor, SensorManager.SENSOR_DELAY_UI);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+       // sensorManager.registerListener(this, stepsensor, SensorManager.SENSOR_DELAY_UI);
+    }
     @Override
     public void onStart() {
         super.onStart();
@@ -247,7 +256,7 @@ public class User extends AppCompatActivity implements SensorEventListener {
             if(event.values[0]==1.0f){
                 mStepDetector++;
                 System.out.println(String.valueOf(mStepDetector));
-                Toast.makeText(getApplicationContext(), "걸음 수: "+String.valueOf(mStepDetector), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "걸음 수: "+String.valueOf(mStepDetector), Toast.LENGTH_SHORT).show();
             }
         }
     }

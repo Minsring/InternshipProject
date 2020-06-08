@@ -22,7 +22,6 @@
             android:exported="true"></service>
 
         <activity android:name=".HospitalScreen" />
-        <activity android:name=".TestHospitalInfo_Activity" />
         <activity android:name=".SubjectListMap" />
         <activity android:name=".Setting_Activity" />
         <activity android:name=".Register_Activity" />
