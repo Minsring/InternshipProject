@@ -1,16 +1,21 @@
 package com.test.internship;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,17 +27,21 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 
+@RequiresApi(api = Build.VERSION_CODES.M)
 public class User extends AppCompatActivity implements SensorEventListener {
 
-    Button allSub, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub
-            ,hanSub, binyoSub, bogun, chkCenter, emergencyRoom, setting, btnregister;
+    Button allSub, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub, hanSub, binyoSub, bogun, chkCenter, emergencyRoom, setting, btnregister;
     private SensorManager sensorManager;
     private Sensor stepsensor;
     private int mStepDetector;
@@ -47,22 +56,48 @@ public class User extends AppCompatActivity implements SensorEventListener {
     private static String CHANNEL_ID = "channel1";
     private static String CHANEL_NAME = "Channel1";
 
+    String phoneNo;
+    String name;
+    private final int MY_PERMISSION_REQUEST_SMS=1001;
 
     //    TODO: 위치 기반 동의, 개인정보 보호 약관..?
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user);
-        sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         stepsensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
-        if(stepsensor==null){
+        if (stepsensor == null) {
             Toast.makeText(this, "센서 없어", Toast.LENGTH_LONG).show();
             System.out.println("센서 없어");
-        }
-        else{
+        } else {
             Toast.makeText(this, "센서 있어", Toast.LENGTH_LONG).show();
             System.out.println("센서 있어");
         }
+
+        //문자 기능
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.SEND_SMS)){
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("알림");
+                builder.setMessage("이 어플리케이션은 SMS 접근을 허용하지 않으면 작동하지 않습니다.");
+                builder.setIcon(R.drawable.ic_launcher_foreground);
+
+                builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ActivityCompat.requestPermissions(User.this, new String[]{Manifest.permission.SEND_SMS},MY_PERMISSION_REQUEST_SMS);
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            } else{
+                ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.SEND_SMS},MY_PERMISSION_REQUEST_SMS);
+            }
+        }
+
 
         // 버튼 연결
         allSub = findViewById(R.id.allSub);                     // 전체
@@ -101,23 +136,29 @@ public class User extends AppCompatActivity implements SensorEventListener {
         emergencyRoom.setOnClickListener(listener);
         setting.setOnClickListener(listener);
 
-        // 윤모꺼
         tt = new TimerTask() {
             @Override
             public void run() {
                 Intent intentBattery = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
                 int level = intentBattery.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
                 int scale = intentBattery.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-                float batteryPct = level / (float)scale;
-                int battery = (int)(batteryPct * 100);
+                float batteryPct = level / (float) scale;
+                int battery = (int) (batteryPct * 100);
 
-                if(battery<15) {
+                if (battery < 15) {
                     Log.d("배터리 부족알림", "배터리 부족! 보호자에게 알림을 보냅니다.");
                     showNoti();
-                    sendSMS();
+
+                    for (int i = 0; i < Register_Activity.index; i++) {
+                        phoneNo = Register_Activity.protectorPhone.get(i);
+                        //System.out.println(phoneNo);
+                        name = Register_Activity.protectorName.get(i);
+                        //System.out.println(name); 정상출력됨 -> 전송이 안되고 있음
+                        sendSMS(phoneNo, name);
+                    }
                 }
             }
-       };
+        };
         timer = new Timer();
         //timer.schedule(tt, 0, 5000);
     }
@@ -146,20 +187,26 @@ public class User extends AppCompatActivity implements SensorEventListener {
     }
 
     //문자전송
-    public void sendSMS() {
-        if(Build.VERSION.SDK_INT == Build.VERSION_CODES.M) {
-            int permissionResult = checkSelfPermission(Manifest.permission.CALL_PHONE);
-            if(permissionResult==1) {
-                try {
-                    //전송
-                    SmsManager smsManager = SmsManager.getDefault();
-                    for (int i = 0; i < Register_Activity.index; i++) {
-                        smsManager.sendTextMessage(Register_Activity.protectorPhone.get(i), null, Register_Activity.protectorName.get(i) + "님의 보호대상자분의 휴대폰이 15%미만입니다 !!", null, null);
-                        Toast.makeText(getApplicationContext(), "전송 완료!", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), "전송실패!", Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
+    public void sendSMS(String phoneNo, String name){
+        phoneNo= Register_Activity.protectorPhone.toString();
+        name= Register_Activity.protectorName.toString();
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자의 배터리가 15% 미만입니다 !!", null, null);
+            Toast.makeText(getApplicationContext(), "메세지 전송!", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
+    public void onRequestPermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
+        switch(requestCode){
+            case MY_PERMISSION_REQUEST_SMS:{
+                if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(this,"허용",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this,"거부",Toast.LENGTH_SHORT).show();
                 }
             }
         }
