@@ -18,6 +18,8 @@ import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.util.FusedLocationSource;
 
+import java.util.Locale;
+
 public class SubjectListMap extends FragmentActivity implements OnMapReadyCallback {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private FusedLocationSource locationSource;
@@ -77,6 +79,7 @@ public class SubjectListMap extends FragmentActivity implements OnMapReadyCallba
 
         // 지도 타입 설정
         naverMap.setMapType(NaverMap.MapType.Basic);
+        naverMap.setLocale(new Locale("ko"));
         // 지도에 표시할 부가적 정보
         naverMap.setLayerGroupEnabled(NaverMap.LAYER_GROUP_BUILDING, true);
         naverMap.setLayerGroupEnabled(NaverMap.LAYER_GROUP_TRANSIT, true);
@@ -87,6 +90,8 @@ public class SubjectListMap extends FragmentActivity implements OnMapReadyCallba
 
         // 카메라 위치를 한반도 인근으로 제한
         naverMap.setExtent(new LatLngBounds(new LatLng(31.43, 122.37), new LatLng(44.35, 132)));
+        naverMap.setMinZoom(6.0);
+        naverMap.setMaxZoom(18.0);
 
         // LocationButton을 누르면 사용자의 현위치로 이동
         naverMap.setLocationSource(locationSource);
