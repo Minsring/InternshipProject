@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,9 +19,9 @@ public class Register_Activity<listener> extends AppCompatActivity {
     EditText idEdit_p;
     String value_p;
 
-    int index=0;
-    ArrayList<String> protectorName = new ArrayList<String>();
-    ArrayList<String> protectorPhone = new ArrayList<String>();
+    static int index=0;
+    static ArrayList<String> protectorName = new ArrayList<String>();
+    static ArrayList<String> protectorPhone = new ArrayList<String>();
 
 
     @Override
@@ -55,6 +56,7 @@ public class Register_Activity<listener> extends AppCompatActivity {
                         System.out.println(protectorPhone.get(i));
                         System.out.println(protectorName.get(i));
                     }
+                    Toast.makeText(Register_Activity.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
                     break;
             }
         }
