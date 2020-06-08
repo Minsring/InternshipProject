@@ -19,6 +19,8 @@ public class HospitalInformation implements Serializable {
     private ArrayList<String> closedTime = new ArrayList<String>();
     private int numSubjects = 0;
     //시간 0번째 -> 평일, (1번째 -> 토요일, 2번째 -> 일요일) -> 없을수도 있음
+    private  double lat = 0.0f;     // 위도
+    private  double lng = 0.0f;     // 경도
 
     // 생성자 -> 사용할지는 모르게씀
     // 일단 distance와 openClosed는 제외하고 만듬
@@ -66,7 +68,11 @@ public class HospitalInformation implements Serializable {
     public void addOpenTime(String openTime){ this.openTime.add(openTime); }
     public void addClosedTime(String closedTime){ this.closedTime.add(closedTime); }
 
-
+    // 위도 경도
+    public double getLat() { return lat; }
+    public double getLng() { return lng; }
+    public void setLat(double lat) { this.lat = lat; }
+    public void setLng(double lng) { this.lng = lng; }
 
     // subject 추가 및 찾기
     public void addSubject(String subject){

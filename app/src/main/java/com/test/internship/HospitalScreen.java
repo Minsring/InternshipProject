@@ -28,20 +28,21 @@ import java.util.Locale;
 
 public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallback {
 
+    HospitalInformation hospital = null;
+    double lat = 0, lng = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hospital_screen);
         Button callHospital = findViewById(R.id.callHospitalBtn);
         Intent getIntent = getIntent();
-        final HospitalInformation hospital = (HospitalInformation) getIntent.getSerializableExtra("병원");
-
-        Toast.makeText(getApplicationContext(), "병원이름: " + hospital.getHospitalName(), Toast.LENGTH_LONG).show();
+        hospital = (HospitalInformation) getIntent.getSerializableExtra("병원");
 
         callHospital.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String number = hospital.getCallNumber(); //이거받으려면 hospital이 final되야한대
+                String number = hospital.getCallNumber();
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number)); //다이얼로 연결
                 startActivity(intent);
             }
@@ -105,6 +106,10 @@ public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallb
         }
 
         // 지도 테스뚜(민슬)
+        // 표시해야할 위도, 경도
+        lat = hospital.getLat();
+        lng = hospital.getLng();
+        Toast.makeText(getApplicationContext(), "위도: " + lat+" 경도: "+lng, Toast.LENGTH_LONG).show();
         FragmentManager hosFm = getSupportFragmentManager();
         MapFragment hosMapFragment = (MapFragment) hosFm.findFragmentById(R.id.info_map);
 
@@ -140,8 +145,7 @@ public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallb
     @Override  // 네이버 맵에서 오버레이 추가, 상호작용하는 등 기능 대부분을 이 클래스 에서 제공
     public void onMapReady(@NonNull NaverMap naverMap) {
         UiSettings uiSettings = naverMap.getUiSettings();
-
-        LatLng hosCoord = new LatLng(1,1);     // final, 임시 위도, 경도
+        LatLng hosCoord = new LatLng(lat,lng);     // 마커 찍어야할 경도, 위도
 //        Toast.makeText(this, "위도: "+hosCoord.latitude +" 경도: "+hosCoord.longitude, Toast.LENGTH_SHORT).show();
 
         // 지도 타입 설정

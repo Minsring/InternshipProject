@@ -176,6 +176,12 @@ public class SubjectList extends AppCompatActivity {
                         if (startTag.equals("distance")) {
                             hospital.setDistance(parser.nextText());
                         }
+                        if (startTag.equals("lat")) {
+                            hospital.setLat(Double.parseDouble(parser.nextText()));
+                        }
+                        if (startTag.equals("lng")) {
+                            hospital.setLng(Double.parseDouble(parser.nextText()));
+                        }
                         break;
                     case XmlPullParser.END_TAG:
                         String endTag = parser.getName();
