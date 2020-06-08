@@ -131,6 +131,7 @@ public class SubjectListMap extends FragmentActivity implements OnMapReadyCallba
             double lng=hos.getLng();
             Marker marker =new Marker();
             marker.setPosition(new LatLng(lat,lng));
+            marker.setCaptionText(hos.getHospitalName());
             marker.setMap(naverMap);
         }
     }
