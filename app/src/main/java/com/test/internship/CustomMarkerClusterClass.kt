@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.annotation.UiThread
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
+
 
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.geometry.LatLngBounds

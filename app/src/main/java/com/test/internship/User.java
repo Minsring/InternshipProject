@@ -1,5 +1,6 @@
 package com.test.internship;
 
+import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -13,10 +14,13 @@ import android.hardware.SensorManager;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
+
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -110,6 +114,7 @@ public class User extends AppCompatActivity implements SensorEventListener {
                 if(battery<15) {
                     Log.d("배터리 부족알림", "배터리 부족! 보호자에게 알림을 보냅니다.");
                     showNoti();
+                    sendSMS();
                 }
             }
        };
@@ -138,6 +143,26 @@ public class User extends AppCompatActivity implements SensorEventListener {
         Notification notification = builder.build();
         //알림창 실행
         manager.notify(1,notification);
+    }
+
+    //문자전송
+    public void sendSMS() {
+        if(Build.VERSION.SDK_INT == Build.VERSION_CODES.M) {
+            int permissionResult = checkSelfPermission(Manifest.permission.CALL_PHONE);
+            if(permissionResult==1) {
+                try {
+                    //전송
+                    SmsManager smsManager = SmsManager.getDefault();
+                    for (int i = 0; i < Register_Activity.index; i++) {
+                        smsManager.sendTextMessage(Register_Activity.protectorPhone.get(i), null, Register_Activity.protectorName.get(i) + "님의 보호대상자분의 휴대폰이 15%미만입니다 !!", null, null);
+                        Toast.makeText(getApplicationContext(), "전송 완료!", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "전송실패!", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     // TODO: 각 버튼 별 처리
