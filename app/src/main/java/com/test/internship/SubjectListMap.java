@@ -3,6 +3,7 @@ package com.test.internship;
 import android.content.Intent;
 import android.os.Bundle;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 import androidx.fragment.app.FragmentActivity;
@@ -37,17 +38,6 @@ public class SubjectListMap extends FragmentActivity implements OnMapReadyCallba
         setContentView(R.layout.subject_list_map);
         Intent getIntent = getIntent();
         hospitals = (ArrayList<HospitalInformation>) getIntent().getSerializableExtra("열린병원리스트");
-//        if(hospitals==null){
-//            Toast.makeText(this,"아무것도 전달되지 않았다",Toast.LENGTH_LONG).show();
-//        }
-//        else{
-//            Iterator<HospitalInformation> it=hospitals.iterator();
-//            Toast.makeText(this,Integer.toString(hospitals.size()),Toast.LENGTH_LONG).show();
-//        }
-        //MapFragment는 지도에 대한 뷰 역할만을 담당
-        //API를 호출하려면 인터페이스 역할을 하는 NaverMap 객체가 필요함
-        //getMapAsync() 메서드로 OnMapReadyCallback을 등록하면 비동기로 NaverMap 객체를 얻을 수 있음
-        //NaverMap 객체가 준비되면 onMapReady() 콜백 메서드가 호출됨
         FragmentManager fm = getSupportFragmentManager();
 
         latlng = hospitals.get(0).getLatLng();

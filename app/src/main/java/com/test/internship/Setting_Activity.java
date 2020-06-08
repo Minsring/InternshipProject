@@ -13,6 +13,9 @@ import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import static com.test.internship.User.timer;
+import static com.test.internship.User.tt;
+
 
 public class Setting_Activity extends AppCompatActivity {
     private boolean saveData;
@@ -50,9 +53,7 @@ public class Setting_Activity extends AppCompatActivity {
                 // 스위치 버튼이 체크되었는지 검사하여 텍스트뷰에 각 경우에 맞게 출력합니다.
                 if (isChecked){
                     save();
-                    // 타이머 활성화 여기서 시켜야함(잘 돌아감)
-                    //Log.d("버튼클릭확인","버튼 클릭됨");
-                    //User.timer.schedule(tt, 0, 5000);
+                    timer.schedule(tt, 0, 5000);
                     System.out.println("1");
 
                 }else{
