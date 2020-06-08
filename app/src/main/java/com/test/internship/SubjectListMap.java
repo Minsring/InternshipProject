@@ -31,6 +31,7 @@ public class SubjectListMap extends FragmentActivity implements OnMapReadyCallba
     private FusedLocationSource locationSource;
     private NaverMap naverMap;
     ArrayList<HospitalInformation>  hospitals=null;
+    double lat,lng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +52,12 @@ public class SubjectListMap extends FragmentActivity implements OnMapReadyCallba
         //NaverMap 객체가 준비되면 onMapReady() 콜백 메서드가 호출됨
         FragmentManager fm = getSupportFragmentManager();
 
+        lat=hospitals.get(0).getLat();
+        lng=hospitals.get(0).getLng();
+
         // 초기 위치 및 맵 타입 설정 // 신평면사무소 근처
         NaverMapOptions options = new NaverMapOptions()
-                .camera(new CameraPosition(new LatLng(36.473702,128.502493), 15))
+                .camera(new CameraPosition(new LatLng(lat,lng), 15))
                 .mapType(NaverMap.MapType.Basic)
                 .locationButtonEnabled(true)
                 .compassEnabled(true)
@@ -119,6 +123,7 @@ public class SubjectListMap extends FragmentActivity implements OnMapReadyCallba
         uiSettings.setCompassEnabled(true);
         uiSettings.setLocationButtonEnabled(true);
 
+        //돌면서 마커찍는 중 !
         Iterator<HospitalInformation> it=hospitals.iterator();
         while(it.hasNext()){
             HospitalInformation hos=it.next();
@@ -126,6 +131,7 @@ public class SubjectListMap extends FragmentActivity implements OnMapReadyCallba
             double lng=hos.getLng();
             Marker marker =new Marker();
             marker.setPosition(new LatLng(lat,lng));
+            marker.setCaptionText(hos.getHospitalName());
             marker.setMap(naverMap);
         }
     }
