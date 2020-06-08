@@ -191,6 +191,8 @@ public class SubjectList extends AppCompatActivity {
                                 nowh=Integer.parseInt(array[0]);
                                 nowm=Integer.parseInt(array[1]); //현재시간 받아옴
 
+                                hospital.setOpenClosed("준비중");
+
                                 if(dayOfWeek==2||dayOfWeek==3||dayOfWeek==4||dayOfWeek==5||dayOfWeek==6){
                                     String startTime=hospital.getOpenTime(0);
                                     String endTime=hospital.getClosedTime(0);
@@ -202,16 +204,8 @@ public class SubjectList extends AppCompatActivity {
                                     endh=Integer.parseInt(array2[0]);
                                     endm=Integer.parseInt(array2[1]);
 
-                                    if((nowh<endh)||(nowh==endh&&nowm<endm)){
-                                        if((starth<nowh)||(starth==nowh&&startm<nowm)){
-                                            hospital.setOpenClosed("진료중");
-                                        }
-                                        else{
-                                            hospital.setOpenClosed("준비중");
-                                        }
-                                    }
-                                    else{
-                                        hospital.setOpenClosed("준비중");
+                                    if(((nowh<endh)||(nowh==endh&&nowm<endm)) && ((starth<nowh)||(starth==nowh&&startm<nowm))){
+                                        hospital.setOpenClosed("진료중");
                                     }
                                 } //평일이다
                                 else if(dayOfWeek==7)
@@ -227,16 +221,8 @@ public class SubjectList extends AppCompatActivity {
                                         endh=Integer.parseInt(array[0]);
                                         endm=Integer.parseInt(array[1]);
 
-                                        if((nowh<endh)||(nowh==endh&&nowm<endm)){
-                                            if((starth<nowh)||(starth==nowh&&startm<nowm)){
-                                                hospital.setOpenClosed("진료중");
-                                            }
-                                            else{
-                                                hospital.setOpenClosed("준비중");
-                                            }
-                                        }
-                                        else{
-                                            hospital.setOpenClosed("준비중");
+                                        if(((nowh<endh)||(nowh==endh&&nowm<endm)) && ((starth<nowh)||(starth==nowh&&startm<nowm))){
+                                            hospital.setOpenClosed("진료중");
                                         }
                                     }
                                 } //토요일이다
@@ -252,16 +238,8 @@ public class SubjectList extends AppCompatActivity {
                                         endh=Integer.parseInt(array[0]);
                                         endm=Integer.parseInt(array[1]);
 
-                                        if((nowh<endh)||(nowh==endh&&nowm<endm)){
-                                            if((starth<nowh)||(starth==nowh&&startm<nowm)){
-                                                hospital.setOpenClosed("진료중");
-                                            }
-                                            else{
-                                                hospital.setOpenClosed("준비중");
-                                            }
-                                        }
-                                        else{
-                                            hospital.setOpenClosed("준비중");
+                                        if(((nowh<endh)||(nowh==endh&&nowm<endm)) && ((starth<nowh)||(starth==nowh&&startm<nowm))){
+                                            hospital.setOpenClosed("진료중");
                                         }
                                     }
                                 } //일요일이다
