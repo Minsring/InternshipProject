@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import ted.gun0912.clustering.clustering.TedClusterItem;
 import ted.gun0912.clustering.geometry.TedLatLng;
 
+
 // 객체를 직렬화해야 액티비티에 데이터 객체를 넘겨줄 수 있다.
 // 클러스터링을 위한 라이브러리 추가
 public class HospitalInformation implements Serializable, TedClusterItem {
