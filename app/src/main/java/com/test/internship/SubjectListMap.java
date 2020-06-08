@@ -17,11 +17,9 @@ import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
-import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.util.FusedLocationSource;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Locale;
 
 import ted.gun0912.clustering.naver.TedNaverClustering;

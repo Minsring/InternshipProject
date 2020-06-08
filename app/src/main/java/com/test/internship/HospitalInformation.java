@@ -1,13 +1,9 @@
 package com.test.internship;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.naver.maps.geometry.LatLng;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 import ted.gun0912.clustering.clustering.TedClusterItem;
 import ted.gun0912.clustering.geometry.TedLatLng;
