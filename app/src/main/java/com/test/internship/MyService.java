@@ -31,8 +31,12 @@ public class MyService extends Service implements SensorEventListener {
         Log.d(TAG, "onCreate()...");
         sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         stepsensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
-        if(stepsensor==null)
-            Toast.makeText(this, "센서 없어", Toast.LENGTH_SHORT).show();
+        System.out.println("3");
+        if(stepsensor==null){
+            Toast.makeText(this, "센서 없어", Toast.LENGTH_LONG).show();
+            System.out.println("2");
+        }
+
     }
 
     @Override
@@ -87,6 +91,7 @@ public class MyService extends Service implements SensorEventListener {
         if(event.sensor.getType()==Sensor.TYPE_STEP_DETECTOR){
             if(event.values[0]==1.0f){
                 mStepDetector++;
+                Toast.makeText(getApplicationContext(), "걸음 수0: "+mStepDetector, Toast.LENGTH_LONG).show();
             }
         }
     }
