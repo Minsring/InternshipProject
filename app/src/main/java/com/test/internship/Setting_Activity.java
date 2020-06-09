@@ -33,24 +33,24 @@ import static com.test.internship.User.tt2;
 
 
 public class Setting_Activity extends AppCompatActivity {
-    private boolean saveData;
-    private boolean isCheck1;
-    private boolean isCheck2;
-    public int flag_Setting1;
-    public int flag_Setting2;
-    String phoneNo;
-    String name;
+    public static boolean saveData;
+    public static boolean isCheck1;
+    public static boolean isCheck2;
+    static int flag_Setting1;
+    static int flag_Setting2;
+    static String phoneNo;
+    static String name;
     Button btnregister;
-    Switch switch1;
-    Switch switch2;
+    static Switch switch1;
+    static Switch switch2;
     IntentFilter ifilter;
     Handler handler;
-    private SharedPreferences appData;
+    static SharedPreferences appData;
     Context context = this;
-    NotificationManager manager;
+    static NotificationManager manager;
     NotificationCompat.Builder builder;
-    private static String CHANNEL_ID = "channel1";
-    private static String CHANEL_NAME = "Channel1";
+    public static String CHANNEL_ID = "channel1";
+    public static String CHANEL_NAME = "Channel1";
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -251,7 +251,7 @@ public class Setting_Activity extends AppCompatActivity {
         editor.apply();
 
     }
-    private void load(){
+    public static void load(){
         saveData = appData.getBoolean("SAVE_LOGIN_DATA", false);
         isCheck1=appData.getBoolean("CHECK1", false);
         isCheck2=appData.getBoolean("CHECK2", false);
@@ -259,7 +259,7 @@ public class Setting_Activity extends AppCompatActivity {
         flag_Setting2=appData.getInt("FLAG_SETTING2", 0);
     }
     //알림창 실행
-    public void showNoti(){
+    public static void showNoti(){
         builder = null;
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         //버전 오레오 이상일 경우
@@ -282,7 +282,7 @@ public class Setting_Activity extends AppCompatActivity {
     }
 
     //문자전송
-    public void sendSMS(String phoneNo, String name, int flag){
+    public static void sendSMS(String phoneNo, String name, int flag){
         phoneNo= Register_Activity.protectorPhone.toString();
         name= Register_Activity.protectorName.toString();
         if(flag==1){

@@ -5,13 +5,16 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -25,6 +28,13 @@ import androidx.core.content.ContextCompat;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.test.internship.Setting_Activity.flag_Setting1;
+import static com.test.internship.Setting_Activity.flag_Setting2;
+import static com.test.internship.Setting_Activity.isCheck1;
+import static com.test.internship.Setting_Activity.isCheck2;
+import static com.test.internship.Setting_Activity.saveData;
+import static com.test.internship.Setting_Activity.switch1;
+import static com.test.internship.Setting_Activity.switch2;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class User extends AppCompatActivity implements SensorEventListener {
@@ -39,6 +49,7 @@ public class User extends AppCompatActivity implements SensorEventListener {
     static TimerTask tt2;
     static int timeCounter;
 
+
     Context context = this;
 
 
@@ -49,7 +60,8 @@ public class User extends AppCompatActivity implements SensorEventListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user);
-
+        flag_Setting1=0;
+        flag_Setting2=0;
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         stepsensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
         if (stepsensor == null) {
@@ -78,7 +90,67 @@ public class User extends AppCompatActivity implements SensorEventListener {
                 ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.SEND_SMS},MY_PERMISSION_REQUEST_SMS);
             }
         }
+        Setting_Activity.appData = getSharedPreferences("appData", MODE_PRIVATE);
+        Setting_Activity.load();
+        if(saveData) {
+            switch1.setChecked(isCheck1);
+            if (isCheck1) {
+                tt1 = new TimerTask() {
+                    @Override
+                    public void run() {
+                        flag_Setting1++;
+                        System.out.println("배터리 확인중");
+                        Intent intentBattery = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+                        int level = intentBattery.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+                        int scale = intentBattery.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+                        float batteryPct = level / (float) scale;
+                        int battery = (int) (batteryPct * 100);
 
+                        if (battery < 15) {
+                            Log.d("배터리 부족알림", "배터리 부족! 보호자에게 알림을 보냅니다.");
+                            Setting_Activity.showNoti();
+
+                            for (int i = 0; i < Register_Activity.index; i++) {
+                                Setting_Activity.phoneNo = Register_Activity.protectorPhone.get(i);
+                                //System.out.println(phoneNo);
+                                Setting_Activity.name = Register_Activity.protectorName.get(i);
+                                //System.out.println(name); 정상출력됨 -> 전송이 안되고 있음
+                                Setting_Activity.sendSMS(Setting_Activity.phoneNo, Setting_Activity.name, 1);
+                            }
+                        }
+                    }
+                };
+                timer.schedule(tt1, 0, 1000);
+            }
+            switch2.setChecked(isCheck2);
+            if (isCheck2) {
+                tt2 = new TimerTask() {
+                    @Override
+                    public void run() {
+                        timeCounter++;
+                        flag_Setting2++;
+                        System.out.println("걸음 수 홗인중");
+
+                        if (timeCounter == 6) {
+                            timeCounter = 0;
+                            if (mStepDetector < 20) {//20걸음 미만이라면 보호자에게 메세지 보내기
+                                for (int i = 0; i < Register_Activity.index; i++) {
+                                    Setting_Activity.phoneNo = Register_Activity.protectorPhone.get(i);
+                                    //System.out.println(phoneNo);
+                                    Setting_Activity.name = Register_Activity.protectorName.get(i);
+                                    //System.out.println(name); 정상출력됨 -> 전송이 안되고 있음
+                                    Setting_Activity.sendSMS(Setting_Activity.phoneNo, Setting_Activity.name, 2);
+                                }
+                            }
+                        }
+                    }
+                };
+                timer.schedule(tt2, 0, 1000);
+                mStepDetector = 0;
+                timeCounter = 0;
+                System.out.println("걸음수 측정 시작");
+            }
+        }
 
         // 버튼 연결
         allSub = findViewById(R.id.allSub);                     // 전체
