@@ -75,7 +75,7 @@ public class SubjectList extends AppCompatActivity {
             recyclerView.setLayoutParams(params);
             recyclerView.setBackgroundColor(Color.parseColor("#22ff0000"));
             linearLayout.addView(recyclerView);
-            recyclerView.setAdapter(adapter);
+            recyclerView.setAdapter(adapter); //등록과정
         } else{
             TextView textView = new TextView(this);
             textView.setBackgroundColor(Color.parseColor("#22ff0000"));

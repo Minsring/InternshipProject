@@ -43,7 +43,14 @@
         android:id="@+id/btnregister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="보호자 연락처 등록"
-        android:layout_margin="30dp"/>
+        android:text="보호자 정보 등록"
+        android:layout_margin="10dp"/>
+
+    <Button
+        android:id="@+id/btnprotectorList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="보호자 정보 목록"
+        android:layout_margin="5dp"/>
 
 </LinearLayout>

@@ -41,10 +41,10 @@ public class Setting_Activity extends AppCompatActivity {
     String phoneNo;
     String name;
     Button btnregister;
+    Button btnprotectorList;
     Switch switch1;
     Switch switch2;
-    IntentFilter ifilter;
-    Handler handler;
+
     private SharedPreferences appData;
     Context context = this;
     NotificationManager manager;
@@ -62,6 +62,8 @@ public class Setting_Activity extends AppCompatActivity {
         flag_Setting2=0;
         btnregister = findViewById(R.id.btnregister);
         btnregister.setOnClickListener(listener);
+        btnprotectorList = findViewById(R.id.btnprotectorList);
+        btnprotectorList.setOnClickListener(listener);
 
         switch1 = (Switch)findViewById(R.id.switch1);
         switch2 = (Switch)findViewById(R.id.switch2);
@@ -184,7 +186,7 @@ public class Setting_Activity extends AppCompatActivity {
                         public void run() {
                             timeCounter++;
                             flag_Setting2++;
-                            System.out.println("걸음 수 홗인중");
+                            System.out.println("걸음 수 확인중");
 
                             if(timeCounter==6) {
                                 timeCounter = 0;
@@ -223,12 +225,20 @@ public class Setting_Activity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.btnregister:
                     intent = new Intent(getApplicationContext(), Register_Activity.class);
-                    /// startActivity(intent);
+//                    startActivity(intent);
+                    break;
+                case R.id.btnprotectorList:
+                    intent = new Intent(getApplicationContext(), ProtectorList.class);
+//                    //정보도 같이 들고가도록
+//                    intent.putExtra("보호자 이름",Register_Activity.protectorName);
+//                    intent.putExtra("보호자 연락처",Register_Activity.protectorPhone);
+//                    startActivity(intent);
                     break;
             }
             if(intent!=null) startActivity(intent);
         }
     };
+
     @Override
     public void onResume() {
         super.onResume();

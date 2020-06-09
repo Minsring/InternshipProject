@@ -39,7 +39,6 @@ public class User extends AppCompatActivity implements SensorEventListener {
     static TimerTask tt2;
     static int timeCounter;
 
-    Context context = this;
 
 
     private final int MY_PERMISSION_REQUEST_SMS=1001;
