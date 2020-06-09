@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +38,7 @@ public class SubjectList extends AppCompatActivity {
     LinearLayout linearLayout;
     Button openClosed;
     ArrayList<HospitalInformation> openHospital=null;
+    ArrayList<HospitalInformation> closedHospital=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class SubjectList extends AppCompatActivity {
         xmlParser(adapter);
         adapter.combineItems();     // 진료중-준비중 순서대로 들어가게 하는 메소드 호출
         openHospital=adapter.getOpenItem(); //얘가 어댑터에서 받아와야 Map에 전달해줄수있다 !
+        closedHospital=adapter.getClosedItem(); //얘가 어댑터에서 받아와야 Map에 전달해줄수있다 !
 
         // 해당 과목의 병원이 있으면 리스트 동적제공, 없으면 "해당 병원 없습니다." 텍스트 동적 제공
         linearLayout = findViewById(R.id.linearLayout);
@@ -293,11 +295,19 @@ public class SubjectList extends AppCompatActivity {
 //                    intent = new Intent(getApplicationContext(), SubjectListMap.class);
                     intent = new Intent(getApplicationContext(), CustomMarkerClusterClass.class);
                     intent.putExtra("열린병원리스트",openHospital);
+                    intent.putExtra("닫은병원리스트",closedHospital);
                     intent.putExtra("진료과",subject);
 //                    startActivity(intent);
                     break;
             }
-            if(intent != null) startActivity(intent);    // 다른 처리 없다면 여기서 한번에 화면 전환
+//            if(intent.getSerializableExtra("열린병원리스트")==null){
+//                Toast.makeText(getApplicationContext(),"현재 열린 병원이 없습니다.",Toast.LENGTH_LONG).show();
+//            }
+//            else{
+//                startActivity(intent);
+//            }
+             if(intent != null) startActivity(intent);    // 다른 처리 없다면 여기서 한번에 화면 전환
+
         }
     };
 }
