@@ -19,6 +19,8 @@ import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
+import com.naver.maps.map.widget.CompassView
+import com.naver.maps.map.widget.ZoomControlView
 import ted.gun0912.clustering.naver.TedNaverClustering
 import java.util.*
 
@@ -56,21 +58,22 @@ class CustomMarkerClusterClass : FragmentActivity(), OnMapReadyCallback {
         simple_info?.setEnabled(false)
 
         val getIntent = intent
-        open_hospitals = intent.getSerializableExtra("열린병원리스트") as ArrayList<HospitalInformation>
-        closed_hospitals = intent.getSerializableExtra("닫은병원리스트") as ArrayList<HospitalInformation>
+        if(intent.getSerializableExtra("열린병원리스트")!=null){
+            open_hospitals = intent.getSerializableExtra("열린병원리스트") as ArrayList<HospitalInformation>
+        }
+        if(intent.getSerializableExtra("닫은병원리스트")!=null){
+            closed_hospitals = intent.getSerializableExtra("닫은병원리스트") as ArrayList<HospitalInformation>
+        }
         subject = intent.getStringExtra("진료과")
         mapTitle?.setText("진료중인 "+subject)
         
         val fm = supportFragmentManager
 
-//        if(hospitals==null){
-//            latlng = LatLng(31.43, 122.37)
-//        }
-//        else{
-//            latlng = hospitals!![0].latLng
-//        }
-        latlng = open_hospitals!![0].latLng
-        // 초기 위치 및 맵 타입 설정 // 신평면사무소 근처
+        // 만약 모두 오픈 또는 클로즈라면 초기위치는 신평면사무소
+        latlng = LatLng(36.47365999,128.50243783)
+        if(open_hospitals != null) {
+            latlng = open_hospitals!![0].latLng }
+
         val options = NaverMapOptions()
                 .camera(CameraPosition(latlng!!, 15.0))
                 .mapType(NaverMap.MapType.Basic)
@@ -151,74 +154,85 @@ class CustomMarkerClusterClass : FragmentActivity(), OnMapReadyCallback {
             simple_call?.setEnabled(false)
             naverMap.setContentPadding(0, 0, 0, 0)
         }
-
-        TedNaverClustering.with<HospitalInformation>(this, naverMap)
-                .items(open_hospitals!!)
-                .customMarker { clusterItem: HospitalInformation ->
-                    Marker(clusterItem.getLatLng()).apply {
-                        icon = OverlayImage.fromResource(R.drawable.custom_icon_open)
-                        width = 120
-                        height = 150;
-                        zIndex = 100;
-                        captionText=clusterItem.getHospitalName();
-                        isHideCollidedSymbols = true                //심벌이랑 겹치는 부분 숨길까 말까
+        if(open_hospitals != null) {
+            TedNaverClustering.with<HospitalInformation>(this, naverMap)
+                    .items(open_hospitals!!)
+                    .customMarker { clusterItem: HospitalInformation ->
+                        Marker(clusterItem.getLatLng()).apply {
+                            icon = OverlayImage.fromResource(R.drawable.custom_icon_open)
+                            width = 120
+                            height = 150;
+                            zIndex = 100;
+                            captionText=clusterItem.getHospitalName();
+                            isHideCollidedSymbols = true                //심벌이랑 겹치는 부분 숨길까 말까
+                        }
                     }
-                }
-                .markerClickListener { hospital: HospitalInformation ->
-                    val position = hospital.getLatLng()
-                    simple_name?.setText(hospital.getHospitalName())
-                    simple_add?.setText(hospital.getAddress())
-                    simple_dis?.setText(hospital.getDistance())
-                    simple?.setBackgroundResource(R.color.strawberryMilk)
-                    simple?.setVisibility(View.VISIBLE)
-                    simple?.bringToFront()
-                    simple_info?.setEnabled(true)
-                    simple_call?.setEnabled(true)
-                    sendHospital = hospital
-                    naverMap.setContentPadding(0, 0, 0, 300)
-                }
-                .clusterBackground{Color.rgb(255,4,152)}
-                .clusterClickListener { cluster ->
-                    val position = cluster.position
-                    Toast.makeText(this, "${cluster.size}개 클러스터", Toast.LENGTH_SHORT).show()
-                }
-                .minClusterSize(2)
-                .clusterBuckets(myBuckets)  // 묶이는 단위 수정하고 싶으면 myBucket건들기
-                .make()
-
-        TedNaverClustering.with<HospitalInformation>(this, naverMap)
-                .items(closed_hospitals!!)
-                .customMarker { clusterItem: HospitalInformation ->
-                    Marker(clusterItem.getLatLng()).apply {
-                        icon = OverlayImage.fromResource(R.drawable.custom_icon_closed)
-                        width = 120
-                        height = 150;
-                        zIndex = 1;
-                        captionText=clusterItem.getHospitalName();
-                        isHideCollidedSymbols = true                //심벌이랑 겹치는 부분 숨길까 말까
+                    .markerClickListener { hospital: HospitalInformation ->
+                        val position = hospital.getLatLng()
+                        simple_name?.setText(hospital.getHospitalName())
+                        simple_add?.setText(hospital.getAddress())
+                        simple_dis?.setText(hospital.getDistance())
+                        simple?.setBackgroundResource(R.color.strawberryMilk)
+                        simple?.setVisibility(View.VISIBLE)
+                        simple?.bringToFront()
+                        simple_info?.setEnabled(true)
+                        simple_call?.setEnabled(true)
+                        sendHospital = hospital
+                        naverMap.setContentPadding(0, 0, 0, 300)
                     }
-                }
-                .markerClickListener { hospital: HospitalInformation ->
-                    val position = hospital.getLatLng()
-                    simple_name?.setText(hospital.getHospitalName())
-                    simple_add?.setText(hospital.getAddress())
-                    simple_dis?.setText(hospital.getDistance())
-                    simple?.setBackgroundResource(R.color.minokGray)
-                    simple?.setVisibility(View.VISIBLE)
-                    simple?.bringToFront()
-                    simple_info?.setEnabled(true)
-                    simple_call?.setEnabled(true)
-                    sendHospital = hospital
-                    naverMap.setContentPadding(0, 0, 0, 300)
-                }
-                .clusterBackground { Color.LTGRAY }
-                .clusterClickListener { cluster ->
-                    val position = cluster.position
-                    Toast.makeText(this, "${cluster.size}개 클러스터", Toast.LENGTH_SHORT).show()
-                }
-                .minClusterSize(2)
-                .clusterBuckets(myBuckets)  // 묶이는 단위 수정하고 싶으면 myBucket건들기
-                .make()
+                    .clusterBackground{Color.rgb(255,4,152)}
+                    .clusterClickListener { cluster ->
+                        val lat = cluster.position.latitude
+                        val lng = cluster.position.longitude
+                        Toast.makeText(this, "${cluster.size}개 클러스터", Toast.LENGTH_SHORT).show()
+                        naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(lat, lng)))
+                        naverMap.moveCamera(CameraUpdate.zoomIn())
+                    }
+                    .minClusterSize(2)
+                    .clusterBuckets(myBuckets)  // 묶이는 단위 수정하고 싶으면 myBucket건들기
+                    .make()
+
+        }
+
+        if(closed_hospitals != null) {
+            TedNaverClustering.with<HospitalInformation>(this, naverMap)
+                    .items(closed_hospitals!!)
+                    .customMarker { clusterItem: HospitalInformation ->
+                        Marker(clusterItem.getLatLng()).apply {
+                            icon = OverlayImage.fromResource(R.drawable.custom_icon_closed)
+                            width = 120
+                            height = 150;
+                            zIndex = 1;
+                            captionText=clusterItem.getHospitalName();
+                            isHideCollidedSymbols = true                //심벌이랑 겹치는 부분 숨길까 말까
+                        }
+                    }
+                    .markerClickListener { hospital: HospitalInformation ->
+                        val position = hospital.getLatLng()
+                        simple_name?.setText(hospital.getHospitalName())
+                        simple_add?.setText(hospital.getAddress())
+                        simple_dis?.setText(hospital.getDistance())
+                        simple?.setBackgroundResource(R.color.minokGray)
+                        simple?.setVisibility(View.VISIBLE)
+                        simple?.bringToFront()
+                        simple_info?.setEnabled(true)
+                        simple_call?.setEnabled(true)
+                        sendHospital = hospital
+                        naverMap.setContentPadding(0, 0, 0, 300)
+                    }
+                    .clusterBackground { Color.LTGRAY }
+                    .clusterClickListener { cluster ->
+                        val lat = cluster.position.latitude
+                        val lng = cluster.position.longitude
+                        Toast.makeText(this, "${cluster.size}개 클러스터", Toast.LENGTH_SHORT).show()
+                        naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(lat, lng)))
+                        naverMap.moveCamera(CameraUpdate.zoomIn())
+                    }
+                    .minClusterSize(2)
+                    .clusterBuckets(myBuckets)  // 묶이는 단위 수정하고 싶으면 myBucket건들기
+                    .make()
+        }
+
     }
 
     companion object {

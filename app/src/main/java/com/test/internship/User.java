@@ -157,6 +157,7 @@ public class User extends AppCompatActivity implements SensorEventListener {
                     intent = new Intent(getApplicationContext(), SubjectList.class);
                     intent.putExtra("진료과", subject);
 //                    startActivity(intent);
+                    break;
                 case R.id.entSub:
                     subject = "이비인후과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);

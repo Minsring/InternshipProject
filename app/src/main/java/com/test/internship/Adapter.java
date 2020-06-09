@@ -2,6 +2,7 @@ package com.test.internship;
 
 import android.content.Context;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -93,6 +95,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
               }
           });
         }
+        @RequiresApi(api = Build.VERSION_CODES.M)
         public void setItem(HospitalInformation hospital){
             itemHospitalName.setText(hospital.getHospitalName());
             itemDistance.setText(hospital.getDistance());
@@ -159,6 +162,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         return new ViewHolder(itemView);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override       // ViewHolder객체가 재사용될 때 자동으로 호출
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
