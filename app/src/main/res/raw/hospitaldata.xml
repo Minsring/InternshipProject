@@ -3,6 +3,147 @@
 <!--응급실진료시간은 따로 있는 경우도 있으니 응급실이있다면 응급실시간 정보넣기-->
 <hospitals>
     <hospital>
+        <name>삼성연합의원</name>
+        <openweekday>08:00</openweekday>
+        <opensaturday>08:00</opensaturday>
+        <opensumday>08:00</opensumday>
+        <closeweekday>18:30</closeweekday>
+        <closesaturday>16:00</closesaturday>
+        <closesunday>16:00</closesunday>
+        <address>경북 의성군 안계면 안계길 171</address>
+        <callnumber>054-861-5353</callnumber>
+        <subject>내과</subject>
+        <subject>정형외과</subject>
+        <subject>소아청소년과</subject>
+        <subject>이비인후과</subject>
+        <subject>피부과</subject>
+        <subject>신경외과</subject>
+        <distance>17.30km </distance>
+        <lat>36.386243</lat>
+        <lng>128.434531</lng>
+    </hospital>
+    <hospital>
+        <name>대학한의원</name>
+        <openweekday>08:00</openweekday>
+        <opensaturday>08:00</opensaturday>
+        <closeweekday>17:30</closeweekday>
+        <closesaturday>13:00</closesaturday>
+        <address>경북 의성군 안계면 용기5길 7</address>
+        <callnumber>054-862-7711</callnumber>
+        <subject>한의원</subject>
+        <distance>17.32km </distance>
+        <lat>36.386474</lat>
+        <lng>128.433876</lng>
+    </hospital>
+    <hospital>
+        <name>대구부부치과의원</name>
+        <openweekday>09:00</openweekday>
+        <opensaturday>09:00</opensaturday>
+        <closeweekday>18:00</closeweekday>
+        <closesaturday>13:00</closesaturday>
+        <address>경북 의성군 안계면 안계길 160-1</address>
+        <callnumber>054-861-5414</callnumber>
+        <subject>치과</subject>
+        <distance>17.38km </distance>
+        <lat>36.385709</lat>
+        <lng>128.435751</lng>
+    </hospital>
+    <hospital>
+        <name>서울한의원</name>
+        <openweekday>08:00</openweekday>
+        <opensaturday>08:00</opensaturday>
+        <closeweekday>17:00</closeweekday>
+        <closesaturday>13:00</closesaturday>
+        <address>경북 의성군 안계면 안계길 197</address>
+        <callnumber>054-862-0973</callnumber>
+        <subject>한의원</subject>
+        <distance>17.40km </distance>
+        <lat>36.388078</lat>
+        <lng>128.432837</lng>
+    </hospital>
+    <hospital>
+        <name>동산연합의원</name>
+        <openweekday>08:30</openweekday>
+        <opensaturday>08:30</opensaturday>
+        <closeweekday>18:00</closeweekday>
+        <closesaturday>13:00</closesaturday>
+        <address>경북 의성군 안계면 안계길 154</address>
+        <callnumber>054-861-0076</callnumber>
+        <subject>내과</subject>
+        <subject>정형외과</subject>
+        <subject>소아청소년과</subject>
+        <subject>비뇨기과</subject>
+        <subject>산부인과</subject>
+        <distance>17.44km </distance>
+        <lat>36.385356</lat>
+        <lng>128.436180</lng>
+    </hospital>
+    <hospital>
+        <name>권의원</name>
+        <openweekday>08:30</openweekday>
+        <opensaturday>08:30</opensaturday>
+        <closeweekday>18:00</closeweekday>
+        <closesaturday>13:00</closesaturday>
+        <address>경북 의성군 안계면 안계길 149</address>
+        <callnumber>054-862-7588</callnumber>
+        <subject>내과</subject>
+        <subject>정형외과</subject>
+        <distance>17.43km </distance>
+        <lat>36.384840</lat>
+        <lng>128.436409</lng>
+    </hospital>
+    <hospital>
+        <name>경북외과의원</name>
+        <openweekday>08:30</openweekday>
+        <opensaturday>08:30</opensaturday>
+        <closeweekday>17:45</closeweekday>
+        <closesaturday>13:00</closesaturday>
+        <address>경북 의성군 안계면 용기4길 12</address>
+        <callnumber>054-862-0090</callnumber>
+        <subject>내과</subject>
+        <subject>정형외과</subject>
+        <subject>신경외과</subject>
+        <subject>소아청소년과</subject>
+        <subject>피부과</subject>
+        <subject>안과</subject>
+        <subject>이비인후과</subject>
+        <subject>비뇨기과</subject>
+        <distance>17.53km </distance>
+        <lat>36.388819</lat>
+        <lng>128.433716</lng>
+    </hospital>
+    <hospital>
+        <name>안계정형외과의원</name>
+        <openweekday>08:30</openweekday>
+        <opensaturday>08:30</opensaturday>
+        <closeweekday>17:30</closeweekday>
+        <closesaturday>12:00</closesaturday>
+        <address>경북 의성군 안계면 용기2길 8</address>
+        <callnumber>054-861-7700</callnumber>
+        <subject>내과</subject>
+        <subject>정형외과</subject>
+        <subject>소아청소년과</subject>
+        <subject>이비인후과</subject>
+        <subject>신경외과</subject>
+        <subject>비뇨기과</subject>
+        <distance>17.54km </distance>
+        <lat>36.384801</lat>
+        <lng>128.438651</lng>
+    </hospital>
+    <hospital>
+        <name>동인당한의원</name>
+        <openweekday>08:30</openweekday>
+        <opensaturday>08:30</opensaturday>
+        <closeweekday>17:00</closeweekday>
+        <closesaturday>12:30</closesaturday>
+        <address>경북 의성군 안계면 안계길 126</address>
+        <callnumber>054-861-5075</callnumber>
+        <subject>한의원</subject>
+        <distance>17.68km</distance>
+        <lat>36.383829</lat>
+        <lng>128.438678</lng>
+    </hospital>
+    <hospital>
         <name>영남제일병원</name>
         <openweekday>09:00</openweekday>
         <closeweekday>18:00</closeweekday>
@@ -14,8 +155,49 @@
         <subject>내과</subject>
         <subject>건강검진센터</subject>
         <distance>17.9km</distance>
-        <lat>36.3890218</lat>
-        <lng>128.4319753</lng>
+        <lat>36.389267</lat>
+        <lng>128.434305</lng>
+    </hospital>
+    <hospital>
+        <name>대세한의원</name>
+        <openweekday>08:00</openweekday>
+        <opensaturday>08:00</opensaturday>
+        <closeweekday>17:30</closeweekday>
+        <closesaturday>13:00</closesaturday>
+        <address>경북 의성군 안계면 용기11길 28-6</address>
+        <callnumber>054-862-1075</callnumber>
+        <subject>한의원</subject>
+        <distance>18.15km</distance>
+        <lat>36.385485</lat>
+        <lng>128.437000</lng>
+    </hospital>
+    <hospital>
+        <name>박준모치과의원</name>
+        <openweekday>08:00</openweekday>
+        <closeweekday>17:00</closeweekday>
+        <address>경북 의성군 봉양면 도리원1길 53-1</address>
+        <callnumber>054-833-2282</callnumber>
+        <subject>치과</subject>
+        <distance>24.63km</distance>
+        <lat>36.299080</lat>
+        <lng>128.579812</lng>
+    </hospital>
+    <hospital>
+        <name>대신의원</name>
+        <openweekday>08:30</openweekday>
+        <opensaturday>08:30</opensaturday>
+        <closeweekday>18:00</closeweekday>
+        <closesaturday>13:00</closesaturday>
+        <address>경북 의성군 봉양면 도리원1길 56-1</address>
+        <callnumber>054-833-8347</callnumber>
+        <subject>정형외과</subject>
+        <subject>내과</subject>
+        <subject>소아청소년과</subject>
+        <subject>이비인후과</subject>
+        <subject>비뇨기과</subject>
+        <distance>24.61km</distance>
+        <lat>36.299027</lat>
+        <lng>128.580151</lng>
     </hospital>
     <hospital>
         <name>제남병원</name>
@@ -354,6 +536,39 @@
         <lng>128.730366</lng>
     </hospital>
     <hospital>
+        <name>제일외과의원</name>
+        <openweekday>08:00</openweekday>
+        <opensaturday>08:00</opensaturday>
+        <closeweekday>18:30</closeweekday>
+        <closesaturday>14:00</closesaturday>
+        <address>경상북도 의성군 금성면 대리리 13-6</address>
+        <callnumber>054-832-7585</callnumber>
+        <subject>내과</subject>
+        <subject>소아청소년과</subject>
+        <subject>피부과</subject>
+        <subject>정형외과</subject>
+        <subject>이비인후과</subject>
+        <subject>비뇨기과</subject>
+        <distance>36.53km</distance>
+        <lat>36.253070</lat>
+        <lng>128.682983</lng>
+    </hospital>
+    <hospital>
+        <name>일심한의원</name>
+        <openweekday>08:30</openweekday>
+        <opensaturday>08:30</opensaturday>
+        <opensunday>08:30</opensunday>
+        <closeweekday>15:30</closeweekday>
+        <closesaturday>12:00</closesaturday>
+        <closesunday>12:00</closesunday>
+        <address>경북 의성군 금성면 탑리길 8</address>
+        <callnumber>054-832-5963</callnumber>
+        <subject>한의원</subject>
+        <distance>36.64km</distance>
+        <lat>36.252151</lat>
+        <lng>128.683480</lng>
+    </hospital>
+    <hospital>
         <name>한사랑의원</name>
         <openweekday>08:30</openweekday>
         <opensaturday>08:30</opensaturday>
@@ -371,7 +586,7 @@
         <subject>비뇨기과</subject>
         <subject>안과</subject>
         <distance>36.8km</distance>
-        <lat>36.2534438</lat>
-        <lng>128.68254</lng>
+        <lat>36.253459</lat>
+        <lng>128.683054</lng>
     </hospital>
 </hospitals>
