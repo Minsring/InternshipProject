@@ -33,24 +33,24 @@ import static com.test.internship.User.tt2;
 
 
 public class Setting_Activity extends AppCompatActivity {
-    private boolean saveData;
-    private boolean isCheck1;
-    private boolean isCheck2;
-    public int flag_Setting1;
-    public int flag_Setting2;
-    String phoneNo;
-    String name;
+    public static boolean saveData;
+    public static boolean isCheck1;
+    public static boolean isCheck2;
+    static int flag_Setting1;
+    static int flag_Setting2;
+    static String phoneNo;
+    static String name;
     Button btnregister;
-    Switch switch1;
-    Switch switch2;
+    static Switch switch1;
+    static Switch switch2;
     IntentFilter ifilter;
     Handler handler;
-    private SharedPreferences appData;
+    static SharedPreferences appData;
     Context context = this;
     NotificationManager manager;
     NotificationCompat.Builder builder;
-    private static String CHANNEL_ID = "channel1";
-    private static String CHANEL_NAME = "Channel1";
+    public String CHANNEL_ID = "channel1";
+    public String CHANEL_NAME = "Channel1";
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -251,7 +251,7 @@ public class Setting_Activity extends AppCompatActivity {
         editor.apply();
 
     }
-    private void load(){
+    public static void load(){
         saveData = appData.getBoolean("SAVE_LOGIN_DATA", false);
         isCheck1=appData.getBoolean("CHECK1", false);
         isCheck2=appData.getBoolean("CHECK2", false);

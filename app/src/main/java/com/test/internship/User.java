@@ -41,7 +41,6 @@ public class User extends AppCompatActivity implements SensorEventListener {
 
     Context context = this;
 
-
     private final int MY_PERMISSION_REQUEST_SMS=1001;
 
     //    TODO: 위치 기반 동의, 개인정보 보호 약관..?
