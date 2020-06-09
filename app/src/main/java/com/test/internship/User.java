@@ -2,36 +2,24 @@ package com.test.internship;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.net.Uri;
-import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
-
-import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import java.util.Timer;
@@ -44,20 +32,16 @@ public class User extends AppCompatActivity implements SensorEventListener {
     Button allSub, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub, hanSub, binyoSub, bogun, chkCenter, emergencyRoom, setting, btnregister;
     private SensorManager sensorManager;
     private Sensor stepsensor;
-    private int mStepDetector;
+    static int mStepDetector;
     static String subject;
     static Timer timer;
-    static TimerTask tt;
+    static TimerTask tt1;
+    static TimerTask tt2;
+    static int timeCounter;
 
     Context context = this;
-    NotificationManager manager;
-    NotificationCompat.Builder builder;
 
-    private static String CHANNEL_ID = "channel1";
-    private static String CHANEL_NAME = "Channel1";
 
-    String phoneNo;
-    String name;
     private final int MY_PERMISSION_REQUEST_SMS=1001;
 
     //    TODO: 위치 기반 동의, 개인정보 보호 약관..?
@@ -69,12 +53,9 @@ public class User extends AppCompatActivity implements SensorEventListener {
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         stepsensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
         if (stepsensor == null) {
-            Toast.makeText(this, "센서 없어", Toast.LENGTH_LONG).show();
-            System.out.println("센서 없어");
-        } else {
-            Toast.makeText(this, "센서 있어", Toast.LENGTH_LONG).show();
-            System.out.println("센서 있어");
+            Toast.makeText(this, "걸음 감지 센서가 없습니다.", Toast.LENGTH_LONG).show();
         }
+        Toast.makeText(this, "앱을 재실행 하셨을 경우 보호자 연락 기능을\n다시 봐주세요", Toast.LENGTH_LONG).show();
 
         //문자 기능
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
@@ -136,69 +117,12 @@ public class User extends AppCompatActivity implements SensorEventListener {
         emergencyRoom.setOnClickListener(listener);
         setting.setOnClickListener(listener);
 
-        tt = new TimerTask() {
-            @Override
-            public void run() {
-                Intent intentBattery = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-                int level = intentBattery.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-                int scale = intentBattery.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-                float batteryPct = level / (float) scale;
-                int battery = (int) (batteryPct * 100);
 
-                if (battery < 15) {
-                    Log.d("배터리 부족알림", "배터리 부족! 보호자에게 알림을 보냅니다.");
-                    showNoti();
 
-                    for (int i = 0; i < Register_Activity.index; i++) {
-                        phoneNo = Register_Activity.protectorPhone.get(i);
-                        //System.out.println(phoneNo);
-                        name = Register_Activity.protectorName.get(i);
-                        //System.out.println(name); 정상출력됨 -> 전송이 안되고 있음
-                        sendSMS(phoneNo, name);
-                    }
-                }
-            }
-        };
         timer = new Timer();
-        //timer.schedule(tt, 0, 5000);
+        //timer.schedule(tt, 0, 10000);
     }
 
-    //알림창 실행
-    public void showNoti(){
-        builder = null;
-        manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        //버전 오레오 이상일 경우
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            manager.createNotificationChannel(
-                    new NotificationChannel(CHANNEL_ID, CHANEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
-            ); builder = new NotificationCompat.Builder(this,CHANNEL_ID);
-            //하위 버전일 경우
-        }else{ builder = new NotificationCompat.Builder(this)
-        ; }
-        //알림창 제목
-        builder.setContentTitle("배터리 부족 알림");
-        // 알림창 메시지
-        builder.setContentText("배터리 부족!! 보호자에 알림을 전송하겠습니다.");
-        //알림창 아이콘
-        builder.setSmallIcon(R.drawable.ic_launcher_foreground);
-        Notification notification = builder.build();
-        //알림창 실행
-        manager.notify(1,notification);
-    }
-
-    //문자전송
-    public void sendSMS(String phoneNo, String name){
-        phoneNo= Register_Activity.protectorPhone.toString();
-        name= Register_Activity.protectorName.toString();
-        try {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자의 배터리가 15% 미만입니다 !!", null, null);
-            Toast.makeText(getApplicationContext(), "메세지 전송!", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-    }
 
     public void onRequestPermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
         switch(requestCode){
@@ -323,8 +247,7 @@ public class User extends AppCompatActivity implements SensorEventListener {
         if(event.sensor.getType()==Sensor.TYPE_STEP_DETECTOR){
             if(event.values[0]==1.0f){
                 mStepDetector++;
-                System.out.println(String.valueOf(mStepDetector));
-                Toast.makeText(getApplicationContext(), "걸음 수: "+String.valueOf(mStepDetector), Toast.LENGTH_SHORT).show();
+                System.out.println(mStepDetector);
             }
         }
     }
