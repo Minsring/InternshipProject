@@ -1,29 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.test.internship.CustomMarkerClusterClass">
+
+  <TextView
+      android:id="@+id/mapTitle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="진료중인 모든병원"
+      android:textSize="25sp"
+      android:gravity="center"
+      android:layout_margin="20dp"/>
 
   <FrameLayout
       android:id="@+id/map"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"/>
+      android:layout_height="match_parent">
 
-  <FrameLayout
-      android:id="@+id/simple"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintBottom_toBottomOf="parent"
-      android:layout_margin="15dp"
-      android:background="#ffddaa">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/simple"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="#ffddcc"
+        android:layout_gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
 
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:orientation="vertical">
+          android:orientation="vertical"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,34 +47,37 @@
           <LinearLayout
               android:layout_width="0dp"
               android:layout_height="wrap_content"
-              android:layout_weight="5"
-              android:orientation="vertical">
+              android:layout_weight="1"
+              android:orientation="vertical"
+              android:layout_marginLeft="20dp"
+              android:layout_marginTop="15dp">
 
             <TextView
                 android:id="@+id/simple_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="병원이름"
-                android:textSize="25dp"/>
+                android:textColor="#000000"
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/simple_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="주소"
-                android:textSize="20dp"/>
+                android:textSize="18sp"
+                android:layout_marginTop="8dp"/>
 
           </LinearLayout>
 
           <TextView
               android:id="@+id/simple_dis"
-              android:layout_width="0dp"
+              android:layout_width="wrap_content"
               android:layout_height="match_parent"
-              android:layout_weight="1"
+              android:gravity="center"
               android:text="거리"
-              android:textSize="25dp"
-              android:gravity="center"/>
-
+              android:textSize="20sp"
+              android:layout_marginRight="20dp"/>
 
 
         </LinearLayout>
@@ -69,34 +86,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            >
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
 
           <Button
               android:id="@+id/simple_call"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
-              android:text="전화걸기"
+              android:layout_margin="10dp"
               android:layout_weight="1"
-              android:layout_margin="10dp"/>
+              android:background="#fdfdfd"
+              android:text="전화걸기" />
+
           <Button
               android:id="@+id/simple_info"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
-              android:text="상세정보"
+              android:layout_margin="10dp"
               android:layout_weight="1"
-              android:layout_margin="10dp"/>
+              android:background="#fdfdfd"
+              android:text="상세정보" />
         </LinearLayout>
 
-
-
-
-
       </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 
   </FrameLayout>
 
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

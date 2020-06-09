@@ -32,6 +32,10 @@ public class HospitalInformation implements Serializable, TedClusterItem {
     // 생성자 -> 사용할지는 모르게씀
     // 일단 distance와 openClosed는 제외하고 만듬
     public HospitalInformation(){}
+    public HospitalInformation(double lat, double lng){
+        this.lat = lat;
+        this.lng = lng;
+    }
     public HospitalInformation(LatLng latLng){
         this.lat = latLng.latitude;
         this.lng = latLng.longitude;

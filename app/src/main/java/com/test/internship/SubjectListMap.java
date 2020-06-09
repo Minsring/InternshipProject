@@ -2,10 +2,14 @@ package com.test.internship;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -31,6 +35,7 @@ public class SubjectListMap extends FragmentActivity implements OnMapReadyCallba
     private NaverMap naverMap;
     ArrayList<HospitalInformation> hospitals = null;
     LatLng latlng = null;
+    ConstraintLayout simple = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +45,11 @@ public class SubjectListMap extends FragmentActivity implements OnMapReadyCallba
         hospitals = (ArrayList<HospitalInformation>) getIntent().getSerializableExtra("열린병원리스트");
         FragmentManager fm = getSupportFragmentManager();
 
+        simple = findViewById(R.id.simple);
+        simple.setVisibility(View.VISIBLE);
+
         latlng = hospitals.get(0).getLatLng();
+
 
         // 초기 위치 및 맵 타입 설정 // 신평면사무소 근처
         NaverMapOptions options = new NaverMapOptions()
@@ -93,7 +102,6 @@ public class SubjectListMap extends FragmentActivity implements OnMapReadyCallba
 
         // 건물명 같은 심볼의 크기 조절 (0~2)
         naverMap.setSymbolScale(1.5f);
-
 
         // 카메라 위치를 한반도 인근으로 제한
         naverMap.setExtent(new LatLngBounds(new LatLng(31.43, 122.37), new LatLng(44.35, 132)));

@@ -2,9 +2,16 @@ package com.test.internship
 
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.PointF
+import android.net.Uri
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.UiThread
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentActivity
 
 
@@ -19,6 +26,7 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.UiSettings
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
+import com.naver.maps.map.util.MarkerIcons
 import ted.gun0912.clustering.clustering.Cluster
 
 import java.util.ArrayList
@@ -30,24 +38,39 @@ class CustomMarkerClusterClass : FragmentActivity(), OnMapReadyCallback {
     private var locationSource: FusedLocationSource? = null
     private var naverMap: NaverMap? = null
     internal var hospitals: ArrayList<HospitalInformation>? = null
+    internal var subject: String? = null
     internal var latlng: LatLng? = null
+    internal var simple: ConstraintLayout? = null
+    internal var mapTitle: TextView? = null
+    internal var simple_name: TextView? = null
+    internal var simple_add: TextView? = null
+    internal var simple_dis: TextView? = null
+    internal var simple_call: Button? = null
+    internal var simple_info: Button? = null
+    internal var sendHospital: HospitalInformation? = null
+    internal var myBuckets: IntArray = intArrayOf(10, 20, 50, 100, 200, 500, 1000)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.subject_list_map)
+
+        mapTitle = findViewById(R.id.mapTitle)
+        simple = findViewById(R.id.simple)
+        simple_name = findViewById(R.id.simple_name)
+        simple_add = findViewById(R.id.simple_add)
+        simple_dis = findViewById(R.id.simple_dis)
+        simple_call = findViewById(R.id.simple_call)
+        simple_info = findViewById(R.id.simple_info)
+
+        simple?.setVisibility(View.INVISIBLE)
+        simple_call?.setEnabled(false)
+        simple_info?.setEnabled(false)
+
         val getIntent = intent
         hospitals = intent.getSerializableExtra("열린병원리스트") as ArrayList<HospitalInformation>
-        //        if(hospitals==null){
-        //            Toast.makeText(this,"아무것도 전달되지 않았다",Toast.LENGTH_LONG).show();
-        //        }
-        //        else{
-        //            Iterator<HospitalInformation> it=hospitals.iterator();
-        //            Toast.makeText(this,Integer.toString(hospitals.size()),Toast.LENGTH_LONG).show();
-        //        }
-        //MapFragment는 지도에 대한 뷰 역할만을 담당
-        //API를 호출하려면 인터페이스 역할을 하는 NaverMap 객체가 필요함
-        //getMapAsync() 메서드로 OnMapReadyCallback을 등록하면 비동기로 NaverMap 객체를 얻을 수 있음
-        //NaverMap 객체가 준비되면 onMapReady() 콜백 메서드가 호출됨
+        subject = intent.getStringExtra("진료과")
+        mapTitle?.setText("진료중인 "+subject)
+        
         val fm = supportFragmentManager
 
         latlng = hospitals!![0].latLng
@@ -71,6 +94,9 @@ class CustomMarkerClusterClass : FragmentActivity(), OnMapReadyCallback {
 
         // 사용자 위치 받아오기
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
+
+        simple_info?.setOnClickListener(listener)
+        simple_call?.setOnClickListener(listener)
     }
 
     // 사용자 위치 받아오기
@@ -117,8 +143,47 @@ class CustomMarkerClusterClass : FragmentActivity(), OnMapReadyCallback {
         uiSettings.isCompassEnabled = true
         uiSettings.isLocationButtonEnabled = true
 
+        // 지도 클릭시 simple창 숨기기
+        naverMap.setOnMapClickListener{ pointF: PointF, latLng: LatLng ->
+            simple?.setVisibility(View.INVISIBLE)
+            simple_info?.setEnabled(false)
+            simple_call?.setEnabled(false)
+            naverMap.setContentPadding(0, 0, 0, 0)
+        }
+        naverMap.setOnMapLongClickListener{ pointF: PointF, latLng: LatLng ->
+            simple?.setVisibility(View.INVISIBLE)
+            simple_info?.setEnabled(false)
+            simple_call?.setEnabled(false)
+            naverMap.setContentPadding(0, 0, 0, 0)
+        }
+
         TedNaverClustering.with<HospitalInformation>(this, naverMap)
                 .items(hospitals!!)
+                .customMarker { clusterItem: HospitalInformation ->
+                    Marker(clusterItem.getLatLng()).apply {
+//                        icon = MarkerIcons.RED;
+                        captionText=clusterItem.getHospitalName();
+                        isHideCollidedSymbols = true                //심벌이랑 겹치는 부분 숨길까 말까
+                    }
+                }
+                .markerClickListener { hospital: HospitalInformation ->
+                    val position = hospital.getLatLng()
+                    simple_name?.setText(hospital.getHospitalName())
+                    simple_add?.setText(hospital.getAddress())
+                    simple_dis?.setText(hospital.getDistance())
+                    simple?.setVisibility(View.VISIBLE)
+                    simple?.bringToFront()
+                    simple_info?.setEnabled(true)
+                    simple_call?.setEnabled(true)
+                    sendHospital = hospital
+                    naverMap.setContentPadding(0, 0, 0, 300)
+                }
+                .clusterClickListener { cluster ->
+                    val position = cluster.position
+                    Toast.makeText(this, "${cluster.size}개 클러스터", Toast.LENGTH_SHORT).show()
+                }
+                .minClusterSize(2)
+                .clusterBuckets(myBuckets)  // 묶이는 단위 수정하고 싶으면 myBucket건들기
                 .make()
     }
 
@@ -147,4 +212,18 @@ class CustomMarkerClusterClass : FragmentActivity(), OnMapReadyCallback {
     ////            i++;
     //        }
 
+    internal var listener: View.OnClickListener = View.OnClickListener { v ->
+        var intent: Intent? = null
+        when (v.id) {
+            R.id.simple_info -> {
+                intent = Intent(applicationContext, HospitalScreen::class.java)
+                intent.putExtra("병원", sendHospital)
+            }
+            R.id.simple_call -> {
+                val number = sendHospital?.getCallNumber()
+                intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$number")) //다이얼로 연결
+            }
+        }//                    startActivity(intent);
+        if (intent != null) startActivity(intent)    // 다른 처리 없다면 여기서 한번에 화면 전환
+    }
 }

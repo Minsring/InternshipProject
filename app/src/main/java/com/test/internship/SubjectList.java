@@ -32,6 +32,7 @@ import java.util.Date;
 
 public class SubjectList extends AppCompatActivity {
 
+    String subject;
     Button mapBtn;
     TextView subjectTitle;
     LinearLayout linearLayout;
@@ -48,8 +49,10 @@ public class SubjectList extends AppCompatActivity {
         openClosed=findViewById(R.id.itemOpenClosed);
 
         // 과목 제목 달기
+        Intent getIntent = getIntent();
+        subject = getIntent.getStringExtra("진료과");
         subjectTitle = findViewById(R.id.subjectName);
-        subjectTitle.setText(User.subject.toString());
+        subjectTitle.setText(subject);
 
         // 리사이클러뷰, 레이아웃 매니저
         RecyclerView recyclerView = new RecyclerView(this);
@@ -118,6 +121,7 @@ public class SubjectList extends AppCompatActivity {
                     HospitalInformation hospital = adapter.getItem(position);
                     Intent intent = new Intent(getApplicationContext(), HospitalScreen.class);
                     intent.putExtra("병원", (Serializable)hospital);
+                    intent.putExtra("진료과", subject);
                     startActivity(intent);
 
                 }
@@ -196,7 +200,7 @@ public class SubjectList extends AppCompatActivity {
                         break;
                     case XmlPullParser.END_TAG:
                         String endTag = parser.getName();
-                        if(((hospital.findSubject(User.subject.toString()))||User.subject.toString().equals("모든 병원"))==true) {
+                        if(((hospital.findSubject(subject))||subject.equals("모든 병원"))==true) {
                             if (endTag.equals("hospital")) {
 
                                 dayOfWeek=calendar.get(Calendar.DAY_OF_WEEK);
@@ -288,7 +292,8 @@ public class SubjectList extends AppCompatActivity {
                 case R.id.mapBtn:
 //                    intent = new Intent(getApplicationContext(), SubjectListMap.class);
                     intent = new Intent(getApplicationContext(), CustomMarkerClusterClass.class);
-                     intent.putExtra("열린병원리스트",openHospital);
+                    intent.putExtra("열린병원리스트",openHospital);
+                    intent.putExtra("진료과",subject);
 //                    startActivity(intent);
                     break;
             }

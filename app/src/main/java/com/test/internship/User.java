@@ -221,77 +221,91 @@ public class User extends AppCompatActivity implements SensorEventListener {
                 case R.id.allSub:
                     subject="모든 병원";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
+                    intent.putExtra("진료과", subject);
 //                    startActivity(intent);
                     break;
                 case R.id.hanSub:
                     subject = "한의원";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
-                    // intent에 정보 담아서 넘기기
+                    intent.putExtra("진료과", subject);
 //                    startActivity(intent);
                     break;
                 case R.id.binyoSub:
                     subject = "비뇨기과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
+                    intent.putExtra("진료과", subject);
 //                    startActivity(intent);
                 case R.id.entSub:
                     subject = "이비인후과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
+                    intent.putExtra("진료과", subject);
 //                    startActivity(intent);
                     break;
                 case R.id.internalSub:
                     subject = "내과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
+                    intent.putExtra("진료과", subject);
 //                    startActivity(intent);
                     break;
                 case R.id.obstSub:
                     subject = "산부인과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
+                    intent.putExtra("진료과", subject);
 //                    startActivity(intent);
                     break;
                 case R.id.eyeSub:
                     subject = "안과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
+                    intent.putExtra("진료과", subject);
 //                    startActivity(intent);
                     break;
                 case R.id.boneSub:
                     subject = "정형외과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
+                    intent.putExtra("진료과", subject);
 //                    startActivity(intent);
                     break;
                 case R.id.neuroSub:
                     subject = "신경외과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
+                    intent.putExtra("진료과", subject);
 //                    startActivity(intent);
                     break;
                 case R.id.childSub:
                     subject = "소아청소년과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
+                    intent.putExtra("진료과", subject);
 //                    startActivity(intent);
                     break;
                 case R.id.dentalSub:
                     subject = "치과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
+                    intent.putExtra("진료과", subject);
 //                    startActivity(intent);
                     break;
                 case R.id.skinSub:
                     subject = "피부과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
+                    intent.putExtra("진료과", subject);
 //                    startActivity(intent);
                     break;
                 case R.id.bogun:
                     subject = "보건소";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
+                    intent.putExtra("진료과", subject);
 //                    startActivity(intent);
                     break;
                 case R.id.chkCenter:
                     subject = "건강검진센터";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
+                    intent.putExtra("진료과", subject);
 //                    startActivity(intent);
                     break;
                 case R.id.emergencyRoom:
                     // 화면 전환 or 대화상자로 바로 연결할까영? 한번 물은 뒤 연결
                     subject = "응급실";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
+                    intent.putExtra("진료과", subject);
 //                    startActivity(intent);
                     break;
                 case R.id.setting:

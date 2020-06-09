@@ -209,7 +209,7 @@ public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallb
         Marker marker = new Marker();   // 마커객체 생성
         marker.setPosition(latLng);
         marker.setCaptionText(hospital.getHospitalName());
-//        marker.setIcon(OverlayImage.fromResource(R.drawable.ic_add_location_green_50dp));
+//        marker.setIcon(OverlayImage.fromResource(R.drawable.ic_local_hospital_green_30dp));
         marker.setMap(naverMap);
     }
 }
