@@ -136,7 +136,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public void setItems(ArrayList<HospitalInformation> items){
         this.items = items;
     }
-    public ArrayList<HospitalInformation> getOpenItem(){ return openItems; }
+    public ArrayList<HospitalInformation> getOpenItem(){
+        if(openItems.size()==0){ return null; }
+        else{ return openItems; }
+    }
     @Override
     public int getItemCount() {
         return items.size();

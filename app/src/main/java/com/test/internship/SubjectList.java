@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -297,7 +297,14 @@ public class SubjectList extends AppCompatActivity {
 //                    startActivity(intent);
                     break;
             }
-            if(intent != null) startActivity(intent);    // 다른 처리 없다면 여기서 한번에 화면 전환
+//            if(intent.getSerializableExtra("열린병원리스트")==null){
+//                Toast.makeText(getApplicationContext(),"현재 열린 병원이 없습니다.",Toast.LENGTH_LONG).show();
+//            }
+//            else{
+//                startActivity(intent);
+//            }
+             if(intent != null) startActivity(intent);    // 다른 처리 없다면 여기서 한번에 화면 전환
+
         }
     };
 }

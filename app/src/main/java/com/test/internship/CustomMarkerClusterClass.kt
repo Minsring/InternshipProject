@@ -1,39 +1,25 @@
 package com.test.internship
 
+
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.PointF
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.UiThread
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentActivity
-
-
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.geometry.LatLngBounds
-import com.naver.maps.map.CameraPosition
-import com.naver.maps.map.LocationTrackingMode
-import com.naver.maps.map.MapFragment
-import com.naver.maps.map.NaverMap
-import com.naver.maps.map.NaverMapOptions
-import com.naver.maps.map.OnMapReadyCallback
-import com.naver.maps.map.UiSettings
+import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
-import com.naver.maps.map.util.MarkerIcons
-import ted.gun0912.clustering.clustering.Cluster
-
-import java.util.ArrayList
-import java.util.Locale
-
 import ted.gun0912.clustering.naver.TedNaverClustering
+import java.util.*
 
 class CustomMarkerClusterClass : FragmentActivity(), OnMapReadyCallback {
     private var locationSource: FusedLocationSource? = null
@@ -74,8 +60,13 @@ class CustomMarkerClusterClass : FragmentActivity(), OnMapReadyCallback {
         
         val fm = supportFragmentManager
 
+        if(hospitals==null){
+            latlng = LatLng(31.43, 122.37)
+        }
+        else{
+            latlng = hospitals!![0].latLng
+        }
         latlng = hospitals!![0].latLng
-
         // 초기 위치 및 맵 타입 설정 // 신평면사무소 근처
         val options = NaverMapOptions()
                 .camera(CameraPosition(latlng!!, 15.0))
