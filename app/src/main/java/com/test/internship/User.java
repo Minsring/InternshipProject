@@ -55,7 +55,7 @@ public class User extends AppCompatActivity implements SensorEventListener {
         if (stepsensor == null) {
             Toast.makeText(this, "걸음 감지 센서가 없습니다.", Toast.LENGTH_LONG).show();
         }
-        Toast.makeText(this, "앱을 재실행 하셨을 경우 보호자 연락 기능을\n다시 봐주세요", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "앱을 재실행 하셨을 경우 보호자 연락 기능을\n다시 봐주세요", Toast.LENGTH_LONG).show();
 
         //문자 기능
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
