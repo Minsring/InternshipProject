@@ -140,6 +140,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         if(openItems.size()==0){ return null; }
         else{ return openItems; }
     }
+    public ArrayList<HospitalInformation> getClosedItem(){
+        if(closedItems.size()==0){ return null; }
+        else{ return closedItems; }
+    }
     @Override
     public int getItemCount() {
         return items.size();

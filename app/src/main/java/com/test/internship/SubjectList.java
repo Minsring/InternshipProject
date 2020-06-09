@@ -38,6 +38,7 @@ public class SubjectList extends AppCompatActivity {
     LinearLayout linearLayout;
     Button openClosed;
     ArrayList<HospitalInformation> openHospital=null;
+    ArrayList<HospitalInformation> closedHospital=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class SubjectList extends AppCompatActivity {
         xmlParser(adapter);
         adapter.combineItems();     // 진료중-준비중 순서대로 들어가게 하는 메소드 호출
         openHospital=adapter.getOpenItem(); //얘가 어댑터에서 받아와야 Map에 전달해줄수있다 !
+        closedHospital=adapter.getClosedItem(); //얘가 어댑터에서 받아와야 Map에 전달해줄수있다 !
 
         // 해당 과목의 병원이 있으면 리스트 동적제공, 없으면 "해당 병원 없습니다." 텍스트 동적 제공
         linearLayout = findViewById(R.id.linearLayout);
@@ -293,6 +295,7 @@ public class SubjectList extends AppCompatActivity {
 //                    intent = new Intent(getApplicationContext(), SubjectListMap.class);
                     intent = new Intent(getApplicationContext(), CustomMarkerClusterClass.class);
                     intent.putExtra("열린병원리스트",openHospital);
+                    intent.putExtra("닫은병원리스트",closedHospital);
                     intent.putExtra("진료과",subject);
 //                    startActivity(intent);
                     break;
