@@ -47,10 +47,10 @@ public class Setting_Activity extends AppCompatActivity {
     Handler handler;
     static SharedPreferences appData;
     Context context = this;
-    static NotificationManager manager;
+    NotificationManager manager;
     NotificationCompat.Builder builder;
-    public static String CHANNEL_ID = "channel1";
-    public static String CHANEL_NAME = "Channel1";
+    public String CHANNEL_ID = "channel1";
+    public String CHANEL_NAME = "Channel1";
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -259,7 +259,7 @@ public class Setting_Activity extends AppCompatActivity {
         flag_Setting2=appData.getInt("FLAG_SETTING2", 0);
     }
     //알림창 실행
-    public static void showNoti(){
+    public void showNoti(){
         builder = null;
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         //버전 오레오 이상일 경우
@@ -282,7 +282,7 @@ public class Setting_Activity extends AppCompatActivity {
     }
 
     //문자전송
-    public static void sendSMS(String phoneNo, String name, int flag){
+    public void sendSMS(String phoneNo, String name, int flag){
         phoneNo= Register_Activity.protectorPhone.toString();
         name= Register_Activity.protectorName.toString();
         if(flag==1){
