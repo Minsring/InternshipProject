@@ -60,12 +60,12 @@ class CustomMarkerClusterClass : FragmentActivity(), OnMapReadyCallback {
         
         val fm = supportFragmentManager
 
-        if(hospitals==null){
-            latlng = LatLng(31.43, 122.37)
-        }
-        else{
-            latlng = hospitals!![0].latLng
-        }
+//        if(hospitals==null){
+//            latlng = LatLng(31.43, 122.37)
+//        }
+//        else{
+//            latlng = hospitals!![0].latLng
+//        }
         latlng = hospitals!![0].latLng
         // 초기 위치 및 맵 타입 설정 // 신평면사무소 근처
         val options = NaverMapOptions()
