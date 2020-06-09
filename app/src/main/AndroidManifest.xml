@@ -17,11 +17,6 @@
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="7t85xooilf"/>
 
-        <service
-            android:name=".MyService"
-            android:enabled="true"
-            android:exported="true"></service>
-
         <activity android:name=".HospitalScreen" />
         <activity android:name=".SubjectListMap" />
         <activity android:name=".Setting_Activity" />
