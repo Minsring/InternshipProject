@@ -19,8 +19,8 @@
         <subject>피부과</subject>
         <subject>신경외과</subject>
         <distance>17.30km </distance>
-        <lat>36.386243</lat>
-        <lng>128.434531</lng>
+        <lat>36.38632188</lat>
+        <lng>128.43459053</lng>
     </hospital>
     <hospital>
         <name>대학한의원</name>
@@ -32,8 +32,8 @@
         <callnumber>054-862-7711</callnumber>
         <subject>한의원</subject>
         <distance>17.32km </distance>
-        <lat>36.386474</lat>
-        <lng>128.433876</lng>
+        <lat>36.38650149</lat>
+        <lng>128.43376942</lng>
     </hospital>
     <hospital>
         <name>대구부부치과의원</name>
@@ -45,8 +45,8 @@
         <callnumber>054-861-5414</callnumber>
         <subject>치과</subject>
         <distance>17.38km </distance>
-        <lat>36.385709</lat>
-        <lng>128.435751</lng>
+        <lat>36.38574013</lat>
+        <lng>128.43580226</lng>
     </hospital>
     <hospital>
         <name>서울한의원</name>
