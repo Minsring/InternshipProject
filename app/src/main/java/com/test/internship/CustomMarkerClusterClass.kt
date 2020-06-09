@@ -25,6 +25,7 @@ import com.naver.maps.map.NaverMapOptions
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.UiSettings
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
 import ted.gun0912.clustering.clustering.Cluster
@@ -161,7 +162,9 @@ class CustomMarkerClusterClass : FragmentActivity(), OnMapReadyCallback {
                 .items(hospitals!!)
                 .customMarker { clusterItem: HospitalInformation ->
                     Marker(clusterItem.getLatLng()).apply {
-//                        icon = MarkerIcons.RED;
+                        icon = OverlayImage.fromResource(R.drawable.custom_icon)
+                        width = 120
+                        height = 150;
                         captionText=clusterItem.getHospitalName();
                         isHideCollidedSymbols = true                //심벌이랑 겹치는 부분 숨길까 말까
                     }
