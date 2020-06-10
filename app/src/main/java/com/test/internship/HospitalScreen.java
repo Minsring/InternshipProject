@@ -116,7 +116,6 @@ public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallb
         // 지도 테스뚜(민슬)
         // 표시해야할 위도, 경도
         latLng = hospital.getLatLng();
-        Toast.makeText(getApplicationContext(), "위도: " + latLng.latitude+" 경도: "+latLng.longitude, Toast.LENGTH_LONG).show();
         FragmentManager hosFm = getSupportFragmentManager();
         MapFragment hosMapFragment = (MapFragment) hosFm.findFragmentById(R.id.info_map);
 
@@ -190,7 +189,7 @@ public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallb
         // 카메라 위치를 한반도 인근으로 제한
         naverMap.setExtent(new LatLngBounds(new LatLng(31.43, 122.37), new LatLng(44.35, 132)));
 
-        // 초기 카메라 위치 신평면 사무소
+        // 초기 카메라 위치
         CameraPosition cameraPosition = new CameraPosition(latLng, 16);
         naverMap.setMinZoom(6.0);
         naverMap.setMaxZoom(18.0);
