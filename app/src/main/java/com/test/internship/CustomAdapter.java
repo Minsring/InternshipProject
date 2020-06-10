@@ -23,18 +23,17 @@ public class CustomAdapter extends BaseAdapter {
 //    ArrayList<String>data;
 //    ListView listView;
 
-
     //추가
     private Context mcontext = null;
-    private ArrayList<ProtectorData>mdata = null;
-    private int layout=0;
+    private ArrayList<ProtectorData> mdata = null;
+    private int layout = 0;
     private LayoutInflater inflater = null;
 
-    public CustomAdapter(Context context, int layout, ArrayList<ProtectorData> mdata){
+    public CustomAdapter(Context context, int layout, ArrayList<ProtectorData> mdata) {
         this.mcontext = context;
         this.layout = layout;
         this.mdata = mdata;
-        this.inflater = (LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        this.inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
     }
 //    public CustomAdapter(Context context, ArrayList<String>data){
 //        this.context = context;
@@ -47,53 +46,46 @@ public class CustomAdapter extends BaseAdapter {
     public int getCount() {
         return mdata.size();
     }
+
     @Override
     public Object getItem(int position) {
         return mdata.get(position).getPersonname();
     }
+
     @Override
     public long getItemId(int position) {
         return position;
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-       if(convertView==null){
-           convertView = inflater.inflate(this.layout,parent,false);
-       }
-       ImageView img = convertView.findViewById(R.id.img);
-       TextView personname = convertView.findViewById(R.id.personname);
-       TextView personnum = convertView.findViewById(R.id.personnum);
-       Button btndelete = convertView.findViewById(R.id.btndelete);
+        if (convertView == null) {
+            convertView = inflater.inflate(this.layout, parent, false);
+        }
+        ImageView img = convertView.findViewById(R.id.img);
+        TextView personname = convertView.findViewById(R.id.personname);
+        TextView personnum = convertView.findViewById(R.id.personnum);
+        Button btndelete = convertView.findViewById(R.id.btndelete);
 
-       img.setImageResource(mdata.get(position).getImg());
-       personname.setText(mdata.get(position).getPersonname());
-       personnum.setText(mdata.get(position).getPersonnum());
+        img.setImageResource(mdata.get(position).getImg());
+        personname.setText(mdata.get(position).getPersonname());
+        personnum.setText(mdata.get(position).getPersonnum());
 
-        View view = layoutInflater.inflate(R.layout.protectorinfo_style,null);
-        TextView t1 = view.findViewById(R.id.personinfo);
-        t1.setText(data.get(position));
+//        View view = layoutInflater.inflate(R.layout.protectorinfo_style,null);
+//        TextView t1 = view.findViewById(R.id.personinfo);
+//        t1.setText(data.get(position));
 
 
-        View bodyView = view.findViewById(R.id.body);
-        Button btn = view.findViewById(R.id.btndelete);
-
-        bodyView.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Toast.makeText(context,"바디클릭 테스트",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        btn.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                // 삭제처리
-                data.remove();
-                CustomAdapter.notifyDataSetChanged();
-
-                Toast.makeText(context,"삭제",Toast.LENGTH_SHORT).show();
-            }
-        });
+//        View bodyView = view.findViewById(R.id.body);
+//        Button btn = view.findViewById(R.id.btndelete);
+//
+//        bodyView.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v){
+//                Toast.makeText(context,"바디클릭 테스트",Toast.LENGTH_SHORT).show();
+//            }
+//        });
         return convertView;
     }
 }
+

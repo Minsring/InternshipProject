@@ -59,6 +59,7 @@
             android:layout_gravity="center"
             android:text="등록"
             android:textSize="15sp" />
+
     </LinearLayout>
     <TextView
         android:id="@+id/protectorinfolist"

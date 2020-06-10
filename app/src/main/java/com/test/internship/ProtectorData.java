@@ -1,9 +1,9 @@
 package com.test.internship;
 
 public class ProtectorData {
-    private int img;
-    private String personname;
-    private String personnum;
+    int img;
+    String personname;
+    String personnum;
 
     public ProtectorData(int img, String personname, String personnum){
         this.img =img;

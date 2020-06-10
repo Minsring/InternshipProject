@@ -22,6 +22,16 @@ import androidx.core.app.NotificationCompat;
 
 import java.util.TimerTask;
 
+import static com.test.internship.Register_Activity.person1_n;
+import static com.test.internship.Register_Activity.person1_p;
+import static com.test.internship.Register_Activity.person2_n;
+import static com.test.internship.Register_Activity.person2_p;
+import static com.test.internship.Register_Activity.person3_n;
+import static com.test.internship.Register_Activity.person3_p;
+import static com.test.internship.Register_Activity.person4_n;
+import static com.test.internship.Register_Activity.person4_p;
+import static com.test.internship.Register_Activity.person5_n;
+import static com.test.internship.Register_Activity.person5_p;
 import static com.test.internship.User.mStepDetector;
 import static com.test.internship.User.timeCounter;
 import static com.test.internship.User.timer;
@@ -78,11 +88,36 @@ public class Setting_Activity extends AppCompatActivity {
 
                         if (battery < 15) {
                             showNoti();
-                            for (int i = 0; i < Register_Activity.index; i++) {
-                                phoneNo = Register_Activity.protectorPhone.get(i);
-                                //System.out.println(phoneNo);
-                                name = Register_Activity.protectorName.get(i);
-                                //System.out.println(name); 정상출력됨 -> 전송이 안되고 있음
+                            if(person1_n!=null && person1_p != null){
+                                name = person1_n;
+                                phoneNo = person1_p;
+                                sendSMS(phoneNo, name, 1);
+                            }
+//                            for (int i = 0; i < 5; i++) {
+//                                phoneNo = Register_Activity.protectorPhone.get(i);
+//                                //System.out.println(phoneNo);
+//                                name = Register_Activity.protectorName.get(i);
+//                                //System.out.println(name); 정상출력됨 -> 전송이 안되고 있음
+//                                sendSMS(phoneNo, name, 1);
+//                            }
+                            if(person2_n!=null && person2_p != null){
+                                name = person2_n;
+                                phoneNo = person2_p;
+                                sendSMS(phoneNo, name, 1);
+                            }
+                            if(person3_n!=null && person3_p != null){
+                                name = person3_n;
+                                phoneNo = person3_p;
+                                sendSMS(phoneNo, name, 1);
+                            }
+                            if(person4_n!=null && person4_p != null){
+                                name = person4_n;
+                                phoneNo = person4_p;
+                                sendSMS(phoneNo, name, 1);
+                            }
+                            if(person5_n!=null && person5_p != null){
+                                name = person5_n;
+                                phoneNo = person5_p;
                                 sendSMS(phoneNo, name, 1);
                             }
                         }
@@ -97,12 +132,37 @@ public class Setting_Activity extends AppCompatActivity {
                     public void run() {
                         flag_Setting2++;
                         if (mStepDetector < 20){//20걸음 미만이라면 보호자에게 메세지 보내기
-                            for (int i = 0; i < Register_Activity.index; i++) {
-                                phoneNo = Register_Activity.protectorPhone.get(i);
-                                //System.out.println(phoneNo);
-                                name = Register_Activity.protectorName.get(i);
-                                //System.out.println(name); 정상출력됨 -> 전송이 안되고 있음
-                                sendSMS(phoneNo, name, 2);
+//                            for (int i = 0; i < Register_Activity.index; i++) {
+//                                phoneNo = Register_Activity.protectorPhone.get(i);
+//                                //System.out.println(phoneNo);
+//                                name = Register_Activity.protectorName.get(i);
+//                                //System.out.println(name); 정상출력됨 -> 전송이 안되고 있음
+//                                sendSMS(phoneNo, name, 2);
+//                            }
+                            if(person1_n!=null && person1_p != null){
+                                name = person1_n;
+                                phoneNo = person1_p;
+                                sendSMS(phoneNo, name, 1);
+                            }
+                            if(person2_n!=null && person2_p != null){
+                                name = person2_n;
+                                phoneNo = person2_p;
+                                sendSMS(phoneNo, name, 1);
+                            }
+                            if(person3_n!=null && person3_p != null){
+                                name = person3_n;
+                                phoneNo = person3_p;
+                                sendSMS(phoneNo, name, 1);
+                            }
+                            if(person4_n!=null && person4_p != null){
+                                name = person4_n;
+                                phoneNo = person4_p;
+                                sendSMS(phoneNo, name, 1);
+                            }
+                            if(person5_n!=null && person5_p != null){
+                                name = person5_n;
+                                phoneNo = person5_p;
+                                sendSMS(phoneNo, name, 1);
                             }
                         }
                     }
@@ -132,11 +192,36 @@ public class Setting_Activity extends AppCompatActivity {
 
                             if (battery < 15) {
                                 showNoti();
-                                for (int i = 0; i < Register_Activity.index; i++) {
-                                    phoneNo = Register_Activity.protectorPhone.get(i);
-                                    //System.out.println(phoneNo);
-                                    name = Register_Activity.protectorName.get(i);
-                                    //System.out.println(name); 정상출력됨 -> 전송이 안되고 있음
+//                                for (int i = 0; i < Register_Activity.index; i++) {
+//                                    phoneNo = Register_Activity.protectorPhone.get(i);
+//                                    //System.out.println(phoneNo);
+//                                    name = Register_Activity.protectorName.get(i);
+//                                    //System.out.println(name); 정상출력됨 -> 전송이 안되고 있음
+//                                    sendSMS(phoneNo, name, 1);
+//                                }
+                                if(person1_n!=null && person1_p != null){
+                                    name = person1_n;
+                                    phoneNo = person1_p;
+                                    sendSMS(phoneNo, name, 1);
+                                }
+                                if(person2_n!=null && person2_p != null){
+                                    name = person2_n;
+                                    phoneNo = person2_p;
+                                    sendSMS(phoneNo, name, 1);
+                                }
+                                if(person3_n!=null && person3_p != null){
+                                    name = person3_n;
+                                    phoneNo = person3_p;
+                                    sendSMS(phoneNo, name, 1);
+                                }
+                                if(person4_n!=null && person4_p != null){
+                                    name = person4_n;
+                                    phoneNo = person4_p;
+                                    sendSMS(phoneNo, name, 1);
+                                }
+                                if(person5_n!=null && person5_p != null){
+                                    name = person5_n;
+                                    phoneNo = person5_p;
                                     sendSMS(phoneNo, name, 1);
                                 }
                             }
@@ -167,12 +252,37 @@ public class Setting_Activity extends AppCompatActivity {
                             flag_Setting2++;
                             if (mStepDetector < 20){//20걸음 미만이라면 보호자에게 메세지 보내기
 
-                                for (int i = 0; i < Register_Activity.index; i++) {
-                                    phoneNo = Register_Activity.protectorPhone.get(i);
-                                    //System.out.println(phoneNo);
-                                    name = Register_Activity.protectorName.get(i);
-                                    //System.out.println(name); 정상출력됨 -> 전송이 안되고 있음
-                                    sendSMS(phoneNo, name, 2);
+//                                for (int i = 0; i < Register_Activity.index; i++) {
+//                                    phoneNo = Register_Activity.protectorPhone.get(i);
+//                                    //System.out.println(phoneNo);
+//                                    name = Register_Activity.protectorName.get(i);
+//                                    //System.out.println(name); 정상출력됨 -> 전송이 안되고 있음
+//                                    sendSMS(phoneNo, name, 2);
+//                                }
+                                if(person1_n!=null && person1_p != null){
+                                    name = person1_n;
+                                    phoneNo = person1_p;
+                                    sendSMS(phoneNo, name, 1);
+                                }
+                                if(person2_n!=null && person2_p != null){
+                                    name = person2_n;
+                                    phoneNo = person2_p;
+                                    sendSMS(phoneNo, name, 1);
+                                }
+                                if(person3_n!=null && person3_p != null){
+                                    name = person3_n;
+                                    phoneNo = person3_p;
+                                    sendSMS(phoneNo, name, 1);
+                                }
+                                if(person4_n!=null && person4_p != null){
+                                    name = person4_n;
+                                    phoneNo = person4_p;
+                                    sendSMS(phoneNo, name, 1);
+                                }
+                                if(person5_n!=null && person5_p != null){
+                                    name = person5_n;
+                                    phoneNo = person5_p;
+                                    sendSMS(phoneNo, name, 1);
                                 }
                             }
                             mStepDetector=0;
@@ -269,8 +379,9 @@ public class Setting_Activity extends AppCompatActivity {
 
     //문자전송
     public void sendSMS(String phoneNo, String name, int flag){
-        phoneNo= Register_Activity.protectorPhone.toString();
-        name= Register_Activity.protectorName.toString();
+//        phoneNo= Register_Activity.protectorPhone.toString();
+//        name= Register_Activity.protectorName.toString();
+
         if(flag==1){
             try {
                 SmsManager smsManager = SmsManager.getDefault();
