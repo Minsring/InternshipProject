@@ -22,8 +22,6 @@ import static com.test.internship.Register_Activity.protectorName;
 import static com.test.internship.Register_Activity.protectorPhone;
 
 public class ProtectorList<listener> extends AppCompatActivity {
-   Context context;
-   int resource;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +29,9 @@ public class ProtectorList<listener> extends AppCompatActivity {
         ListView listView;
         CustomAdapter adapter;
 
-        adapter = new CustomAdapter(context,resource);
-
         listView = (ListView)findViewById(R.id.list);
+        adapter = new CustomAdapter(this, protectorName);
+
         listView.setAdapter(adapter);
 
 
@@ -55,6 +53,4 @@ public class ProtectorList<listener> extends AppCompatActivity {
             }
         }) ;
     }
-
-
 }
