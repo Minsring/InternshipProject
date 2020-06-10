@@ -28,7 +28,6 @@ import static com.test.internship.User.timer;
 import static com.test.internship.User.tt1;
 import static com.test.internship.User.tt2;
 
-
 public class Setting_Activity extends AppCompatActivity {
     private boolean saveData;
     private boolean isCheck1;
@@ -233,6 +232,8 @@ public class Setting_Activity extends AppCompatActivity {
         editor.putBoolean("CHECK2", switch2.isChecked());
         editor.putInt("FLAG_SETTING1", flag_Setting1);
         editor.putInt("FLAG_SETTING2", flag_Setting2);
+
+
         editor.apply();
 
     }
