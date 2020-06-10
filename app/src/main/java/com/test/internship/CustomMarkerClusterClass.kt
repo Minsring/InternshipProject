@@ -11,20 +11,18 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.UiThread
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.FragmentActivity
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.geometry.LatLngBounds
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
-import com.naver.maps.map.widget.CompassView
-import com.naver.maps.map.widget.ZoomControlView
 import ted.gun0912.clustering.naver.TedNaverClustering
 import java.util.*
 
-class CustomMarkerClusterClass : FragmentActivity(), OnMapReadyCallback {
+class CustomMarkerClusterClass : AppCompatActivity(), OnMapReadyCallback {
     private var locationSource: FusedLocationSource? = null
     private var naverMap: NaverMap? = null
     internal var open_hospitals: ArrayList<HospitalInformation>? = null
@@ -66,27 +64,30 @@ class CustomMarkerClusterClass : FragmentActivity(), OnMapReadyCallback {
         }
         subject = intent.getStringExtra("진료과")
         mapTitle?.setText(subject+" 지도")
-        
-        val fm = supportFragmentManager
 
         // 만약 모두 오픈 또는 클로즈라면 초기위치는 신평면사무소
         latlng = LatLng(36.47365999,128.50243783)
         if(open_hospitals != null) {
             latlng = open_hospitals!![0].latLng }
+        else{
+            latlng = closed_hospitals!![0].latLng }
 
-        val options = NaverMapOptions()
-                .camera(CameraPosition(latlng!!, 15.0))
-                .mapType(NaverMap.MapType.Basic)
-                .locationButtonEnabled(true)
-                .compassEnabled(true)
-                .stopGesturesEnabled(false)
-                .tiltGesturesEnabled(false)
-        var mapFragment = fm.findFragmentById(R.id.map) as MapFragment?
+//        val options = NaverMapOptions()
+//                .locationButtonEnabled(true)
+//                .compassEnabled(true)
+//                .tiltGesturesEnabled(false)
 
-        if (mapFragment == null) {
-            mapFragment = MapFragment.newInstance(options)
-            fm.beginTransaction().add(R.id.map, mapFragment).commit()
-        }
+        val fm = supportFragmentManager
+
+        val mapFragment = fm.findFragmentById(R.id.map) as MapFragment?
+                ?: MapFragment.newInstance().also {
+                    fm.beginTransaction().add(R.id.map, it).commit()
+                }
+
+//        if (mapFragment == null) {
+//            mapFragment = MapFragment.newInstance(options)
+//            fm.beginTransaction().add(R.id.map, mapFragment).commit()
+//        }
 
         mapFragment!!.getMapAsync(this)
 
@@ -134,12 +135,19 @@ class CustomMarkerClusterClass : FragmentActivity(), OnMapReadyCallback {
         // LocationButton을 누르면 사용자의 현위치로 이동
         naverMap.locationSource = locationSource
 
+        // 초기 카메라 위치
+        val cameraPosition = CameraPosition(latlng!!, 16.0)
+        naverMap.cameraPosition = cameraPosition
 
         // 컨트롤 설정
         val uiSettings = naverMap.uiSettings
 
         uiSettings.isCompassEnabled = true
+        uiSettings.isScaleBarEnabled = true
+        uiSettings.isZoomControlEnabled = true
         uiSettings.isLocationButtonEnabled = true
+
+        uiSettings.isTiltGesturesEnabled = false
 
         // 지도 클릭시 simple창 숨기기
         naverMap.setOnMapClickListener{ pointF: PointF, latLng: LatLng ->
@@ -182,11 +190,11 @@ class CustomMarkerClusterClass : FragmentActivity(), OnMapReadyCallback {
                     }
                     .clusterBackground{Color.rgb(255,4,152)}
                     .clusterClickListener { cluster ->
-                        val lat = cluster.position.latitude
-                        val lng = cluster.position.longitude
+                        //                        val lat = cluster.position.latitude
+//                        val lng = cluster.position.longitude
                         Toast.makeText(this, "${cluster.size}개 클러스터", Toast.LENGTH_SHORT).show()
-                        naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(lat, lng)))
-                        naverMap.moveCamera(CameraUpdate.zoomIn())
+//                        naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(lat, lng)))
+//                        naverMap.moveCamera(CameraUpdate.zoomIn())
                     }
                     .minClusterSize(2)
                     .clusterBuckets(myBuckets)  // 묶이는 단위 수정하고 싶으면 myBucket건들기
@@ -208,7 +216,7 @@ class CustomMarkerClusterClass : FragmentActivity(), OnMapReadyCallback {
                         }
                     }
                     .markerClickListener { hospital: HospitalInformation ->
-                        val position = hospital.getLatLng()
+                        //                        val position = hospital.getLatLng()
                         simple_name?.setText(hospital.getHospitalName())
                         simple_add?.setText(hospital.getAddress())
                         simple_dis?.setText(hospital.getDistance())
@@ -225,8 +233,8 @@ class CustomMarkerClusterClass : FragmentActivity(), OnMapReadyCallback {
                         val lat = cluster.position.latitude
                         val lng = cluster.position.longitude
                         Toast.makeText(this, "${cluster.size}개 클러스터", Toast.LENGTH_SHORT).show()
-                        naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(lat, lng)))
-                        naverMap.moveCamera(CameraUpdate.zoomIn())
+//                        naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(lat, lng)))
+//                        naverMap.moveCamera(CameraUpdate.zoomIn())
                     }
                     .minClusterSize(2)
                     .clusterBuckets(myBuckets)  // 묶이는 단위 수정하고 싶으면 myBucket건들기
@@ -238,27 +246,6 @@ class CustomMarkerClusterClass : FragmentActivity(), OnMapReadyCallback {
     companion object {
         private val LOCATION_PERMISSION_REQUEST_CODE = 1000
     }
-
-    //    private ArrayList<HospitalInformation> getItems() {
-    //        LatLngBounds bounds = naverMap.getContentBounds();
-    //        ArrayList<HospitalInformation> items = new ArrayList<>();
-    //
-    //
-    //    }
-    //        //돌면서 마커찍는 중 !
-    ////        int i = 0;
-    //        Iterator<HospitalInformation> it=hospitals.iterator();
-    //        while(it.hasNext()){
-    //            HospitalInformation hos=it.next();
-    //            latlng = hos.getLatLng();
-    //            Marker marker =new Marker();
-    //            marker.setPosition(latlng);
-    //            marker.setCaptionText(hos.getHospitalName());
-    ////            marker.setZIndex(hospitals.size()-i);
-    ////            marker.setHideCollidedCaptions(true);
-    //            marker.setMap(naverMap);
-    ////            i++;
-    //        }
 
     internal var listener: View.OnClickListener = View.OnClickListener { v ->
         var intent: Intent? = null

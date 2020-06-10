@@ -52,9 +52,15 @@
   </androidx.constraintlayout.widget.ConstraintLayout>
 
   <FrameLayout
-      android:id="@+id/map"
+      android:id="@+id/frame_map"
       android:layout_width="match_parent"
       android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.naver.maps.map.MapFragment"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/simple"
