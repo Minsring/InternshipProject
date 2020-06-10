@@ -284,7 +284,7 @@ public class Setting_Activity extends AppCompatActivity {
         else {
             try {
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자의 일일 걸음 수가 20보 미만입닙다 !!", null, null);
+                smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자의 일일 걸음 수가 20보 미만입니다 !!", null, null);
                 //Toast.makeText(getApplicationContext(), "메세지 전송!", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 // Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
