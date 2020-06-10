@@ -2,6 +2,7 @@ package com.test.internship;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,59 +11,62 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
-public class CustomAdapter extends ArrayAdapter<String> {
-    private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>();
+///커스텀 리스너 정의 -> 추가
+public class CustomAdapter extends BaseAdapter {
 
-    public CustomAdapter(@NonNull Context context, int resource) {
-        super(context, resource);
+    Context context;
+    LayoutInflater layoutInflater;
+    ArrayList<String>data;
+
+    public CustomAdapter(Context context, ArrayList<String>data){
+        this.context = context;
+        this.layoutInflater = LayoutInflater.from(context);
+        this.data = data;
     }
 
     @Override
     public int getCount() {
-        return listViewItemList.size();
+        return data.size();
     }
-
+    @Override
+    public Object getItem(int position) {
+        return data.get(position);
+    }
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final int pos = position;
-        final Context context = parent.getContext();
+        View view = layoutInflater.inflate(R.layout.protectorinfo_style,null);
+        TextView t1 = view.findViewById(R.id.personName);
 
-        if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.protector_list, parent, true);
-        }
+        t1.setText(data.get(position));
 
-        ImageView iconImageView = (ImageView) convertView.findViewById(R.id.personimg);
-        TextView personNameTextView = (TextView) convertView.findViewById(R.id.personName);
-        TextView personNumTextView = (TextView) convertView.findViewById(R.id.personNum);
-        Button delete = (Button) convertView.findViewById(R.id.btndelete);
+        View bodyView = view.findViewById(R.id.body);
+        Button btn = view.findViewById(R.id.btndelete);
 
-        ListViewItem listViewItem = listViewItemList.get(position);
+        bodyView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Toast.makeText(context,"바디클릭 테스트",Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        iconImageView.setImageDrawable(listViewItem.getIcon());
-        personNameTextView.setText(listViewItem.getPersonName());
-        personNumTextView.setText(listViewItem.getPersonNum());
+        btn.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                // 삭제처리
 
-        return convertView;
-    }
-
-    //getItem 겹쳐 -> getList
-    public Object getList(int position) {
-        return listViewItemList.get(position);
-    }
-
-    public void addItem(Drawable icon, String name, String num) {
-        ListViewItem item = new ListViewItem();
-
-        item.setIcon(icon);
-        item.setPersonName(name);
-        item.setPersonNum(num);
-
-        listViewItemList.add(item);
+                Toast.makeText(context,"삭제",Toast.LENGTH_SHORT).show();
+            }
+        });
+        return view;
     }
 }

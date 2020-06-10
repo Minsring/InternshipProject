@@ -10,14 +10,11 @@ import android.content.SharedPreferences;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,8 +46,8 @@ public class Setting_Activity extends AppCompatActivity {
     Context context = this;
     NotificationManager manager;
     NotificationCompat.Builder builder;
-    private static String CHANNEL_ID = "channel1";
-    private static String CHANEL_NAME = "Channel1";
+    private String CHANNEL_ID = "channel1";
+    private String CHANEL_NAME = "Channel1";
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -76,7 +73,6 @@ public class Setting_Activity extends AppCompatActivity {
                     @Override
                     public void run() {
                         flag_Setting1++;
-                        System.out.println("배터리 확인중");
                         Intent intentBattery = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
                         int level = intentBattery.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
                         int scale = intentBattery.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
@@ -84,9 +80,7 @@ public class Setting_Activity extends AppCompatActivity {
                         int battery = (int) (batteryPct * 100);
 
                         if (battery < 15) {
-                            Log.d("배터리 부족알림", "배터리 부족! 보호자에게 알림을 보냅니다.");
                             showNoti();
-
                             for (int i = 0; i < Register_Activity.index; i++) {
                                 phoneNo = Register_Activity.protectorPhone.get(i);
                                 //System.out.println(phoneNo);
@@ -97,35 +91,27 @@ public class Setting_Activity extends AppCompatActivity {
                         }
                     }
                 };
-                timer.schedule(tt1, 0, 1000);
+                timer.schedule(tt1, 0, 1800000);
             }
             switch2.setChecked(isCheck2);
             if(isCheck2){
                 tt2 = new TimerTask() {
                     @Override
                     public void run() {
-                        timeCounter++;
                         flag_Setting2++;
-                        System.out.println("걸음 수 홗인중");
-
-                        if(timeCounter==6) {
-                            timeCounter = 0;
-                            if (mStepDetector < 20){//20걸음 미만이라면 보호자에게 메세지 보내기
-                                for (int i = 0; i < Register_Activity.index; i++) {
-                                    phoneNo = Register_Activity.protectorPhone.get(i);
-                                    //System.out.println(phoneNo);
-                                    name = Register_Activity.protectorName.get(i);
-                                    //System.out.println(name); 정상출력됨 -> 전송이 안되고 있음
-                                    sendSMS(phoneNo, name, 2);
-                                }
+                        if (mStepDetector < 20){//20걸음 미만이라면 보호자에게 메세지 보내기
+                            for (int i = 0; i < Register_Activity.index; i++) {
+                                phoneNo = Register_Activity.protectorPhone.get(i);
+                                //System.out.println(phoneNo);
+                                name = Register_Activity.protectorName.get(i);
+                                //System.out.println(name); 정상출력됨 -> 전송이 안되고 있음
+                                sendSMS(phoneNo, name, 2);
                             }
                         }
                     }
                 };
-                timer.schedule(tt2, 0, 1000);
+                timer.schedule(tt2, 0, 86400000);
                 mStepDetector=0;
-                timeCounter=0;
-                System.out.println("걸음수 측정 시작");
             }
         }
 
@@ -141,7 +127,6 @@ public class Setting_Activity extends AppCompatActivity {
                         @Override
                         public void run() {
                             flag_Setting1++;
-                            System.out.println("배터리 확인중");
                             Intent intentBattery = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
                             int level = intentBattery.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
                             int scale = intentBattery.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
@@ -149,9 +134,7 @@ public class Setting_Activity extends AppCompatActivity {
                             int battery = (int) (batteryPct * 100);
 
                             if (battery < 15) {
-                                Log.d("배터리 부족알림", "배터리 부족! 보호자에게 알림을 보냅니다.");
                                 showNoti();
-
                                 for (int i = 0; i < Register_Activity.index; i++) {
                                     phoneNo = Register_Activity.protectorPhone.get(i);
                                     //System.out.println(phoneNo);
@@ -162,7 +145,7 @@ public class Setting_Activity extends AppCompatActivity {
                             }
                         }
                     };
-                    timer.schedule(tt1, 0, 1000);
+                    timer.schedule(tt1, 0, 1800000);
 
                 }else{
                     if(flag_Setting1!=0){
@@ -184,34 +167,28 @@ public class Setting_Activity extends AppCompatActivity {
                     tt2 = new TimerTask() {
                         @Override
                         public void run() {
-                            timeCounter++;
                             flag_Setting2++;
-                            System.out.println("걸음 수 확인중");
+                            if (mStepDetector < 20){//20걸음 미만이라면 보호자에게 메세지 보내기
 
-                            if(timeCounter==6) {
-                                timeCounter = 0;
-                                if (mStepDetector < 20){//20걸음 미만이라면 보호자에게 메세지 보내기
-                                    for (int i = 0; i < Register_Activity.index; i++) {
-                                        phoneNo = Register_Activity.protectorPhone.get(i);
-                                        //System.out.println(phoneNo);
-                                        name = Register_Activity.protectorName.get(i);
-                                        //System.out.println(name); 정상출력됨 -> 전송이 안되고 있음
-                                        sendSMS(phoneNo, name, 2);
-                                    }
+                                for (int i = 0; i < Register_Activity.index; i++) {
+                                    phoneNo = Register_Activity.protectorPhone.get(i);
+                                    //System.out.println(phoneNo);
+                                    name = Register_Activity.protectorName.get(i);
+                                    //System.out.println(name); 정상출력됨 -> 전송이 안되고 있음
+                                    sendSMS(phoneNo, name, 2);
                                 }
                             }
+                            mStepDetector=0;
+                            User.save();
                         }
                     };
-                    timer.schedule(tt2, 0, 1000);
+                    timer.schedule(tt2, 0, 86400000);
                     mStepDetector=0;
-                    timeCounter=0;
-                    System.out.println("걸음수 측정 시작");
                 }else{
                     if(flag_Setting2!=0){
                         tt2.cancel();
                         flag_Setting2=0;
                     }
-                    System.out.println("걸음수 측정 멈춤");
                     save();
                 }
             }
@@ -301,7 +278,7 @@ public class Setting_Activity extends AppCompatActivity {
                 smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자의 배터리가 15% 미만입니다 !!", null, null);
                 //Toast.makeText(getApplicationContext(), "메세지 전송!", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
-                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         }
