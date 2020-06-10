@@ -25,7 +25,7 @@ public class Register_Activity<listener> extends AppCompatActivity {
     static int index=0;
     static ArrayList<String> protectorName = new ArrayList<String>();
     static ArrayList<String> protectorPhone = new ArrayList<String>();
-//    static ArrayList<String> protectorAdd = new ArrayList<>();
+   static ArrayList<String> protectorAdd = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class Register_Activity<listener> extends AppCompatActivity {
     public void getProtectorInfo() {
         protectorName.add(index,value_n);
         protectorPhone.add(index,value_p);
-//        protectorAdd.add(index,value_n+value_p);
+        protectorAdd.add(index,value_n+"  , "+value_p);
         index++;
         return;
     }

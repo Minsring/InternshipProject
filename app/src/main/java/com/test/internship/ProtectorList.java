@@ -17,11 +17,11 @@ import java.util.List;
 
 //import static com.test.internship.Register_Activity.protectorAdd;
 import static com.test.internship.Register_Activity.index;
+import static com.test.internship.Register_Activity.protectorAdd;
 import static com.test.internship.Register_Activity.protectorName;
 import static com.test.internship.Register_Activity.protectorPhone;
 
 public class ProtectorList extends AppCompatActivity {
-
     ListView listView;
     ArrayList<String>data;
 
@@ -32,8 +32,9 @@ public class ProtectorList extends AppCompatActivity {
         data = new ArrayList<String>();
 
         for(int i=0;i<index;i++) {
-            data.add(protectorName.get(i));
+            data.add(protectorAdd.get(i));
         }
+
         listView = findViewById(R.id.list);
         CustomAdapter customAdapter = new CustomAdapter(this, data);
         listView.setAdapter(customAdapter);

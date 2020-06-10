@@ -15,16 +15,11 @@
         <TextView
             android:id="@+id/personName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="텍스트1"
             android:textSize="35sp" />
 
-        <TextView
-            android:id="@+id/personNum"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="텍스트2"
-            android:textSize="30sp" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -32,7 +27,6 @@
         android:layout_height="wrap_content">
     <Button
         android:id="@+id/btndelete"
-        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="삭제"

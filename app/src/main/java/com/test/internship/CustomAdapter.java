@@ -22,17 +22,14 @@ public class CustomAdapter extends BaseAdapter {
 
     Context context;
     LayoutInflater layoutInflater;
-    ArrayList<String> data;
+    ArrayList<String>data;
 
-    public CustomAdapter(ProtectorList protectorList, ArrayList<String> data) {
-
-    }
-
-    public void ButtonListAdapter(Context context, ArrayList<String>data){
+    public CustomAdapter(Context context, ArrayList<String>data){
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
         this.data = data;
     }
+
     @Override
     public int getCount() {
         return data.size();
@@ -47,11 +44,12 @@ public class CustomAdapter extends BaseAdapter {
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = layoutInflater.inflate(R.layout.protector_list,null);
-        TextView textView = view.findViewById(R.id.personName);
-        textView.setText(data.get(position));
+        View view = layoutInflater.inflate(R.layout.protectorinfo_style,null);
+        TextView t1 = view.findViewById(R.id.personName);
 
-        View bodyView = view.findViewById(R.id.personNum);
+        t1.setText(data.get(position));
+
+        View bodyView = view.findViewById(R.id.body);
         Button btn = view.findViewById(R.id.btndelete);
 
         bodyView.setOnClickListener(new View.OnClickListener(){
