@@ -1,6 +1,5 @@
 package com.test.internship;
 
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -21,36 +20,23 @@ import static com.test.internship.Register_Activity.index;
 import static com.test.internship.Register_Activity.protectorName;
 import static com.test.internship.Register_Activity.protectorPhone;
 
-public class ProtectorList<listener> extends AppCompatActivity {
+public class ProtectorList extends AppCompatActivity {
+
+    ListView listView;
+    ArrayList<String>data;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ListView listView;
-        CustomAdapter adapter;
-
-        listView = (ListView)findViewById(R.id.list);
-        adapter = new CustomAdapter(this, protectorName);
-
-        listView.setAdapter(adapter);
-
+        setContentView(R.layout.protector_list);
+        data = new ArrayList<String>();
 
         for(int i=0;i<index;i++) {
-            adapter.addItem(ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground), protectorName.get(i),protectorPhone.get(i));
+            data.add(protectorName.get(i));
         }
+        listView = findViewById(R.id.list);
+        CustomAdapter customAdapter = new CustomAdapter(this, data);
+        listView.setAdapter(customAdapter);
 
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View v, int position, long id) {
-                // get item
-                ListViewItem item = (ListViewItem) parent.getItemAtPosition(position) ;
-
-                String titleStr = item.getPersonName() ;
-                String descStr = item.getPersonNum() ;
-                Drawable iconDrawable = item.getIcon() ;
-
-            }
-        }) ;
     }
 }
