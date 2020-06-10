@@ -62,6 +62,8 @@ public class CustomAdapter extends BaseAdapter {
         btn.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View view) {
+                // 삭제처리
+
                 Toast.makeText(context,"삭제",Toast.LENGTH_SHORT).show();
             }
         });
