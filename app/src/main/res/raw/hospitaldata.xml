@@ -293,8 +293,8 @@
         <callnumber>054-832-1070</callnumber>
         <subject>치과</subject>
         <distance>27.6km</distance>
-        <lat>36.35397904</lat>
-        <lng>128.69484816</lng>
+        <lat>36.35394964</lat>
+        <lng>128.69492205</lng>
     </hospital>
     <hospital>
         <name>의성신통의원</name>
@@ -306,8 +306,8 @@
         <callnumber>054-833-6733</callnumber>
         <subject>정형외과</subject>
         <distance>27.7km</distance>
-        <lat>36.35569812</lat>
-        <lng>128.69449340</lng>
+        <lat>36.35572271</lat>
+        <lng>128.69453318</lng>
     </hospital>
     <hospital>
         <name>경희한의원</name>
@@ -377,8 +377,8 @@
         <callnumber>054-833-1400</callnumber>
         <subject>한의원</subject>
         <distance>27.8km</distance>
-        <lat>36.35415855</lat>
-        <lng>128.69477738</lng>
+        <lat>36.35415150</lat>
+        <lng>128.69469172</lng>
     </hospital>
     <hospital>
         <name>의성스마트치과의원</name>
@@ -388,8 +388,8 @@
         <callnumber>054-833-2804</callnumber>
         <subject>치과</subject>
         <distance>27.9km</distance>
-        <lat>36.35500482</lat>
-        <lng>128.69455064</lng>
+        <lat>36.35503259</lat>
+        <lng>128.69452347</lng>
     </hospital>
     <hospital>
         <name>김종수치과의원</name>
@@ -425,8 +425,8 @@
         <callnumber>054-833-1380</callnumber>
         <subject>이비인후과</subject>
         <distance>27.9km</distance>
-        <lat>36.35500471</lat>
-        <lng>128.69455065</lng>
+        <lat>36.35497532</lat>
+        <lng>128.69457508</lng>
     </hospital>
     <hospital>
         <name>오복치과의원</name>
@@ -486,8 +486,8 @@
         <subject>내과</subject>
         <subject>소아청소년과</subject>
         <distance>28km</distance>
-        <lat>36.35539739</lat>
-        <lng>128.69452912</lng>
+        <lat>36.35541673</lat>
+        <lng>128.69448580</lng>
     </hospital>
     <hospital>
         <name>의성군보건소</name>
