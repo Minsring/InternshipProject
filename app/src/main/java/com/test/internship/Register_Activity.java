@@ -1,13 +1,13 @@
 package com.test.internship;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
-
-
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,18 +25,28 @@ public class Register_Activity<listener> extends AppCompatActivity {
     static int index=0;
     static ArrayList<String> protectorName = new ArrayList<String>();
     static ArrayList<String> protectorPhone = new ArrayList<String>();
-   static ArrayList<String> protectorAdd = new ArrayList<>();
+    static ArrayList<String> protectorAdd = new ArrayList<>();
+
+    CustomAdapter customAdapter;
+    ListView listView;
+    ArrayList<String>data;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
+
         Button addInfo;
         addInfo = findViewById(R.id.confirm);
+        addInfo.setOnClickListener(listener);
+
         idEdit_n = (EditText)findViewById(R.id.pName);
         idEdit_p = (EditText)findViewById(R.id.pPhone);
 
-        addInfo.setOnClickListener(listener);
+        data = new ArrayList<String>();
+        listView = findViewById(R.id.list);
+        customAdapter = new CustomAdapter(this, data);
     }
 
     /// ArrayList에 보호자정보(이름, 번호) 넣는 부분
@@ -56,11 +66,20 @@ public class Register_Activity<listener> extends AppCompatActivity {
                     value_n = idEdit_n.getText().toString();
                     value_p = idEdit_p.getText().toString();
                     getProtectorInfo();
-                    for (int i = 0; i < index; i++) {
-                        System.out.println(protectorPhone.get(i));
-                        System.out.println(protectorName.get(i));
-                    }
                     Toast.makeText(Register_Activity.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
+//                    for (int i = 0; i < index; i++) {
+//                        System.out.println(protectorPhone.get(i));
+//                        System.out.println(protectorName.get(i));
+//                    }
+
+//                    data = new ArrayList<String>();
+                    for(int i=0;i<index;i++) {
+                        data.add(protectorAdd.get(i));
+                    }
+//                    listView = findViewById(R.id.list);
+//                    customAdapter = new CustomAdapter(context, data);
+                    listView.setAdapter(customAdapter);
+
                     break;
             }
         }

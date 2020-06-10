@@ -59,8 +59,6 @@ public class Setting_Activity extends AppCompatActivity {
         flag_Setting2=0;
         btnregister = findViewById(R.id.btnregister);
         btnregister.setOnClickListener(listener);
-        btnprotectorList = findViewById(R.id.btnprotectorList);
-        btnprotectorList.setOnClickListener(listener);
 
         switch1 = (Switch)findViewById(R.id.switch1);
         switch2 = (Switch)findViewById(R.id.switch2);
@@ -204,13 +202,13 @@ public class Setting_Activity extends AppCompatActivity {
                     intent = new Intent(getApplicationContext(), Register_Activity.class);
 //                    startActivity(intent);
                     break;
-                case R.id.btnprotectorList:
-                    intent = new Intent(getApplicationContext(), ProtectorList.class);
-//                    //정보도 같이 들고가도록
-//                    intent.putExtra("보호자 이름",Register_Activity.protectorName);
-//                    intent.putExtra("보호자 연락처",Register_Activity.protectorPhone);
-//                    startActivity(intent);
-                    break;
+//                case R.id.btnprotectorList:
+//                    intent = new Intent(getApplicationContext(), ProtectorList.class);
+////                    //정보도 같이 들고가도록
+////                    intent.putExtra("보호자 이름",Register_Activity.protectorName);
+////                    intent.putExtra("보호자 연락처",Register_Activity.protectorPhone);
+////                    startActivity(intent);
+//                    break;
             }
             if(intent!=null) startActivity(intent);
         }

@@ -28,7 +28,7 @@ public class ProtectorList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.protector_list);
+        setContentView(R.layout.register);
         data = new ArrayList<String>();
 
         for(int i=0;i<index;i++) {
@@ -38,6 +38,5 @@ public class ProtectorList extends AppCompatActivity {
         listView = findViewById(R.id.list);
         CustomAdapter customAdapter = new CustomAdapter(this, data);
         listView.setAdapter(customAdapter);
-
     }
 }

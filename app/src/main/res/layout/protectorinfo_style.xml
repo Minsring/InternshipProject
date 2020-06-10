@@ -13,7 +13,7 @@
         android:layout_weight="2">
 
         <TextView
-            android:id="@+id/personName"
+            android:id="@+id/personinfo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="텍스트1"

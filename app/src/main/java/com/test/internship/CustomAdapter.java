@@ -1,19 +1,13 @@
 package com.test.internship;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
@@ -27,8 +21,10 @@ public class CustomAdapter extends BaseAdapter {
     public CustomAdapter(Context context, ArrayList<String>data){
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
+//        this.listener=listener;
         this.data = data;
     }
+
 
     @Override
     public int getCount() {
@@ -45,8 +41,7 @@ public class CustomAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = layoutInflater.inflate(R.layout.protectorinfo_style,null);
-        TextView t1 = view.findViewById(R.id.personName);
-
+        TextView t1 = view.findViewById(R.id.personinfo);
         t1.setText(data.get(position));
 
         View bodyView = view.findViewById(R.id.body);
