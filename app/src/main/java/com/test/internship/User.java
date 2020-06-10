@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -38,6 +39,7 @@ public class User extends AppCompatActivity implements SensorEventListener {
     static TimerTask tt1;
     static TimerTask tt2;
     static int timeCounter;
+    private static SharedPreferences appData;
 
 
     private final int MY_PERMISSION_REQUEST_SMS=1001;
@@ -47,6 +49,8 @@ public class User extends AppCompatActivity implements SensorEventListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user);
+        appData = getSharedPreferences("appData", MODE_PRIVATE);
+        load();
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         stepsensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
@@ -76,6 +80,9 @@ public class User extends AppCompatActivity implements SensorEventListener {
                 ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.SEND_SMS},MY_PERMISSION_REQUEST_SMS);
             }
         }
+
+
+
 
 
         // 버튼 연결
@@ -254,17 +261,23 @@ public class User extends AppCompatActivity implements SensorEventListener {
         super.onStart();
         sensorManager.registerListener(this, stepsensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
-
+    public static void save(){
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putInt("SAVE_STEP_DATA", mStepDetector);
+        editor.apply();
+    }
+    private void load(){
+        mStepDetector = appData.getInt("SAVE_STEP_DATA", 0);
+    }
     @Override
     public void onSensorChanged(SensorEvent event) {
         if(event.sensor.getType()==Sensor.TYPE_STEP_DETECTOR){
             if(event.values[0]==1.0f){
                 mStepDetector++;
-                System.out.println(mStepDetector);
+                save();
             }
         }
     }
-
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
