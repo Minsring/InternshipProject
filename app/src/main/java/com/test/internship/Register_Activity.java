@@ -51,6 +51,7 @@ public class Register_Activity<listener> extends AppCompatActivity {
 
     /// ArrayList에 보호자정보(이름, 번호) 넣는 부분
     public void getProtectorInfo() {
+
         protectorName.add(index,value_n);
         protectorPhone.add(index,value_p);
         protectorAdd.add(index,value_n+"  , "+value_p);
@@ -65,21 +66,17 @@ public class Register_Activity<listener> extends AppCompatActivity {
                 case R.id.confirm:
                     value_n = idEdit_n.getText().toString();
                     value_p = idEdit_p.getText().toString();
-                    getProtectorInfo();
-                    Toast.makeText(Register_Activity.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
-//                    for (int i = 0; i < index; i++) {
-//                        System.out.println(protectorPhone.get(i));
-//                        System.out.println(protectorName.get(i));
-//                    }
-
-//                    data = new ArrayList<String>();
-                    for(int i=0;i<index;i++) {
-                        data.add(protectorAdd.get(i));
-                    }
+                    if(value_n.length()!=0 && value_p.length()!=0) {
+                        getProtectorInfo();
+                        Toast.makeText(Register_Activity.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                        data.add(protectorAdd.get(index-1));
 //                    listView = findViewById(R.id.list);
 //                    customAdapter = new CustomAdapter(context, data);
-                    listView.setAdapter(customAdapter);
-
+                        listView.setAdapter(customAdapter);
+                    }
+                    else {
+                        Toast.makeText(Register_Activity.this, "보호자 정보가 부족합니다", Toast.LENGTH_SHORT).show();
+                    }
                     break;
             }
         }

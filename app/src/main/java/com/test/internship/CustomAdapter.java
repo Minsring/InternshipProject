@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ public class CustomAdapter extends BaseAdapter {
     Context context;
     LayoutInflater layoutInflater;
     ArrayList<String>data;
+    ListView listView;
 
     public CustomAdapter(Context context, ArrayList<String>data){
         this.context = context;
@@ -58,6 +60,8 @@ public class CustomAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 // 삭제처리
+                int pos;
+
 
                 Toast.makeText(context,"삭제",Toast.LENGTH_SHORT).show();
             }
