@@ -65,7 +65,7 @@ class CustomMarkerClusterClass : FragmentActivity(), OnMapReadyCallback {
             closed_hospitals = intent.getSerializableExtra("닫은병원리스트") as ArrayList<HospitalInformation>
         }
         subject = intent.getStringExtra("진료과")
-        mapTitle?.setText("진료중인 "+subject)
+        mapTitle?.setText(subject+" 지도")
         
         val fm = supportFragmentManager
 
@@ -129,7 +129,7 @@ class CustomMarkerClusterClass : FragmentActivity(), OnMapReadyCallback {
         // 카메라 위치를 한반도 인근으로 제한
         naverMap.extent = LatLngBounds(LatLng(31.43, 122.37), LatLng(44.35, 132.0))
         naverMap.minZoom = 6.0
-        naverMap.maxZoom = 18.0
+        naverMap.maxZoom = 20.0
 
         // LocationButton을 누르면 사용자의 현위치로 이동
         naverMap.locationSource = locationSource
