@@ -163,6 +163,28 @@ public class Register_Activity extends AppCompatActivity {
             }
         }
     };
+    public void onResume() {
+        super.onResume();
+        //    sensorManager.registerListener(this, stepsensor, SensorManager.SENSOR_DELAY_UI);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        // sensorManager.registerListener(this, stepsensor, SensorManager.SENSOR_DELAY_UI);
+    }
+    public void onStop() {
+        super.onStop();
+        for(int i=0;i<5;i++){
+            save(i);
+        }
+    }
+    public void onDestroy() {
+        super.onDestroy();
+        for(int i=0;i<5;i++){
+            save(i);
+        }
+    }
+
 
 
 
