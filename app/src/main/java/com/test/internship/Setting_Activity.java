@@ -405,4 +405,3 @@ public class Setting_Activity extends AppCompatActivity {
     }
 }
 
-
