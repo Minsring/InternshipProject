@@ -70,12 +70,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="등록된 보호자 정보 목록"
+        android:textStyle="bold"
         android:textSize="25sp"
         android:gravity="center"
         android:layout_marginTop="10dp" />
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="정보를 삭제하려면 해당 리스트를 꾸욱 눌러주세요"
+            android:textSize="15sp"
+            android:gravity="center"/>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
