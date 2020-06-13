@@ -169,6 +169,9 @@ public class Register_Activity extends AppCompatActivity {
             save(i);
         }
         //    sensorManager.registerListener(this, stepsensor, SensorManager.SENSOR_DELAY_UI);
+        for(int i=0;i<5;i++){
+            save(i);
+        }
     }
     @Override
     public void onPause() {
@@ -177,6 +180,9 @@ public class Register_Activity extends AppCompatActivity {
             save(i);
         }
         // sensorManager.registerListener(this, stepsensor, SensorManager.SENSOR_DELAY_UI);
+        for(int i=0;i<5;i++){
+            save(i);
+        }
     }
     public void onStop() {
         super.onStop();
@@ -190,16 +196,15 @@ public class Register_Activity extends AppCompatActivity {
             save(i);
         }
     }
-    public void onStart() {
-        super.onStart();
+    public void onRestart() {
+        super.onRestart();
         for(int i=0;i<5;i++){
             save(i);
         }
     }
 
 
-
-    public void save(int a) {
+    private void save(int a) {
         SharedPreferences.Editor editor = appData.edit();
         editor.putBoolean("SAVE_ON", true);
         if (a == 0) {

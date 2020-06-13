@@ -78,28 +78,88 @@ public class CustomAdapter extends BaseAdapter {
         item_layout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                persondata.remove(position);
-                Register_Activity.customAdapter.notifyDataSetChanged();
                 if(position==0){
-                    person1_n=null;
-                    person1_p=null;
+                    if(person1_n==null && person1_p==null){
+                        if(person2_n == null && person2_p==null){
+                            if(person3_n==null && person3_p==null){
+                                if(person4_n==null && person4_p==null){
+                                    person5_n=null;
+                                    person5_p=null;
+                                }
+                                else{
+                                    person4_p=null;
+                                    person4_n=null;
+                                }
+                            }
+                            else{
+                                person3_p=null;
+                                person3_n=null;
+                            }
+                        }
+                        else{
+                            person2_p=null;
+                            person2_n=null;
+                        }
+                    }
+                    else {
+                        person1_n = null;
+                        person1_p = null;
+                    }
                 }
-                if(position==1){
-                    person2_n=null;
-                    person2_p=null;
+                else if(position==1){
+                    if(person2_n == null && person2_p==null){
+                        if(person3_n==null && person3_p==null){
+                            if(person4_n==null && person4_p==null){
+                                person5_n=null;
+                                person5_p=null;
+                            }
+                            else{
+                                person4_p=null;
+                                person4_n=null;
+                            }
+                        }
+                        else{
+                            person3_p=null;
+                            person3_n=null;
+                        }
+                    }
+                    else {
+                        person2_p = null;
+                        person2_n = null;
+                    }
                 }
-                if(position==2){
-                    person3_n=null;
-                    person3_p=null;
+                else if(position==2){
+                    if(person3_n==null && person3_p==null){
+                        if(person4_n==null && person4_p==null){
+                            person5_n=null;
+                            person5_p=null;
+                        }
+                        else{
+                            person4_p=null;
+                            person4_n=null;
+                        }
+                    }
+                    else{
+                        person3_p=null;
+                        person3_n=null;
+                    }
                 }
-                if(position==3){
-                    person4_n=null;
-                    person4_p=null;
+                else if(position==3){
+                    if(person4_n==null && person4_p==null){
+                        person5_n=null;
+                        person5_p=null;
+                    }
+                    else{
+                        person4_p=null;
+                        person4_n=null;
+                    }
                 }
-                if(position==4){
+                else{
                     person5_n=null;
                     person5_p=null;
                 }
+                persondata.remove(position);
+                Register_Activity.customAdapter.notifyDataSetChanged();
 //                Toast.makeText(Register_Activity, "삭제되었습니다.", Toast.LENGTH_SHORT).show();
                 return false;
             }
