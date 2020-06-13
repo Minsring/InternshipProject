@@ -165,11 +165,17 @@ public class Register_Activity extends AppCompatActivity {
     };
     public void onResume() {
         super.onResume();
+        for(int i=0;i<5;i++){
+            save(i);
+        }
         //    sensorManager.registerListener(this, stepsensor, SensorManager.SENSOR_DELAY_UI);
     }
     @Override
     public void onPause() {
         super.onPause();
+        for(int i=0;i<5;i++){
+            save(i);
+        }
         // sensorManager.registerListener(this, stepsensor, SensorManager.SENSOR_DELAY_UI);
     }
     public void onStop() {
@@ -184,7 +190,12 @@ public class Register_Activity extends AppCompatActivity {
             save(i);
         }
     }
-
+    public void onStart() {
+        super.onStart();
+        for(int i=0;i<5;i++){
+            save(i);
+        }
+    }
 
 
 
