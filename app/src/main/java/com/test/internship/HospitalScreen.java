@@ -171,7 +171,7 @@ public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallb
     @Override  // 네이버 맵에서 오버레이 추가, 상호작용하는 등 기능 대부분을 이 클래스 에서 제공
     public void onMapReady(@NonNull NaverMap naverMap) {
         this.naverMap = naverMap;
-        UiSettings uiSettings = naverMap.getUiSettings();
+
 //        Toast.makeText(this, "위도: "+hosCoord.latitude +" 경도: "+hosCoord.longitude, Toast.LENGTH_SHORT).show();
 
         // 지도 타입 설정
@@ -194,6 +194,7 @@ public class HospitalScreen extends AppCompatActivity implements OnMapReadyCallb
         naverMap.setMinZoom(6.0);
         naverMap.setMaxZoom(18.0);
 
+        UiSettings uiSettings = naverMap.getUiSettings();
         // ui설정
         uiSettings.setCompassEnabled(true);
         uiSettings.setScaleBarEnabled(true);

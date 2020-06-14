@@ -1,7 +1,9 @@
 package com.test.internship;
 
+import android.graphics.Color;
 import android.graphics.PointF;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,7 +21,9 @@ import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
+import com.naver.maps.map.overlay.CircleOverlay;
 import com.naver.maps.map.overlay.Marker;
+import com.naver.maps.map.overlay.PolygonOverlay;
 import com.naver.maps.map.util.FusedLocationSource;
 
 import java.util.Locale;
@@ -29,10 +33,14 @@ public class asd123 extends AppCompatActivity implements OnMapReadyCallback {
     private FusedLocationSource locationSource;
     private NaverMap naverMap;
     Marker marker;
+    CircleOverlay circle;
+    PolygonOverlay polygon;
+    EditText radiusEdit;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.asd123);
+        radiusEdit=findViewById(R.id.radiusEdit);
         FragmentManager fm = getSupportFragmentManager();
 
         MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map123);
@@ -43,6 +51,8 @@ public class asd123 extends AppCompatActivity implements OnMapReadyCallback {
                 new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
 
         marker = new Marker();
+        circle=new CircleOverlay();
+        polygon=new PolygonOverlay();
 
     }
 
@@ -90,14 +100,26 @@ public class asd123 extends AppCompatActivity implements OnMapReadyCallback {
         uiSettings.setLocationButtonEnabled(true);
 
 
+
         NaverMap.OnMapClickListener mapListener = new NaverMap.OnMapClickListener() {
             @Override
             public void onMapClick(@NonNull PointF pointF, @NonNull LatLng latLng) {
                 Toast.makeText(getApplicationContext(), latLng.latitude + ", " + latLng.longitude,
                         Toast.LENGTH_SHORT).show();
+                int radius=200;
+               if(!(radiusEdit.length()==0)){
+                   radius=Integer.parseInt(radiusEdit.getText().toString());
+               }
                 marker.setMap(null);
+                circle.setMap(null);
                 marker.setPosition(latLng);
                 marker.setMap(naverMap);
+                circle.setCenter(latLng);
+                circle.setRadius(radius);
+                circle.setColor(Color.argb(50,0,255,0));
+                circle.setOutlineColor(Color.argb(200,0,255,0));
+                circle.setOutlineWidth(10);
+                circle.setMap(naverMap);
             }
         };
         naverMap.setOnMapClickListener(mapListener);
