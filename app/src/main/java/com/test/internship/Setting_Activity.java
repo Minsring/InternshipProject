@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,6 +47,7 @@ public class Setting_Activity extends AppCompatActivity {
     String phoneNo;
     String name;
     Button btnregister;
+    Button btnregister2;
     Button btnprotectorList;
     Switch switch1;
     Switch switch2;
@@ -69,6 +69,8 @@ public class Setting_Activity extends AppCompatActivity {
         flag_Setting2=0;
         btnregister = findViewById(R.id.btnregister);
         btnregister.setOnClickListener(listener);
+        btnregister2 = findViewById(R.id.btnregister2);
+        btnregister2.setOnClickListener(listener);
 
         switch1 = (Switch)findViewById(R.id.switch1);
         switch2 = (Switch)findViewById(R.id.switch2);
@@ -285,6 +287,9 @@ public class Setting_Activity extends AppCompatActivity {
                 case R.id.btnregister:
                     intent = new Intent(getApplicationContext(), Register_Activity.class);
 //                    startActivity(intent);
+                    break;
+                case R.id.btnregister2:
+                    intent = new Intent(getApplicationContext(), asd123.class);
                     break;
             }
             if(intent!=null) startActivity(intent);
