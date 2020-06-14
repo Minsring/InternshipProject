@@ -32,6 +32,7 @@ public class asd123 extends AppCompatActivity implements OnMapReadyCallback {
         }
 
         mapFragment.getMapAsync(this);
+        //주석주석
 
 
 
