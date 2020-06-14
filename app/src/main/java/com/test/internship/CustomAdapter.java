@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -25,12 +26,6 @@ import static com.test.internship.Register_Activity.persondata;
 
 ///커스텀 리스너 정의 -> 추가
 public class CustomAdapter extends BaseAdapter {
-
-//    Context context;
-//    LayoutInflater layoutInflater;
-//    ArrayList<String>data;
-//    ListView listView;
-
 
     private Context mcontext = null;
     private ArrayList<ProtectorData> mdata = null;
@@ -285,25 +280,11 @@ public class CustomAdapter extends BaseAdapter {
                 }
                 persondata.remove(position);
                 Register_Activity.customAdapter.notifyDataSetChanged();
-//                Toast.makeText(Register_Activity, "삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mcontext, "삭제되었습니다.", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
 
-//        View view = layoutInflater.inflate(R.layout.protectorinfo_style,null);
-//        TextView t1 = view.findViewById(R.id.personinfo);
-//        t1.setText(data.get(position));
-
-
-//        View bodyView = view.findViewById(R.id.body);
-//        Button btn = view.findViewById(R.id.btndelete);
-//
-//        bodyView.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v){
-//                Toast.makeText(context,"바디클릭 테스트",Toast.LENGTH_SHORT).show();
-//            }
-//        });
         return convertView;
     }
 }

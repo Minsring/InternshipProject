@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,7 +48,6 @@ public class Setting_Activity extends AppCompatActivity {
     String phoneNo;
     String name;
     Button btnregister;
-    Button btnregister2;
     Button btnprotectorList;
     Switch switch1;
     Switch switch2;
@@ -68,9 +68,8 @@ public class Setting_Activity extends AppCompatActivity {
         flag_Setting1=0;
         flag_Setting2=0;
         btnregister = findViewById(R.id.btnregister);
-        btnregister2 = findViewById(R.id.btnregister2);
         btnregister.setOnClickListener(listener);
-        btnregister2.setOnClickListener(listener);
+
         switch1 = (Switch)findViewById(R.id.switch1);
         switch2 = (Switch)findViewById(R.id.switch2);
         appData = getSharedPreferences("appData", MODE_PRIVATE);
@@ -95,13 +94,7 @@ public class Setting_Activity extends AppCompatActivity {
                                 phoneNo = person1_p;
                                 sendSMS(phoneNo, name, 1);
                             }
-//                            for (int i = 0; i < 5; i++) {
-//                                phoneNo = Register_Activity.protectorPhone.get(i);
-//                                //System.out.println(phoneNo);
-//                                name = Register_Activity.protectorName.get(i);
-//                                //System.out.println(name); 정상출력됨 -> 전송이 안되고 있음
-//                                sendSMS(phoneNo, name, 1);
-//                            }
+
                             if(person2_n!=null && person2_p != null){
                                 name = person2_n;
                                 phoneNo = person2_p;
@@ -134,13 +127,7 @@ public class Setting_Activity extends AppCompatActivity {
                     public void run() {
                         flag_Setting2++;
                         if (mStepDetector < 20){//20걸음 미만이라면 보호자에게 메세지 보내기
-//                            for (int i = 0; i < Register_Activity.index; i++) {
-//                                phoneNo = Register_Activity.protectorPhone.get(i);
-//                                //System.out.println(phoneNo);
-//                                name = Register_Activity.protectorName.get(i);
-//                                //System.out.println(name); 정상출력됨 -> 전송이 안되고 있음
-//                                sendSMS(phoneNo, name, 2);
-//                            }
+//
                             if(person1_n!=null && person1_p != null){
                                 name = person1_n;
                                 phoneNo = person1_p;
@@ -194,13 +181,6 @@ public class Setting_Activity extends AppCompatActivity {
 
                             if (battery < 15) {
                                 showNoti();
-//                                for (int i = 0; i < Register_Activity.index; i++) {
-//                                    phoneNo = Register_Activity.protectorPhone.get(i);
-//                                    //System.out.println(phoneNo);
-//                                    name = Register_Activity.protectorName.get(i);
-//                                    //System.out.println(name); 정상출력됨 -> 전송이 안되고 있음
-//                                    sendSMS(phoneNo, name, 1);
-//                                }
                                 if(person1_n!=null && person1_p != null){
                                     name = person1_n;
                                     phoneNo = person1_p;
@@ -254,13 +234,6 @@ public class Setting_Activity extends AppCompatActivity {
                             flag_Setting2++;
                             if (mStepDetector < 20){//20걸음 미만이라면 보호자에게 메세지 보내기
 
-//                                for (int i = 0; i < Register_Activity.index; i++) {
-//                                    phoneNo = Register_Activity.protectorPhone.get(i);
-//                                    //System.out.println(phoneNo);
-//                                    name = Register_Activity.protectorName.get(i);
-//                                    //System.out.println(name); 정상출력됨 -> 전송이 안되고 있음
-//                                    sendSMS(phoneNo, name, 2);
-//                                }
                                 if(person1_n!=null && person1_p != null){
                                     name = person1_n;
                                     phoneNo = person1_p;
@@ -313,16 +286,6 @@ public class Setting_Activity extends AppCompatActivity {
                     intent = new Intent(getApplicationContext(), Register_Activity.class);
 //                    startActivity(intent);
                     break;
-                case R.id.btnregister2:
-                    intent = new Intent(getApplicationContext(), asd123.class);
-                    break;
-//                case R.id.btnprotectorList:
-//                    intent = new Intent(getApplicationContext(), ProtectorList.class);
-////                    //정보도 같이 들고가도록
-////                    intent.putExtra("보호자 이름",Register_Activity.protectorName);
-////                    intent.putExtra("보호자 연락처",Register_Activity.protectorPhone);
-////                    startActivity(intent);
-//                    break;
             }
             if(intent!=null) startActivity(intent);
         }
@@ -347,7 +310,10 @@ public class Setting_Activity extends AppCompatActivity {
         editor.putBoolean("CHECK2", switch2.isChecked());
         editor.putInt("FLAG_SETTING1", flag_Setting1);
         editor.putInt("FLAG_SETTING2", flag_Setting2);
+
+
         editor.apply();
+
     }
     private void load(){
         saveData = appData.getBoolean("SAVE_LOGIN_DATA", false);
@@ -388,9 +354,9 @@ public class Setting_Activity extends AppCompatActivity {
             try {
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자의 배터리가 15% 미만입니다 !!", null, null);
-                //Toast.makeText(getApplicationContext(), "메세지 전송!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "메세지 전송!", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
-                //Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         }
