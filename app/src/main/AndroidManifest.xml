@@ -18,6 +18,7 @@
             android:value="7t85xooilf"/>
 
         <activity android:name=".HospitalScreen" />
+        <activity android:name=".asd123" />
         <activity android:name=".SubjectListMap" />
         <activity android:name=".Setting_Activity" />
         <activity android:name=".Register_Activity" />

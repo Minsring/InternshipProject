@@ -47,6 +47,7 @@ public class Setting_Activity extends AppCompatActivity {
     String phoneNo;
     String name;
     Button btnregister;
+    Button btnregister2;
     Button btnprotectorList;
     Switch switch1;
     Switch switch2;
@@ -67,8 +68,9 @@ public class Setting_Activity extends AppCompatActivity {
         flag_Setting1=0;
         flag_Setting2=0;
         btnregister = findViewById(R.id.btnregister);
+        btnregister2 = findViewById(R.id.btnregister2);
         btnregister.setOnClickListener(listener);
-
+        btnregister2.setOnClickListener(listener);
         switch1 = (Switch)findViewById(R.id.switch1);
         switch2 = (Switch)findViewById(R.id.switch2);
         appData = getSharedPreferences("appData", MODE_PRIVATE);
@@ -311,6 +313,9 @@ public class Setting_Activity extends AppCompatActivity {
                     intent = new Intent(getApplicationContext(), Register_Activity.class);
 //                    startActivity(intent);
                     break;
+                case R.id.btnregister2:
+                    intent = new Intent(getApplicationContext(), asd123.class);
+                    break;
 //                case R.id.btnprotectorList:
 //                    intent = new Intent(getApplicationContext(), ProtectorList.class);
 ////                    //정보도 같이 들고가도록
@@ -342,10 +347,7 @@ public class Setting_Activity extends AppCompatActivity {
         editor.putBoolean("CHECK2", switch2.isChecked());
         editor.putInt("FLAG_SETTING1", flag_Setting1);
         editor.putInt("FLAG_SETTING2", flag_Setting2);
-
-
         editor.apply();
-
     }
     private void load(){
         saveData = appData.getBoolean("SAVE_LOGIN_DATA", false);
