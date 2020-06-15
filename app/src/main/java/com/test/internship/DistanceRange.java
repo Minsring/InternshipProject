@@ -53,28 +53,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         circle=new CircleOverlay();
         polygon=new PolygonOverlay();
         appData = getSharedPreferences("appData", MODE_PRIVATE);
-        load();
-        if(savedata){
-            System.out.println("1");
-            radius *= 1000;
-            System.out.println("222");
-            marker.setPosition(new LatLng(centerLat, centerLng));
-            System.out.println("2");
-            marker.setMap(naverMap);
-            System.out.println("3");
-            circle.setCenter(new LatLng(centerLat, centerLng));
-            System.out.println("4");
-            circle.setRadius(radius);
-            System.out.println("5");
-            circle.setColor(Color.argb(50,0,255,0));
-            System.out.println("6");
-            circle.setOutlineColor(Color.argb(200,0,255,0));
-            System.out.println("7");
-            circle.setOutlineWidth(10);
-            System.out.println("8");
-            circle.setMap(naverMap);
-            System.out.println("9");
-        }
+
         FragmentManager fm = getSupportFragmentManager();
 
         MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map123);
@@ -124,7 +103,17 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         this.naverMap = naverMap;
         naverMap.setLocationSource(locationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
-
+        load();
+        if(savedata){
+            marker.setPosition(new LatLng(centerLat, centerLng));
+            marker.setMap(naverMap);
+            circle.setCenter(new LatLng(centerLat, centerLng));
+            circle.setRadius(radius);
+            circle.setColor(Color.argb(50,0,255,0));
+            circle.setOutlineColor(Color.argb(200,0,255,0));
+            circle.setOutlineWidth(10);
+            circle.setMap(naverMap);
+        }
         // 지도 타입 설정
         naverMap.setMapType(NaverMap.MapType.Basic);
         naverMap.setLocale(new Locale("ko"));
