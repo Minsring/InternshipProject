@@ -123,7 +123,5 @@ public class asd123 extends AppCompatActivity implements OnMapReadyCallback {
             }
         };
         naverMap.setOnMapClickListener(mapListener);
-
-
     }
 }
