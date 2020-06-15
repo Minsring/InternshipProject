@@ -1,19 +1,28 @@
 package com.test.internship;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PointF;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationListener;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.CameraUpdate;
@@ -28,6 +37,8 @@ import com.naver.maps.map.overlay.PolygonOverlay;
 import com.naver.maps.map.util.FusedLocationSource;
 
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class DistanceRange extends AppCompatActivity implements OnMapReadyCallback {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
@@ -42,17 +53,25 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     float centerLat;
     float centerLng;
     boolean savedata;
+    Switch switchRadius;
+    boolean switchState;
     private static SharedPreferences appData;
+    Timer timer=new Timer();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.distance_range);
         radiusEdit=findViewById(R.id.radiusEdit);
+        switchRadius=findViewById(R.id.switchRadius);
         savedata = false;
         marker = new Marker();
         circle=new CircleOverlay();
         polygon=new PolygonOverlay();
         appData = getSharedPreferences("appData", MODE_PRIVATE);
+        load();
+        if(savedata){
+            switchRadius.setChecked(switchState);
+        }
 
         FragmentManager fm = getSupportFragmentManager();
 
@@ -66,13 +85,45 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
 
 
         button = findViewById(R.id.okay);
-
-
         button.setOnClickListener(buttonListener);
 
-
+//        switchRadius.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            TimerTask alarmTimer;
+//            @RequiresApi(api = Build.VERSION_CODES.M)
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+//                if(isChecked){
+//                    save();
+//                    alarmTimer=new TimerTask() {
+//                        @Override
+//                        public void run() {
+//                            LatLng nowLatLng = new LatLng(locationSource.getLastLocation().getLatitude(),
+//                                    locationSource.getLastLocation().getLongitude());
+//
+//                            double dis = nowLatLng.distanceTo(new LatLng(centerLat,centerLng));
+//                            if(dis>radius){
+//                                Toast.makeText(getApplicationContext(), nowLatLng.latitude + ", " + nowLatLng.longitude+" 범위를 벗어났습니다.",
+//                                        Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                    };
+//                    timer.schedule(alarmTimer,0,10000);
+//                }
+//                else{
+//                    alarmTimer.cancel();
+//                }
+//            }
+//        });
 
     }
+//    private Location lastKnownLocation =null;
+//    LocationListener locationListener=new LocationListener() {
+//        @Override
+//        public void onLocationChanged(Location location) {
+//            LocationManager lm=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
+//            lastKnownLocation=location;
+//        }
+//    };
 
     View.OnClickListener buttonListener = new View.OnClickListener() {
         @Override
@@ -179,6 +230,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     }
     public void save(){
         SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("ISCHECKED",switchRadius.isChecked());
         editor.putBoolean("SAVEDATA", true);
         editor.putFloat("RADIUS", radius);
         editor.putFloat("LAT", centerLat);
@@ -186,9 +238,12 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         editor.apply();
     }
     private void load(){
+        switchState= appData.getBoolean("ISCHECKED",false);
         savedata = appData.getBoolean("SAVEDATA", false);
         radius = appData.getFloat("RADIUS", 0.2F);
         centerLat = appData.getFloat("LAT", 36.8851976F);
         centerLng = appData.getFloat("LNG", 126.7735638F);
     }
+
+
 }

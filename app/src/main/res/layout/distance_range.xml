@@ -4,6 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchRadius"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="이동반경설정 및 알림서비스       "
+        android:textSize="25sp"
+        android:layout_marginLeft="10dp"
+
+        ></androidx.appcompat.widget.SwitchCompat>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
