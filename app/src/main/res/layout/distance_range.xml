@@ -6,8 +6,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
 
         <TextView
             android:layout_weight="1"
@@ -27,19 +28,29 @@
             android:inputType="numberDecimal"/>
 
         <TextView
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="m"
-            android:textSize="30sp"/>
+            android:text="km"
+            android:textSize="30sp"
+            android:gravity="center"/>
     </LinearLayout>
 
 
     <fragment
         android:id="@+id/map123"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
         android:name="com.naver.maps.map.MapFragment"/>
+
+    <Button
+        android:id="@+id/okay"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="등록"
+        android:textSize="30sp"/>
 
 </LinearLayout>
 
