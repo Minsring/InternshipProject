@@ -13,12 +13,9 @@ import androidx.fragment.app.FragmentManager;
 
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
-import com.naver.maps.map.CameraPosition;
-import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
-import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.CircleOverlay;
@@ -28,7 +25,7 @@ import com.naver.maps.map.util.FusedLocationSource;
 
 import java.util.Locale;
 
-public class asd123 extends AppCompatActivity implements OnMapReadyCallback {
+public class DistanceRange extends AppCompatActivity implements OnMapReadyCallback {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private FusedLocationSource locationSource;
     private NaverMap naverMap;
@@ -39,7 +36,7 @@ public class asd123 extends AppCompatActivity implements OnMapReadyCallback {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.asd123);
+        setContentView(R.layout.distance_range);
         radiusEdit=findViewById(R.id.radiusEdit);
         FragmentManager fm = getSupportFragmentManager();
 

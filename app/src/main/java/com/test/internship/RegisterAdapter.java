@@ -12,20 +12,20 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import static com.test.internship.Register_Activity.person1_n;
-import static com.test.internship.Register_Activity.person1_p;
-import static com.test.internship.Register_Activity.person2_n;
-import static com.test.internship.Register_Activity.person2_p;
-import static com.test.internship.Register_Activity.person3_n;
-import static com.test.internship.Register_Activity.person3_p;
-import static com.test.internship.Register_Activity.person4_n;
-import static com.test.internship.Register_Activity.person4_p;
-import static com.test.internship.Register_Activity.person5_n;
-import static com.test.internship.Register_Activity.person5_p;
-import static com.test.internship.Register_Activity.persondata;
+import static com.test.internship.Register.person1_n;
+import static com.test.internship.Register.person1_p;
+import static com.test.internship.Register.person2_n;
+import static com.test.internship.Register.person2_p;
+import static com.test.internship.Register.person3_n;
+import static com.test.internship.Register.person3_p;
+import static com.test.internship.Register.person4_n;
+import static com.test.internship.Register.person4_p;
+import static com.test.internship.Register.person5_n;
+import static com.test.internship.Register.person5_p;
+import static com.test.internship.Register.persondata;
 
 ///커스텀 리스너 정의 -> 추가
-public class CustomAdapter extends BaseAdapter {
+public class RegisterAdapter extends BaseAdapter {
 
     private Context mcontext = null;
     private ArrayList<ProtectorData> mdata = null;
@@ -33,7 +33,7 @@ public class CustomAdapter extends BaseAdapter {
     private LayoutInflater inflater = null;
     int num, t;
 
-    public CustomAdapter(Context context, int layout, ArrayList<ProtectorData> mdata) {
+    public RegisterAdapter(Context context, int layout, ArrayList<ProtectorData> mdata) {
         this.mcontext = context;
         this.layout = layout;
         this.mdata = mdata;
@@ -280,7 +280,7 @@ public class CustomAdapter extends BaseAdapter {
                     person5_p=null;
                 }
                 persondata.remove(position);
-                Register_Activity.customAdapter.notifyDataSetChanged();
+                Register.registerAdapter.notifyDataSetChanged();
                 Toast.makeText(mcontext, "삭제되었습니다.", Toast.LENGTH_SHORT).show();
                 return false;
             }

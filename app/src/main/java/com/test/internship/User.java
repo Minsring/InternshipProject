@@ -237,7 +237,7 @@ public class User extends AppCompatActivity implements SensorEventListener {
 //                    startActivity(intent);
                     break;
                 case R.id.setting:
-                    intent = new Intent(getApplicationContext(), Setting_Activity.class);
+                    intent = new Intent(getApplicationContext(), Setting.class);
 //                    startActivity(intent);
                     break;
             }

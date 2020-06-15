@@ -22,11 +22,11 @@ import com.naver.maps.map.util.FusedLocationSource
 import ted.gun0912.clustering.naver.TedNaverClustering
 import java.util.*
 
-class CustomMarkerClusterClass : AppCompatActivity(), OnMapReadyCallback {
+class SubjectListMap : AppCompatActivity(), OnMapReadyCallback {
     private var locationSource: FusedLocationSource? = null
     private var naverMap: NaverMap? = null
-    internal var open_hospitals: ArrayList<HospitalInformation>? = null
-    internal var closed_hospitals: ArrayList<HospitalInformation>? = null
+    internal var open_hospitals: ArrayList<HospitalData>? = null
+    internal var closed_hospitals: ArrayList<HospitalData>? = null
     internal var subject: String? = null
     internal var latlng: LatLng? = null
     internal var simple: ConstraintLayout? = null
@@ -36,7 +36,7 @@ class CustomMarkerClusterClass : AppCompatActivity(), OnMapReadyCallback {
     internal var simple_dis: TextView? = null
     internal var simple_call: Button? = null
     internal var simple_info: Button? = null
-    internal var sendHospital: HospitalInformation? = null
+    internal var sendHospital: HospitalData? = null
     internal var myBuckets: IntArray = intArrayOf(10, 20, 50, 100, 200, 500, 1000)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,10 +57,10 @@ class CustomMarkerClusterClass : AppCompatActivity(), OnMapReadyCallback {
 
         val getIntent = intent
         if(intent.getSerializableExtra("열린병원리스트")!=null){
-            open_hospitals = intent.getSerializableExtra("열린병원리스트") as ArrayList<HospitalInformation>
+            open_hospitals = intent.getSerializableExtra("열린병원리스트") as ArrayList<HospitalData>
         }
         if(intent.getSerializableExtra("닫은병원리스트")!=null){
-            closed_hospitals = intent.getSerializableExtra("닫은병원리스트") as ArrayList<HospitalInformation>
+            closed_hospitals = intent.getSerializableExtra("닫은병원리스트") as ArrayList<HospitalData>
         }
         subject = intent.getStringExtra("진료과")
         mapTitle?.setText(subject+" 지도")
@@ -163,9 +163,9 @@ class CustomMarkerClusterClass : AppCompatActivity(), OnMapReadyCallback {
             naverMap.setContentPadding(0, 0, 0, 0)
         }
         if(open_hospitals != null) {
-            TedNaverClustering.with<HospitalInformation>(this, naverMap)
+            TedNaverClustering.with<HospitalData>(this, naverMap)
                     .items(open_hospitals!!)
-                    .customMarker { clusterItem: HospitalInformation ->
+                    .customMarker { clusterItem: HospitalData ->
                         Marker(clusterItem.getLatLng()).apply {
                             icon = OverlayImage.fromResource(R.drawable.custom_icon_open)
                             width = 120
@@ -175,7 +175,7 @@ class CustomMarkerClusterClass : AppCompatActivity(), OnMapReadyCallback {
                             isHideCollidedSymbols = true                //심벌이랑 겹치는 부분 숨길까 말까
                         }
                     }
-                    .markerClickListener { hospital: HospitalInformation ->
+                    .markerClickListener { hospital: HospitalData ->
                         val position = hospital.getLatLng()
                         simple_name?.setText(hospital.getHospitalName())
                         simple_add?.setText(hospital.getAddress())
@@ -203,9 +203,9 @@ class CustomMarkerClusterClass : AppCompatActivity(), OnMapReadyCallback {
         }
 
         if(closed_hospitals != null) {
-            TedNaverClustering.with<HospitalInformation>(this, naverMap)
+            TedNaverClustering.with<HospitalData>(this, naverMap)
                     .items(closed_hospitals!!)
-                    .customMarker { clusterItem: HospitalInformation ->
+                    .customMarker { clusterItem: HospitalData ->
                         Marker(clusterItem.getLatLng()).apply {
                             icon = OverlayImage.fromResource(R.drawable.custom_icon_closed)
                             width = 120
@@ -215,7 +215,7 @@ class CustomMarkerClusterClass : AppCompatActivity(), OnMapReadyCallback {
                             isHideCollidedSymbols = true                //심벌이랑 겹치는 부분 숨길까 말까
                         }
                     }
-                    .markerClickListener { hospital: HospitalInformation ->
+                    .markerClickListener { hospital: HospitalData ->
                         //                        val position = hospital.getLatLng()
                         simple_name?.setText(hospital.getHospitalName())
                         simple_add?.setText(hospital.getAddress())
@@ -251,7 +251,7 @@ class CustomMarkerClusterClass : AppCompatActivity(), OnMapReadyCallback {
         var intent: Intent? = null
         when (v.id) {
             R.id.simple_info -> {
-                intent = Intent(applicationContext, HospitalScreen::class.java)
+                intent = Intent(applicationContext, HospitalInformation::class.java)
                 intent.putExtra("병원", sendHospital)
             }
             R.id.simple_call -> {

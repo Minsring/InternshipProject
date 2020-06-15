@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,8 +36,8 @@ public class SubjectList extends AppCompatActivity {
     TextView subjectTitle;
     LinearLayout linearLayout;
     Button openClosed;
-    ArrayList<HospitalInformation> openHospital=null;
-    ArrayList<HospitalInformation> closedHospital=null;
+    ArrayList<HospitalData> openHospital=null;
+    ArrayList<HospitalData> closedHospital=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +60,11 @@ public class SubjectList extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
 
-        final Adapter adapter = new Adapter();
-        xmlParser(adapter);
-        adapter.combineItems();     // 진료중-준비중 순서대로 들어가게 하는 메소드 호출
-        openHospital=adapter.getOpenItem(); //얘가 어댑터에서 받아와야 Map에 전달해줄수있다 !
-        closedHospital=adapter.getClosedItem(); //얘가 어댑터에서 받아와야 Map에 전달해줄수있다 !
+        final SubjectListAdapter subjectListAdapter = new SubjectListAdapter();
+        xmlParser(subjectListAdapter);
+        subjectListAdapter.combineItems();     // 진료중-준비중 순서대로 들어가게 하는 메소드 호출
+        openHospital= subjectListAdapter.getOpenItem(); //얘가 어댑터에서 받아와야 Map에 전달해줄수있다 !
+        closedHospital= subjectListAdapter.getClosedItem(); //얘가 어댑터에서 받아와야 Map에 전달해줄수있다 !
 
         // 해당 과목의 병원이 있으면 리스트 동적제공, 없으면 "해당 병원 없습니다." 텍스트 동적 제공
         linearLayout = findViewById(R.id.linearLayout);
@@ -73,11 +72,11 @@ public class SubjectList extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT
         );
-        if(adapter.getItemCount()!=0){
+        if(subjectListAdapter.getItemCount()!=0){
             recyclerView.setLayoutParams(params);
             recyclerView.setBackgroundColor(Color.parseColor("#22ff0000"));
             linearLayout.addView(recyclerView);
-            recyclerView.setAdapter(adapter); //등록과정
+            recyclerView.setAdapter(subjectListAdapter); //등록과정
         } else{
             TextView textView = new TextView(this);
             textView.setBackgroundColor(Color.parseColor("#22ff0000"));
@@ -89,25 +88,25 @@ public class SubjectList extends AppCompatActivity {
         }
 
         // 액티비티에서 커스텀 리스너 객체 생성 및 전달
-        adapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
+        subjectListAdapter.setOnItemClickListener(new SubjectListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
                 // 클릭시 이벤트를 SubjectList에서 처리
-                HospitalInformation hospital = adapter.getItem(position);
+                HospitalData hospital = subjectListAdapter.getItem(position);
 //                Toast.makeText(getApplicationContext(), "클릭한 병원 이름: "+hospital.getHospitalName(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), HospitalScreen.class);
+                Intent intent = new Intent(getApplicationContext(), HospitalInformation.class);
                 intent.putExtra("병원", (Serializable)hospital);
                 startActivity(intent);
             }
         });
 
         if(subjectTitle.getText().equals("응급실")){
-            adapter.setEROpenClosedClickListener(new View.OnClickListener(){
+            subjectListAdapter.setEROpenClosedClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
                     //번호받아와서
                     int position=(int)view.getTag(); //붙였던 position꼬리표 때오기
-                    HospitalInformation hospital=adapter.getItem(position);
+                    HospitalData hospital= subjectListAdapter.getItem(position);
                     String number=hospital.getCallNumber();
                     Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+number)); //다이얼로 연결
                     startActivity(intent);
@@ -115,13 +114,13 @@ public class SubjectList extends AppCompatActivity {
             });
         } //응급실이면 다이얼로 연결되는 리스너 연결하자
         else{
-            adapter.setOpenClosedClickListener(new View.OnClickListener(){
+            subjectListAdapter.setOpenClosedClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
                  //  Toast.makeText(getApplicationContext(),"버튼눌림",Toast.LENGTH_LONG).show();
                     int position=(int)view.getTag();
-                    HospitalInformation hospital = adapter.getItem(position);
-                    Intent intent = new Intent(getApplicationContext(), HospitalScreen.class);
+                    HospitalData hospital = subjectListAdapter.getItem(position);
+                    Intent intent = new Intent(getApplicationContext(), HospitalInformation.class);
                     intent.putExtra("병원", (Serializable)hospital);
                     intent.putExtra("진료과", subject);
                     startActivity(intent);
@@ -133,13 +132,13 @@ public class SubjectList extends AppCompatActivity {
     }
 
 
-    private void xmlParser(Adapter adapter) {
+    private void xmlParser(SubjectListAdapter subjectListAdapter) {
         Calendar calendar=Calendar.getInstance();
         int dayOfWeek; //요일을 숫자로 받을거다
         int starth,startm,endh,endm; //병원 여는 시,분, 닫는 시, 분 시분...
         int nowh,nowm; //현재 시,분
 
-        ArrayList<HospitalInformation> items = new ArrayList<HospitalInformation>();
+        ArrayList<HospitalData> items = new ArrayList<HospitalData>();
         InputStream is = getResources().openRawResource(R.raw.hospitaldata);
 
         try {
@@ -148,7 +147,7 @@ public class SubjectList extends AppCompatActivity {
 
             parser.setInput(new InputStreamReader(is, "UTF-8"));
             int eventType = parser.getEventType();
-            HospitalInformation hospital = null;
+            HospitalData hospital = null;
             double lat= 0.0f, lng = 0.0f;
 
             while (eventType != XmlPullParser.END_DOCUMENT) {
@@ -156,7 +155,7 @@ public class SubjectList extends AppCompatActivity {
                     case XmlPullParser.START_TAG:
                         String startTag = parser.getName();
                         if (startTag.equals("hospital")) {
-                            hospital = new HospitalInformation();
+                            hospital = new HospitalData();
                         }
                         if (startTag.equals("name")) {
                             hospital.setHospitalName(parser.nextText());
@@ -268,10 +267,10 @@ public class SubjectList extends AppCompatActivity {
                                 } //일요일이다
 
                                 if(hospital.getOpenClosed()=="진료중"){
-                                    adapter.addOpenItem(hospital);
+                                    subjectListAdapter.addOpenItem(hospital);
                                 }
                                 else if(hospital.getOpenClosed()=="준비중"){
-                                    adapter.addClosedItem(hospital);
+                                    subjectListAdapter.addClosedItem(hospital);
                                 }
                             }
                         }
@@ -293,7 +292,7 @@ public class SubjectList extends AppCompatActivity {
             switch (v.getId()){
                 case R.id.mapBtn:
 //                    intent = new Intent(getApplicationContext(), SubjectListMap.class);
-                    intent = new Intent(getApplicationContext(), CustomMarkerClusterClass.class);
+                    intent = new Intent(getApplicationContext(), SubjectListMap.class);
                     intent.putExtra("열린병원리스트",openHospital);
                     intent.putExtra("닫은병원리스트",closedHospital);
                     intent.putExtra("진료과",subject);
