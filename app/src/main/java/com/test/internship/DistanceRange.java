@@ -1,11 +1,9 @@
 package com.test.internship;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -21,8 +19,6 @@ import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationListener;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.CameraUpdate;
@@ -55,23 +51,28 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     boolean savedata;
     Switch switchRadius;
     boolean switchState;
+    TimerTask alarmTimer;
+    int switchFlag;
     private static SharedPreferences appData;
-    Timer timer=new Timer();
+    Timer timer;
+    double lowStep;
+    double highStep;
+    int rangeFlag=0;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        timer=new Timer();
         setContentView(R.layout.distance_range);
         radiusEdit=findViewById(R.id.radiusEdit);
-        switchRadius=findViewById(R.id.switchRadius);
+        switchRadius=(Switch)findViewById(R.id.switchRadius);
         savedata = false;
         marker = new Marker();
         circle=new CircleOverlay();
         polygon=new PolygonOverlay();
+        switchFlag=0;
+
         appData = getSharedPreferences("appData", MODE_PRIVATE);
         load();
-        if(savedata){
-            switchRadius.setChecked(switchState);
-        }
 
         FragmentManager fm = getSupportFragmentManager();
 
@@ -82,48 +83,9 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         locationSource =
                 new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
 
-
-
         button = findViewById(R.id.okay);
         button.setOnClickListener(buttonListener);
-
-//        switchRadius.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            TimerTask alarmTimer;
-//            @RequiresApi(api = Build.VERSION_CODES.M)
-//            @Override
-//            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-//                if(isChecked){
-//                    save();
-//                    alarmTimer=new TimerTask() {
-//                        @Override
-//                        public void run() {
-//                            LatLng nowLatLng = new LatLng(locationSource.getLastLocation().getLatitude(),
-//                                    locationSource.getLastLocation().getLongitude());
-//
-//                            double dis = nowLatLng.distanceTo(new LatLng(centerLat,centerLng));
-//                            if(dis>radius){
-//                                Toast.makeText(getApplicationContext(), nowLatLng.latitude + ", " + nowLatLng.longitude+" 범위를 벗어났습니다.",
-//                                        Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    };
-//                    timer.schedule(alarmTimer,0,10000);
-//                }
-//                else{
-//                    alarmTimer.cancel();
-//                }
-//            }
-//        });
-
     }
-//    private Location lastKnownLocation =null;
-//    LocationListener locationListener=new LocationListener() {
-//        @Override
-//        public void onLocationChanged(Location location) {
-//            LocationManager lm=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
-//            lastKnownLocation=location;
-//        }
-//    };
 
     View.OnClickListener buttonListener = new View.OnClickListener() {
         @Override
@@ -152,6 +114,8 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     @Override
     public void onMapReady(@NonNull final NaverMap naverMap) {
         this.naverMap = naverMap;
+
+
         naverMap.setLocationSource(locationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
         load();
@@ -194,11 +158,11 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             public void onMapClick(@NonNull PointF pointF, @NonNull LatLng latLng) {
 
                 radius=0.2F;
-               if(!(radiusEdit.length()==0)){
-                   radius=Float.parseFloat(radiusEdit.getText().toString());
-               }
-               centerLat = (float)latLng.latitude;
-               centerLng = (float)latLng.longitude;
+                if(!(radiusEdit.length()==0)){
+                    radius=Float.parseFloat(radiusEdit.getText().toString());
+                }
+                centerLat = (float)latLng.latitude;
+                centerLng = (float)latLng.longitude;
                 radius *= 1000;
                 marker.setMap(null);
                 circle.setMap(null);
@@ -210,23 +174,43 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 circle.setOutlineColor(Color.argb(200,0,255,0));
                 circle.setOutlineWidth(10);
                 circle.setMap(naverMap);
+                lowStep=0;
+                highStep=radius;
+
+
 
 
                 // 카메라 위치 변경
                 CameraUpdate cameraUpdate = CameraUpdate.scrollTo(latLng);
                 naverMap.moveCamera(cameraUpdate);
-
-                LatLng nowLatLng = new LatLng(locationSource.getLastLocation().getLatitude(),
-                        locationSource.getLastLocation().getLongitude());
-
-                double dis = nowLatLng.distanceTo(latLng);
-                if(dis>radius){
-                    Toast.makeText(getApplicationContext(), latLng.latitude + ", " + latLng.longitude+" 범위를 벗어났습니다.",
-                            Toast.LENGTH_SHORT).show();
-                }
             }
         };
         naverMap.setOnMapClickListener(mapListener);
+
+        NaverMap.OnLocationChangeListener changelocationListener = new NaverMap.OnLocationChangeListener() {
+            @Override
+            public void onLocationChange(@NonNull Location location) {
+                LatLng nowLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                LatLng center = new LatLng(centerLat, centerLng);
+                double dis = nowLatLng.distanceTo(center);
+                if(rangeFlag==0 && dis>highStep) {
+                    Toast.makeText(getApplicationContext(), nowLatLng.latitude + ", " + nowLatLng.longitude + " 사용자가 중심으로부터 "+highStep+"m 이상 멀어졌습니다.",
+                            Toast.LENGTH_SHORT).show();
+                    if(highStep==radius) lowStep=radius;
+                    else lowStep+=10;
+                    highStep+=10;
+                    rangeFlag=1;
+                }
+                else if(dis<lowStep){
+                    Toast.makeText(getApplicationContext(), nowLatLng.latitude + ", " + nowLatLng.longitude + " 사용자가 중심으로부터 "+lowStep+"m 이상 멀어졌습니다.",
+                            Toast.LENGTH_SHORT).show();
+                    highStep-=10;
+                    lowStep-=10;
+                }
+
+            }
+        };
+        naverMap.addOnLocationChangeListener(changelocationListener);
     }
     public void save(){
         SharedPreferences.Editor editor = appData.edit();
@@ -235,6 +219,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         editor.putFloat("RADIUS", radius);
         editor.putFloat("LAT", centerLat);
         editor.putFloat("LNG", centerLng);
+        editor.putInt("FLAG", switchFlag);
         editor.apply();
     }
     private void load(){
@@ -243,7 +228,18 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         radius = appData.getFloat("RADIUS", 0.2F);
         centerLat = appData.getFloat("LAT", 36.8851976F);
         centerLng = appData.getFloat("LNG", 126.7735638F);
+        switchFlag = appData.getInt("FLAG", 0);
     }
 
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        save();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        save();
+    }
 }
