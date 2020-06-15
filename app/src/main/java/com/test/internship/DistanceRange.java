@@ -1,8 +1,12 @@
 package com.test.internship;
 
+import android.graphics.Camera;
 import android.graphics.Color;
 import android.graphics.PointF;
+import android.location.Location;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -13,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
+import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
@@ -33,6 +38,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     CircleOverlay circle;
     PolygonOverlay polygon;
     EditText radiusEdit;
+    Button button;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,11 +53,25 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         locationSource =
                 new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
 
+
         marker = new Marker();
         circle=new CircleOverlay();
         polygon=new PolygonOverlay();
+        button = findViewById(R.id.okay);
+
+
+        button.setOnClickListener(buttonListener);
+
+
 
     }
+
+    View.OnClickListener buttonListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+        }
+    };
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -101,12 +121,12 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         NaverMap.OnMapClickListener mapListener = new NaverMap.OnMapClickListener() {
             @Override
             public void onMapClick(@NonNull PointF pointF, @NonNull LatLng latLng) {
-                Toast.makeText(getApplicationContext(), latLng.latitude + ", " + latLng.longitude,
-                        Toast.LENGTH_SHORT).show();
-                int radius=200;
+
+                double radius=0.2;
                if(!(radiusEdit.length()==0)){
-                   radius=Integer.parseInt(radiusEdit.getText().toString());
+                   radius=Double.parseDouble(radiusEdit.getText().toString());
                }
+                radius *= 1000;
                 marker.setMap(null);
                 circle.setMap(null);
                 marker.setPosition(latLng);
@@ -117,6 +137,19 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 circle.setOutlineColor(Color.argb(200,0,255,0));
                 circle.setOutlineWidth(10);
                 circle.setMap(naverMap);
+
+                // 카메라 위치 변경
+                CameraUpdate cameraUpdate = CameraUpdate.scrollTo(latLng);
+                naverMap.moveCamera(cameraUpdate);
+
+                LatLng nowLatLng = new LatLng(locationSource.getLastLocation().getLatitude(),
+                        locationSource.getLastLocation().getLongitude());
+
+                double dis = nowLatLng.distanceTo(latLng);
+                if(dis>radius){
+                    Toast.makeText(getApplicationContext(), latLng.latitude + ", " + latLng.longitude+" 범위를 벗어났습니다.",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         };
         naverMap.setOnMapClickListener(mapListener);
