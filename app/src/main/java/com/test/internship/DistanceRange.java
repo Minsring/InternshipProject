@@ -1,9 +1,8 @@
 package com.test.internship;
 
-import android.graphics.Camera;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PointF;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,11 +38,43 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     PolygonOverlay polygon;
     EditText radiusEdit;
     Button button;
+    float radius;
+    float centerLat;
+    float centerLng;
+    boolean savedata;
+    private static SharedPreferences appData;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.distance_range);
         radiusEdit=findViewById(R.id.radiusEdit);
+        savedata = false;
+        marker = new Marker();
+        circle=new CircleOverlay();
+        polygon=new PolygonOverlay();
+        appData = getSharedPreferences("appData", MODE_PRIVATE);
+        load();
+        if(savedata){
+            System.out.println("1");
+            radius *= 1000;
+            System.out.println("222");
+            marker.setPosition(new LatLng(centerLat, centerLng));
+            System.out.println("2");
+            marker.setMap(naverMap);
+            System.out.println("3");
+            circle.setCenter(new LatLng(centerLat, centerLng));
+            System.out.println("4");
+            circle.setRadius(radius);
+            System.out.println("5");
+            circle.setColor(Color.argb(50,0,255,0));
+            System.out.println("6");
+            circle.setOutlineColor(Color.argb(200,0,255,0));
+            System.out.println("7");
+            circle.setOutlineWidth(10);
+            System.out.println("8");
+            circle.setMap(naverMap);
+            System.out.println("9");
+        }
         FragmentManager fm = getSupportFragmentManager();
 
         MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map123);
@@ -54,9 +85,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
 
 
-        marker = new Marker();
-        circle=new CircleOverlay();
-        polygon=new PolygonOverlay();
+
         button = findViewById(R.id.okay);
 
 
@@ -68,7 +97,9 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
 
     View.OnClickListener buttonListener = new View.OnClickListener() {
         @Override
-        public void onClick(View view) {
+        public void onClick(View v) {
+            save();
+            Toast.makeText(getApplicationContext(), "등록되었습니다.", Toast.LENGTH_SHORT).show();
 
         }
     };
@@ -122,10 +153,12 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             @Override
             public void onMapClick(@NonNull PointF pointF, @NonNull LatLng latLng) {
 
-                double radius=0.2;
+                radius=0.2F;
                if(!(radiusEdit.length()==0)){
-                   radius=Double.parseDouble(radiusEdit.getText().toString());
+                   radius=Float.parseFloat(radiusEdit.getText().toString());
                }
+               centerLat = (float)latLng.latitude;
+               centerLng = (float)latLng.longitude;
                 radius *= 1000;
                 marker.setMap(null);
                 circle.setMap(null);
@@ -137,6 +170,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 circle.setOutlineColor(Color.argb(200,0,255,0));
                 circle.setOutlineWidth(10);
                 circle.setMap(naverMap);
+
 
                 // 카메라 위치 변경
                 CameraUpdate cameraUpdate = CameraUpdate.scrollTo(latLng);
@@ -153,7 +187,19 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             }
         };
         naverMap.setOnMapClickListener(mapListener);
-
-
+    }
+    public void save(){
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("SAVEDATA", true);
+        editor.putFloat("RADIUS", radius);
+        editor.putFloat("LAT", centerLat);
+        editor.putFloat("LNG", centerLng);
+        editor.apply();
+    }
+    private void load(){
+        savedata = appData.getBoolean("SAVEDATA", false);
+        radius = appData.getFloat("RADIUS", 0.2F);
+        centerLat = appData.getFloat("LAT", 36.8851976F);
+        centerLng = appData.getFloat("LNG", 126.7735638F);
     }
 }
