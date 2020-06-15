@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 public class Register_Activity extends AppCompatActivity {
 
-    // 보호자가 입력한 정보를 받아서 변수에 넣는 부분
     EditText idEdit_n;
     String value_n;
     private boolean saveData;
@@ -36,7 +35,6 @@ public class Register_Activity extends AppCompatActivity {
         appData = getSharedPreferences("appData", MODE_PRIVATE);
         load();
 
-        //추가
         persondata = new ArrayList<ProtectorData>();
         customAdapter = new CustomAdapter(this, R.layout.protectorinfo_style, persondata);
         listView = findViewById(R.id.list);
@@ -165,7 +163,6 @@ public class Register_Activity extends AppCompatActivity {
             save(i);
         }
     }
-
 
     private void save(int a) {
         SharedPreferences.Editor editor = appData.edit();

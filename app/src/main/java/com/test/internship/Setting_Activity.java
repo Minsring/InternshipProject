@@ -48,7 +48,6 @@ public class Setting_Activity extends AppCompatActivity {
     String name;
     Button btnregister;
     Button btnregister2;
-    Button btnprotectorList;
     Switch switch1;
     Switch switch2;
 
@@ -222,6 +221,7 @@ public class Setting_Activity extends AppCompatActivity {
                 }
             }
         });
+
         switch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @RequiresApi(api = Build.VERSION_CODES.M)
@@ -315,7 +315,6 @@ public class Setting_Activity extends AppCompatActivity {
         editor.putBoolean("CHECK2", switch2.isChecked());
         editor.putInt("FLAG_SETTING1", flag_Setting1);
         editor.putInt("FLAG_SETTING2", flag_Setting2);
-
 
         editor.apply();
 

@@ -32,6 +32,7 @@ public class CustomAdapter extends BaseAdapter {
     private int layout = 0;
     private LayoutInflater inflater = null;
     int num, t;
+
     public CustomAdapter(Context context, int layout, ArrayList<ProtectorData> mdata) {
         this.mcontext = context;
         this.layout = layout;
@@ -284,7 +285,6 @@ public class CustomAdapter extends BaseAdapter {
                 return false;
             }
         });
-
         return convertView;
     }
 }

@@ -30,7 +30,7 @@ import java.util.TimerTask;
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class User extends AppCompatActivity implements SensorEventListener {
 
-    Button allSub, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub, hanSub, binyoSub, bogun, chkCenter, emergencyRoom, setting, btnregister;
+    Button allSub, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub, hanSub, binyoSub, bogun, chkCenter, emergencyRoom, setting;
     private SensorManager sensorManager;
     private Sensor stepsensor;
     static int mStepDetector;
@@ -40,8 +40,6 @@ public class User extends AppCompatActivity implements SensorEventListener {
     static TimerTask tt2;
     static int timeCounter;
     private static SharedPreferences appData;
-
-
     private final int MY_PERMISSION_REQUEST_SMS=1001;
 
     //    TODO: 위치 기반 동의, 개인정보 보호 약관..?
@@ -280,6 +278,5 @@ public class User extends AppCompatActivity implements SensorEventListener {
     }
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
     }
 }
