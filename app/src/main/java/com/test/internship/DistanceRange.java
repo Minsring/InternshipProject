@@ -1,9 +1,14 @@
 package com.test.internship;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +22,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import com.naver.maps.geometry.LatLng;
@@ -55,9 +62,8 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     int switchFlag;
     private static SharedPreferences appData;
     Timer timer;
-    double lowStep;
-    double highStep;
-    int rangeFlag=0;
+    private final int MY_PERMISSIONS_REQUEST_LOCATION=1001;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,9 +76,46 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         circle=new CircleOverlay();
         polygon=new PolygonOverlay();
         switchFlag=0;
-
+        final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         appData = getSharedPreferences("appData", MODE_PRIVATE);
+
         load();
+        if(savedata){
+            switchRadius.setChecked(switchState);
+//            if(switchRadius.isChecked()){
+//                save();
+//                if ( Build.VERSION.SDK_INT >= 23 &&
+//                        ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
+//                    System.out.println("1");
+//                    ActivityCompat.requestPermissions( DistanceRange.this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
+//                            MY_PERMISSIONS_REQUEST_LOCATION );
+//                    System.out.println("10000000000000000000000000000000000000");
+//                }
+//                else{
+//                    System.out.println("10000000000000000000000000000000000000");
+//                    lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+//                            1000,
+//                            1,
+//                            gpsLocationListener);
+//                    lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+//                            1000,
+//                            1,
+//                            gpsLocationListener);
+//                    System.out.println("4");
+//                }
+//            }
+
+        }
+        int permissionCheck= ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        if(permissionCheck!= PackageManager.PERMISSION_GRANTED){
+            Toast.makeText(this,"권한승인필요",Toast.LENGTH_LONG).show();
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_FINE_LOCATION)){
+                Toast.makeText(this, "위치접근 권한 필요", Toast.LENGTH_SHORT).show();
+            }else{
+                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},MY_PERMISSIONS_REQUEST_LOCATION);
+                Toast.makeText(this, "위치접근 권한 필요", Toast.LENGTH_LONG).show();
+            }
+        }
 
         FragmentManager fm = getSupportFragmentManager();
 
@@ -83,9 +126,79 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         locationSource =
                 new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
 
+
+
         button = findViewById(R.id.okay);
         button.setOnClickListener(buttonListener);
+
+        switchRadius.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked){
+                    save();
+
+                    if ( Build.VERSION.SDK_INT >= 23 &&
+                            ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
+                        System.out.println("1");
+                        ActivityCompat.requestPermissions( DistanceRange.this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
+                                MY_PERMISSIONS_REQUEST_LOCATION );
+                    }
+                    else{
+                        System.out.println("------------------------------------------");
+                        System.out.println(isChecked);
+                        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                                1000,
+                                1,
+                                gpsLocationListener);
+                        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                                1000,
+                                1,
+                                gpsLocationListener);
+                        System.out.println("4");
+                    }
+
+                }
+                else{
+                    save();
+                    lm.removeUpdates(gpsLocationListener);
+                }
+            }
+        });
+
     }
+
+    final LocationListener gpsLocationListener = new LocationListener() {
+        public void onLocationChanged(Location location) {
+
+            String provider = location.getProvider();
+            double longitude = location.getLongitude();
+            double latitude = location.getLatitude();
+            LatLng nowLatLng=new LatLng(latitude,longitude);
+            LatLng centerLatLng=new LatLng(centerLat,centerLng);
+
+            double dis = nowLatLng.distanceTo(centerLatLng); //m단위를 double로 반환
+            System.out.println(dis);
+            System.out.println(radius);
+            System.out.println(switchState);
+            if(dis>radius){
+                Toast.makeText(getApplicationContext(), nowLatLng.latitude + ", " + nowLatLng.longitude+" 범위를 벗어났습니다.",
+                        Toast.LENGTH_LONG).show();
+            }
+        }
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+        }
+
+        public void onProviderEnabled(String provider) {
+        }
+
+        public void onProviderDisabled(String provider) {
+        }
+    };
+
+
+
 
     View.OnClickListener buttonListener = new View.OnClickListener() {
         @Override
@@ -99,6 +212,15 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions,  @NonNull int[] grantResults) {
+        if(requestCode==MY_PERMISSIONS_REQUEST_LOCATION){           //위치 허락받으려고 한다면,
+            if(grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(this,"승인 허가",Toast.LENGTH_LONG).show(); //허가 되었다.
+            }
+            else{
+                Toast.makeText(this,"아직 승인 안됐다",Toast.LENGTH_LONG).show(); //아직 허가 안됨
+            }
+            return;
+        }
         if (locationSource.onRequestPermissionsResult(
                 requestCode, permissions, grantResults)) {
             if (!locationSource.isActivated()) { // 권한 거부됨
@@ -114,8 +236,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     @Override
     public void onMapReady(@NonNull final NaverMap naverMap) {
         this.naverMap = naverMap;
-
-
         naverMap.setLocationSource(locationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
         load();
@@ -174,43 +294,15 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 circle.setOutlineColor(Color.argb(200,0,255,0));
                 circle.setOutlineWidth(10);
                 circle.setMap(naverMap);
-                lowStep=0;
-                highStep=radius;
-
-
 
 
                 // 카메라 위치 변경
                 CameraUpdate cameraUpdate = CameraUpdate.scrollTo(latLng);
                 naverMap.moveCamera(cameraUpdate);
+
             }
         };
         naverMap.setOnMapClickListener(mapListener);
-
-        NaverMap.OnLocationChangeListener changelocationListener = new NaverMap.OnLocationChangeListener() {
-            @Override
-            public void onLocationChange(@NonNull Location location) {
-                LatLng nowLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-                LatLng center = new LatLng(centerLat, centerLng);
-                double dis = nowLatLng.distanceTo(center);
-                if(rangeFlag==0 && dis>highStep) {
-                    Toast.makeText(getApplicationContext(), nowLatLng.latitude + ", " + nowLatLng.longitude + " 사용자가 중심으로부터 "+highStep+"m 이상 멀어졌습니다.",
-                            Toast.LENGTH_SHORT).show();
-                    if(highStep==radius) lowStep=radius;
-                    else lowStep+=10;
-                    highStep+=10;
-                    rangeFlag=1;
-                }
-                else if(dis<lowStep){
-                    Toast.makeText(getApplicationContext(), nowLatLng.latitude + ", " + nowLatLng.longitude + " 사용자가 중심으로부터 "+lowStep+"m 이상 멀어졌습니다.",
-                            Toast.LENGTH_SHORT).show();
-                    highStep-=10;
-                    lowStep-=10;
-                }
-
-            }
-        };
-        naverMap.addOnLocationChangeListener(changelocationListener);
     }
     public void save(){
         SharedPreferences.Editor editor = appData.edit();
