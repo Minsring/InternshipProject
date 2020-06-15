@@ -22,23 +22,23 @@ import androidx.core.app.NotificationCompat;
 
 import java.util.TimerTask;
 
-import static com.test.internship.Register_Activity.person1_n;
-import static com.test.internship.Register_Activity.person1_p;
-import static com.test.internship.Register_Activity.person2_n;
-import static com.test.internship.Register_Activity.person2_p;
-import static com.test.internship.Register_Activity.person3_n;
-import static com.test.internship.Register_Activity.person3_p;
-import static com.test.internship.Register_Activity.person4_n;
-import static com.test.internship.Register_Activity.person4_p;
-import static com.test.internship.Register_Activity.person5_n;
-import static com.test.internship.Register_Activity.person5_p;
+import static com.test.internship.Register.person1_n;
+import static com.test.internship.Register.person1_p;
+import static com.test.internship.Register.person2_n;
+import static com.test.internship.Register.person2_p;
+import static com.test.internship.Register.person3_n;
+import static com.test.internship.Register.person3_p;
+import static com.test.internship.Register.person4_n;
+import static com.test.internship.Register.person4_p;
+import static com.test.internship.Register.person5_n;
+import static com.test.internship.Register.person5_p;
 import static com.test.internship.User.mStepDetector;
 import static com.test.internship.User.timeCounter;
 import static com.test.internship.User.timer;
 import static com.test.internship.User.tt1;
 import static com.test.internship.User.tt2;
 
-public class Setting_Activity extends AppCompatActivity {
+public class Setting extends AppCompatActivity {
     private boolean saveData;
     private boolean isCheck1;
     private boolean isCheck2;
@@ -48,7 +48,6 @@ public class Setting_Activity extends AppCompatActivity {
     String name;
     Button btnregister;
     Button btnregister2;
-    Button btnprotectorList;
     Switch switch1;
     Switch switch2;
 
@@ -222,6 +221,7 @@ public class Setting_Activity extends AppCompatActivity {
                 }
             }
         });
+
         switch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @RequiresApi(api = Build.VERSION_CODES.M)
@@ -285,11 +285,11 @@ public class Setting_Activity extends AppCompatActivity {
             Intent intent = null;
             switch (v.getId()) {
                 case R.id.btnregister:
-                    intent = new Intent(getApplicationContext(), Register_Activity.class);
+                    intent = new Intent(getApplicationContext(), Register.class);
 //                    startActivity(intent);
                     break;
                 case R.id.btnregister2:
-                    intent = new Intent(getApplicationContext(), asd123.class);
+                    intent = new Intent(getApplicationContext(), DistanceRange.class);
                     break;
             }
             if(intent!=null) startActivity(intent);
@@ -315,7 +315,6 @@ public class Setting_Activity extends AppCompatActivity {
         editor.putBoolean("CHECK2", switch2.isChecked());
         editor.putInt("FLAG_SETTING1", flag_Setting1);
         editor.putInt("FLAG_SETTING2", flag_Setting2);
-
 
         editor.apply();
 
@@ -352,8 +351,8 @@ public class Setting_Activity extends AppCompatActivity {
 
     //문자전송
     public void sendSMS(String phoneNo, String name, int flag){
-//        phoneNo= Register_Activity.protectorPhone.toString();
-//        name= Register_Activity.protectorName.toString();
+//        phoneNo= Register.protectorPhone.toString();
+//        name= Register.protectorName.toString();
 
         if(flag==1){
             try {

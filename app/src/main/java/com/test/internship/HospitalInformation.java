@@ -1,110 +1,218 @@
 package com.test.internship;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+
+import com.google.android.material.tabs.TabLayout;
 import com.naver.maps.geometry.LatLng;
+import com.naver.maps.geometry.LatLngBounds;
+import com.naver.maps.map.CameraPosition;
+import com.naver.maps.map.LocationTrackingMode;
+import com.naver.maps.map.MapFragment;
+import com.naver.maps.map.NaverMap;
+import com.naver.maps.map.NaverMapOptions;
+import com.naver.maps.map.OnMapReadyCallback;
+import com.naver.maps.map.UiSettings;
+import com.naver.maps.map.overlay.Marker;
+import com.naver.maps.map.overlay.OverlayImage;
+import com.naver.maps.map.util.FusedLocationSource;
 
-import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Locale;
 
-import ted.gun0912.clustering.clustering.TedClusterItem;
-import ted.gun0912.clustering.geometry.TedLatLng;
+public class HospitalInformation extends AppCompatActivity implements OnMapReadyCallback {
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
+    private FusedLocationSource locationSource;
+    private NaverMap naverMap;
 
+    HospitalData hospital = null;
+    LatLng latLng = null;
 
-// 객체를 직렬화해야 액티비티에 데이터 객체를 넘겨줄 수 있다.
-// 클러스터링을 위한 라이브러리 추가
-public class HospitalInformation implements Serializable, TedClusterItem {
-    // 클래스의 버전을 의미, 객체를 전달하고 수신할 때 사용하는 클래스 파일이 동일한지 체크하는 용도로 사용
-    private static final long serialVersionUID = 1L;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.hospital_information);
+        Button callHospital = findViewById(R.id.callHospitalBtn);
+        Intent getIntent = getIntent();
+        hospital = (HospitalData) getIntent.getSerializableExtra("병원");
 
-    private String hospitalName = "병원이름";
-    private String address = "주소";
-    private String callNumber = "전화번호";
-//    private String openDay = "여는요일";    // 요일마다 영업시간이 바뀐다면?
-    private String distance = "0km";         // 목록에 표시할 거라면 판단하는 함수 필요
-    private String openClosed = "영업중";         // 목록에 표시할 거라면 판단하는 함수 필요
-    private ArrayList<String> subjects = new ArrayList<String>();
-    private ArrayList<String> openTime = new ArrayList<String>();
-    private ArrayList<String> closedTime = new ArrayList<String>();
-    private int numSubjects = 0;
-    //시간 0번째 -> 평일, (1번째 -> 토요일, 2번째 -> 일요일) -> 없을수도 있음
-    private double lat = 0.0f;     // 위도
-    private double lng = 0.0f;     // 경도
-
-    // 생성자 -> 사용할지는 모르게씀
-    // 일단 distance와 openClosed는 제외하고 만듬
-    public HospitalInformation(){}
-    public HospitalInformation(double lat, double lng){
-        this.lat = lat;
-        this.lng = lng;
-    }
-    public HospitalInformation(LatLng latLng){
-        this.lat = latLng.latitude;
-        this.lng = latLng.longitude;
-    }
-//    public HospitalInformation(String hospitalName, String openTime, String closedTime, String address,
-//                               String callNumber, String subject, String openDay){
-//        this.hospitalName = hospitalName;
-//        this.openTime = openTime;
-//        this.closedTime = closedTime;
-//        this.address = address;
-//        this.callNumber = callNumber;
-//        this.subject = subject;
-//        this.openDay = openDay;
-//    }
+        callHospital.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String number = hospital.getCallNumber();
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number)); //다이얼로 연결
+                startActivity(intent);
+            }
+        });
 
 
-    public boolean openTime_isEmpty(int num){
-        if(num > openTime.size()-1) return true;
-        else return false;
-    }
+        // 탭 레이아웃 설정
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        changeView(0);
 
-    // getter()
-    public String getHospitalName() { return hospitalName; }
-    public String getOpenTime(int num) { return openTime.get(num); }
-    public String getClosedTime(int num) { return closedTime.get(num); }
-    public int getOpenTimesize(){ return openTime.size();}
-    public int getClosedTimesize(){return closedTime.size();}
-    public String getAddress() { return address; }
-    public String getCallNumber() { return callNumber; }
-    // 일단 첫번째 ArrayList 원소 보이게
-    public String getSubject(int num) { return subjects.get(num); }
-    public int getNumSubjects() { return numSubjects;}
-//    public String getOpenDay() { return openDay; }
-    public String getDistance() { return distance; }
-    public String getOpenClosed() { return openClosed; }
-    public void setHospitalName(String name){ hospitalName=name; }
-    public void setAddress(String address){ this.address=address; }
-    public void setCallNumber(String callNumber){ this.callNumber=callNumber; }
-//    public void setSubject(String subject){ this.subject=subject; }
-//    public void setOpenDay(String openDay){this.openDay=openDay;}
-    public void setDistance(String distance){this.distance=distance;}
-    public void setOpenClosed(String openClosed){this.openClosed=openClosed;}
-    public void setNumSubjects(int numSubjects){ this.numSubjects = numSubjects;}
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            // 선택 안된 상태에서 선택 된 상태의 탭에 대한 이벤트
+            public void onTabSelected(TabLayout.Tab tab) {
+                int pos = tab.getPosition();
+                changeView(pos);
+            }
 
-    public void addOpenTime(String openTime){ this.openTime.add(openTime); }
-    public void addClosedTime(String closedTime){ this.closedTime.add(closedTime); }
+            @Override
+            // 선택된 상태에서 선택되지 않음으로 바뀐 탭에 대한 이벤트
+            public void onTabUnselected(TabLayout.Tab tab) {
 
-    // 위도 경도
-    public LatLng getLatLng(){
-        return new LatLng(lat, lng);
-    }
-    public void setLatLng(LatLng latLng) {
-        this.lat = latLng.latitude;
-        this.lng = latLng.longitude;
-    }
+            }
 
-    // subject 추가 및 찾기
-    public void addSubject(String subject){
-        this.subjects.add(subject);
-    }
-    public boolean findSubject(String subject){
-        for(String temp: subjects){
-            if(temp.equals(subject)) return true;
+            @Override
+            // 이미 선택된 탭이 사용자에 의해 다시 선택된 탭의 이벤트
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
+        TextView Title = findViewById(R.id.Title);
+        TextView info_Name = findViewById(R.id.info_Name);
+        TextView info_Call = findViewById(R.id.info_Call);
+        TextView info_Address = findViewById(R.id.info_Address);
+        TextView info_Subject = findViewById(R.id.info_Subject);
+        TextView info_Distance = findViewById(R.id.info_Distance);
+        TextView info_Weekday = findViewById(R.id.info_Weekday);
+        TextView info_Saturday = findViewById(R.id.info_Saturday);
+        TextView info_Sunday = findViewById(R.id.info_Sunday);
+
+        Title.setText(hospital.getHospitalName());
+        info_Name.setText("병원명 : " + hospital.getHospitalName());
+        info_Call.setText("전화번호 : " + hospital.getCallNumber());
+        info_Distance.setText("거리 : " + hospital.getDistance());
+        info_Address.setText("주소 : " + hospital.getAddress());
+        String allSubjects = "";
+        for (int pos = 0; pos < hospital.getNumSubjects(); pos++) {
+            allSubjects = allSubjects + hospital.getSubject(pos) + "  ";
         }
-        return false;
+        info_Subject.setText("진료과목 : " + allSubjects);
+        if (hospital.openTime_isEmpty(0) == false) {
+            info_Weekday.setText("주중 진료시간 : " + hospital.getOpenTime(0) + " ~ " + hospital.getClosedTime(0));
+        }
+        if (hospital.openTime_isEmpty(1) == false) {
+            info_Saturday.setText("토요일 진료시간 : " + hospital.getOpenTime(1) + " ~ " + hospital.getClosedTime(1));
+        }
+        if (hospital.openTime_isEmpty(2) == false) {
+            info_Sunday.setText("일요일 진료시간 : " + hospital.getOpenTime(2) + " ~ " + hospital.getClosedTime(2));
+        }
+
+        // 지도 테스뚜(민슬)
+        // 표시해야할 위도, 경도
+        latLng = hospital.getLatLng();
+        FragmentManager hosFm = getSupportFragmentManager();
+        MapFragment hosMapFragment = (MapFragment) hosFm.findFragmentById(R.id.info_map);
+
+        NaverMapOptions hosOptions = new NaverMapOptions()
+                .locationButtonEnabled(true)
+                .compassEnabled(true)
+                .tiltGesturesEnabled(false);
+
+        if (hosMapFragment == null) {
+            hosMapFragment = MapFragment.newInstance(hosOptions);
+            hosFm.beginTransaction().add(R.id.info_map, hosMapFragment).commit();
+        }
+
+        hosMapFragment.getMapAsync(this);
+
+        // 현재위치
+        locationSource =
+                new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
+
+
+
+    }
+    private void changeView(int index){
+        LinearLayout linearLayout1 = (LinearLayout) findViewById(R.id.content_info);
+        LinearLayout linearLayout2 = (LinearLayout) findViewById(R.id.content_map);
+
+        switch(index){
+            case 0:
+                linearLayout1.setVisibility(View.VISIBLE);
+                linearLayout2.setVisibility(View.INVISIBLE);
+                break;
+            case 1:
+                linearLayout1.setVisibility(View.INVISIBLE);
+                linearLayout2.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 
     @Override
-    public TedLatLng getTedLatLng() {
-        return new TedLatLng(lat, lng);
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (locationSource.onRequestPermissionsResult(
+                requestCode, permissions, grantResults)) {
+            if (!locationSource.isActivated()) {
+                naverMap.setLocationTrackingMode(LocationTrackingMode.Face);
+            }
+            return;
+        }
+        super.onRequestPermissionsResult(
+                requestCode, permissions, grantResults);
+    }
+
+    @Override  // 네이버 맵에서 오버레이 추가, 상호작용하는 등 기능 대부분을 이 클래스 에서 제공
+    public void onMapReady(@NonNull NaverMap naverMap) {
+        this.naverMap = naverMap;
+
+//        Toast.makeText(this, "위도: "+hosCoord.latitude +" 경도: "+hosCoord.longitude, Toast.LENGTH_SHORT).show();
+
+        // 지도 타입 설정
+        naverMap.setMapType(NaverMap.MapType.Basic);
+        naverMap.setLocale(new Locale("ko"));
+
+        // 지도에 표시할 부가적 정보
+        naverMap.setLayerGroupEnabled(NaverMap.LAYER_GROUP_BUILDING, true);
+        naverMap.setLayerGroupEnabled(NaverMap.LAYER_GROUP_TRANSIT, true);
+        naverMap.setLayerGroupEnabled(NaverMap.LAYER_GROUP_MOUNTAIN, true);
+
+        // 건물명 같은 심볼의 크기 조절 (0~2)
+        naverMap.setSymbolScale(1.5f);
+
+        // 카메라 위치를 한반도 인근으로 제한
+        naverMap.setExtent(new LatLngBounds(new LatLng(31.43, 122.37), new LatLng(44.35, 132)));
+
+        // 초기 카메라 위치
+        CameraPosition cameraPosition = new CameraPosition(latLng, 16);
+        naverMap.setMinZoom(6.0);
+        naverMap.setMaxZoom(18.0);
+
+        UiSettings uiSettings = naverMap.getUiSettings();
+        // ui설정
+        uiSettings.setCompassEnabled(true);
+        uiSettings.setScaleBarEnabled(true);
+        uiSettings.setZoomControlEnabled(true);
+        uiSettings.setLocationButtonEnabled(true);
+        uiSettings.setTiltGesturesEnabled(false);
+//        uiSettings.setLogoClickEnabled(false);
+
+        naverMap.setCameraPosition(cameraPosition);
+        naverMap.setLocationSource(locationSource);
+
+        // 마커 생성
+        Marker marker = new Marker();   // 마커객체 생성
+        marker.setPosition(latLng);
+        marker.setCaptionText(hospital.getHospitalName());
+        if(hospital.getOpenClosed().equals("진료중")) marker.setIcon(OverlayImage.fromResource(R.drawable.custom_icon_open));
+        else marker.setIcon(OverlayImage.fromResource(R.drawable.custom_icon_closed));
+        marker.setWidth(120);
+        marker.setHeight(150);
+        marker.setMap(naverMap);
     }
 }

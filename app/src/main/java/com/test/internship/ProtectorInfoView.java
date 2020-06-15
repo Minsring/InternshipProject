@@ -1,23 +1,22 @@
 package com.test.internship;
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class ItemView extends LinearLayout {
+public class ProtectorInfoView extends LinearLayout {
     private ImageView mImg;
     private TextView mName;
     private  TextView mNum;
 
-    public ItemView(Context context, ProtectorData protectorData){
+    public ProtectorInfoView(Context context, ProtectorData protectorData){
         super(context);
 
         //인플레이션
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.protectorinfo_style, this,true);
+        inflater.inflate(R.layout.protector_info_style, this,true);
 
         //set
         mImg = findViewById(R.id.img);

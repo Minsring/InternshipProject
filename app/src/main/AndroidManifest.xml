@@ -18,13 +18,12 @@
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="7t85xooilf"/>
 
-        <activity android:name=".HospitalScreen" />
-        <activity android:name=".asd123" />
-        <activity android:name=".SubjectListMap" />
-        <activity android:name=".Setting_Activity" />
-        <activity android:name=".Register_Activity" />
+        <activity android:name=".HospitalInformation" />
+        <activity android:name=".DistanceRange" />
+        <activity android:name=".Setting" />
+        <activity android:name=".Register" />
         <activity android:name=".SubjectList" />
-        <activity android:name=".CustomMarkerClusterClass" />
+        <activity android:name=".SubjectListMap" />
         <activity android:name=".User">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

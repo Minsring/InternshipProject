@@ -12,9 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class Register_Activity extends AppCompatActivity {
+public class Register extends AppCompatActivity {
 
-    // 보호자가 입력한 정보를 받아서 변수에 넣는 부분
     EditText idEdit_n;
     String value_n;
     private boolean saveData;
@@ -24,7 +23,7 @@ public class Register_Activity extends AppCompatActivity {
     static String person1_n, person1_p, person2_n, person2_p, person3_n, person3_p, person4_n, person4_p, person5_n, person5_p;
 
     static ArrayList<ProtectorData> persondata = null;
-    static CustomAdapter customAdapter = null;
+    static RegisterAdapter registerAdapter = null;
     private ListView listView = null;
 
 
@@ -36,11 +35,10 @@ public class Register_Activity extends AppCompatActivity {
         appData = getSharedPreferences("appData", MODE_PRIVATE);
         load();
 
-        //추가
         persondata = new ArrayList<ProtectorData>();
-        customAdapter = new CustomAdapter(this, R.layout.protectorinfo_style, persondata);
+        registerAdapter = new RegisterAdapter(this, R.layout.protector_info_style, persondata);
         listView = findViewById(R.id.list);
-        listView.setAdapter(customAdapter);
+        listView.setAdapter(registerAdapter);
 
         Button addInfo;
         addInfo = findViewById(R.id.confirm);
@@ -52,23 +50,23 @@ public class Register_Activity extends AppCompatActivity {
         if (saveData) {
             if (person1_n != null && person1_p != null) {
                 persondata.add(new ProtectorData(R.drawable.ic_launcher_foreground, person1_n, person1_p));
-                listView.setAdapter(customAdapter);
+                listView.setAdapter(registerAdapter);
             }
             if (person2_n != null && person2_p != null) {
                 persondata.add(new ProtectorData(R.drawable.ic_launcher_foreground, person2_n, person2_p));
-                listView.setAdapter(customAdapter);
+                listView.setAdapter(registerAdapter);
             }
             if (person3_n != null && person3_p != null) {
                 persondata.add(new ProtectorData(R.drawable.ic_launcher_foreground, person3_n, person3_p));
-                listView.setAdapter(customAdapter);
+                listView.setAdapter(registerAdapter);
             }
             if (person4_n != null && person4_p != null) {
                 persondata.add(new ProtectorData(R.drawable.ic_launcher_foreground, person4_n, person4_p));
-                listView.setAdapter(customAdapter);
+                listView.setAdapter(registerAdapter);
             }
             if (person5_n != null && person5_p != null) {
                 persondata.add(new ProtectorData(R.drawable.ic_launcher_foreground, person5_n, person5_p));
-                listView.setAdapter(customAdapter);
+                listView.setAdapter(registerAdapter);
             }
 
         }
@@ -88,40 +86,40 @@ public class Register_Activity extends AppCompatActivity {
                             person1_p = value_p;
                             person1_n = value_n;
                             persondata.add(new ProtectorData(R.drawable.ic_launcher_foreground, value_n, value_p));
-                            Toast.makeText(Register_Activity.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
-                            listView.setAdapter(customAdapter);
+                            Toast.makeText(Register.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                            listView.setAdapter(registerAdapter);
                             save(0);
                         } else if (person2_n == null && person2_p == null) {
                             person2_p = value_p;
                             person2_n = value_n;
                             persondata.add(new ProtectorData(R.drawable.ic_launcher_foreground, value_n, value_p));
-                            Toast.makeText(Register_Activity.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
-                            listView.setAdapter(customAdapter);
+                            Toast.makeText(Register.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                            listView.setAdapter(registerAdapter);
                             save(1);
                         } else if (person3_n == null && person3_p == null) {
                             person3_p = value_p;
                             person3_n = value_n;
                             persondata.add(new ProtectorData(R.drawable.ic_launcher_foreground, value_n, value_p));
-                            Toast.makeText(Register_Activity.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
-                            listView.setAdapter(customAdapter);
+                            Toast.makeText(Register.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                            listView.setAdapter(registerAdapter);
                             save(2);
                         } else if (person4_n == null && person4_p == null) {
                             person4_p = value_p;
                             person4_n = value_n;
                             persondata.add(new ProtectorData(R.drawable.ic_launcher_foreground, value_n, value_p));
-                            Toast.makeText(Register_Activity.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
-                            listView.setAdapter(customAdapter);
+                            Toast.makeText(Register.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                            listView.setAdapter(registerAdapter);
                             save(3);
                         } else if (person5_n == null && person5_p == null) {
                             person5_p = value_p;
                             person5_n = value_n;
                             persondata.add(new ProtectorData(R.drawable.ic_launcher_foreground, value_n, value_p));
-                            Toast.makeText(Register_Activity.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
-                            listView.setAdapter(customAdapter);
+                            Toast.makeText(Register.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                            listView.setAdapter(registerAdapter);
                             save(4);
                         }
                     } else {
-                        Toast.makeText(Register_Activity.this, "보호자 정보가 부족합니다", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Register.this, "보호자 정보가 부족합니다", Toast.LENGTH_SHORT).show();
                     }break;
             }
         }
@@ -165,7 +163,6 @@ public class Register_Activity extends AppCompatActivity {
             save(i);
         }
     }
-
 
     private void save(int a) {
         SharedPreferences.Editor editor = appData.edit();

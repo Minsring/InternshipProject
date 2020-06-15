@@ -16,10 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
-    ArrayList<HospitalInformation> items =new ArrayList<HospitalInformation>();
-    ArrayList<HospitalInformation> openItems =new ArrayList<HospitalInformation>();      // 진료중인 병원 리스트
-    ArrayList<HospitalInformation> closedItems =new ArrayList<HospitalInformation>();     // 준비중인 병원 리스트
+public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.ViewHolder> {
+    ArrayList<HospitalData> items =new ArrayList<HospitalData>();
+    ArrayList<HospitalData> openItems =new ArrayList<HospitalData>();      // 진료중인 병원 리스트
+    ArrayList<HospitalData> closedItems =new ArrayList<HospitalData>();     // 준비중인 병원 리스트
     Context context;
 
     // items에 순차적으로 합쳐서 정렬되게 한다.
@@ -96,7 +96,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
           });
         }
         @RequiresApi(api = Build.VERSION_CODES.M)
-        public void setItem(HospitalInformation hospital){
+        public void setItem(HospitalData hospital){
             itemHospitalName.setText(hospital.getHospitalName());
             itemDistance.setText(hospital.getDistance());
             if(hospital.findSubject("응급실") && User.subject.toString().equals("응급실"))
@@ -122,28 +122,28 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     // 임시로 사용
-    public void addOpenItem(HospitalInformation item){
+    public void addOpenItem(HospitalData item){
         openItems.add(item);
     }
-    public void addClosedItem(HospitalInformation item){
+    public void addClosedItem(HospitalData item){
         closedItems.add(item);
     }
-    public HospitalInformation getItem(int position){
+    public HospitalData getItem(int position){
         return items.get(position);
     }
     // 해당위치의 item을 변경하는 함수
-    public void setItem(int position, HospitalInformation item){
+    public void setItem(int position, HospitalData item){
         items.set(position, item);
     }
     // 리스트를 set
-    public void setItems(ArrayList<HospitalInformation> items){
+    public void setItems(ArrayList<HospitalData> items){
         this.items = items;
     }
-    public ArrayList<HospitalInformation> getOpenItem(){
+    public ArrayList<HospitalData> getOpenItem(){
         if(openItems.size()==0){ return null; }
         else{ return openItems; }
     }
-    public ArrayList<HospitalInformation> getClosedItem(){
+    public ArrayList<HospitalData> getClosedItem(){
         if(closedItems.size()==0){ return null; }
         else{ return closedItems; }
     }
@@ -156,7 +156,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override       // ViewHolder객체가 생성될 때 자동으로 호출
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View itemView = inflater.inflate(R.layout.item_style, viewGroup, false);
+        View itemView = inflater.inflate(R.layout.hospital_info_style, viewGroup, false);
 
         // 새로 생성된 ViewHolder 객체를 뷰 객체를 담아서 리턴
         return new ViewHolder(itemView);
@@ -166,7 +166,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override       // ViewHolder객체가 재사용될 때 자동으로 호출
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
-        HospitalInformation item = items.get(position);
+        HospitalData item = items.get(position);
         viewHolder.setItem(item);
     }
 }
