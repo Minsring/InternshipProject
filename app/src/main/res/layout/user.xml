@@ -9,9 +9,12 @@
 
   <Button
       android:id="@+id/allSub"
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="전체 병원 보기"
+      android:layout_gravity="center"
+      android:drawableLeft="@drawable/hospital_icon"
+      android:text="   전체 병원 보기   "
+      android:background="@color/customYellow"
       android:fontFamily="@font/pork_6"
       android:layout_margin="20dp" />
 
@@ -186,7 +189,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
         android:layout_weight="1"
-        android:background="#3300ff00"
+        android:background="@color/customGreen"
         android:drawableTop="@drawable/chkcenter_icon"
         android:fontFamily="@font/pork_6"
         android:text="건강검진센터"
