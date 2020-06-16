@@ -12,6 +12,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="전체 병원 보기"
+      android:fontFamily="@font/pork_6"
       android:layout_margin="20dp" />
 
   <!--    TODO: 그리드 뷰(Demo 19 참고)로 아이콘 + 진료과목 나타낼 수 있게 수정-->
@@ -32,6 +33,7 @@
           android:id="@+id/internalSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
+          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
           android:text="내과"/>
 
@@ -39,6 +41,7 @@
           android:id="@+id/boneSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
+          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
           android:text="정형외과"/>
 
@@ -46,6 +49,7 @@
           android:id="@+id/hanSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
+          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
           android:text="한의원"/>
 
@@ -59,6 +63,7 @@
           android:id="@+id/dentalSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
+          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
           android:text="치과"/>
 
@@ -66,6 +71,7 @@
           android:id="@+id/entSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
+          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
           android:text="이비인후과"/>
 
@@ -74,6 +80,7 @@
           android:id="@+id/eyeSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
+          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
           android:text="안과"/>
 
@@ -87,12 +94,14 @@
           android:id="@+id/skinSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
+          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
           android:text="피부과"/>
       <Button
           android:id="@+id/childSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
+          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
           android:text="소아청소년과"/>
 
@@ -100,6 +109,7 @@
           android:id="@+id/obstSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
+          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
           android:text="산부인과"/>
 
@@ -112,18 +122,21 @@
           android:id="@+id/neuroSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
+          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
           android:text="신경외과"/>
       <Button
           android:id="@+id/binyoSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
+          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
           android:text="비뇨기과"/>
       <Button
           android:id="@+id/bogun"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
+          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
           android:text="보건소"
           android:textColor="#0000ff"/>
@@ -135,6 +148,7 @@
       android:id="@+id/chkCenter"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:fontFamily="@font/pork_6"
       android:background="#3300ff00"
       android:layout_margin="20dp"
       android:text="건강검진센터"/>
@@ -143,6 +157,7 @@
       android:id="@+id/emergencyRoom"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:fontFamily="@font/pork_6"
       android:background="#aaff0000"
       android:text="응급실"
       android:layout_marginLeft="20dp"
@@ -152,6 +167,7 @@
       android:id="@+id/setting"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:fontFamily="@font/pork_6"
       android:layout_margin="20dp"
       android:text="보호자 연락 기능" />
 

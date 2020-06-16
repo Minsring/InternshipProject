@@ -9,10 +9,10 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:fontFamily="@font/pork_6"
         android:text="이동반경설정 및 알림서비스       "
         android:textSize="25sp"
         android:layout_marginLeft="10dp"
-
         ></Switch>
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,6 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="30sp"
+            android:fontFamily="@font/pork_3"
             android:text="반경: "
             android:layout_marginLeft="10dp"/>
 
@@ -33,6 +34,7 @@
             android:id="@+id/radiusEdit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/pork_3"
             android:textSize="30sp"
             android:hint="반경을 입력해주세요."
             android:inputType="numberDecimal"/>
@@ -41,6 +43,7 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/pork_3"
             android:text="km"
             android:textSize="30sp"
             android:gravity="center"/>
@@ -59,6 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:fontFamily="@font/pork_3"
         android:text="등록"
         android:textSize="30sp"/>
 
