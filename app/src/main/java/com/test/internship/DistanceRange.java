@@ -36,12 +36,11 @@ import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.CircleOverlay;
 import com.naver.maps.map.overlay.Marker;
-import com.naver.maps.map.overlay.PolygonOverlay;
 import com.naver.maps.map.util.FusedLocationSource;
+import com.naver.maps.map.util.MarkerIcons;
 
 import java.util.Locale;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import static com.test.internship.Register.person1_n;
 import static com.test.internship.Register.person1_p;
@@ -59,8 +58,9 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     private FusedLocationSource locationSource;
     private NaverMap naverMap;
     Marker marker;
+    Marker regMarker;
     CircleOverlay circle;
-    PolygonOverlay polygon;
+    CircleOverlay regCircle;
     EditText radiusEdit;
     Button button;
     float radius;
@@ -69,7 +69,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     boolean savedata;
     Switch switchRadius;
     boolean switchState;
-    TimerTask alarmTimer;
     int switchFlag;
     private static SharedPreferences appData;
     Timer timer;
@@ -84,8 +83,9 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         switchRadius=(Switch)findViewById(R.id.switchRadius);
         savedata = false;
         marker = new Marker();
+        regMarker = new Marker();
         circle=new CircleOverlay();
-        polygon=new PolygonOverlay();
+        regCircle = new CircleOverlay();
         switchFlag=0;
 
 
@@ -128,6 +128,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             public void onClick(View view) {
                 save();
                 Toast.makeText(getApplicationContext(), "등록되었습니다.", Toast.LENGTH_SHORT).show();
+                onMapReady(naverMap);
             }
         });
 
@@ -246,15 +247,20 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
         load();
         if(savedata){
-            marker.setPosition(new LatLng(centerLat, centerLng));
-            marker.setMap(naverMap);
-            circle.setCenter(new LatLng(centerLat, centerLng));
-            circle.setRadius(radius);
-            circle.setColor(Color.argb(50,0,255,0));
-            circle.setOutlineColor(Color.argb(200,0,255,0));
-            circle.setOutlineWidth(10);
-            circle.setMap(naverMap);
+            regMarker.setPosition(new LatLng(centerLat, centerLng));
+            regMarker.setIcon(MarkerIcons.BLACK);
+            regMarker.setIconTintColor(Color.RED);
+            regMarker.setMap(naverMap);
+            regCircle.setCenter(new LatLng(centerLat, centerLng));
+            regCircle.setRadius(radius);
+            regCircle.setColor(Color.argb(50,255,0,0));
+            regCircle.setOutlineColor(Color.argb(200,255,0,0));
+            regCircle.setOutlineWidth(10);
+            regCircle.setMap(naverMap);
+            circle.setMap(null);
+            marker.setMap(null);
         }
+        savedata = false;
         // 지도 타입 설정
         naverMap.setMapType(NaverMap.MapType.Basic);
         naverMap.setLocale(new Locale("ko"));
@@ -335,11 +341,9 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     @Override
     public void onPause() {
         super.onPause();
-        save();
     }
     @Override
     public void onStop() {
         super.onStop();
-        save();
     }
 }
