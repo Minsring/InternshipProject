@@ -47,7 +47,6 @@ public class Setting extends AppCompatActivity {
     String phoneNo;
     String name;
     Button btnregister;
-    Button btnregister2;
     Switch switch1;
     Switch switch2;
 
@@ -68,8 +67,6 @@ public class Setting extends AppCompatActivity {
         flag_Setting2=0;
         btnregister = findViewById(R.id.btnregister);
         btnregister.setOnClickListener(listener);
-        btnregister2 = findViewById(R.id.btnregister2);
-        btnregister2.setOnClickListener(listener);
 
         switch1 = (Switch)findViewById(R.id.switch1);
         switch2 = (Switch)findViewById(R.id.switch2);
@@ -286,9 +283,6 @@ public class Setting extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.btnregister:
                     intent = new Intent(getApplicationContext(), Register.class);
-                    break;
-                case R.id.btnregister2:
-                    intent = new Intent(getApplicationContext(), DistanceRange.class);
                     break;
             }
             if(intent!=null) startActivity(intent);
