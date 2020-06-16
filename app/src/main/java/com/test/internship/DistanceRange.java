@@ -156,7 +156,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         NaverMap.OnMapClickListener mapListener = new NaverMap.OnMapClickListener() {
             @Override
             public void onMapClick(@NonNull PointF pointF, @NonNull LatLng latLng) {
-
                 radius=0.2F;
                 if(!(radiusEdit.length()==0)){
                     radius=Float.parseFloat(radiusEdit.getText().toString());
@@ -176,7 +175,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 circle.setMap(naverMap);
                 lowStep=0;
                 highStep=radius;
-
 
 
 
