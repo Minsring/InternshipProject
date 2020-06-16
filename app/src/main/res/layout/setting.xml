@@ -13,20 +13,33 @@
         android:padding="20dp"
         android:text="추가 기능 설정"
         android:fontFamily="@font/pork_6"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:layout_marginBottom="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="보호자 문자전송 설정"
+            android:gravity="center"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="15dp">
+        android:padding="20dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="배터리 20% 이하일 경우보호자 연락"
+            android:text="배터리 20% 미만일 경우"
             android:fontFamily="@font/pork_3"
             android:textSize="20sp"
-            android:layout_marginRight="30dp"/>
+            android:layout_marginRight="80dp"/>
 
         <Switch
             android:id="@+id/switch1"
@@ -38,15 +51,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="15dp">
+        android:padding="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="떨림 없을 시 보호자 연락"
+            android:text="움직임 없을 경우"
             android:fontFamily="@font/pork_3"
             android:textSize="20sp"
-            android:layout_marginRight="130dp"/>
+            android:layout_marginRight="150dp"/>
+
         <Switch
             android:id="@+id/switch2"
             android:layout_width="wrap_content"
