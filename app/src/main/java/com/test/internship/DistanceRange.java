@@ -293,19 +293,23 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         naverMap.setLocationSource(locationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
         load();
+        circle.setMap(null);
+        marker.setMap(null);
         if(savedata){
-            regMarker.setPosition(new LatLng(centerLat, centerLng));
-            regMarker.setIcon(MarkerIcons.BLACK);
-            regMarker.setIconTintColor(Color.RED);
-            regMarker.setMap(naverMap);
-            regCircle.setCenter(new LatLng(centerLat, centerLng));
-            regCircle.setRadius(radius);
-            regCircle.setColor(Color.argb(50,255,0,0));
-            regCircle.setOutlineColor(Color.argb(200,255,0,0));
-            regCircle.setOutlineWidth(10);
-            regCircle.setMap(naverMap);
-            circle.setMap(null);
-            marker.setMap(null);
+            if(switchRadius.isChecked()==true){
+                regMarker.setPosition(new LatLng(centerLat, centerLng));
+                regMarker.setIcon(MarkerIcons.BLACK);
+                regMarker.setIconTintColor(Color.RED);
+                regMarker.setMap(naverMap);
+                regCircle.setCenter(new LatLng(centerLat, centerLng));
+                regCircle.setRadius(radius);
+                regCircle.setColor(Color.argb(50,255,0,0));
+                regCircle.setOutlineColor(Color.argb(200,255,0,0));
+                regCircle.setOutlineWidth(10);
+                regCircle.setMap(naverMap);
+                circle.setMap(null);
+                marker.setMap(null);
+            }
         }
         savedata = false;
         // 지도 타입 설정
