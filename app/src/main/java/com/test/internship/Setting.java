@@ -286,7 +286,6 @@ public class Setting extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.btnregister:
                     intent = new Intent(getApplicationContext(), Register.class);
-//                    startActivity(intent);
                     break;
                 case R.id.btnregister2:
                     intent = new Intent(getApplicationContext(), DistanceRange.class);
@@ -351,8 +350,6 @@ public class Setting extends AppCompatActivity {
 
     //문자전송
     public void sendSMS(String phoneNo, String name, int flag){
-//        phoneNo= Register.protectorPhone.toString();
-//        name= Register.protectorName.toString();
 
         if(flag==1){
             try {

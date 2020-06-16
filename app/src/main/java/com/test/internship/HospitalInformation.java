@@ -112,7 +112,6 @@ public class HospitalInformation extends AppCompatActivity implements OnMapReady
             info_Sunday.setText("일요일 진료시간 : " + hospital.getOpenTime(2) + " ~ " + hospital.getClosedTime(2));
         }
 
-        // 지도 테스뚜(민슬)
         // 표시해야할 위도, 경도
         latLng = hospital.getLatLng();
         FragmentManager hosFm = getSupportFragmentManager();

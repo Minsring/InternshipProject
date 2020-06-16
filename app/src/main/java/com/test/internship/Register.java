@@ -140,7 +140,6 @@ public class Register extends AppCompatActivity {
         for(int i=0;i<5;i++){
             save(i);
         }
-        // sensorManager.registerListener(this, stepsensor, SensorManager.SENSOR_DELAY_UI);
         for(int i=0;i<5;i++){
             save(i);
         }

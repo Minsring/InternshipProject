@@ -276,7 +276,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         NaverMap.OnMapClickListener mapListener = new NaverMap.OnMapClickListener() {
             @Override
             public void onMapClick(@NonNull PointF pointF, @NonNull LatLng latLng) {
-
                 radius=0.2F;
                 if(!(radiusEdit.length()==0)){
                     radius=Float.parseFloat(radiusEdit.getText().toString());
@@ -294,7 +293,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 circle.setOutlineColor(Color.argb(200,0,255,0));
                 circle.setOutlineWidth(10);
                 circle.setMap(naverMap);
-
 
                 // 카메라 위치 변경
                 CameraUpdate cameraUpdate = CameraUpdate.scrollTo(latLng);

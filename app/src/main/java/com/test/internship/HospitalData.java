@@ -40,16 +40,6 @@ public class HospitalData implements Serializable, TedClusterItem {
         this.lat = latLng.latitude;
         this.lng = latLng.longitude;
     }
-//    public HospitalData(String hospitalName, String openTime, String closedTime, String address,
-//                               String callNumber, String subject, String openDay){
-//        this.hospitalName = hospitalName;
-//        this.openTime = openTime;
-//        this.closedTime = closedTime;
-//        this.address = address;
-//        this.callNumber = callNumber;
-//        this.subject = subject;
-//        this.openDay = openDay;
-//    }
 
 
     public boolean openTime_isEmpty(int num){
