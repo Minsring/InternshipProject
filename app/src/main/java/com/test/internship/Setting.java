@@ -40,15 +40,14 @@ import static com.test.internship.User.tt2;
 
 public class Setting extends AppCompatActivity {
     private boolean saveData;
-    private boolean isCheck1;
-    private boolean isCheck2;
-    public int flag_Setting1;
-    public int flag_Setting2;
+    private boolean isCheckBattery;
+    private boolean isCheckMotion;
+    public int flagBattery;
+    public int flagMotion;
     String phoneNo;
     String name;
     Button btnregister;
-    Switch switch1;
-    Switch switch2;
+    Switch batterySwitch, motionSwitch;
 
     private SharedPreferences appData;
     Context context = this;
@@ -63,22 +62,22 @@ public class Setting extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting);
         timeCounter=0;
-        flag_Setting1=0;
-        flag_Setting2=0;
+        flagBattery=0;
+        flagMotion=0;
         btnregister = findViewById(R.id.btnregister);
         btnregister.setOnClickListener(listener);
 
-        switch1 = (Switch)findViewById(R.id.switch1);
-        switch2 = (Switch)findViewById(R.id.switch2);
+        batterySwitch = findViewById(R.id.batterySwitch);
+        motionSwitch = findViewById(R.id.motionSwitch);
         appData = getSharedPreferences("appData", MODE_PRIVATE);
         load();
         if(saveData){
-            switch1.setChecked(isCheck1);
-            if(isCheck1){
+            batterySwitch.setChecked(isCheckBattery);
+            if(isCheckBattery){
                 tt1 = new TimerTask() {
                     @Override
                     public void run() {
-                        flag_Setting1++;
+                        flagBattery++;
                         Intent intentBattery = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
                         int level = intentBattery.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
                         int scale = intentBattery.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
@@ -118,12 +117,12 @@ public class Setting extends AppCompatActivity {
                 };
                 timer.schedule(tt1, 0, 1800000);
             }
-            switch2.setChecked(isCheck2);
-            if(isCheck2){
+            motionSwitch.setChecked(isCheckMotion);
+            if(isCheckMotion){
                 tt2 = new TimerTask() {
                     @Override
                     public void run() {
-                        flag_Setting2++;
+                        flagMotion++;
                         if (mStepDetector < 20){//20걸음 미만이라면 보호자에게 메세지 보내기
 //
                             if(person1_n!=null && person1_p != null){
@@ -160,7 +159,7 @@ public class Setting extends AppCompatActivity {
         }
 
 
-        switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        batterySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
@@ -170,7 +169,7 @@ public class Setting extends AppCompatActivity {
                     tt1 = new TimerTask() {
                         @Override
                         public void run() {
-                            flag_Setting1++;
+                            flagBattery++;
                             Intent intentBattery = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
                             int level = intentBattery.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
                             int scale = intentBattery.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
@@ -210,16 +209,16 @@ public class Setting extends AppCompatActivity {
                     timer.schedule(tt1, 0, 1800000);
 
                 }else{
-                    if(flag_Setting1!=0){
+                    if(flagBattery!=0){
                         tt1.cancel();
-                        flag_Setting1=0;
+                        flagBattery=0;
                     }
                     save();
                 }
             }
         });
 
-        switch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        motionSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
@@ -230,7 +229,7 @@ public class Setting extends AppCompatActivity {
                     tt2 = new TimerTask() {
                         @Override
                         public void run() {
-                            flag_Setting2++;
+                            flagMotion++;
                             if (mStepDetector < 20){//20걸음 미만이라면 보호자에게 메세지 보내기
 
                                 if(person1_n!=null && person1_p != null){
@@ -266,9 +265,9 @@ public class Setting extends AppCompatActivity {
                     timer.schedule(tt2, 0, 86400000);
                     mStepDetector=0;
                 }else{
-                    if(flag_Setting2!=0){
+                    if(flagMotion!=0){
                         tt2.cancel();
-                        flag_Setting2=0;
+                        flagMotion=0;
                     }
                     save();
                 }
@@ -303,21 +302,21 @@ public class Setting extends AppCompatActivity {
     }
     private void save(){
         SharedPreferences.Editor editor = appData.edit();
-        editor.putBoolean("SAVE_LOGIN_DATA", (switch1.isChecked()||switch2.isChecked()));
-        editor.putBoolean("CHECK1", switch1.isChecked());
-        editor.putBoolean("CHECK2", switch2.isChecked());
-        editor.putInt("FLAG_SETTING1", flag_Setting1);
-        editor.putInt("FLAG_SETTING2", flag_Setting2);
+        editor.putBoolean("SAVE_LOGIN_DATA", (batterySwitch.isChecked()||motionSwitch.isChecked()));
+        editor.putBoolean("CHECK1", batterySwitch.isChecked());
+        editor.putBoolean("CHECK2", motionSwitch.isChecked());
+        editor.putInt("FLAG_SETTING1", flagBattery);
+        editor.putInt("FLAG_SETTING2", flagMotion);
 
         editor.apply();
 
     }
     private void load(){
         saveData = appData.getBoolean("SAVE_LOGIN_DATA", false);
-        isCheck1=appData.getBoolean("CHECK1", false);
-        isCheck2=appData.getBoolean("CHECK2", false);
-        flag_Setting1=appData.getInt("FLAG_SETTING1", 0);
-        flag_Setting2=appData.getInt("FLAG_SETTING2", 0);
+        isCheckBattery=appData.getBoolean("CHECK1", false);
+        isCheckMotion=appData.getBoolean("CHECK2", false);
+        flagBattery=appData.getInt("FLAG_SETTING1", 0);
+        flagMotion=appData.getInt("FLAG_SETTING2", 0);
     }
     //알림창 실행
     public void showNoti(){
