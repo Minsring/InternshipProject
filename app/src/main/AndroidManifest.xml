@@ -8,9 +8,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/dognari"
+        android:icon="@mipmap/pink"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/dognari"
+        android:roundIcon="@mipmap/pink"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
