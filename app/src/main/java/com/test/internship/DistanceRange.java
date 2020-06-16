@@ -43,6 +43,17 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.test.internship.Register.person1_n;
+import static com.test.internship.Register.person1_p;
+import static com.test.internship.Register.person2_n;
+import static com.test.internship.Register.person2_p;
+import static com.test.internship.Register.person3_n;
+import static com.test.internship.Register.person3_p;
+import static com.test.internship.Register.person4_n;
+import static com.test.internship.Register.person4_p;
+import static com.test.internship.Register.person5_n;
+import static com.test.internship.Register.person5_p;
+
 public class DistanceRange extends AppCompatActivity implements OnMapReadyCallback {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private FusedLocationSource locationSource;
@@ -86,29 +97,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         load();
         if(savedata){
             switchRadius.setChecked(switchState);
-//            if(switchRadius.isChecked()){
-//                save();
-//                if ( Build.VERSION.SDK_INT >= 23 &&
-//                        ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
-//                    System.out.println("1");
-//                    ActivityCompat.requestPermissions( DistanceRange.this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
-//                            MY_PERMISSIONS_REQUEST_LOCATION );
-//                    System.out.println("10000000000000000000000000000000000000");
-//                }
-//                else{
-//                    System.out.println("10000000000000000000000000000000000000");
-//                    lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-//                            1000,
-//                            1,
-//                            gpsLocationListener);
-//                    lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-//                            1000,
-//                            1,
-//                            gpsLocationListener);
-//                    System.out.println("4");
-//                }
-//            }
-
         }
 
         // 접근 권한 설정
@@ -155,24 +143,19 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
 
                     if ( Build.VERSION.SDK_INT >= 23 &&
                             ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
-                        System.out.println("1");
                         ActivityCompat.requestPermissions( DistanceRange.this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
                                 MY_PERMISSIONS_REQUEST_LOCATION );
                     }
                     else{
-                        System.out.println("------------------------------------------");
-                        System.out.println(isChecked);
                         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                                1000,
+                                10000,
                                 1,
                                 gpsLocationListener);
                         lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                                1000,
+                                10000,
                                 1,
                                 gpsLocationListener);
-                        System.out.println("4");
                     }
-
                 }
                 else{
                     save();
@@ -198,8 +181,25 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             System.out.println(radius);
             System.out.println(switchState);
             if(dis>radius){
-                Toast.makeText(getApplicationContext(), nowLatLng.latitude + ", " + nowLatLng.longitude+" 범위를 벗어났습니다.",
-                        Toast.LENGTH_LONG).show();
+               if(switchRadius.isChecked()==true){
+                   Toast.makeText(getApplicationContext(), nowLatLng.latitude + ", " + nowLatLng.longitude+" 범위를 벗어났습니다.",
+                           Toast.LENGTH_LONG).show();
+                   if(person1_n!=null && person1_p != null){
+                       Setting.sendSMS(person1_p, person1_n, 3);
+                   }
+                   if(person2_n!=null && person2_p != null){
+                       Setting.sendSMS(person2_p, person2_n, 3);
+                   }
+                   if(person3_n!=null && person3_p != null){
+                       Setting.sendSMS(person3_p, person3_n, 3);
+                   }
+                   if(person4_n!=null && person4_p != null){
+                       Setting.sendSMS(person4_p, person4_n, 3);
+                   }
+                   if(person5_n!=null && person5_p != null){
+                       Setting.sendSMS(person5_p, person5_n, 3);
+                   }
+               }
             }
         }
         public void onStatusChanged(String provider, int status, Bundle extras) {

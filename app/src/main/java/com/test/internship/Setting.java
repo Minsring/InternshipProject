@@ -132,27 +132,27 @@ public class Setting extends AppCompatActivity {
                             if(person1_n!=null && person1_p != null){
                                 name = person1_n;
                                 phoneNo = person1_p;
-                                sendSMS(phoneNo, name, 1);
+                                sendSMS(phoneNo, name, 2);
                             }
                             if(person2_n!=null && person2_p != null){
                                 name = person2_n;
                                 phoneNo = person2_p;
-                                sendSMS(phoneNo, name, 1);
+                                sendSMS(phoneNo, name, 2);
                             }
                             if(person3_n!=null && person3_p != null){
                                 name = person3_n;
                                 phoneNo = person3_p;
-                                sendSMS(phoneNo, name, 1);
+                                sendSMS(phoneNo, name, 2);
                             }
                             if(person4_n!=null && person4_p != null){
                                 name = person4_n;
                                 phoneNo = person4_p;
-                                sendSMS(phoneNo, name, 1);
+                                sendSMS(phoneNo, name, 2);
                             }
                             if(person5_n!=null && person5_p != null){
                                 name = person5_n;
                                 phoneNo = person5_p;
-                                sendSMS(phoneNo, name, 1);
+                                sendSMS(phoneNo, name, 2);
                             }
                         }
                     }
@@ -239,27 +239,27 @@ public class Setting extends AppCompatActivity {
                                 if(person1_n!=null && person1_p != null){
                                     name = person1_n;
                                     phoneNo = person1_p;
-                                    sendSMS(phoneNo, name, 1);
+                                    sendSMS(phoneNo, name, 2);
                                 }
                                 if(person2_n!=null && person2_p != null){
                                     name = person2_n;
                                     phoneNo = person2_p;
-                                    sendSMS(phoneNo, name, 1);
+                                    sendSMS(phoneNo, name, 2);
                                 }
                                 if(person3_n!=null && person3_p != null){
                                     name = person3_n;
                                     phoneNo = person3_p;
-                                    sendSMS(phoneNo, name, 1);
+                                    sendSMS(phoneNo, name, 2);
                                 }
                                 if(person4_n!=null && person4_p != null){
                                     name = person4_n;
                                     phoneNo = person4_p;
-                                    sendSMS(phoneNo, name, 1);
+                                    sendSMS(phoneNo, name, 2);
                                 }
                                 if(person5_n!=null && person5_p != null){
                                     name = person5_n;
                                     phoneNo = person5_p;
-                                    sendSMS(phoneNo, name, 1);
+                                    sendSMS(phoneNo, name, 2);
                                 }
                             }
                             mStepDetector=0;
@@ -349,22 +349,32 @@ public class Setting extends AppCompatActivity {
     }
 
     //문자전송
-    public void sendSMS(String phoneNo, String name, int flag){
+    public static void sendSMS(String phoneNo, String name, int flag){
 
         if(flag==1){
             try {
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자의 배터리가 15% 미만입니다 !!", null, null);
+                smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자의 휴대전화 배터리가 15% 미만입니다 !!", null, null);
 //                Toast.makeText(getApplicationContext(), "메세지 전송!", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
 //                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         }
-        else {
+        else if(flag==2){
             try {
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자의 일일 걸음 수가 20보 미만입니다 !!", null, null);
+                //Toast.makeText(getApplicationContext(), "메세지 전송!", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                // Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+        }
+        else if (flag==3){
+            try {
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자님께서 설정한 이동 반경을 벗어나셨습니다 !!", null, null);
                 //Toast.makeText(getApplicationContext(), "메세지 전송!", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 // Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
