@@ -27,7 +27,8 @@
     <TableRow
         android:id="@+id/medicalSubjects1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
 
       <Button
           android:id="@+id/internalSub"
@@ -66,7 +67,8 @@
     <TableRow
         android:id="@+id/medicalSubjects2"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="100dp"
+        android:layout_marginBottom="10dp">
 
       <Button
           android:id="@+id/dentalSub"
@@ -95,6 +97,7 @@
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:fontFamily="@font/pork_6"
+          android:layout_gravity="center"
           android:layout_weight="1"
           android:text="안과"
           android:drawableTop="@drawable/eye_icon"
@@ -104,7 +107,8 @@
     <TableRow
         android:id="@+id/medicalSubjects3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
       <Button
           android:id="@+id/skinSub"
           android:layout_width="0dp"
@@ -121,7 +125,7 @@
           android:fontFamily="@font/pork_6"
           android:layout_weight="1"
           android:text="소아청소년과"
-          android:drawableTop="@drawable/chikd_icon"
+          android:drawableTop="@drawable/child_icon"
           android:background="#00000000"/>
 
       <Button
@@ -171,33 +175,49 @@
     </TableRow>
   </TableLayout>
 
-  <Button
-      android:id="@+id/chkCenter"
+  <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:fontFamily="@font/pork_6"
-      android:background="#3300ff00"
-      android:layout_margin="20dp"
-      android:text="건강검진센터"
-      android:drawableTop="@drawable/chkcenter_icon" />
+      android:layout_marginTop="15dp">
 
-  <Button
-      android:id="@+id/emergencyRoom"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:fontFamily="@font/pork_6"
-      android:background="#aaff0000"
-      android:text="응급실"
-      android:layout_marginLeft="20dp"
-      android:layout_marginRight="20dp"
-      android:drawableTop="@drawable/emergency_icon" />
+    <Button
+        android:id="@+id/chkCenter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_weight="1"
+        android:background="#3300ff00"
+        android:drawableTop="@drawable/chkcenter_icon"
+        android:fontFamily="@font/pork_6"
+        android:text="건강검진센터"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/emergencyRoom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_weight="1"
+        android:background="#aaff0000"
+        android:drawableTop="@drawable/emergency_icon"
+        android:fontFamily="@font/pork_6"
+        android:text="응급실"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
 
   <Button
       android:id="@+id/setting"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:fontFamily="@font/pork_6"
-      android:layout_margin="20dp"
+      android:layout_margin="10dp"
       android:text="보호자 연락 기능" />
 
 </LinearLayout>
