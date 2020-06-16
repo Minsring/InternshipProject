@@ -114,11 +114,11 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 }
                 else{
                     lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                            10000,
+                            300000,
                             1,
                             gpsLocationListener);
                     lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                            10000,
+                            300000,
                             1,
                             gpsLocationListener);
                 }
@@ -189,11 +189,11 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                     }
                     else{
                         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                                10000,
+                                300000,
                                 1,
                                 gpsLocationListener);
                         lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                                10000,
+                                300000,
                                 1,
                                 gpsLocationListener);
                     }
