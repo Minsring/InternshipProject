@@ -124,6 +124,10 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 }
             }
             else{
+                regCircle.setMap(null);
+                regMarker.setMap(null);
+                circle.setMap(null);
+                marker.setMap(null);
                 lm.removeUpdates(gpsLocationListener);
                 layoutRadius.setVisibility(View.INVISIBLE);
                 mapRadius.setVisibility(View.INVISIBLE);
@@ -197,7 +201,10 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 else{
                     save();
                     lm.removeUpdates(gpsLocationListener);
-
+                    regCircle.setMap(null);
+                    regMarker.setMap(null);
+                    circle.setMap(null);
+                    marker.setMap(null);
                     layoutRadius.setVisibility(View.INVISIBLE);
                     mapRadius.setVisibility(View.INVISIBLE);
                     button.setVisibility(View.INVISIBLE);
@@ -372,8 +379,8 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         switchState= appData.getBoolean("ISCHECKED",false);
         savedata = appData.getBoolean("SAVEDATA", false);
         radius = appData.getFloat("RADIUS", 0.2F);
-        centerLat = appData.getFloat("LAT", 36.8851976F);
-        centerLng = appData.getFloat("LNG", 126.7735638F);
+        centerLat = appData.getFloat("LAT", 36.4735165F);
+        centerLng = appData.getFloat("LNG", 128.5024796F);
         switchFlag = appData.getInt("FLAG", 0);
     }
 
