@@ -17,15 +17,16 @@
         android:layout_marginBottom="20dp"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20sp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:text="보호자 문자전송 설정"
-            android:gravity="center"/>
+            android:fontFamily="@font/pork_3"/>
     </LinearLayout>
 
     <LinearLayout
@@ -39,7 +40,7 @@
             android:text="배터리 20% 미만일 경우"
             android:fontFamily="@font/pork_3"
             android:textSize="20sp"
-            android:layout_marginRight="80dp"/>
+            android:layout_marginRight="80dp" />
 
         <Switch
             android:id="@+id/switch1"
