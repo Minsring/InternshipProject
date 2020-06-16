@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -27,7 +28,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
-public class User extends AppCompatActivity implements SensorEventListener {
+public class User extends AppCompatActivityPlusStatus implements SensorEventListener {
 
     Button allSub, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub, hanSub, binyoSub, bogun, chkCenter, emergencyRoom, setting;
     private SensorManager sensorManager;
@@ -48,6 +49,11 @@ public class User extends AppCompatActivity implements SensorEventListener {
         setContentView(R.layout.user);
         appData = getSharedPreferences("appData", MODE_PRIVATE);
         load();
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            // 21 버전 이상일 때
+            getWindow().setStatusBarColor(Color.WHITE);
+        }
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         stepsensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
