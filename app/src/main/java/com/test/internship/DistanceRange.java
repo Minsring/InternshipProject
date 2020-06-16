@@ -76,9 +76,13 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         circle=new CircleOverlay();
         polygon=new PolygonOverlay();
         switchFlag=0;
+
+
+
         final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         appData = getSharedPreferences("appData", MODE_PRIVATE);
 
+        // 저장된 기록 로딩
         load();
         if(savedata){
             switchRadius.setChecked(switchState);
@@ -106,6 +110,8 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
 //            }
 
         }
+
+        // 접근 권한 설정
         int permissionCheck= ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         if(permissionCheck!= PackageManager.PERMISSION_GRANTED){
             Toast.makeText(this,"권한승인필요",Toast.LENGTH_LONG).show();
@@ -117,6 +123,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             }
         }
 
+        // Map 생성
         FragmentManager fm = getSupportFragmentManager();
 
         MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map123);
@@ -126,11 +133,18 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         locationSource =
                 new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
 
-
-
+        // okay 버튼 리스너 연결
         button = findViewById(R.id.okay);
-        button.setOnClickListener(buttonListener);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                save();
+                Toast.makeText(getApplicationContext(), "등록되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
+
+        // 똑딱버튼 리스너 연결
         switchRadius.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @RequiresApi(api = Build.VERSION_CODES.M)
@@ -167,8 +181,9 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             }
         });
 
-    }
+    }// 요까지 onCreate
 
+    // 현재위치가 바뀌면 호출되는 리스너너
     final LocationListener gpsLocationListener = new LocationListener() {
         public void onLocationChanged(Location location) {
 
@@ -198,17 +213,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     };
 
 
-
-
-    View.OnClickListener buttonListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            save();
-            Toast.makeText(getApplicationContext(), "등록되었습니다.", Toast.LENGTH_SHORT).show();
-
-        }
-    };
-
+    // 위치 권한 허가
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions,  @NonNull int[] grantResults) {
@@ -232,6 +237,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 requestCode, permissions, grantResults);
     }
 
+    // 지도가 생성되면 자동으로 호출
     @UiThread
     @Override
     public void onMapReady(@NonNull final NaverMap naverMap) {
@@ -272,7 +278,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         uiSettings.setLocationButtonEnabled(true);
 
 
-
+        // 지도 위를 클릭하면 마커가 생기고 화면 중앙으로 카메라 이동
         NaverMap.OnMapClickListener mapListener = new NaverMap.OnMapClickListener() {
             @Override
             public void onMapClick(@NonNull PointF pointF, @NonNull LatLng latLng) {
@@ -302,6 +308,8 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         };
         naverMap.setOnMapClickListener(mapListener);
     }
+
+    // 데이터 저장
     public void save(){
         SharedPreferences.Editor editor = appData.edit();
         editor.putBoolean("ISCHECKED",switchRadius.isChecked());
@@ -312,6 +320,8 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         editor.putInt("FLAG", switchFlag);
         editor.apply();
     }
+
+    // 데이터 로딩
     private void load(){
         switchState= appData.getBoolean("ISCHECKED",false);
         savedata = appData.getBoolean("SAVEDATA", false);
