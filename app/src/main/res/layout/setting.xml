@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:padding="20dp"
         android:text="추가 기능 설정"
+        android:textColor="#000000"
         android:fontFamily="@font/pork_6"
         android:textSize="30sp"
         android:layout_marginBottom="20dp"/>
@@ -27,49 +28,62 @@
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:text="보호자 문자전송 설정"
+            android:textColor="#333333"
             android:fontFamily="@font/pork_3"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="20dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="배터리 20% 미만일 경우"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
             android:fontFamily="@font/pork_3"
+            android:text="배터리 20% 미만일 경우"
             android:textSize="20sp"
-            android:layout_marginRight="100dp"
-            android:paddingBottom="5dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Switch
             android:id="@+id/switch1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="20dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="움직임 없을 경우"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/pork_3"
+            android:text="움직임 없을 경우"
             android:textSize="20sp"
-            android:layout_marginRight="170dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Switch
             android:id="@+id/switch2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp" />
-    </LinearLayout>
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/btnregister"
