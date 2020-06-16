@@ -33,31 +33,40 @@
           android:id="@+id/internalSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
-          android:text="내과"/>
+          android:background="#00000000"
+          android:drawableTop="@drawable/internal_icon"
+          android:fontFamily="@font/pork_6"
+          android:scaleType="fitCenter"
+          android:text="내과" />
 
       <Button
           android:id="@+id/boneSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
-          android:text="정형외과"/>
+          android:background="#00000000"
+          android:drawableTop="@drawable/bone_icon"
+          android:fontFamily="@font/pork_6"
+          android:scaleType="fitCenter"
+          android:text="정형외과" />
 
       <Button
           android:id="@+id/hanSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
-          android:text="한의원"/>
+          android:background="#00000000"
+          android:drawableTop="@drawable/han_icon"
+          android:fontFamily="@font/pork_6"
+          android:scaleType="fitCenter"
+          android:text="한의원" />
 
     </TableRow>
     <TableRow
         android:id="@+id/medicalSubjects2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="100dp">
 
       <Button
           android:id="@+id/dentalSub"
@@ -65,7 +74,10 @@
           android:layout_height="wrap_content"
           android:fontFamily="@font/pork_6"
           android:layout_weight="1"
-          android:text="치과"/>
+          android:text="치과"
+          android:drawableTop="@drawable/dental_icon"
+          android:background="#00000000"
+          />
 
       <Button
           android:id="@+id/entSub"
@@ -73,7 +85,9 @@
           android:layout_height="wrap_content"
           android:fontFamily="@font/pork_6"
           android:layout_weight="1"
-          android:text="이비인후과"/>
+          android:text="이비인후과"
+          android:drawableTop="@drawable/ent_icon"
+          android:background="#00000000"/>
 
 
       <Button
@@ -82,8 +96,9 @@
           android:layout_height="wrap_content"
           android:fontFamily="@font/pork_6"
           android:layout_weight="1"
-          android:text="안과"/>
-
+          android:text="안과"
+          android:drawableTop="@drawable/eye_icon"
+          android:background="#00000000"/>
 
     </TableRow>
     <TableRow
@@ -96,14 +111,18 @@
           android:layout_height="wrap_content"
           android:fontFamily="@font/pork_6"
           android:layout_weight="1"
-          android:text="피부과"/>
+          android:text="피부과"
+          android:drawableTop="@drawable/skin_icon"
+          android:background="#00000000"/>
       <Button
           android:id="@+id/childSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:fontFamily="@font/pork_6"
           android:layout_weight="1"
-          android:text="소아청소년과"/>
+          android:text="소아청소년과"
+          android:drawableTop="@drawable/chikd_icon"
+          android:background="#00000000"/>
 
       <Button
           android:id="@+id/obstSub"
@@ -111,7 +130,9 @@
           android:layout_height="wrap_content"
           android:fontFamily="@font/pork_6"
           android:layout_weight="1"
-          android:text="산부인과"/>
+          android:text="산부인과"
+          android:drawableTop="@drawable/obst_icon"
+          android:background="#00000000"/>
 
     </TableRow>
     <TableRow
@@ -124,14 +145,18 @@
           android:layout_height="wrap_content"
           android:fontFamily="@font/pork_6"
           android:layout_weight="1"
-          android:text="신경외과"/>
+          android:text="신경외과"
+          android:drawableTop="@drawable/neuro_icon"
+          android:background="#00000000"/>
       <Button
           android:id="@+id/binyoSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:fontFamily="@font/pork_6"
           android:layout_weight="1"
-          android:text="비뇨기과"/>
+          android:text="비뇨기과"
+          android:drawableTop="@drawable/binyo_icon"
+          android:background="#00000000"/>
       <Button
           android:id="@+id/bogun"
           android:layout_width="0dp"
@@ -139,7 +164,9 @@
           android:fontFamily="@font/pork_6"
           android:layout_weight="1"
           android:text="보건소"
-          android:textColor="#0000ff"/>
+          android:textColor="#0000ff"
+          android:drawableTop="@drawable/bogun_icon"
+          android:background="#00000000"/>
 
     </TableRow>
   </TableLayout>
@@ -151,7 +178,8 @@
       android:fontFamily="@font/pork_6"
       android:background="#3300ff00"
       android:layout_margin="20dp"
-      android:text="건강검진센터"/>
+      android:text="건강검진센터"
+      android:drawableTop="@drawable/chkcenter_icon" />
 
   <Button
       android:id="@+id/emergencyRoom"
@@ -161,7 +189,8 @@
       android:background="#aaff0000"
       android:text="응급실"
       android:layout_marginLeft="20dp"
-      android:layout_marginRight="20dp"/>
+      android:layout_marginRight="20dp"
+      android:drawableTop="@drawable/emergency_icon" />
 
   <Button
       android:id="@+id/setting"
