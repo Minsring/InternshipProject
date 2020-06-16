@@ -25,7 +25,6 @@ import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.naver.maps.geometry.LatLng;
@@ -104,6 +103,32 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         load();
         if(savedata){
             switchRadius.setChecked(switchState);
+            if(switchRadius.isChecked()==true){
+                layoutRadius.setVisibility(View.VISIBLE);
+                mapRadius.setVisibility(View.VISIBLE);
+                button.setVisibility(View.VISIBLE);
+                if ( Build.VERSION.SDK_INT >= 23 &&
+                        ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
+                    ActivityCompat.requestPermissions( DistanceRange.this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
+                            MY_PERMISSIONS_REQUEST_LOCATION );
+                }
+                else{
+                    lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                            10000,
+                            1,
+                            gpsLocationListener);
+                    lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                            10000,
+                            1,
+                            gpsLocationListener);
+                }
+            }
+            else{
+                lm.removeUpdates(gpsLocationListener);
+                layoutRadius.setVisibility(View.INVISIBLE);
+                mapRadius.setVisibility(View.INVISIBLE);
+                button.setVisibility(View.INVISIBLE);
+            }
         }
 
         // 접근 권한 설정

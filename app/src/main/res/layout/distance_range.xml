@@ -38,7 +38,7 @@
             android:fontFamily="@font/pork_3"
             android:textSize="30sp"
             android:hint="반경을 입력해주세요."
-            android:inputType="numberDecimal"/>
+            android:inputType="number"/>
 
         <TextView
             android:layout_weight="1"
