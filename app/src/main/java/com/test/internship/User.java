@@ -28,7 +28,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
-public class User extends AppCompatActivityPlusStatus implements SensorEventListener {
+public class User extends AppCompatActivity implements SensorEventListener {
 
     Button allSub, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub, hanSub, binyoSub, bogun, chkCenter, emergencyRoom, setting;
     private SensorManager sensorManager;

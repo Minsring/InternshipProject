@@ -168,7 +168,6 @@
           android:fontFamily="@font/pork_6"
           android:layout_weight="1"
           android:text="보건소"
-          android:textColor="#0000ff"
           android:drawableTop="@drawable/bogun_icon"
           android:background="#00000000"/>
 
