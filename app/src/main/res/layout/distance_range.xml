@@ -25,20 +25,23 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:fontFamily="@font/pork_3"
             android:text="반경: "
             android:layout_marginLeft="10dp"/>
 
         <EditText
-            android:layout_weight="4"
+            android:layout_weight="3"
             android:id="@+id/radiusEdit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pork_3"
-            android:textSize="30sp"
-            android:hint="반경을 입력해주세요."
-            android:inputType="number"/>
+            android:textSize="25sp"
+            android:hint="0.2"
+            android:inputType="numberDecimal"
+            android:gravity="right"
+            android:imeOptions="actionDone"
+            />
 
         <TextView
             android:layout_weight="1"
@@ -46,8 +49,20 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/pork_3"
             android:text="km"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:gravity="center"/>
+        <Button
+            android:id="@+id/okay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/pork_3"
+            android:text="등록"
+            android:textSize="20sp"
+            android:layout_marginRight="10dp"
+
+            />
+
     </LinearLayout>
 
 
@@ -58,14 +73,7 @@
         android:layout_weight="10"
         android:name="com.naver.maps.map.MapFragment"/>
 
-    <Button
-        android:id="@+id/okay"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:fontFamily="@font/pork_3"
-        android:text="등록"
-        android:textSize="30sp"/>
+
 
 </LinearLayout>
 
