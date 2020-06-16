@@ -12,9 +12,10 @@
         android:fontFamily="@font/pork_6"
         android:text="이동반경설정 및 알림서비스       "
         android:textSize="25sp"
-        android:layout_marginLeft="10dp"
-        ></Switch>
+        android:layout_marginLeft="10dp"/>
+
     <LinearLayout
+        android:id="@+id/layoutRadius"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
@@ -51,7 +52,7 @@
 
 
     <fragment
-        android:id="@+id/map123"
+        android:id="@+id/mapRadius"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10"

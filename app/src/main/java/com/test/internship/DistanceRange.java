@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.naver.maps.geometry.LatLng;
@@ -63,6 +65,8 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     CircleOverlay regCircle;
     EditText radiusEdit;
     Button button;
+    LinearLayout layoutRadius;
+    View mapRadius;
     float radius;
     float centerLat;
     float centerLng;
@@ -81,6 +85,9 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         setContentView(R.layout.distance_range);
         radiusEdit=findViewById(R.id.radiusEdit);
         switchRadius=(Switch)findViewById(R.id.switchRadius);
+        mapRadius = findViewById(R.id.mapRadius);
+        layoutRadius = findViewById(R.id.layoutRadius);
+        button = findViewById(R.id.okay);
         savedata = false;
         marker = new Marker();
         regMarker = new Marker();
@@ -114,7 +121,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         // Map 생성
         FragmentManager fm = getSupportFragmentManager();
 
-        MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map123);
+        MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.mapRadius);
 
         mapFragment.getMapAsync(this);
 
@@ -122,7 +129,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
 
         // okay 버튼 리스너 연결
-        button = findViewById(R.id.okay);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -141,6 +147,11 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked){
                     save();
+
+                    layoutRadius.setVisibility(View.VISIBLE);
+                    mapRadius.setVisibility(View.VISIBLE);
+                    button.setVisibility(View.VISIBLE);
+
 
                     if ( Build.VERSION.SDK_INT >= 23 &&
                             ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
@@ -161,6 +172,10 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 else{
                     save();
                     lm.removeUpdates(gpsLocationListener);
+
+                    layoutRadius.setVisibility(View.INVISIBLE);
+                    mapRadius.setVisibility(View.INVISIBLE);
+                    button.setVisibility(View.INVISIBLE);
                 }
             }
         });
