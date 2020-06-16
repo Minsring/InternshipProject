@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="50dp"
+        android:fontFamily="@font/pork_6"
         android:text="보호자 연락처 등록"
         android:textSize="30sp" />
 
@@ -24,6 +25,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/pork_3"
                 android:text="보호자 이름 : "
                 android:textStyle="bold"/>
             <EditText
@@ -40,6 +42,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/pork_3"
                 android:text="연락처(-제외 입력) : "
                 android:textStyle="bold"/>
 
@@ -47,6 +50,7 @@
                 android:id="@+id/pPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/pork_3"
                 android:layout_marginBottom="40dp"
                 android:inputType="phone"
                 android:textSize="15sp" />
@@ -57,6 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="@font/pork_3"
             android:text="등록"
             android:textSize="15sp" />
 
@@ -69,6 +74,7 @@
         android:id="@+id/protectorinfolist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/pork_6"
         android:text="등록된 보호자 정보 목록"
         android:textStyle="bold"
         android:textSize="25sp"
@@ -83,6 +89,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/pork_3"
             android:text="정보를 삭제하려면 해당 리스트를 꾸욱 눌러주세요"
             android:textSize="15sp"
             android:gravity="center"/>
