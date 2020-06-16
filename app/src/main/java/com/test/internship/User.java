@@ -30,7 +30,8 @@ import java.util.TimerTask;
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class User extends AppCompatActivity implements SensorEventListener {
 
-    Button allSub, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub, hanSub, binyoSub, bogun, chkCenter, emergencyRoom, setting;
+    Button allSub, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub,
+            hanSub, binyoSub, bogun, chkCenter, emergencyRoom, contactProtector, fence;
     private SensorManager sensorManager;
     private Sensor stepsensor;
     static int mStepDetector;
@@ -105,7 +106,8 @@ public class User extends AppCompatActivity implements SensorEventListener {
         chkCenter = findViewById(R.id.chkCenter);               // 건강검진센터
         emergencyRoom = findViewById(R.id.emergencyRoom);       // 응급실
 
-        setting = findViewById(R.id.setting);                   // 설정
+        contactProtector = findViewById(R.id.contactProtector);                   // 설정1
+        fence = findViewById(R.id.fence);                   // 설정2
 
         // 리스너
         allSub.setOnClickListener(listener);
@@ -123,7 +125,8 @@ public class User extends AppCompatActivity implements SensorEventListener {
         bogun.setOnClickListener(listener);
         chkCenter.setOnClickListener(listener);
         emergencyRoom.setOnClickListener(listener);
-        setting.setOnClickListener(listener);
+        contactProtector.setOnClickListener(listener);
+        fence.setOnClickListener(listener);
 
 
 
@@ -241,8 +244,12 @@ public class User extends AppCompatActivity implements SensorEventListener {
                     intent.putExtra("진료과", subject);
 //                    startActivity(intent);
                     break;
-                case R.id.setting:
+                case R.id.contactProtector:
                     intent = new Intent(getApplicationContext(), Setting.class);
+//                    startActivity(intent);
+                    break;
+                case R.id.fence:
+                    intent = new Intent(getApplicationContext(), DistanceRange.class);
 //                    startActivity(intent);
                     break;
             }
