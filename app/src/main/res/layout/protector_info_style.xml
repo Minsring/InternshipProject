@@ -3,13 +3,15 @@
     android:id="@+id/item_layout"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="80dp">
     <ImageView
         android:id="@+id/img"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:scaleType="centerInside"
-        android:src="@drawable/ic_launcher_foreground"/>
+        android:layout_marginLeft="30dp"
+        android:src="@drawable/person5"
+        android:layout_gravity="center_vertical"/>
 
     <LinearLayout
         android:id="@+id/body"
