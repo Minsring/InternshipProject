@@ -228,7 +228,7 @@ public class User extends AppCompatActivity implements SensorEventListener {
                     intent = new Intent(getApplicationContext(), DistanceRange.class);
                     break;
             }
-            if(intent != null) startActivity(intent);    // 다른 처리 없다면 여기서 한번에 화면 전환
+            if(intent != null) startActivity(intent);
         }
     };
     @Override

@@ -9,7 +9,6 @@ import ted.gun0912.clustering.clustering.TedClusterItem;
 import ted.gun0912.clustering.geometry.TedLatLng;
 
 
-// 객체를 직렬화해야 액티비티에 데이터 객체를 넘겨줄 수 있다.
 // 클러스터링을 위한 라이브러리 추가
 public class HospitalData implements Serializable, TedClusterItem {
     // 클래스의 버전을 의미, 객체를 전달하고 수신할 때 사용하는 클래스 파일이 동일한지 체크하는 용도로 사용
@@ -18,9 +17,8 @@ public class HospitalData implements Serializable, TedClusterItem {
     private String hospitalName = "병원이름";
     private String address = "주소";
     private String callNumber = "전화번호";
-//    private String openDay = "여는요일";    // 요일마다 영업시간이 바뀐다면?
-    private String distance = "0km";         // 목록에 표시할 거라면 판단하는 함수 필요
-    private String openClosed = "영업중";         // 목록에 표시할 거라면 판단하는 함수 필요
+    private String distance = "0km";
+    private String openClosed = "영업중";
     private ArrayList<String> subjects = new ArrayList<String>();
     private ArrayList<String> openTime = new ArrayList<String>();
     private ArrayList<String> closedTime = new ArrayList<String>();

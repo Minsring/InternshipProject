@@ -24,7 +24,6 @@ import static com.test.internship.Register.person5_n;
 import static com.test.internship.Register.person5_p;
 import static com.test.internship.Register.persondata;
 
-///커스텀 리스너 정의 -> 추가
 public class RegisterAdapter extends BaseAdapter {
 
     private Context mcontext = null;

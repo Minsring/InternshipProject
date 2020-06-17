@@ -3,8 +3,8 @@
   <color name="colorPrimary">#008577</color>
   <color name="colorPrimaryDark">#00574B</color>
   <color name="colorAccent">#D81B60</color>
-  <color name="minokPink">#FF0498</color>
-  <color name="minokGray">#d1d1d1</color>
+  <color name="hospitalPink">#FF0498</color>
+  <color name="hospitalGray">#d1d1d1</color>
   <color name="strawberryMilk">#Fbd9d8</color>
   <color name="mainBackground">#F7ECA9</color>
   <color name="mainItem">#FFF9D7</color>

@@ -124,7 +124,6 @@ public class Setting extends AppCompatActivity {
                     public void run() {
                         flagMotion++;
                         if (mStepDetector < 20){ //20걸음 미만이라면 보호자에게 메세지 보내기
-//
                             if(person1_n!=null && person1_p != null){
                                 name = person1_n;
                                 phoneNo = person1_p;

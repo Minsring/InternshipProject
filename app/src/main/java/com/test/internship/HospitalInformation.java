@@ -50,7 +50,7 @@ public class HospitalInformation extends AppCompatActivity implements OnMapReady
             @Override
             public void onClick(View view) {
                 String number = hospital.getCallNumber();
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number)); //다이얼로 연결
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
                 startActivity(intent);
             }
         });

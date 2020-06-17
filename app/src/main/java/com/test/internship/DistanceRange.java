@@ -95,7 +95,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         switchFlag=0;
 
 
-
         final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         appData = getSharedPreferences("appData", MODE_PRIVATE);
 
@@ -259,7 +258,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         public void onProviderDisabled(String provider) {
         }
     };
-
 
     // 위치 권한 허가
     @Override

@@ -50,8 +50,6 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
     }
 
     // item으로 만든 itemView를 담아두는 뷰 홀더
-    // 일단 필요한 객체의 수만 ViewHolder에 담아서 화면에 뿌려준다
-    // 이벤트 처리를 위해 static -> public으로 변경
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView itemHospitalName, itemSubject;
         TextView itemDistance;
@@ -126,11 +124,9 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
     public HospitalData getItem(int position){
         return items.get(position);
     }
-    // 해당위치의 item을 변경하는 함수
     public void setItem(int position, HospitalData item){
         items.set(position, item);
     }
-    // 리스트를 set
     public void setItems(ArrayList<HospitalData> items){
         this.items = items;
     }
