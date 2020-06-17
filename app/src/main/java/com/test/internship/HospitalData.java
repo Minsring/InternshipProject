@@ -29,8 +29,6 @@ public class HospitalData implements Serializable, TedClusterItem {
     private double lat = 0.0f;     // 위도
     private double lng = 0.0f;     // 경도
 
-    // 생성자 -> 사용할지는 모르게씀
-    // 일단 distance와 openClosed는 제외하고 만듬
     public HospitalData(){}
     public HospitalData(double lat, double lng){
         this.lat = lat;
@@ -58,14 +56,13 @@ public class HospitalData implements Serializable, TedClusterItem {
     // 일단 첫번째 ArrayList 원소 보이게
     public String getSubject(int num) { return subjects.get(num); }
     public int getNumSubjects() { return numSubjects;}
-//    public String getOpenDay() { return openDay; }
+
     public String getDistance() { return distance; }
     public String getOpenClosed() { return openClosed; }
     public void setHospitalName(String name){ hospitalName=name; }
     public void setAddress(String address){ this.address=address; }
     public void setCallNumber(String callNumber){ this.callNumber=callNumber; }
-//    public void setSubject(String subject){ this.subject=subject; }
-//    public void setOpenDay(String openDay){this.openDay=openDay;}
+
     public void setDistance(String distance){this.distance=distance;}
     public void setOpenClosed(String openClosed){this.openClosed=openClosed;}
     public void setNumSubjects(int numSubjects){ this.numSubjects = numSubjects;}

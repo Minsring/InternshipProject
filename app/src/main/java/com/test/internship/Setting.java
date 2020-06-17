@@ -123,7 +123,7 @@ public class Setting extends AppCompatActivity {
                     @Override
                     public void run() {
                         flagMotion++;
-                        if (mStepDetector < 20){//20걸음 미만이라면 보호자에게 메세지 보내기
+                        if (mStepDetector < 20){ //20걸음 미만이라면 보호자에게 메세지 보내기
 //
                             if(person1_n!=null && person1_p != null){
                                 name = person1_n;
@@ -163,7 +163,6 @@ public class Setting extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                // 스위치 버튼이 체크되었는지 검사하여 텍스트뷰에 각 경우에 맞게 출력합니다.
                 if (isChecked){
                     save();
                     tt1 = new TimerTask() {
@@ -223,7 +222,6 @@ public class Setting extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                // 스위치 버튼이 체크되었는지 검사하여 텍스트뷰에 각 경우에 맞게 출력합니다.
                 if (isChecked){
                     save();
                     tt2 = new TimerTask() {
@@ -318,6 +316,7 @@ public class Setting extends AppCompatActivity {
         flagBattery=appData.getInt("FLAG_SETTING1", 0);
         flagMotion=appData.getInt("FLAG_SETTING2", 0);
     }
+
     //알림창 실행
     public void showNoti(){
         builder = null;
@@ -330,14 +329,10 @@ public class Setting extends AppCompatActivity {
             //하위 버전일 경우
         }else{ builder = new NotificationCompat.Builder(this)
         ; }
-        //알림창 제목
         builder.setContentTitle("배터리 부족 알림");
-        // 알림창 메시지
         builder.setContentText("배터리 부족!! 보호자에 알림을 전송하겠습니다.");
-        //알림창 아이콘
         builder.setSmallIcon(R.drawable.ic_launcher_foreground);
         Notification notification = builder.build();
-        //알림창 실행
         manager.notify(1,notification);
     }
 
@@ -348,9 +343,7 @@ public class Setting extends AppCompatActivity {
             try {
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자의 휴대전화 배터리가 15% 미만입니다 !!", null, null);
-//                Toast.makeText(getApplicationContext(), "메세지 전송!", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
-//                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         }
@@ -358,9 +351,7 @@ public class Setting extends AppCompatActivity {
             try {
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자의 일일 걸음 수가 20보 미만입니다 !!", null, null);
-                //Toast.makeText(getApplicationContext(), "메세지 전송!", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
-                // Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         }
@@ -368,9 +359,7 @@ public class Setting extends AppCompatActivity {
             try {
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자님께서 설정한 이동 반경을 벗어나셨습니다 !!", null, null);
-                //Toast.makeText(getApplicationContext(), "메세지 전송!", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
-                // Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         }

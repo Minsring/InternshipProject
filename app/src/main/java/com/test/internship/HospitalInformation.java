@@ -132,9 +132,6 @@ public class HospitalInformation extends AppCompatActivity implements OnMapReady
         // 현재위치
         locationSource =
                 new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
-
-
-
     }
     private void changeView(int index){
         LinearLayout linearLayout1 = (LinearLayout) findViewById(R.id.content_info);
@@ -153,8 +150,7 @@ public class HospitalInformation extends AppCompatActivity implements OnMapReady
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (locationSource.onRequestPermissionsResult(
                 requestCode, permissions, grantResults)) {
             if (!locationSource.isActivated()) {
@@ -169,8 +165,6 @@ public class HospitalInformation extends AppCompatActivity implements OnMapReady
     @Override  // 네이버 맵에서 오버레이 추가, 상호작용하는 등 기능 대부분을 이 클래스 에서 제공
     public void onMapReady(@NonNull NaverMap naverMap) {
         this.naverMap = naverMap;
-
-//        Toast.makeText(this, "위도: "+hosCoord.latitude +" 경도: "+hosCoord.longitude, Toast.LENGTH_SHORT).show();
 
         // 지도 타입 설정
         naverMap.setMapType(NaverMap.MapType.Basic);
@@ -199,13 +193,12 @@ public class HospitalInformation extends AppCompatActivity implements OnMapReady
         uiSettings.setZoomControlEnabled(true);
         uiSettings.setLocationButtonEnabled(true);
         uiSettings.setTiltGesturesEnabled(false);
-//        uiSettings.setLogoClickEnabled(false);
 
         naverMap.setCameraPosition(cameraPosition);
         naverMap.setLocationSource(locationSource);
 
         // 마커 생성
-        Marker marker = new Marker();   // 마커객체 생성
+        Marker marker = new Marker();
         marker.setPosition(latLng);
         marker.setCaptionText(hospital.getHospitalName());
         if(hospital.getOpenClosed().equals("진료중")) marker.setIcon(OverlayImage.fromResource(R.drawable.custom_icon_open));

@@ -88,7 +88,6 @@ public class SubjectList extends AppCompatActivity {
             public void onItemClick(View v, int position) {
                 // 클릭시 이벤트를 SubjectList에서 처리
                 HospitalData hospital = subjectListAdapter.getItem(position);
-//                Toast.makeText(getApplicationContext(), "클릭한 병원 이름: "+hospital.getHospitalName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), HospitalInformation.class);
                 intent.putExtra("병원", (Serializable)hospital);
                 startActivity(intent);
@@ -119,11 +118,9 @@ public class SubjectList extends AppCompatActivity {
                     intent.putExtra("병원", (Serializable)hospital);
                     intent.putExtra("진료과", subject);
                     startActivity(intent);
-
                 }
             });
         } //응급실 아니면 그냥 itemlistener와 같은 역할로 다음 화면으로 넘어가야한다.
-
     }
 
 
@@ -273,7 +270,6 @@ public class SubjectList extends AppCompatActivity {
                 }
                 eventType = parser.next();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -286,22 +282,13 @@ public class SubjectList extends AppCompatActivity {
             Intent intent = null;
             switch (v.getId()){
                 case R.id.mapBtn:
-//                    intent = new Intent(getApplicationContext(), SubjectListMap.class);
                     intent = new Intent(getApplicationContext(), SubjectListMap.class);
                     intent.putExtra("열린병원리스트",openHospital);
                     intent.putExtra("닫은병원리스트",closedHospital);
                     intent.putExtra("진료과",subject);
-//                    startActivity(intent);
                     break;
             }
-//            if(intent.getSerializableExtra("열린병원리스트")==null){
-//                Toast.makeText(getApplicationContext(),"현재 열린 병원이 없습니다.",Toast.LENGTH_LONG).show();
-//            }
-//            else{
-//                startActivity(intent);
-//            }
              if(intent != null) startActivity(intent);    // 다른 처리 없다면 여기서 한번에 화면 전환
-
         }
     };
 }

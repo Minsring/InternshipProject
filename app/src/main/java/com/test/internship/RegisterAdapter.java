@@ -63,7 +63,6 @@ public class RegisterAdapter extends BaseAdapter {
         ImageView img = convertView.findViewById(R.id.img);
         TextView personname = convertView.findViewById(R.id.personname);
         TextView personnum = convertView.findViewById(R.id.personnum);
-//        Button btndelete = convertView.findViewById(R.id.btndelete);
         LinearLayout item_layout = (LinearLayout) convertView.findViewById(R.id.item_layout);
 
         img.setImageResource(mdata.get(position).getImg());
