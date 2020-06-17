@@ -1,10 +1,8 @@
 package com.test.internship;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -51,23 +49,23 @@ public class Register extends AppCompatActivity {
 
         if (saveData) {
             if (person1_n != null && person1_p != null) {
-                persondata.add(new ProtectorData(R.drawable.person6, person1_n, person1_p));
+                persondata.add(new ProtectorData(R.drawable.person, person1_n, person1_p));
                 listView.setAdapter(registerAdapter);
             }
             if (person2_n != null && person2_p != null) {
-                persondata.add(new ProtectorData(R.drawable.t, person2_n, person2_p));
+                persondata.add(new ProtectorData(R.drawable.person, person2_n, person2_p));
                 listView.setAdapter(registerAdapter);
             }
             if (person3_n != null && person3_p != null) {
-                persondata.add(new ProtectorData(R.drawable.ic_launcher_foreground, person3_n, person3_p));
+                persondata.add(new ProtectorData(R.drawable.person, person3_n, person3_p));
                 listView.setAdapter(registerAdapter);
             }
             if (person4_n != null && person4_p != null) {
-                persondata.add(new ProtectorData(R.drawable.ic_launcher_foreground, person4_n, person4_p));
+                persondata.add(new ProtectorData(R.drawable.person, person4_n, person4_p));
                 listView.setAdapter(registerAdapter);
             }
             if (person5_n != null && person5_p != null) {
-                persondata.add(new ProtectorData(R.drawable.ic_launcher_foreground, person5_n, person5_p));
+                persondata.add(new ProtectorData(R.drawable.person, person5_n, person5_p));
                 listView.setAdapter(registerAdapter);
             }
         }
@@ -86,35 +84,35 @@ public class Register extends AppCompatActivity {
                         if (person1_n == null && person1_p == null) {
                             person1_p = value_p;
                             person1_n = value_n;
-                            persondata.add(new ProtectorData(R.drawable.person1, value_n, value_p));
+                            persondata.add(new ProtectorData(R.drawable.person, value_n, value_p));
                             Toast.makeText(Register.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
                             listView.setAdapter(registerAdapter);
                             save(0);
                         } else if (person2_n == null && person2_p == null) {
                             person2_p = value_p;
                             person2_n = value_n;
-                            persondata.add(new ProtectorData(R.drawable.person2, value_n, value_p));
+                            persondata.add(new ProtectorData(R.drawable.person, value_n, value_p));
                             Toast.makeText(Register.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
                             listView.setAdapter(registerAdapter);
                             save(1);
                         } else if (person3_n == null && person3_p == null) {
                             person3_p = value_p;
                             person3_n = value_n;
-                            persondata.add(new ProtectorData(R.drawable.person4, value_n, value_p));
+                            persondata.add(new ProtectorData(R.drawable.person, value_n, value_p));
                             Toast.makeText(Register.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
                             listView.setAdapter(registerAdapter);
                             save(2);
                         } else if (person4_n == null && person4_p == null) {
                             person4_p = value_p;
                             person4_n = value_n;
-                            persondata.add(new ProtectorData(R.drawable.person5, value_n, value_p));
+                            persondata.add(new ProtectorData(R.drawable.person, value_n, value_p));
                             Toast.makeText(Register.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
                             listView.setAdapter(registerAdapter);
                             save(3);
                         } else if (person5_n == null && person5_p == null) {
                             person5_p = value_p;
                             person5_n = value_n;
-                            persondata.add(new ProtectorData(R.drawable.person5, value_n, value_p));
+                            persondata.add(new ProtectorData(R.drawable.person, value_n, value_p));
                             Toast.makeText(Register.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
                             listView.setAdapter(registerAdapter);
                             save(4);
