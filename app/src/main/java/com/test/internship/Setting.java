@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 
 import androidx.annotation.RequiresApi;
@@ -50,6 +52,7 @@ public class Setting extends AppCompatActivity {
     String phoneNo;
     String name;
 
+    ImageView healthImage;
     Button buttonRegister;
     Switch batterySwitch;
     Switch motionSwitch;
@@ -75,6 +78,15 @@ public class Setting extends AppCompatActivity {
         // 배터리 스위치와 움직임 스위치 설정
         batterySwitch = findViewById(R.id.batterySwitch);
         motionSwitch = findViewById(R.id.motionSwitch);
+
+        healthImage=findViewById(R.id.health_image);
+        healthImage.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.mohw.go.kr/react/policy/index.jsp?PAR_MENU_ID=06&MENU_ID=06390104&PAGE=4&topTitle=노인맞춤돌봄서비스"));
+                startActivity(intent);
+            }
+        });
 
         appData = getSharedPreferences("appData", MODE_PRIVATE);
         load();
@@ -278,6 +290,7 @@ public class Setting extends AppCompatActivity {
             }
         });
     }
+
 
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
