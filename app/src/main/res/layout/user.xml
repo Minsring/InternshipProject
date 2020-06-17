@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/mainBackground"
     tools:context=".User">
 
   <Button
@@ -14,9 +15,9 @@
       android:layout_gravity="center"
       android:drawableLeft="@drawable/hospital_icon"
       android:text="   전체 병원 보기   "
-      android:background="@color/customYellow"
+      android:background="@color/mainBackground"
       android:fontFamily="@font/pork_6"
-      android:layout_margin="20dp" />
+      android:layout_marginTop="20dp" />
 
   <!--    TODO: 그리드 뷰(Demo 19 참고)로 아이콘 + 진료과목 나타낼 수 있게 수정-->
   <!--    TODO: 진료과 재배치 or 더 추가하거나 뺄 진료과-->
@@ -24,8 +25,11 @@
       android:id="@+id/medicalSubjects"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginTop="15dp"
       android:layout_marginLeft="20dp"
-      android:layout_marginRight="20dp">
+      android:layout_marginRight="20dp"
+      android:background="@color/mainItem"
+      android:padding="20dp">
 
     <TableRow
         android:id="@+id/medicalSubjects1"
@@ -175,61 +179,56 @@
           android:background="#00000000"/>
 
     </TableRow>
-  </TableLayout>
 
-  <androidx.constraintlayout.widget.ConstraintLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="15dp">
+    <TableRow
+        android:id="@+id/medicalSubjects5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
+            <Button
+                android:id="@+id/chkCenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/chkcenter_icon"
+                android:fontFamily="@font/pork_6"
+                android:text="건강검진센터"
+                android:background="#00000000"/>
+
+            <Button
+                android:id="@+id/emergencyRoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/emergency_icon"
+                android:fontFamily="@font/pork_6"
+                android:text="응급실"
+                android:textColor="#FF0000"
+                android:layout_marginLeft="30dp"
+                android:background="#00000000"/>
+        </TableRow>
+     </TableLayout>
 
     <Button
-        android:id="@+id/chkCenter"
-        android:layout_width="0dp"
+        android:id="@+id/contactProtector"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="100dp"
-        android:layout_weight="1"
-        android:background="@color/customGreen"
-        android:drawableTop="@drawable/chkcenter_icon"
         android:fontFamily="@font/pork_6"
-        android:text="건강검진센터"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@color/customBlue"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:text="보호자 연락 기능"
+        android:textSize="17sp"/>
 
     <Button
-        android:id="@+id/emergencyRoom"
-        android:layout_width="0dp"
+        android:id="@+id/fence"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
-        android:layout_marginRight="100dp"
-        android:layout_weight="1"
-        android:background="#aaff0000"
-        android:drawableTop="@drawable/emergency_icon"
         android:fontFamily="@font/pork_6"
-        android:text="응급실"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-  </androidx.constraintlayout.widget.ConstraintLayout>
-
-  <Button
-      android:id="@+id/contactProtector"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:fontFamily="@font/pork_6"
-      android:layout_margin="10dp"
-      android:text="보호자 연락 기능" />
-
-  <Button
-      android:id="@+id/fence"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:fontFamily="@font/pork_6"
-      android:layout_marginLeft="10dp"
-      android:layout_marginRight="10dp"
-      android:text="울타리 기능" />
-
-
+        android:background="@color/customOrange"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="울타리 기능"
+        android:textSize="17sp"/>
 </LinearLayout>

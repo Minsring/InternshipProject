@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.test.internship.HospitalInformation">
+    tools:context="com.test.internship.HospitalInformation"
+    android:background="@color/mainItem">
 
 
     <TextView
@@ -19,7 +20,8 @@
         android:paddingBottom="10dp"
         android:fontFamily="@font/pork_6"
         android:text="병원 이름"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textColor="#000000"/>
 
 
     <com.google.android.material.tabs.TabLayout
@@ -33,13 +35,15 @@
             android:id="@+id/tab_item1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="병원 정보"/>
+            android:text="병원 정보"
+            android:textColor="#000000"/>
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tab_item2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="지도"/>
+            android:text="지도"
+            android:textColor="#000000"/>
 
 
     </com.google.android.material.tabs.TabLayout>
@@ -61,56 +65,64 @@
                 android:fontFamily="@font/pork_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="25dp"/>
+                android:textSize="25dp"
+                android:textColor="#000000"/>
 
             <TextView
                 android:id="@+id/info_Address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pork_3"
-                android:textSize="25dp"/>
+                android:textSize="25dp"
+                android:textColor="#000000"/>
 
             <TextView
                 android:id="@+id/info_Call"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pork_3"
-                android:textSize="25dp"/>
+                android:textSize="25dp"
+                android:textColor="#000000"/>
 
             <TextView
                 android:id="@+id/info_Subject"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pork_3"
-                android:textSize="25dp"/>
+                android:textSize="25dp"
+                android:textColor="#000000"/>
 
             <TextView
                 android:id="@+id/info_Distance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pork_3"
-                android:textSize="25dp"/>
+                android:textSize="25dp"
+                android:textColor="#000000"/>
 
             <TextView
                 android:id="@+id/info_Weekday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pork_3"
-                android:textSize="25dp"/>
+                android:textSize="25dp"
+                android:textColor="#000000"/>
 
             <TextView
                 android:id="@+id/info_Saturday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pork_3"
-                android:textSize="25dp"/>
+                android:textSize="25dp"
+                android:textColor="#000000"/>
 
             <TextView
                 android:id="@+id/info_Sunday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pork_3"
-                android:textSize="25dp"/>
+                android:textSize="25dp"
+                android:textColor="#000000"/>
 
 
         </LinearLayout>
