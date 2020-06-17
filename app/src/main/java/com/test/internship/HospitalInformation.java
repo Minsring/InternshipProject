@@ -42,10 +42,11 @@ public class HospitalInformation extends AppCompatActivity implements OnMapReady
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hospital_information);
-        Button callHospital = findViewById(R.id.callHospitalBtn);
+
         Intent getIntent = getIntent();
         hospital = (HospitalData) getIntent.getSerializableExtra("병원");
 
+        Button callHospital = findViewById(R.id.callHospitalBtn);
         callHospital.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,15 +71,11 @@ public class HospitalInformation extends AppCompatActivity implements OnMapReady
 
             @Override
             // 선택된 상태에서 선택되지 않음으로 바뀐 탭에 대한 이벤트
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
+            public void onTabUnselected(TabLayout.Tab tab) { }
 
             @Override
             // 이미 선택된 탭이 사용자에 의해 다시 선택된 탭의 이벤트
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
+            public void onTabReselected(TabLayout.Tab tab) { }
         });
 
 
@@ -97,6 +94,7 @@ public class HospitalInformation extends AppCompatActivity implements OnMapReady
         info_Call.setText("전화번호 : " + hospital.getCallNumber());
         info_Distance.setText("거리 : " + hospital.getDistance());
         info_Address.setText("주소 : " + hospital.getAddress());
+
         String allSubjects = "";
         for (int pos = 0; pos < hospital.getNumSubjects(); pos++) {
             allSubjects = allSubjects + hospital.getSubject(pos) + "  ";
@@ -133,6 +131,7 @@ public class HospitalInformation extends AppCompatActivity implements OnMapReady
         locationSource =
                 new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
     }
+
     private void changeView(int index){
         LinearLayout linearLayout1 = (LinearLayout) findViewById(R.id.content_info);
         LinearLayout linearLayout2 = (LinearLayout) findViewById(R.id.content_map);
@@ -186,8 +185,8 @@ public class HospitalInformation extends AppCompatActivity implements OnMapReady
         naverMap.setMinZoom(6.0);
         naverMap.setMaxZoom(18.0);
 
-        UiSettings uiSettings = naverMap.getUiSettings();
         // ui설정
+        UiSettings uiSettings = naverMap.getUiSettings();
         uiSettings.setCompassEnabled(true);
         uiSettings.setScaleBarEnabled(true);
         uiSettings.setZoomControlEnabled(true);
