@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -207,7 +206,7 @@ public class SubjectList extends AppCompatActivity {
                                 } //평일이다
                                 else if(dayOfWeek==7)
                                 {
-                                    if(hospital.getOpenTimesize()>=2){
+                                    if(hospital.getOpenTimeSize()>=2){
                                         String startTime=hospital.getOpenTime(1);
                                         String endTime=hospital.getClosedTime(1);
                                         //병원 진료시간
@@ -224,7 +223,7 @@ public class SubjectList extends AppCompatActivity {
                                     }
                                 } //토요일이다
                                 else if(dayOfWeek==1){
-                                    if(hospital.getOpenTimesize()>=3){
+                                    if(hospital.getOpenTimeSize()>=3){
                                         String startTime=hospital.getOpenTime(2);
                                         String endTime=hospital.getClosedTime(2);
                                         //병원 진료시간
