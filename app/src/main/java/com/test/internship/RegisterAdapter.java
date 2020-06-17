@@ -30,7 +30,7 @@ public class RegisterAdapter extends BaseAdapter {
     private ArrayList<ProtectorData> mdata = null;
     private int layout = 0;
     private LayoutInflater inflater = null;
-    int num, t;
+    int numPerson, time;
 
     public RegisterAdapter(Context context, int layout, ArrayList<ProtectorData> mdata) {
         this.mcontext = context;
@@ -73,8 +73,8 @@ public class RegisterAdapter extends BaseAdapter {
         item_layout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                num=0;
-                t=0;
+                numPerson =0;
+                time =0;
                 if(position==0){
                     if(person1_n==null && person1_p==null){
                         if(person2_n == null && person2_p==null){
@@ -104,172 +104,172 @@ public class RegisterAdapter extends BaseAdapter {
                     }
                 }
                 else if(position==1){
-                    while (t<5){
-                        if(t==0){
+                    while (time <5){
+                        if(time ==0){
                             if(person1_p!=null&&person1_n!=null){
-                                num++;
+                                numPerson++;
                             }
-                            t++;
+                            time++;
                         }
-                        else if (t==1){
+                        else if (time ==1){
                             if(person2_p!=null&&person2_n!=null){
-                                if(num==1){
+                                if(numPerson ==1){
                                     person2_p=null;
                                     person2_n=null;
                                     break;
                                 }
-                                num++;
+                                numPerson++;
                             }
-                            t++;
+                            time++;
                         }
-                        else if(t==2){
+                        else if(time ==2){
                             if(person3_n!=null&&person3_p!=null){
-                                if(num==1){
+                                if(numPerson ==1){
                                     person3_n=null;
                                     person3_p=null;
                                     break;
                                 }
                                 else{
-                                    num++;
+                                    numPerson++;
                                 }
                             }
-                            t++;
+                            time++;
                         }
-                        else if(t==3){
+                        else if(time ==3){
                             if(person4_n!=null&&person4_p!=null){
-                                if(num==1){
+                                if(numPerson ==1){
                                     person4_n=null;
                                     person4_p=null;
                                     break;
                                 }
                                 else{
-                                    num++;
+                                    numPerson++;
                                 }
                             }
-                            t++;
+                            time++;
                         }
                         else{
                             if(person5_n!=null&&person5_p!=null){
-                                if(num==1){
+                                if(numPerson ==1){
                                     person5_n=null;
                                     person5_p=null;
                                     break;
                                 }
                                 else{
-                                    num++;
+                                    numPerson++;
                                 }
                             }
-                            t++;
+                            time++;
                         }
                     }
                 }
                 else if(position==2){
-                   while (t<5){
-                       if(t==0){
+                   while (time <5){
+                       if(time ==0){
                            if(person1_p!=null&&person1_n!=null){
-                               num++;
+                               numPerson++;
                            }
-                           t++;
+                           time++;
                        }
-                       else if (t==1){
+                       else if (time ==1){
                            if(person2_p!=null&&person2_n!=null){
-                               num++;
+                               numPerson++;
                            }
-                           t++;
+                           time++;
                        }
-                       else if(t==2){
+                       else if(time ==2){
                            if(person3_n!=null&&person3_p!=null){
-                               if(num==2){
+                               if(numPerson ==2){
                                    person3_n=null;
                                    person3_p=null;
                                    break;
                                }
                                else{
-                                   num++;
+                                   numPerson++;
                                }
                            }
-                           t++;
+                           time++;
                        }
-                       else if(t==3){
+                       else if(time ==3){
                            if(person4_n!=null&&person4_p!=null){
-                               if(num==2){
+                               if(numPerson ==2){
                                    person4_n=null;
                                    person4_p=null;
                                    break;
                                }
                                else{
-                                   num++;
+                                   numPerson++;
                                }
                            }
-                           t++;
+                           time++;
                        }
                        else{
                            if(person5_n!=null&&person5_p!=null){
-                               if(num==2){
+                               if(numPerson ==2){
                                    person5_n=null;
                                    person5_p=null;
                                    break;
                                }
                                else{
-                                   num++;
+                                   numPerson++;
                                }
                            }
-                           t++;
+                           time++;
                        }
                    }
                 }
                 else if(position==3){
-                    while (t<5){
-                        if(t==0){
+                    while (time <5){
+                        if(time ==0){
                             if(person1_p!=null&&person1_n!=null){
-                                num++;
+                                numPerson++;
                             }
-                            t++;
+                            time++;
                         }
-                        else if (t==1){
+                        else if (time ==1){
                             if(person2_p!=null&&person2_n!=null){
-                                num++;
+                                numPerson++;
                             }
-                            t++;
+                            time++;
                         }
-                        else if(t==2){
+                        else if(time ==2){
                             if(person3_n!=null&&person3_p!=null){
-                                if(num==3){
+                                if(numPerson ==3){
                                     person3_n=null;
                                     person3_p=null;
                                     break;
                                 }
                                 else{
-                                    num++;
+                                    numPerson++;
                                 }
                             }
-                            t++;
+                            time++;
                         }
-                        else if(t==3){
+                        else if(time ==3){
                             if(person4_n!=null&&person4_p!=null){
-                                if(num==3){
+                                if(numPerson ==3){
                                     person4_n=null;
                                     person4_p=null;
                                     break;
                                 }
                                 else{
-                                    num++;
+                                    numPerson++;
                                 }
                             }
-                            t++;
+                            time++;
                         }
                         else{
                             if(person5_n!=null&&person5_p!=null){
-                                if(num==3){
+                                if(numPerson ==3){
                                     person5_n=null;
                                     person5_p=null;
                                     break;
                                 }
                                 else{
-                                    num++;
+                                    numPerson++;
                                 }
                             }
-                            t++;
+                            time++;
                         }
                     }
                 }
