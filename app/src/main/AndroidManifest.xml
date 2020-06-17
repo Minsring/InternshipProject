@@ -18,18 +18,23 @@
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="7t85xooilf"/>
 
+
         <activity android:name=".HospitalInformation" />
         <activity android:name=".DistanceRange" />
         <activity android:name=".Setting" />
         <activity android:name=".Register" />
         <activity android:name=".SubjectList" />
         <activity android:name=".SubjectListMap" />
-        <activity android:name=".User">
+        <activity android:name=".User" />
+        <activity android:name=".Splash"
+                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+                  android:screenOrientation="unspecified">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 </manifest>

@@ -15,4 +15,19 @@
         app:font="@font/pork_6"
         app:fontStyle="normal"/>
 
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/Typo_DabangguB"/>
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/Typo_DonQuixoteB"/>
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/Maplestory_Bold"/>
+
 </font-family>
