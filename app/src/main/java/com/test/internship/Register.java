@@ -119,6 +119,9 @@ public class Register extends AppCompatActivity {
                             listView.setAdapter(registerAdapter);
                             save(4);
                         }
+                        else{
+                            Toast.makeText(Register.this, "보호자 정보는 5개까지 저장가능합니다!", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         Toast.makeText(Register.this, "보호자 정보가 부족합니다", Toast.LENGTH_SHORT).show();
                     }break;
