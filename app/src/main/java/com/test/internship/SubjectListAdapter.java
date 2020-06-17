@@ -1,7 +1,5 @@
 package com.test.internship;
 
-import android.content.Context;
-
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,13 +18,6 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
     ArrayList<HospitalData> items =new ArrayList<HospitalData>();
     ArrayList<HospitalData> openItems =new ArrayList<HospitalData>();      // 진료중인 병원 리스트
     ArrayList<HospitalData> closedItems =new ArrayList<HospitalData>();     // 준비중인 병원 리스트
-    Context context;
-
-    // items에 순차적으로 합쳐서 정렬되게 한다.
-    public void combineItems(){
-        items.addAll(openItems);
-        items.addAll(closedItems);
-    }
 
     // 커스텀 리스너 인터페이스 정의
     public interface OnItemClickListener{
@@ -51,9 +42,10 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
 
     // item으로 만든 itemView를 담아두는 뷰 홀더
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView itemHospitalName, itemSubject;
+        TextView itemHospitalName;
         TextView itemDistance;
         Button itemOpenClosed;
+
         public ViewHolder(final View itemView){
             super(itemView);
             itemHospitalName = itemView.findViewById(R.id.itemHospitalName);
@@ -89,6 +81,7 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
               }
           });
         }
+
         @RequiresApi(api = Build.VERSION_CODES.M)
         public void setItem(HospitalData hospital){
             itemHospitalName.setText(hospital.getHospitalName());
@@ -99,7 +92,8 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
                 itemOpenClosed.setBackgroundResource(R.drawable.telephone);
                 itemDistance.setTextColor(0xFF999999);
                 itemHospitalName.setTextColor(0xFF000000);
-            }else{      // 정렬된 리스트의 진료중/준비중을 색으로 구분
+            }
+            else{      // 정렬된 리스트의 진료중/준비중을 색으로 구분
                 itemOpenClosed.setText(hospital.getOpenClosed());
                 if(hospital.getOpenClosed()=="진료중"){
                     itemOpenClosed.setTextColor(0xFFFF0000);
@@ -115,6 +109,11 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
         }
     }
 
+    // items에 순차적으로 합쳐서 정렬되게 한다.
+    public void combineItems(){
+        items.addAll(openItems);
+        items.addAll(closedItems);
+    }
     public void addOpenItem(HospitalData item){
         openItems.add(item);
     }
@@ -124,12 +123,6 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
     public HospitalData getItem(int position){
         return items.get(position);
     }
-    public void setItem(int position, HospitalData item){
-        items.set(position, item);
-    }
-    public void setItems(ArrayList<HospitalData> items){
-        this.items = items;
-    }
     public ArrayList<HospitalData> getOpenItem(){
         if(openItems.size()==0){ return null; }
         else{ return openItems; }
@@ -138,6 +131,7 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
         if(closedItems.size()==0){ return null; }
         else{ return closedItems; }
     }
+
     @Override
     public int getItemCount() {
         return items.size();
