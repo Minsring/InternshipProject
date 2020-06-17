@@ -1,41 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/mainBackground"
+    android:background="@color/mainItem"
     tools:context=".User">
-
-  <Button
-      android:id="@+id/allSub"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center"
-      android:drawableLeft="@drawable/hospital_icon"
-      android:text="   전체 병원 보기   "
-      android:background="@color/mainBackground"
-      android:fontFamily="@font/pork_6"
-      android:layout_marginTop="20dp" />
 
   <!--    TODO: 그리드 뷰(Demo 19 참고)로 아이콘 + 진료과목 나타낼 수 있게 수정-->
   <!--    TODO: 진료과 재배치 or 더 추가하거나 뺄 진료과-->
   <TableLayout
-      android:id="@+id/medicalSubjects"
+      android:id="@+id/tableLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="15dp"
+      android:layout_marginStart="20dp"
       android:layout_marginLeft="20dp"
+      android:layout_marginTop="30dp"
+      android:layout_marginEnd="20dp"
       android:layout_marginRight="20dp"
-      android:background="@color/mainItem"
-      android:padding="20dp">
+      android:background="@drawable/round_white_20"
+      android:padding="10dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
 
     <TableRow
-        android:id="@+id/medicalSubjects1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp">
+
+      <Button
+          android:id="@+id/allSub"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:background="#00000000"
+          android:drawableTop="@drawable/hospital_icon"
+          android:fontFamily="@font/pork_6"
+          android:stateListAnimator="@null"
+          android:text="모든 병원" />
 
       <Button
           android:id="@+id/internalSub"
@@ -46,6 +50,7 @@
           android:drawableTop="@drawable/internal_icon"
           android:fontFamily="@font/pork_6"
           android:scaleType="fitCenter"
+          android:stateListAnimator="@null"
           android:text="내과" />
 
       <Button
@@ -57,7 +62,14 @@
           android:drawableTop="@drawable/bone_icon"
           android:fontFamily="@font/pork_6"
           android:scaleType="fitCenter"
+          android:stateListAnimator="@null"
           android:text="정형외과" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
 
       <Button
           android:id="@+id/hanSub"
@@ -68,167 +80,197 @@
           android:drawableTop="@drawable/han_icon"
           android:fontFamily="@font/pork_6"
           android:scaleType="fitCenter"
+          android:stateListAnimator="@null"
           android:text="한의원" />
-
-    </TableRow>
-    <TableRow
-        android:id="@+id/medicalSubjects2"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginBottom="10dp">
 
       <Button
           android:id="@+id/dentalSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
-          android:text="치과"
-          android:drawableTop="@drawable/dental_icon"
           android:background="#00000000"
-          />
+          android:drawableTop="@drawable/dental_icon"
+          android:fontFamily="@font/pork_6"
+          android:stateListAnimator="@null"
+          android:text="치과" />
 
       <Button
           android:id="@+id/entSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
-          android:text="이비인후과"
+          android:background="#00000000"
           android:drawableTop="@drawable/ent_icon"
-          android:background="#00000000"/>
+          android:fontFamily="@font/pork_6"
+          android:stateListAnimator="@null"
+          android:text="이비인후과" />
 
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginBottom="10dp">
 
       <Button
           android:id="@+id/eyeSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:fontFamily="@font/pork_6"
           android:layout_gravity="center"
           android:layout_weight="1"
-          android:text="안과"
+          android:background="#00000000"
           android:drawableTop="@drawable/eye_icon"
-          android:background="#00000000"/>
+          android:fontFamily="@font/pork_6"
+          android:stateListAnimator="@null"
+          android:text="안과" />
 
-    </TableRow>
-    <TableRow
-        android:id="@+id/medicalSubjects3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp">
       <Button
           android:id="@+id/skinSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
-          android:text="피부과"
+          android:background="#00000000"
           android:drawableTop="@drawable/skin_icon"
-          android:background="#00000000"/>
+          android:fontFamily="@font/pork_6"
+          android:stateListAnimator="@null"
+          android:text="피부과" />
+
       <Button
           android:id="@+id/childSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
-          android:text="소아청소년과"
+          android:background="#00000000"
           android:drawableTop="@drawable/child_icon"
-          android:background="#00000000"/>
+          android:fontFamily="@font/pork_6"
+          android:stateListAnimator="@null"
+          android:text="소아청소년과" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
 
       <Button
           android:id="@+id/obstSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
-          android:text="산부인과"
+          android:background="#00000000"
           android:drawableTop="@drawable/obst_icon"
-          android:background="#00000000"/>
-
-    </TableRow>
-    <TableRow
-        android:id="@+id/medicalSubjects4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-      <Button
-          android:id="@+id/neuroSub"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
           android:fontFamily="@font/pork_6"
-          android:layout_weight="1"
-          android:text="신경외과"
-          android:drawableTop="@drawable/neuro_icon"
-          android:background="#00000000"/>
+          android:stateListAnimator="@null"
+          android:text="산부인과" />
+
       <Button
           android:id="@+id/binyoSub"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
-          android:text="비뇨기과"
+          android:background="#00000000"
           android:drawableTop="@drawable/binyo_icon"
-          android:background="#00000000"/>
+          android:fontFamily="@font/pork_6"
+          android:stateListAnimator="@null"
+          android:text="비뇨기과" />
+
       <Button
           android:id="@+id/bogun"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:fontFamily="@font/pork_6"
           android:layout_weight="1"
-          android:text="보건소"
+          android:background="#00000000"
           android:drawableTop="@drawable/bogun_icon"
-          android:background="#00000000"/>
+          android:fontFamily="@font/pork_6"
+          android:stateListAnimator="@null"
+          android:text="보건소" />
 
     </TableRow>
 
     <TableRow
-        android:id="@+id/medicalSubjects5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+      <Button
+          android:id="@+id/neuroSub"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:background="#00000000"
+          android:drawableTop="@drawable/neuro_icon"
+          android:fontFamily="@font/pork_6"
+          android:stateListAnimator="@null"
+          android:text="신경외과" />
+
+      <Button
+          android:id="@+id/chkCenter"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:background="#00000000"
+          android:drawableTop="@drawable/chkcenter_icon"
+          android:fontFamily="@font/pork_6"
+          android:stateListAnimator="@null"
+          android:text="건강검진센터" />
+
+      <Button
+          android:id="@+id/emergencyRoom"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:background="#00000000"
+          android:drawableTop="@drawable/emergency_icon"
+          android:fontFamily="@font/pork_6"
+          android:stateListAnimator="@null"
+          android:text="응급실"
+          android:textColor="#FF0000" />
+
+
+    </TableRow>
+
+    <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center">
-            <Button
-                android:id="@+id/chkCenter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableTop="@drawable/chkcenter_icon"
-                android:fontFamily="@font/pork_6"
-                android:text="건강검진센터"
-                android:background="#00000000"/>
 
-            <Button
-                android:id="@+id/emergencyRoom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableTop="@drawable/emergency_icon"
-                android:fontFamily="@font/pork_6"
-                android:text="응급실"
-                android:textColor="#FF0000"
-                android:layout_marginLeft="30dp"
-                android:background="#00000000"/>
-        </TableRow>
-     </TableLayout>
+    </TableRow>
+  </TableLayout>
 
-    <Button
-        android:id="@+id/contactProtector"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/pork_6"
-        android:background="@color/customBlue"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:text="보호자 연락 기능"
-        android:textSize="17sp"/>
+  <Button
+      android:id="@+id/contactProtector"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="20dp"
+      android:layout_marginLeft="20dp"
+      android:layout_marginEnd="20dp"
+      android:layout_marginRight="20dp"
+      android:layout_marginBottom="20dp"
+      android:background="@drawable/round_blue_15"
+      android:fontFamily="@font/pork_6"
+      android:stateListAnimator="@null"
+      android:text="보호자 연락 기능"
+      android:textSize="17sp"
+      app:layout_constraintBottom_toTopOf="@+id/fence"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/fence"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/pork_6"
-        android:background="@color/customOrange"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="울타리 기능"
-        android:textSize="17sp"/>
-</LinearLayout>
+  <Button
+      android:id="@+id/fence"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="20dp"
+      android:layout_marginLeft="20dp"
+      android:layout_marginEnd="20dp"
+      android:layout_marginRight="20dp"
+      android:layout_marginBottom="50dp"
+      android:background="@drawable/round_orange_15"
+      android:fontFamily="@font/pork_6"
+      android:stateListAnimator="@null"
+      android:text="울타리 기능"
+      android:textSize="17sp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
