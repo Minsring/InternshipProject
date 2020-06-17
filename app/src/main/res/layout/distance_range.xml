@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:fontFamily="@font/pork_3"
-            android:text="반경 등록"
+            android:text="위치 등록"
             android:textSize="23sp"
             android:background="@drawable/round_deeporange_20"
             android:layout_marginRight="10dp"

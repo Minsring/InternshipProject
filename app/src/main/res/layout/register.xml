@@ -54,7 +54,8 @@
                 android:ems="10"
                 android:maxLines="1"
                 android:textColor="#296EB3"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                />
         </LinearLayout>
 
         <LinearLayout
