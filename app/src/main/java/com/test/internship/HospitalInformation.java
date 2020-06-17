@@ -80,34 +80,30 @@ public class HospitalInformation extends AppCompatActivity implements OnMapReady
 
 
         TextView Title = findViewById(R.id.Title);
-        TextView info_Name = findViewById(R.id.info_Name);
         TextView info_Call = findViewById(R.id.info_Call);
         TextView info_Address = findViewById(R.id.info_Address);
         TextView info_Subject = findViewById(R.id.info_Subject);
-        TextView info_Distance = findViewById(R.id.info_Distance);
         TextView info_Weekday = findViewById(R.id.info_Weekday);
         TextView info_Saturday = findViewById(R.id.info_Saturday);
         TextView info_Sunday = findViewById(R.id.info_Sunday);
 
         Title.setText(hospital.getHospitalName());
-        info_Name.setText("병원명 : " + hospital.getHospitalName());
-        info_Call.setText("전화번호 : " + hospital.getCallNumber());
-        info_Distance.setText("거리 : " + hospital.getDistance());
-        info_Address.setText("주소 : " + hospital.getAddress());
+        info_Call.setText(hospital.getCallNumber());
+        info_Address.setText(hospital.getAddress());
 
         String allSubjects = "";
         for (int pos = 0; pos < hospital.getNumSubjects(); pos++) {
             allSubjects = allSubjects + hospital.getSubject(pos) + "  ";
         }
-        info_Subject.setText("진료과목 : " + allSubjects);
+        info_Subject.setText(allSubjects);
         if (hospital.openTime_isEmpty(0) == false) {
-            info_Weekday.setText("주중 진료시간 : " + hospital.getOpenTime(0) + " ~ " + hospital.getClosedTime(0));
+            info_Weekday.setText("평   일 : "+hospital.getOpenTime(0) + " ~ " + hospital.getClosedTime(0));
         }
         if (hospital.openTime_isEmpty(1) == false) {
-            info_Saturday.setText("토요일 진료시간 : " + hospital.getOpenTime(1) + " ~ " + hospital.getClosedTime(1));
+            info_Saturday.setText("토요일 : " + hospital.getOpenTime(1) + " ~ " + hospital.getClosedTime(1));
         }
         if (hospital.openTime_isEmpty(2) == false) {
-            info_Sunday.setText("일요일 진료시간 : " + hospital.getOpenTime(2) + " ~ " + hospital.getClosedTime(2));
+            info_Sunday.setText("일요일 : " + hospital.getOpenTime(2) + " ~ " + hospital.getClosedTime(2));
         }
 
         // 표시해야할 위도, 경도

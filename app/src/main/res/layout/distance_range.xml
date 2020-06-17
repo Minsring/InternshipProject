@@ -18,9 +18,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:fontFamily="@font/pork_6"
-            android:text="이동반경설정 및 알림서비스"
+            android:text="울타리 서비스"
             android:textColor="#ffffff"
-            android:textSize="25sp"
+            android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:gravity="center"
@@ -30,42 +30,57 @@
             android:id="@+id/switchRadius"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:textColor="#ffffff"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toTopOf="parent"
-            android:gravity="center"/>
+            android:layout_marginRight="10dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#F8CDB5">
+        android:layout_weight="1.2"
+        android:background="#F8CDB5"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/bulb_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView5"
-            android:layout_width="0dp"
-            android:layout_weight="5"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/pork_3"
             android:text="보호자 등록은 하셨나요?"
             android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/buttonRegister"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/buttonRegister"
-            android:layout_width="0dp"
-            android:layout_weight="2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/round_deeporange_20"
+            android:fontFamily="@font/pork_3"
             android:text="보호자 등록"
             android:textSize="20sp"
+            android:padding="5dp"
             android:layout_marginRight="10dp"
-             />
-    </LinearLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <fragment
         android:id="@+id/mapRadius"
@@ -79,13 +94,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        android:layout_weight="1">
+        android:layout_weight="1.2"
+        android:gravity="center"
+        android:background="#F8CDB5">
 
         <TextView
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
+            android:textSize="22sp"
             android:fontFamily="@font/pork_3"
             android:text="반경: "
             android:layout_marginLeft="10dp"/>
@@ -109,7 +126,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/pork_3"
             android:text="km"
-            android:textSize="25sp"
+            android:textSize="22sp"
             android:gravity="center"/>
         <Button
             android:id="@+id/okay"
@@ -117,8 +134,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:fontFamily="@font/pork_3"
-            android:text="위치 등록"
-            android:textSize="23sp"
+            android:text="울타리 등록"
+            android:textSize="20sp"
             android:background="@drawable/round_deeporange_20"
             android:layout_marginRight="10dp"
             />
