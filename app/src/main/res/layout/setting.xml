@@ -11,12 +11,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="20dp"
+        android:paddingTop="25dp"
         android:paddingLeft="20dp"
         android:text="추가 기능 설정"
         android:textColor="#ffffff"
         android:fontFamily="@font/pork_6"
-        android:textSize="30sp"
+        android:textSize="35sp"
         android:layout_marginBottom="20dp"/>
 
     <LinearLayout
@@ -25,12 +25,12 @@
         android:padding="20dp"
         android:layout_margin="10dp"
         android:orientation="vertical"
-        android:background="#ffffff">
+        android:background="@drawable/round_white_20">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
+            android:textSize="30sp"
             android:text="보호자 문자전송 설정"
             android:textColor="#333333"
             android:fontFamily="@font/pork_3"/>
@@ -47,10 +47,11 @@
                 android:fontFamily="@font/pork_3"
                 android:text="배터리 15% 미만일 경우"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="10dp"/>
 
             <Switch
                 android:id="@+id/batterySwitch"
@@ -60,7 +61,8 @@
                 android:layout_marginRight="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="10dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -77,10 +79,11 @@
                 android:fontFamily="@font/pork_3"
                 android:text="움직임 없을 경우"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="5dp"/>
 
             <Switch
                 android:id="@+id/motionSwitch"
@@ -89,21 +92,39 @@
                 android:layout_marginRight="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="5dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnregister"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="  보호자 정보 등록  "
-        android:textSize="20sp"
-        android:fontFamily="@font/pork_6"
-        android:background="#ffffff"
-        android:layout_margin="10dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:text="보호자 등록은 하셨나요?"
+            android:layout_marginLeft="20dp"
+            android:textSize="21sp"
+            android:gravity="center_vertical"
+            android:textColor="#ffffff"/>
+
+        <Button
+            android:id="@+id/btnregister"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="보호자 등록"
+            android:textSize="21sp"
+            android:textColor="#ffffff"
+            android:fontFamily="@font/pork_6"
+            android:background="@drawable/round_navy_20"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+
 
 </LinearLayout>

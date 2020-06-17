@@ -2,6 +2,7 @@ package com.test.internship;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -75,6 +76,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     int switchFlag;
     private static SharedPreferences appData;
     Timer timer;
+    Button buttonRegister;
     private final int MY_PERMISSIONS_REQUEST_LOCATION=1001;
 
 
@@ -87,6 +89,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         mapRadius = findViewById(R.id.mapRadius);
         layoutRadius = findViewById(R.id.layoutRadius);
         button = findViewById(R.id.okay);
+        buttonRegister=findViewById(R.id.buttonRegister);
         savedata = false;
         marker = new Marker();
         regMarker = new Marker();
@@ -166,6 +169,14 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             }
         });
 
+        //보호자 등록 버튼 리스너 달기
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(),Register.class);
+                startActivity(intent);
+            }
+        });
 
         // 스위치 리스너 연결
         switchRadius.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

@@ -1,20 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/customOrange">
 
-    <Switch
-        android:id="@+id/switchRadius"
-        android:layout_width="wrap_content"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/pork_6"
+            android:text="이동반경설정 및 알림서비스"
+            android:textColor="#ffffff"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"/>
+
+        <Switch
+            android:id="@+id/switchRadius"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#ffffff"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:fontFamily="@font/pork_6"
-        android:text="이동반경설정 및 알림서비스       "
-        android:textColor="#ffffff"
-        android:textSize="25sp"
-        android:layout_marginLeft="10dp"/>
+        android:background="#F8CDB5">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/pork_3"
+            android:text="보호자 등록은 하셨나요?"
+            android:textSize="20sp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"/>
+
+        <Button
+            android:id="@+id/buttonRegister"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_deeporange_20"
+            android:text="보호자 등록"
+            android:textSize="20sp"
+            android:layout_marginRight="10dp"
+             />
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/mapRadius"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:name="com.naver.maps.map.MapFragment"/>
 
     <LinearLayout
         android:id="@+id/layoutRadius"
@@ -57,23 +115,16 @@
             android:id="@+id/okay"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:fontFamily="@font/pork_3"
-            android:text="등록"
-            android:textSize="20sp"
+            android:text="반경 등록"
+            android:textSize="23sp"
+            android:background="@drawable/round_deeporange_20"
             android:layout_marginRight="10dp"
-
             />
 
     </LinearLayout>
 
-
-    <fragment
-        android:id="@+id/mapRadius"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:name="com.naver.maps.map.MapFragment"/>
 
 
 
