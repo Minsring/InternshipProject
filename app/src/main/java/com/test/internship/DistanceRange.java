@@ -42,7 +42,6 @@ import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.util.MarkerIcons;
 
 import java.util.Locale;
-import java.util.Timer;
 
 import static com.test.internship.Register.person1_n;
 import static com.test.internship.Register.person1_p;
@@ -57,6 +56,8 @@ import static com.test.internship.Register.person5_p;
 
 public class DistanceRange extends AppCompatActivity implements OnMapReadyCallback {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
+    private final int MY_PERMISSIONS_REQUEST_LOCATION = 1001;
+    private static SharedPreferences appData;
     private FusedLocationSource locationSource;
     private NaverMap naverMap;
     Marker marker;
@@ -64,38 +65,36 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     CircleOverlay circle;
     CircleOverlay regCircle;
     EditText radiusEdit;
-    Button button;
+    Button buttonOkay;
+    Button buttonRegister;
     LinearLayout layoutRadius;
     View mapRadius;
+    Switch switchRadius;
     float radius;
     float centerLat;
     float centerLng;
-    boolean savedata;
-    Switch switchRadius;
+    boolean saveData;
     boolean switchState;
-    int switchFlag;
-    private static SharedPreferences appData;
-    Timer timer;
-    Button buttonRegister;
-    private final int MY_PERMISSIONS_REQUEST_LOCATION=1001;
+
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        timer=new Timer();
         setContentView(R.layout.distance_range);
+
         radiusEdit=findViewById(R.id.radiusEdit);
         switchRadius=(Switch)findViewById(R.id.switchRadius);
         mapRadius = findViewById(R.id.mapRadius);
         layoutRadius = findViewById(R.id.layoutRadius);
-        button = findViewById(R.id.okay);
+        buttonOkay = findViewById(R.id.okay);
         buttonRegister=findViewById(R.id.buttonRegister);
-        savedata = false;
+
+        saveData = false;
         marker = new Marker();
         regMarker = new Marker();
-        circle=new CircleOverlay();
+        circle = new CircleOverlay();
         regCircle = new CircleOverlay();
-        switchFlag=0;
 
 
         final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -103,26 +102,21 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
 
         // 저장된 기록 로딩
         load();
-        if(savedata){
+        if(saveData){
             switchRadius.setChecked(switchState);
+
             if(switchRadius.isChecked()==true){
                 layoutRadius.setVisibility(View.VISIBLE);
                 mapRadius.setVisibility(View.VISIBLE);
-                button.setVisibility(View.VISIBLE);
+                buttonOkay.setVisibility(View.VISIBLE);
                 if ( Build.VERSION.SDK_INT >= 23 &&
                         ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
                     ActivityCompat.requestPermissions( DistanceRange.this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
                             MY_PERMISSIONS_REQUEST_LOCATION );
                 }
                 else{
-                    lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                            300000,
-                            1,
-                            gpsLocationListener);
-                    lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                            300000,
-                            1,
-                            gpsLocationListener);
+                    lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 300000, 1, gpsLocationListener);
+                    lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 300000, 1, gpsLocationListener);
                 }
             }
             else{
@@ -133,7 +127,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 lm.removeUpdates(gpsLocationListener);
                 layoutRadius.setVisibility(View.INVISIBLE);
                 mapRadius.setVisibility(View.INVISIBLE);
-                button.setVisibility(View.INVISIBLE);
+                buttonOkay.setVisibility(View.INVISIBLE);
             }
         }
 
@@ -151,22 +145,19 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
 
         // Map 생성
         FragmentManager fm = getSupportFragmentManager();
-
         MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.mapRadius);
-
         mapFragment.getMapAsync(this);
 
         locationSource =
                 new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
 
         // okay 버튼 리스너 연결
-        button.setOnClickListener(new View.OnClickListener() {
+        buttonOkay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 save();
-                if(person1_n==null&&person1_p==null&&person2_n==null&&person2_p==null&&
-                        person3_n==null&&person3_p==null&&person4_n==null&&person4_p==null&&person5_n==null&&person5_p==null)
-                {
+                if(person1_n==null && person1_p==null && person2_n==null && person2_p==null
+                        && person3_n==null && person3_p==null && person4_n==null && person4_p==null && person5_n==null && person5_p==null) {
                     Toast.makeText(getApplicationContext(), "보호자 정보를 먼저 등록해주세요.", Toast.LENGTH_SHORT).show();
                 }
                 Toast.makeText(getApplicationContext(), "등록되었습니다.", Toast.LENGTH_SHORT).show();
@@ -178,7 +169,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(),Register.class);
+                Intent intent = new Intent(getApplicationContext(),Register.class);
                 startActivity(intent);
             }
         });
@@ -194,7 +185,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
 
                     layoutRadius.setVisibility(View.VISIBLE);
                     mapRadius.setVisibility(View.VISIBLE);
-                    button.setVisibility(View.VISIBLE);
+                    buttonOkay.setVisibility(View.VISIBLE);
 
 
                     if ( Build.VERSION.SDK_INT >= 23 &&
@@ -203,14 +194,8 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                                 MY_PERMISSIONS_REQUEST_LOCATION );
                     }
                     else{
-                        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                                300000,
-                                1,
-                                gpsLocationListener);
-                        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                                300000,
-                                1,
-                                gpsLocationListener);
+                        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 300000, 1, gpsLocationListener);
+                        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 300000, 1, gpsLocationListener);
                     }
                 }
                 else{
@@ -222,27 +207,23 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                     marker.setMap(null);
                     layoutRadius.setVisibility(View.INVISIBLE);
                     mapRadius.setVisibility(View.INVISIBLE);
-                    button.setVisibility(View.INVISIBLE);
+                    buttonOkay.setVisibility(View.INVISIBLE);
                 }
             }
         });
-
     }
 
     // 현재위치가 바뀌면 호출되는 리스너너
     final LocationListener gpsLocationListener = new LocationListener() {
+        @Override
         public void onLocationChanged(Location location) {
 
-            String provider = location.getProvider();
             double longitude = location.getLongitude();
             double latitude = location.getLatitude();
-            LatLng nowLatLng=new LatLng(latitude,longitude);
-            LatLng centerLatLng=new LatLng(centerLat,centerLng);
+            LatLng nowLatLng = new LatLng(latitude,longitude);
+            LatLng centerLatLng = new LatLng(centerLat,centerLng);
 
             double dis = nowLatLng.distanceTo(centerLatLng); //m단위를 double로 반환
-            System.out.println(dis);
-            System.out.println(radius);
-            System.out.println(switchState);
             if(dis>radius){
                if(switchRadius.isChecked()==true){
                    Toast.makeText(getApplicationContext(), nowLatLng.latitude + ", " + nowLatLng.longitude+" 범위를 벗어났습니다.",
@@ -265,37 +246,33 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                }
             }
         }
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-        }
-
-        public void onProviderEnabled(String provider) {
-        }
-
-        public void onProviderDisabled(String provider) {
-        }
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) { }
+        @Override
+        public void onProviderEnabled(String provider) { }
+        @Override
+        public void onProviderDisabled(String provider) { }
     };
 
     // 위치 권한 허가
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,  @NonNull int[] grantResults) {
         if(requestCode==MY_PERMISSIONS_REQUEST_LOCATION){
-            if(grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(this,"승인 허가",Toast.LENGTH_LONG).show();
             }
             else{
-                Toast.makeText(this,"아직 승인 안됐다",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"승인 불허가",Toast.LENGTH_LONG).show();
             }
             return;
         }
-        if (locationSource.onRequestPermissionsResult(
-                requestCode, permissions, grantResults)) {
+        if (locationSource.onRequestPermissionsResult(requestCode, permissions, grantResults)) {
             if (!locationSource.isActivated()) {
                 naverMap.setLocationTrackingMode(LocationTrackingMode.None);
             }
             return;
         }
-        super.onRequestPermissionsResult(
-                requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     // 지도가 생성되면 자동으로 호출
@@ -303,12 +280,16 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     @Override
     public void onMapReady(@NonNull final NaverMap naverMap) {
         this.naverMap = naverMap;
+
         naverMap.setLocationSource(locationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
+
         load();
+
         circle.setMap(null);
         marker.setMap(null);
-        if(savedata){
+
+        if(saveData){
             if(switchRadius.isChecked()==true){
                 regMarker.setPosition(new LatLng(centerLat, centerLng));
                 regMarker.setIcon(MarkerIcons.BLACK);
@@ -324,10 +305,12 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 marker.setMap(null);
             }
         }
-        savedata = false;
+        saveData = false;
+
         // 지도 타입 설정
         naverMap.setMapType(NaverMap.MapType.Basic);
         naverMap.setLocale(new Locale("ko"));
+
         // 지도에 표시할 부가적 정보
         naverMap.setLayerGroupEnabled(NaverMap.LAYER_GROUP_BUILDING, true);
         naverMap.setLayerGroupEnabled(NaverMap.LAYER_GROUP_TRANSIT, true);
@@ -343,7 +326,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
 
         // 컨트롤 설정
         UiSettings uiSettings = naverMap.getUiSettings();
-
         uiSettings.setCompassEnabled(true);
         uiSettings.setLocationButtonEnabled(true);
 
@@ -373,7 +355,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 // 카메라 위치 변경
                 CameraUpdate cameraUpdate = CameraUpdate.scrollTo(latLng);
                 naverMap.moveCamera(cameraUpdate);
-
             }
         };
         naverMap.setOnMapClickListener(mapListener);
@@ -387,25 +368,23 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         editor.putFloat("RADIUS", radius);
         editor.putFloat("LAT", centerLat);
         editor.putFloat("LNG", centerLng);
-        editor.putInt("FLAG", switchFlag);
         editor.apply();
     }
 
     // 데이터 로딩
     private void load(){
         switchState= appData.getBoolean("ISCHECKED",false);
-        savedata = appData.getBoolean("SAVEDATA", false);
+        saveData = appData.getBoolean("SAVEDATA", false);
         radius = appData.getFloat("RADIUS", 0.2F);
         centerLat = appData.getFloat("LAT", 36.4735165F);
         centerLng = appData.getFloat("LNG", 128.5024796F);
-        switchFlag = appData.getInt("FLAG", 0);
     }
-
 
     @Override
     public void onPause() {
         super.onPause();
     }
+
     @Override
     public void onStop() {
         super.onStop();
