@@ -2,23 +2,23 @@ package com.test.internship;
 
 public class ProtectorData {
     int img;
-    String personname;
-    String personnum;
+    String personName;
+    String personNum;
 
-    public ProtectorData(int img, String personname, String personnum){
+    public ProtectorData(int img, String personName, String personNum){
         this.img =img;
-        this.personname=personname;
-        this.personnum=personnum;
+        this.personName = personName;
+        this.personNum = personNum;
     }
 
     public int getImg() {
         return img;
     }
-    public String getPersonname(){
-        return personname;
+    public String getPersonName(){
+        return personName;
     }
-    public String getPersonnum(){
-        return personnum;
+    public String getPersonNum(){
+        return personNum;
     }
 
 }

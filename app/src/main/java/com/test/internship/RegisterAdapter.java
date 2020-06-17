@@ -46,7 +46,7 @@ public class RegisterAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return mdata.get(position).getPersonname();
+        return mdata.get(position).getPersonName();
     }
 
     @Override
@@ -65,8 +65,8 @@ public class RegisterAdapter extends BaseAdapter {
         LinearLayout item_layout = (LinearLayout) convertView.findViewById(R.id.item_layout);
 
         img.setImageResource(mdata.get(position).getImg());
-        personname.setText(mdata.get(position).getPersonname());
-        personnum.setText(mdata.get(position).getPersonnum());
+        personname.setText(mdata.get(position).getPersonName());
+        personnum.setText(mdata.get(position).getPersonNum());
         System.out.println("1");
 
 
