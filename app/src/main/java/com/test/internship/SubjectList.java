@@ -29,9 +29,8 @@ import java.util.Date;
 public class SubjectList extends AppCompatActivity {
 
     String subject;
-    Button mapBtn;
+    Button mapButton;
     TextView subjectTitle;
-    Button openClosed;
     RecyclerView recyclerView;
     ArrayList<HospitalData> openHospital=null;
     ArrayList<HospitalData> closedHospital=null;
@@ -41,9 +40,8 @@ public class SubjectList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subject_list);
 
-        mapBtn = findViewById(R.id.mapBtn);
-        mapBtn.setOnClickListener(listener);
-        openClosed=findViewById(R.id.itemOpenClosed);
+        mapButton = findViewById(R.id.mapBtn);
+        mapButton.setOnClickListener(listener);
 
         // 과목 제목 달기
         Intent getIntent = getIntent();
@@ -112,17 +110,17 @@ public class SubjectList extends AppCompatActivity {
         int starth,startm,endh,endm; //병원 여는 시,분, 닫는 시, 분 시분...
         int nowh,nowm; //현재 시,분
 
-        ArrayList<HospitalData> items = new ArrayList<HospitalData>();
-        InputStream is = getResources().openRawResource(R.raw.hospitaldata);
+        InputStream inputStream = getResources().openRawResource(R.raw.hospitaldata);
 
         try {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             XmlPullParser parser = factory.newPullParser();
 
-            parser.setInput(new InputStreamReader(is, "UTF-8"));
+            parser.setInput(new InputStreamReader(inputStream, "UTF-8"));
             int eventType = parser.getEventType();
             HospitalData hospital = null;
-            double lat= 0.0f, lng = 0.0f;
+            double lat = 0;
+            double lng = 0;
 
             while (eventType != XmlPullParser.END_DOCUMENT) {
                 switch (eventType) {
@@ -178,67 +176,73 @@ public class SubjectList extends AppCompatActivity {
                         if(((hospital.findSubject(subject))||subject.equals("모든 병원"))==true) {
                             if (endTag.equals("hospital")) {
 
-                                dayOfWeek=calendar.get(Calendar.DAY_OF_WEEK);
-                                String pattern="HH:mm";
-                                SimpleDateFormat sdf=new SimpleDateFormat(pattern);
-                                Date now=new Date();
-                                String nowString=sdf.format(now); //현재 시시:분분 형태 String
-                                String[] array=nowString.split(":");
-                                nowh=Integer.parseInt(array[0]);
-                                nowm=Integer.parseInt(array[1]); //현재시간 받아옴
+                                dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+                                String pattern = "HH:mm";
+                                SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+                                Date now = new Date();
+                                String nowString = sdf.format(now); //현재 시시:분분 형태 String
+                                String[] array = nowString.split(":");
+                                nowh = Integer.parseInt(array[0]);
+                                nowm = Integer.parseInt(array[1]); //현재시간 받아옴
 
                                 hospital.setOpenClosed("준비중");
 
+                                // 평일
                                 if(dayOfWeek==2||dayOfWeek==3||dayOfWeek==4||dayOfWeek==5||dayOfWeek==6){
-                                    String startTime=hospital.getOpenTime(0);
-                                    String endTime=hospital.getClosedTime(0);
+                                    String startTime = hospital.getOpenTime(0);
+                                    String endTime = hospital.getClosedTime(0);
+
                                     //병원 진료시간
-                                    String[] array1=startTime.split(":");
-                                    starth=Integer.parseInt(array1[0]);
-                                    startm=Integer.parseInt(array1[1]);
-                                    String[] array2=endTime.split(":");
-                                    endh=Integer.parseInt(array2[0]);
-                                    endm=Integer.parseInt(array2[1]);
+                                    String[] array1 = startTime.split(":");
+                                    starth = Integer.parseInt(array1[0]);
+                                    startm = Integer.parseInt(array1[1]);
+                                    String[] array2 = endTime.split(":");
+                                    endh = Integer.parseInt(array2[0]);
+                                    endm = Integer.parseInt(array2[1]);
 
                                     if(((nowh<endh)||(nowh==endh&&nowm<endm)) && ((starth<nowh)||(starth==nowh&&startm<nowm))){
                                         hospital.setOpenClosed("진료중");
                                     }
-                                } //평일이다
+                                }
+                                // 토요일
                                 else if(dayOfWeek==7)
                                 {
                                     if(hospital.getOpenTimeSize()>=2){
-                                        String startTime=hospital.getOpenTime(1);
-                                        String endTime=hospital.getClosedTime(1);
+                                        String startTime = hospital.getOpenTime(1);
+                                        String endTime = hospital.getClosedTime(1);
+
                                         //병원 진료시간
-                                        array=startTime.split(":");
-                                        starth=Integer.parseInt(array[0]);
-                                        startm=Integer.parseInt(array[1]);
-                                        array=endTime.split(":");
-                                        endh=Integer.parseInt(array[0]);
-                                        endm=Integer.parseInt(array[1]);
+                                        array = startTime.split(":");
+                                        starth = Integer.parseInt(array[0]);
+                                        startm = Integer.parseInt(array[1]);
+                                        array = endTime.split(":");
+                                        endh = Integer.parseInt(array[0]);
+                                        endm = Integer.parseInt(array[1]);
 
                                         if(((nowh<endh)||(nowh==endh&&nowm<endm)) && ((starth<nowh)||(starth==nowh&&startm<nowm))){
                                             hospital.setOpenClosed("진료중");
                                         }
                                     }
-                                } //토요일이다
+                                }
+                                // 일요일
                                 else if(dayOfWeek==1){
                                     if(hospital.getOpenTimeSize()>=3){
-                                        String startTime=hospital.getOpenTime(2);
-                                        String endTime=hospital.getClosedTime(2);
+                                        String startTime = hospital.getOpenTime(2);
+                                        String endTime = hospital.getClosedTime(2);
+
                                         //병원 진료시간
-                                        array=startTime.split(":");
-                                        starth=Integer.parseInt(array[0]);
-                                        startm=Integer.parseInt(array[1]);
-                                        array=endTime.split(":");
-                                        endh=Integer.parseInt(array[0]);
-                                        endm=Integer.parseInt(array[1]);
+                                        array = startTime.split(":");
+                                        starth = Integer.parseInt(array[0]);
+                                        startm = Integer.parseInt(array[1]);
+                                        array = endTime.split(":");
+                                        endh = Integer.parseInt(array[0]);
+                                        endm = Integer.parseInt(array[1]);
 
                                         if(((nowh<endh)||(nowh==endh&&nowm<endm)) && ((starth<nowh)||(starth==nowh&&startm<nowm))){
                                             hospital.setOpenClosed("진료중");
                                         }
                                     }
-                                } //일요일이다
+                                }
 
                                 if(hospital.getOpenClosed()=="진료중"){
                                     subjectListAdapter.addOpenItem(hospital);
