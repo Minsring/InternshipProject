@@ -22,7 +22,7 @@ import static com.test.internship.Register.person4_n;
 import static com.test.internship.Register.person4_p;
 import static com.test.internship.Register.person5_n;
 import static com.test.internship.Register.person5_p;
-import static com.test.internship.Register.persondata;
+import static com.test.internship.Register.personData;
 
 public class RegisterAdapter extends BaseAdapter {
 
@@ -277,7 +277,7 @@ public class RegisterAdapter extends BaseAdapter {
                     person5_n=null;
                     person5_p=null;
                 }
-                persondata.remove(position);
+                personData.remove(position);
                 Register.registerAdapter.notifyDataSetChanged();
                 Toast.makeText(mcontext, "삭제되었습니다.", Toast.LENGTH_SHORT).show();
                 return false;

@@ -22,7 +22,7 @@ public class Register extends AppCompatActivity {
     private SharedPreferences appData;
     static String person1_n, person1_p, person2_n, person2_p, person3_n, person3_p, person4_n, person4_p, person5_n, person5_p;
 
-    static ArrayList<ProtectorData> persondata = null;
+    static ArrayList<ProtectorData> personData = null;
     static RegisterAdapter registerAdapter = null;
     private ListView listView = null;
 
@@ -35,8 +35,8 @@ public class Register extends AppCompatActivity {
         appData = getSharedPreferences("appData", MODE_PRIVATE);
         load();
 
-        persondata = new ArrayList<ProtectorData>();
-        registerAdapter = new RegisterAdapter(this, R.layout.protector_info_style, persondata);
+        personData = new ArrayList<ProtectorData>();
+        registerAdapter = new RegisterAdapter(this, R.layout.protector_info_style, personData);
         listView = findViewById(R.id.list);
         listView.setAdapter(registerAdapter);
 
@@ -49,23 +49,23 @@ public class Register extends AppCompatActivity {
 
         if (saveData) {
             if (person1_n != null && person1_p != null) {
-                persondata.add(new ProtectorData(R.drawable.person, person1_n, person1_p));
+                personData.add(new ProtectorData(R.drawable.person, person1_n, person1_p));
                 listView.setAdapter(registerAdapter);
             }
             if (person2_n != null && person2_p != null) {
-                persondata.add(new ProtectorData(R.drawable.person, person2_n, person2_p));
+                personData.add(new ProtectorData(R.drawable.person, person2_n, person2_p));
                 listView.setAdapter(registerAdapter);
             }
             if (person3_n != null && person3_p != null) {
-                persondata.add(new ProtectorData(R.drawable.person, person3_n, person3_p));
+                personData.add(new ProtectorData(R.drawable.person, person3_n, person3_p));
                 listView.setAdapter(registerAdapter);
             }
             if (person4_n != null && person4_p != null) {
-                persondata.add(new ProtectorData(R.drawable.person, person4_n, person4_p));
+                personData.add(new ProtectorData(R.drawable.person, person4_n, person4_p));
                 listView.setAdapter(registerAdapter);
             }
             if (person5_n != null && person5_p != null) {
-                persondata.add(new ProtectorData(R.drawable.person, person5_n, person5_p));
+                personData.add(new ProtectorData(R.drawable.person, person5_n, person5_p));
                 listView.setAdapter(registerAdapter);
             }
         }
@@ -84,35 +84,35 @@ public class Register extends AppCompatActivity {
                         if (person1_n == null && person1_p == null) {
                             person1_p = value_p;
                             person1_n = value_n;
-                            persondata.add(new ProtectorData(R.drawable.person, value_n, value_p));
+                            personData.add(new ProtectorData(R.drawable.person, value_n, value_p));
                             Toast.makeText(Register.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
                             listView.setAdapter(registerAdapter);
                             save(0);
                         } else if (person2_n == null && person2_p == null) {
                             person2_p = value_p;
                             person2_n = value_n;
-                            persondata.add(new ProtectorData(R.drawable.person, value_n, value_p));
+                            personData.add(new ProtectorData(R.drawable.person, value_n, value_p));
                             Toast.makeText(Register.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
                             listView.setAdapter(registerAdapter);
                             save(1);
                         } else if (person3_n == null && person3_p == null) {
                             person3_p = value_p;
                             person3_n = value_n;
-                            persondata.add(new ProtectorData(R.drawable.person, value_n, value_p));
+                            personData.add(new ProtectorData(R.drawable.person, value_n, value_p));
                             Toast.makeText(Register.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
                             listView.setAdapter(registerAdapter);
                             save(2);
                         } else if (person4_n == null && person4_p == null) {
                             person4_p = value_p;
                             person4_n = value_n;
-                            persondata.add(new ProtectorData(R.drawable.person, value_n, value_p));
+                            personData.add(new ProtectorData(R.drawable.person, value_n, value_p));
                             Toast.makeText(Register.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
                             listView.setAdapter(registerAdapter);
                             save(3);
                         } else if (person5_n == null && person5_p == null) {
                             person5_p = value_p;
                             person5_n = value_n;
-                            persondata.add(new ProtectorData(R.drawable.person, value_n, value_p));
+                            personData.add(new ProtectorData(R.drawable.person, value_n, value_p));
                             Toast.makeText(Register.this, "보호자 정보 등록되었습니다.", Toast.LENGTH_SHORT).show();
                             listView.setAdapter(registerAdapter);
                             save(4);
@@ -164,22 +164,22 @@ public class Register extends AppCompatActivity {
         }
     }
 
-    private void save(int a) {
+    private void save(int numPerson) {
         SharedPreferences.Editor editor = appData.edit();
         editor.putBoolean("SAVE_ON", true);
-        if (a == 0) {
+        if (numPerson == 0) {
             editor.putString("PERSON1_NAME", person1_n);
             editor.putString("PERSON1_PHONE", person1_p);
-        } else if (a == 1) {
+        } else if (numPerson == 1) {
             editor.putString("PERSON2_NAME", person2_n);
             editor.putString("PERSON2_PHONE", person2_p);
-        } else if (a == 2) {
+        } else if (numPerson == 2) {
             editor.putString("PERSON3_NAME", person3_n);
             editor.putString("PERSON3_PHONE", person3_p);
-        } else if (a == 3) {
+        } else if (numPerson == 3) {
             editor.putString("PERSON4_NAME", person4_n);
             editor.putString("PERSON4_PHONE", person4_p);
-        } else if (a == 4) {
+        } else if (numPerson == 4) {
             editor.putString("PERSON5_NAME", person5_n);
             editor.putString("PERSON5_PHONE", person5_p);
         }
