@@ -130,6 +130,13 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 buttonOkay.setVisibility(View.INVISIBLE);
             }
         }
+        else{
+            if(!switchRadius.isChecked()){
+                    layoutRadius.setVisibility(View.INVISIBLE);
+                    mapRadius.setVisibility(View.INVISIBLE);
+                buttonOkay.setVisibility(View.INVISIBLE);
+            }
+        }
 
         // 접근 권한 설정
         int permissionCheck= ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
@@ -226,8 +233,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             double dis = nowLatLng.distanceTo(centerLatLng); //m단위를 double로 반환
             if(dis>radius){
                if(switchRadius.isChecked()==true){
-                   Toast.makeText(getApplicationContext(), nowLatLng.latitude + ", " + nowLatLng.longitude+" 범위를 벗어났습니다.",
-                           Toast.LENGTH_LONG).show();
                    if(person1_n!=null && person1_p != null){
                        Setting.sendSMS(person1_p, person1_n, 3);
                    }
