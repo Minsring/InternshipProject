@@ -3,7 +3,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/customBlue">
+    android:background="@color/customBlue"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,9 +45,14 @@
                 android:id="@+id/pName"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
-                android:imeOptions="actionDone"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
                 android:background="@drawable/round_white_5"
+                android:privateImeOptions="defaultInputmode=korean"
                 android:paddingLeft="10dp"
+                android:maxLength="10"
+                android:ems="10"
+                android:maxLines="1"
                 android:textColor="#296EB3"
                 android:textSize="20sp"/>
         </LinearLayout>
@@ -72,6 +79,8 @@
                 android:imeOptions="actionDone"
                 android:inputType="number"
                 android:paddingLeft="10dp"
+                android:maxLength="15"
+                android:ems="15"
                 android:textColor="#296EB3"
                 android:background="@drawable/round_white_5"
                 android:textSize="20sp" />
@@ -99,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pork_6"
-            android:text="등록된 보호자 정보 목록"
+            android:text="등록된 보호자 목록"
             android:textColor="#ffffff"
             android:textStyle="bold"
             android:textSize="25sp"
@@ -120,7 +129,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp">
+        android:layout_margin="20dp"
+        android:background="@drawable/round_white_20">
 
         <ListView
             android:id="@+id/list"

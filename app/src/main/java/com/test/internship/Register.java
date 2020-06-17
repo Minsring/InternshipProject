@@ -1,8 +1,10 @@
 package com.test.internship;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -68,7 +70,6 @@ public class Register extends AppCompatActivity {
                 persondata.add(new ProtectorData(R.drawable.ic_launcher_foreground, person5_n, person5_p));
                 listView.setAdapter(registerAdapter);
             }
-
         }
     }
 
