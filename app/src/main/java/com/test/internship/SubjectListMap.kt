@@ -72,10 +72,6 @@ class SubjectListMap : AppCompatActivity(), OnMapReadyCallback {
         else{
             latlng = closed_hospitals!![0].latLng }
 
-//        val options = NaverMapOptions()
-//                .locationButtonEnabled(true)
-//                .compassEnabled(true)
-//                .tiltGesturesEnabled(false)
 
         val fm = supportFragmentManager
 
@@ -84,10 +80,6 @@ class SubjectListMap : AppCompatActivity(), OnMapReadyCallback {
                     fm.beginTransaction().add(R.id.map, it).commit()
                 }
 
-//        if (mapFragment == null) {
-//            mapFragment = MapFragment.newInstance(options)
-//            fm.beginTransaction().add(R.id.map, mapFragment).commit()
-//        }
 
         mapFragment!!.getMapAsync(this)
 
@@ -172,7 +164,7 @@ class SubjectListMap : AppCompatActivity(), OnMapReadyCallback {
                             height = 150;
                             zIndex = 100;
                             captionText=clusterItem.getHospitalName();
-                            isHideCollidedSymbols = true                //심벌이랑 겹치는 부분 숨길까 말까
+                            isHideCollidedSymbols = true
                         }
                     }
                     .markerClickListener { hospital: HospitalData ->
@@ -190,14 +182,11 @@ class SubjectListMap : AppCompatActivity(), OnMapReadyCallback {
                     }
                     .clusterBackground{Color.rgb(255,4,152)}
                     .clusterClickListener { cluster ->
-                        //                        val lat = cluster.position.latitude
-//                        val lng = cluster.position.longitude
                         Toast.makeText(this, "${cluster.size}개 클러스터", Toast.LENGTH_SHORT).show()
-//                        naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(lat, lng)))
-//                        naverMap.moveCamera(CameraUpdate.zoomIn())
+
                     }
                     .minClusterSize(2)
-                    .clusterBuckets(myBuckets)  // 묶이는 단위 수정하고 싶으면 myBucket건들기
+                    .clusterBuckets(myBuckets)
                     .make()
 
         }
@@ -212,15 +201,14 @@ class SubjectListMap : AppCompatActivity(), OnMapReadyCallback {
                             height = 150;
                             zIndex = 1;
                             captionText=clusterItem.getHospitalName();
-                            isHideCollidedSymbols = true                //심벌이랑 겹치는 부분 숨길까 말까
+                            isHideCollidedSymbols = true
                         }
                     }
                     .markerClickListener { hospital: HospitalData ->
-                        //                        val position = hospital.getLatLng()
                         simple_name?.setText(hospital.getHospitalName())
                         simple_add?.setText(hospital.getAddress())
                         simple_dis?.setText(hospital.getDistance())
-                        simple?.setBackgroundResource(R.color.minokGray)
+                        simple?.setBackgroundResource(R.color.hospitalGray)
                         simple?.setVisibility(View.VISIBLE)
                         simple?.bringToFront()
                         simple_info?.setEnabled(true)
@@ -233,11 +221,10 @@ class SubjectListMap : AppCompatActivity(), OnMapReadyCallback {
                         val lat = cluster.position.latitude
                         val lng = cluster.position.longitude
                         Toast.makeText(this, "${cluster.size}개 클러스터", Toast.LENGTH_SHORT).show()
-//                        naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(lat, lng)))
-//                        naverMap.moveCamera(CameraUpdate.zoomIn())
+
                     }
                     .minClusterSize(2)
-                    .clusterBuckets(myBuckets)  // 묶이는 단위 수정하고 싶으면 myBucket건들기
+                    .clusterBuckets(myBuckets)
                     .make()
         }
 
@@ -256,9 +243,9 @@ class SubjectListMap : AppCompatActivity(), OnMapReadyCallback {
             }
             R.id.simple_call -> {
                 val number = sendHospital?.getCallNumber()
-                intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$number")) //다이얼로 연결
+                intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$number"))
             }
-        }//                    startActivity(intent);
-        if (intent != null) startActivity(intent)    // 다른 처리 없다면 여기서 한번에 화면 전환
+        }
+        if (intent != null) startActivity(intent)
     }
 }

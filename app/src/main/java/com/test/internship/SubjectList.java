@@ -1,11 +1,9 @@
 package com.test.internship;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -13,7 +11,6 @@ import android.widget.TextView;
 
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,7 +32,6 @@ public class SubjectList extends AppCompatActivity {
     String subject;
     Button mapBtn;
     TextView subjectTitle;
-    LinearLayout linearLayout;
     Button openClosed;
     RecyclerView recyclerView;
     ArrayList<HospitalData> openHospital=null;
@@ -66,21 +62,9 @@ public class SubjectList extends AppCompatActivity {
         xmlParser(subjectListAdapter);
         subjectListAdapter.combineItems();     // 진료중-준비중 순서대로 들어가게 하는 메소드 호출
         openHospital= subjectListAdapter.getOpenItem(); //얘가 어댑터에서 받아와야 Map에 전달해줄수있다 !
-        closedHospital= subjectListAdapter.getClosedItem(); //얘가 어댑터에서 받아와야 Map에 전달해줄수있다 !
+        closedHospital= subjectListAdapter.getClosedItem();
 
-//        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), 1));    // 구분선
         recyclerView.setAdapter(subjectListAdapter);
-
-        // 해당 과목의 병원이 있으면 리스트 동적제공, 없으면 "해당 병원 없습니다." 텍스트 동적 제공
-//        linearLayout = findViewById(R.id.linearLayout);
-//        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.MATCH_PARENT,
-//                LinearLayout.LayoutParams.MATCH_PARENT
-//        );
-//        if(subjectListAdapter.getItemCount()!=0) {
-//            recyclerView.setLayoutParams(params);
-//            recyclerView.setAdapter(subjectListAdapter); //등록과정
-//        }
 
         // 액티비티에서 커스텀 리스너 객체 생성 및 전달
         subjectListAdapter.setOnItemClickListener(new SubjectListAdapter.OnItemClickListener() {
@@ -88,7 +72,6 @@ public class SubjectList extends AppCompatActivity {
             public void onItemClick(View v, int position) {
                 // 클릭시 이벤트를 SubjectList에서 처리
                 HospitalData hospital = subjectListAdapter.getItem(position);
-//                Toast.makeText(getApplicationContext(), "클릭한 병원 이름: "+hospital.getHospitalName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), HospitalInformation.class);
                 intent.putExtra("병원", (Serializable)hospital);
                 startActivity(intent);
@@ -107,7 +90,7 @@ public class SubjectList extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-        } //응급실이면 다이얼로 연결되는 리스너 연결하자
+        }
         else{
             subjectListAdapter.setOpenClosedClickListener(new View.OnClickListener(){
                 @Override
@@ -119,17 +102,14 @@ public class SubjectList extends AppCompatActivity {
                     intent.putExtra("병원", (Serializable)hospital);
                     intent.putExtra("진료과", subject);
                     startActivity(intent);
-
                 }
             });
-        } //응급실 아니면 그냥 itemlistener와 같은 역할로 다음 화면으로 넘어가야한다.
-
+        }
     }
-
 
     private void xmlParser(SubjectListAdapter subjectListAdapter) {
         Calendar calendar=Calendar.getInstance();
-        int dayOfWeek; //요일을 숫자로 받을거다
+        int dayOfWeek; //요일을 숫자로 받기
         int starth,startm,endh,endm; //병원 여는 시,분, 닫는 시, 분 시분...
         int nowh,nowm; //현재 시,분
 
@@ -273,7 +253,6 @@ public class SubjectList extends AppCompatActivity {
                 }
                 eventType = parser.next();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -286,22 +265,13 @@ public class SubjectList extends AppCompatActivity {
             Intent intent = null;
             switch (v.getId()){
                 case R.id.mapBtn:
-//                    intent = new Intent(getApplicationContext(), SubjectListMap.class);
                     intent = new Intent(getApplicationContext(), SubjectListMap.class);
                     intent.putExtra("열린병원리스트",openHospital);
                     intent.putExtra("닫은병원리스트",closedHospital);
                     intent.putExtra("진료과",subject);
-//                    startActivity(intent);
                     break;
             }
-//            if(intent.getSerializableExtra("열린병원리스트")==null){
-//                Toast.makeText(getApplicationContext(),"현재 열린 병원이 없습니다.",Toast.LENGTH_LONG).show();
-//            }
-//            else{
-//                startActivity(intent);
-//            }
              if(intent != null) startActivity(intent);    // 다른 처리 없다면 여기서 한번에 화면 전환
-
         }
     };
 }

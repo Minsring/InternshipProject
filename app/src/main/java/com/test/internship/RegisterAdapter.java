@@ -24,7 +24,6 @@ import static com.test.internship.Register.person5_n;
 import static com.test.internship.Register.person5_p;
 import static com.test.internship.Register.persondata;
 
-///커스텀 리스너 정의 -> 추가
 public class RegisterAdapter extends BaseAdapter {
 
     private Context mcontext = null;
@@ -63,7 +62,6 @@ public class RegisterAdapter extends BaseAdapter {
         ImageView img = convertView.findViewById(R.id.img);
         TextView personname = convertView.findViewById(R.id.personname);
         TextView personnum = convertView.findViewById(R.id.personnum);
-//        Button btndelete = convertView.findViewById(R.id.btndelete);
         LinearLayout item_layout = (LinearLayout) convertView.findViewById(R.id.item_layout);
 
         img.setImageResource(mdata.get(position).getImg());

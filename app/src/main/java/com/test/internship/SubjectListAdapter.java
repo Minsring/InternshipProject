@@ -49,10 +49,7 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
         this.openClosedListener=listener;
     }
 
-
     // item으로 만든 itemView를 담아두는 뷰 홀더
-    // 일단 필요한 객체의 수만 ViewHolder에 담아서 화면에 뿌려준다
-    // 이벤트 처리를 위해 static -> public으로 변경 (items를 static으로 하기엔 찝찝해서..)
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView itemHospitalName, itemSubject;
         TextView itemDistance;
@@ -67,12 +64,10 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Toast.makeText(itemView.getContext(), "아이템 클릭", Toast.LENGTH_SHORT).show();
-                    int position = getAdapterPosition();        // 클릭한 아이템의 위치
-                    if(position != RecyclerView.NO_POSITION){   // 아이템이 있으면
-                        // 아이템클릭 이벤트 핸들러 메소드에서 리스너 객체 메소드 호출
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION){
                         if(hosClickListener != null){
-                            hosClickListener.onItemClick(v, position);  // Subject List에서 처리하기
+                            hosClickListener.onItemClick(v, position);
                         }
                     }
                 }
@@ -83,13 +78,12 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
               public void onClick(View view) {
                   if(emergencyOpenClosedListener!=null){
                       int position=getAdapterPosition();
-                        view.setTag(position); //position을 전달해줘야 listener에서 병원번호 받을 수있음.
+                        view.setTag(position);
                       emergencyOpenClosedListener.onClick(view);
-                  } //응급실 리스너가 붙어있다면 !
+                  }
                   else if(openClosedListener!=null){
                       int position=getAdapterPosition();
-                      view.setTag(position); //얘는 itemlistener와 같은 역할을 해야하므로 또 position이 필요함
-                      //tag는 꼬리표같은 느낌으로 전해주는것 같음.
+                      view.setTag(position);
                       openClosedListener.onClick(view);
                   }
               }
@@ -121,7 +115,6 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
         }
     }
 
-    // 임시로 사용
     public void addOpenItem(HospitalData item){
         openItems.add(item);
     }
@@ -131,11 +124,9 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
     public HospitalData getItem(int position){
         return items.get(position);
     }
-    // 해당위치의 item을 변경하는 함수
     public void setItem(int position, HospitalData item){
         items.set(position, item);
     }
-    // 리스트를 set
     public void setItems(ArrayList<HospitalData> items){
         this.items = items;
     }

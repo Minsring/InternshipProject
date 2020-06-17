@@ -43,7 +43,6 @@ public class User extends AppCompatActivity implements SensorEventListener {
     private static SharedPreferences appData;
     private final int MY_PERMISSION_REQUEST_SMS=1001;
 
-    //    TODO: 위치 기반 동의, 개인정보 보호 약관..?
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +60,6 @@ public class User extends AppCompatActivity implements SensorEventListener {
         if (stepsensor == null) {
             Toast.makeText(this, "걸음 감지 센서가 없습니다.", Toast.LENGTH_LONG).show();
         }
-        //Toast.makeText(this, "앱을 재실행 하셨을 경우 보호자 연락 기능을\n다시 봐주세요", Toast.LENGTH_LONG).show();
 
         //문자 기능
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
@@ -86,9 +84,6 @@ public class User extends AppCompatActivity implements SensorEventListener {
         }
 
 
-
-
-
         // 버튼 연결
         allSub = findViewById(R.id.allSub);                     // 전체
         hanSub = findViewById(R.id.hanSub);                     // 한의원
@@ -106,8 +101,8 @@ public class User extends AppCompatActivity implements SensorEventListener {
         chkCenter = findViewById(R.id.chkCenter);               // 건강검진센터
         emergencyRoom = findViewById(R.id.emergencyRoom);       // 응급실
 
-        contactProtector = findViewById(R.id.contactProtector);                   // 설정1
-        fence = findViewById(R.id.fence);                   // 설정2
+        contactProtector = findViewById(R.id.contactProtector);
+        fence = findViewById(R.id.fence);
 
         // 리스너
         allSub.setOnClickListener(listener);
@@ -129,9 +124,7 @@ public class User extends AppCompatActivity implements SensorEventListener {
         fence.setOnClickListener(listener);
 
 
-
         timer = new Timer();
-        //timer.schedule(tt, 0, 10000);
     }
 
 
@@ -147,7 +140,7 @@ public class User extends AppCompatActivity implements SensorEventListener {
         }
     }
 
-    // TODO: 각 버튼 별 처리
+    // 각 버튼 별 처리
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -157,114 +150,94 @@ public class User extends AppCompatActivity implements SensorEventListener {
                     subject="모든 병원";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
                     intent.putExtra("진료과", subject);
-//                    startActivity(intent);
                     break;
                 case R.id.hanSub:
                     subject = "한의원";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
                     intent.putExtra("진료과", subject);
-//                    startActivity(intent);
                     break;
                 case R.id.binyoSub:
                     subject = "비뇨기과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
                     intent.putExtra("진료과", subject);
-//                    startActivity(intent);
                     break;
                 case R.id.entSub:
                     subject = "이비인후과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
                     intent.putExtra("진료과", subject);
-//                    startActivity(intent);
                     break;
                 case R.id.internalSub:
                     subject = "내과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
                     intent.putExtra("진료과", subject);
-//                    startActivity(intent);
                     break;
                 case R.id.obstSub:
                     subject = "산부인과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
                     intent.putExtra("진료과", subject);
-//                    startActivity(intent);
                     break;
                 case R.id.eyeSub:
                     subject = "안과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
                     intent.putExtra("진료과", subject);
-//                    startActivity(intent);
                     break;
                 case R.id.boneSub:
                     subject = "정형외과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
                     intent.putExtra("진료과", subject);
-//                    startActivity(intent);
                     break;
                 case R.id.neuroSub:
                     subject = "신경외과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
                     intent.putExtra("진료과", subject);
-//                    startActivity(intent);
                     break;
                 case R.id.childSub:
                     subject = "소아청소년과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
                     intent.putExtra("진료과", subject);
-//                    startActivity(intent);
                     break;
                 case R.id.dentalSub:
                     subject = "치과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
                     intent.putExtra("진료과", subject);
-//                    startActivity(intent);
                     break;
                 case R.id.skinSub:
                     subject = "피부과";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
                     intent.putExtra("진료과", subject);
-//                    startActivity(intent);
                     break;
                 case R.id.bogun:
                     subject = "보건소";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
                     intent.putExtra("진료과", subject);
-//                    startActivity(intent);
                     break;
                 case R.id.chkCenter:
                     subject = "건강검진센터";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
                     intent.putExtra("진료과", subject);
-//                    startActivity(intent);
                     break;
                 case R.id.emergencyRoom:
-                    // 화면 전환 or 대화상자로 바로 연결할까영? 한번 물은 뒤 연결
                     subject = "응급실";
                     intent = new Intent(getApplicationContext(), SubjectList.class);
                     intent.putExtra("진료과", subject);
-//                    startActivity(intent);
                     break;
                 case R.id.contactProtector:
                     intent = new Intent(getApplicationContext(), Setting.class);
-//                    startActivity(intent);
                     break;
                 case R.id.fence:
                     intent = new Intent(getApplicationContext(), DistanceRange.class);
-//                    startActivity(intent);
                     break;
             }
-            if(intent != null) startActivity(intent);    // 다른 처리 없다면 여기서 한번에 화면 전환
+            if(intent != null) startActivity(intent);
         }
     };
     @Override
     public void onResume() {
         super.onResume();
-    //    sensorManager.registerListener(this, stepsensor, SensorManager.SENSOR_DELAY_UI);
     }
     @Override
     public void onPause() {
         super.onPause();
-       // sensorManager.registerListener(this, stepsensor, SensorManager.SENSOR_DELAY_UI);
     }
     @Override
     public void onStart() {

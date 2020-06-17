@@ -95,7 +95,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         switchFlag=0;
 
 
-
         final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         appData = getSharedPreferences("appData", MODE_PRIVATE);
 
@@ -168,7 +167,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         });
 
 
-        // 똑딱버튼 리스너 연결
+        // 스위치 리스너 연결
         switchRadius.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @RequiresApi(api = Build.VERSION_CODES.M)
@@ -212,7 +211,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             }
         });
 
-    }// 요까지 onCreate
+    }
 
     // 현재위치가 바뀌면 호출되는 리스너너
     final LocationListener gpsLocationListener = new LocationListener() {
@@ -260,23 +259,21 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         }
     };
 
-
     // 위치 권한 허가
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,  @NonNull int[] grantResults) {
-        if(requestCode==MY_PERMISSIONS_REQUEST_LOCATION){           //위치 허락받으려고 한다면,
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,  @NonNull int[] grantResults) {
+        if(requestCode==MY_PERMISSIONS_REQUEST_LOCATION){
             if(grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(this,"승인 허가",Toast.LENGTH_LONG).show(); //허가 되었다.
+                Toast.makeText(this,"승인 허가",Toast.LENGTH_LONG).show();
             }
             else{
-                Toast.makeText(this,"아직 승인 안됐다",Toast.LENGTH_LONG).show(); //아직 허가 안됨
+                Toast.makeText(this,"아직 승인 안됐다",Toast.LENGTH_LONG).show();
             }
             return;
         }
         if (locationSource.onRequestPermissionsResult(
                 requestCode, permissions, grantResults)) {
-            if (!locationSource.isActivated()) { // 권한 거부됨
+            if (!locationSource.isActivated()) {
                 naverMap.setLocationTrackingMode(LocationTrackingMode.None);
             }
             return;
