@@ -26,27 +26,28 @@ import static com.test.internship.Register.personData;
 
 public class RegisterAdapter extends BaseAdapter {
 
-    private Context mcontext = null;
-    private ArrayList<ProtectorData> mdata = null;
-    private int layout = 0;
-    private LayoutInflater inflater = null;
+    private Context mContext;
+    private ArrayList<ProtectorData> mData;
+    private LayoutInflater inflater;
+    private int layout;
+
     int numPerson, time;
 
-    public RegisterAdapter(Context context, int layout, ArrayList<ProtectorData> mdata) {
-        this.mcontext = context;
+    public RegisterAdapter(Context context, int layout, ArrayList<ProtectorData> mData) {
+        this.mContext = context;
         this.layout = layout;
-        this.mdata = mdata;
+        this.mData = mData;
         this.inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return mdata.size();
+        return mData.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mdata.get(position).getPersonName();
+        return mData.get(position).getPersonName();
     }
 
     @Override
@@ -60,21 +61,19 @@ public class RegisterAdapter extends BaseAdapter {
             convertView = inflater.inflate(this.layout, parent, false);
         }
         ImageView img = convertView.findViewById(R.id.img);
-        TextView personname = convertView.findViewById(R.id.personname);
-        TextView personnum = convertView.findViewById(R.id.personnum);
-        LinearLayout item_layout = (LinearLayout) convertView.findViewById(R.id.item_layout);
+        TextView personName = convertView.findViewById(R.id.personname);
+        TextView personNum = convertView.findViewById(R.id.personnum);
+        LinearLayout item_layout = convertView.findViewById(R.id.item_layout);
 
-        img.setImageResource(mdata.get(position).getImg());
-        personname.setText(mdata.get(position).getPersonName());
-        personnum.setText(mdata.get(position).getPersonNum());
-        System.out.println("1");
-
+        img.setImageResource(mData.get(position).getImg());
+        personName.setText(mData.get(position).getPersonName());
+        personNum.setText(mData.get(position).getPersonNum());
 
         item_layout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                numPerson =0;
-                time =0;
+                numPerson = 0;
+                time = 0;
                 if(position==0){
                     if(person1_n==null && person1_p==null){
                         if(person2_n == null && person2_p==null){
@@ -279,7 +278,7 @@ public class RegisterAdapter extends BaseAdapter {
                 }
                 personData.remove(position);
                 Register.registerAdapter.notifyDataSetChanged();
-                Toast.makeText(mcontext, "삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "선택한 보호자의 정보를 삭제하였습니다.", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
