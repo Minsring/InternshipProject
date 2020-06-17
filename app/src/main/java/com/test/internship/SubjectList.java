@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,6 +37,7 @@ public class SubjectList extends AppCompatActivity {
     TextView subjectTitle;
     LinearLayout linearLayout;
     Button openClosed;
+    RecyclerView recyclerView;
     ArrayList<HospitalData> openHospital=null;
     ArrayList<HospitalData> closedHospital=null;
 
@@ -55,7 +57,7 @@ public class SubjectList extends AppCompatActivity {
         subjectTitle.setText(subject);
 
         // 리사이클러뷰, 레이아웃 매니저
-        RecyclerView recyclerView = new RecyclerView(this);
+        recyclerView = findViewById(R.id.listRecycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -66,26 +68,19 @@ public class SubjectList extends AppCompatActivity {
         openHospital= subjectListAdapter.getOpenItem(); //얘가 어댑터에서 받아와야 Map에 전달해줄수있다 !
         closedHospital= subjectListAdapter.getClosedItem(); //얘가 어댑터에서 받아와야 Map에 전달해줄수있다 !
 
+//        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), 1));    // 구분선
+        recyclerView.setAdapter(subjectListAdapter);
+
         // 해당 과목의 병원이 있으면 리스트 동적제공, 없으면 "해당 병원 없습니다." 텍스트 동적 제공
-        linearLayout = findViewById(R.id.linearLayout);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-        );
-        if(subjectListAdapter.getItemCount()!=0){
-            recyclerView.setLayoutParams(params);
-            recyclerView.setBackgroundColor(Color.parseColor("#22ff0000"));
-            linearLayout.addView(recyclerView);
-            recyclerView.setAdapter(subjectListAdapter); //등록과정
-        } else{
-            TextView textView = new TextView(this);
-            textView.setBackgroundColor(Color.parseColor("#22ff0000"));
-            textView.setText("선택하신 과목의 병원이 없습니다.");
-            textView.setTextSize(25);
-            textView.setGravity(Gravity.CENTER);
-            textView.setLayoutParams(params);
-            linearLayout.addView(textView);
-        }
+//        linearLayout = findViewById(R.id.linearLayout);
+//        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+//                LinearLayout.LayoutParams.MATCH_PARENT,
+//                LinearLayout.LayoutParams.MATCH_PARENT
+//        );
+//        if(subjectListAdapter.getItemCount()!=0) {
+//            recyclerView.setLayoutParams(params);
+//            recyclerView.setAdapter(subjectListAdapter); //등록과정
+//        }
 
         // 액티비티에서 커스텀 리스너 객체 생성 및 전달
         subjectListAdapter.setOnItemClickListener(new SubjectListAdapter.OnItemClickListener() {
