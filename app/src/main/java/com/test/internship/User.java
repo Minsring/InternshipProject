@@ -16,9 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -32,21 +30,23 @@ public class User extends AppCompatActivity implements SensorEventListener {
 
     Button allSub, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub,
             hanSub, binyoSub, bogun, chkCenter, emergencyRoom, contactProtector, fence;
+    private final int MY_PERMISSION_REQUEST_SMS=1001;
+    private static SharedPreferences appData;
     private SensorManager sensorManager;
-    private Sensor stepsensor;
-    static int mStepDetector;
+    private Sensor stepSensor;
     static String subject;
     static Timer timer;
-    static TimerTask tt1;
-    static TimerTask tt2;
+    static TimerTask timerTask1;
+    static TimerTask timerTask2;
     static int timeCounter;
-    private static SharedPreferences appData;
-    private final int MY_PERMISSION_REQUEST_SMS=1001;
+    static int mStepDetector;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user);
+
         appData = getSharedPreferences("appData", MODE_PRIVATE);
         load();
 
@@ -56,10 +56,7 @@ public class User extends AppCompatActivity implements SensorEventListener {
         }
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        stepsensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
-        if (stepsensor == null) {
-            Toast.makeText(this, "걸음 감지 센서가 없습니다.", Toast.LENGTH_LONG).show();
-        }
+        stepSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
 
         //문자 기능
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
@@ -78,11 +75,11 @@ public class User extends AppCompatActivity implements SensorEventListener {
 
                 AlertDialog dialog = builder.create();
                 dialog.show();
-            } else{
+            }
+            else{
                 ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.SEND_SMS},MY_PERMISSION_REQUEST_SMS);
             }
         }
-
 
         // 버튼 연결
         allSub = findViewById(R.id.allSub);                     // 전체
@@ -123,21 +120,8 @@ public class User extends AppCompatActivity implements SensorEventListener {
         contactProtector.setOnClickListener(listener);
         fence.setOnClickListener(listener);
 
-
+        // 타이머
         timer = new Timer();
-    }
-
-
-    public void onRequestPermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
-        switch(requestCode){
-            case MY_PERMISSION_REQUEST_SMS:{
-                if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    Toast.makeText(this,"허용",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(this,"거부",Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
     }
 
     // 각 버튼 별 처리
@@ -231,27 +215,16 @@ public class User extends AppCompatActivity implements SensorEventListener {
             if(intent != null) startActivity(intent);
         }
     };
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-    @Override
-    public void onStart() {
-        super.onStart();
-        sensorManager.registerListener(this, stepsensor, SensorManager.SENSOR_DELAY_NORMAL);
-    }
-    public static void save(){
+
+    public static void save() {
         SharedPreferences.Editor editor = appData.edit();
         editor.putInt("SAVE_STEP_DATA", mStepDetector);
         editor.apply();
     }
-    private void load(){
+    private void load() {
         mStepDetector = appData.getInt("SAVE_STEP_DATA", 0);
     }
+
     @Override
     public void onSensorChanged(SensorEvent event) {
         if(event.sensor.getType()==Sensor.TYPE_STEP_DETECTOR){
@@ -261,7 +234,33 @@ public class User extends AppCompatActivity implements SensorEventListener {
             }
         }
     }
+
     @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    public void onAccuracyChanged(Sensor sensor, int accuracy) { }
+    @Override
+    public void onResume() {
+        super.onResume();
     }
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        sensorManager.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+//    public void onRequestPermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
+//        switch(requestCode){
+//            case MY_PERMISSION_REQUEST_SMS:{
+//                if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+//                    Toast.makeText(this,"허용",Toast.LENGTH_SHORT).show();
+//                }else{
+//                    Toast.makeText(this,"거부",Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        }
+//    }
 }

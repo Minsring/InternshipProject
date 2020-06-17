@@ -35,8 +35,8 @@ import static com.test.internship.Register.person5_p;
 import static com.test.internship.User.mStepDetector;
 import static com.test.internship.User.timeCounter;
 import static com.test.internship.User.timer;
-import static com.test.internship.User.tt1;
-import static com.test.internship.User.tt2;
+import static com.test.internship.User.timerTask1;
+import static com.test.internship.User.timerTask2;
 
 public class Setting extends AppCompatActivity {
     private boolean saveData;
@@ -74,7 +74,7 @@ public class Setting extends AppCompatActivity {
         if(saveData){
             batterySwitch.setChecked(isCheckBattery);
             if(isCheckBattery){
-                tt1 = new TimerTask() {
+                timerTask1 = new TimerTask() {
                     @Override
                     public void run() {
                         flagBattery++;
@@ -115,11 +115,11 @@ public class Setting extends AppCompatActivity {
                         }
                     }
                 };
-                timer.schedule(tt1, 0, 1800000);
+                timer.schedule(timerTask1, 0, 1800000);
             }
             motionSwitch.setChecked(isCheckMotion);
             if(isCheckMotion){
-                tt2 = new TimerTask() {
+                timerTask2 = new TimerTask() {
                     @Override
                     public void run() {
                         flagMotion++;
@@ -152,7 +152,7 @@ public class Setting extends AppCompatActivity {
                         }
                     }
                 };
-                timer.schedule(tt2, 0, 86400000);
+                timer.schedule(timerTask2, 0, 86400000);
                 mStepDetector=0;
             }
         }
@@ -164,7 +164,7 @@ public class Setting extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                 if (isChecked){
                     save();
-                    tt1 = new TimerTask() {
+                    timerTask1 = new TimerTask() {
                         @Override
                         public void run() {
                             flagBattery++;
@@ -204,11 +204,11 @@ public class Setting extends AppCompatActivity {
                             }
                         }
                     };
-                    timer.schedule(tt1, 0, 1800000);
+                    timer.schedule(timerTask1, 0, 1800000);
 
                 }else{
                     if(flagBattery!=0){
-                        tt1.cancel();
+                        timerTask1.cancel();
                         flagBattery=0;
                     }
                     save();
@@ -223,7 +223,7 @@ public class Setting extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                 if (isChecked){
                     save();
-                    tt2 = new TimerTask() {
+                    timerTask2 = new TimerTask() {
                         @Override
                         public void run() {
                             flagMotion++;
@@ -259,11 +259,11 @@ public class Setting extends AppCompatActivity {
                             User.save();
                         }
                     };
-                    timer.schedule(tt2, 0, 86400000);
+                    timer.schedule(timerTask2, 0, 86400000);
                     mStepDetector=0;
                 }else{
                     if(flagMotion!=0){
-                        tt2.cancel();
+                        timerTask2.cancel();
                         flagMotion=0;
                     }
                     save();
