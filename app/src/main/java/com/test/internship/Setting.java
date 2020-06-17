@@ -33,42 +33,49 @@ import static com.test.internship.Register.person4_p;
 import static com.test.internship.Register.person5_n;
 import static com.test.internship.Register.person5_p;
 import static com.test.internship.User.mStepDetector;
-import static com.test.internship.User.timeCounter;
 import static com.test.internship.User.timer;
 import static com.test.internship.User.timerTask1;
 import static com.test.internship.User.timerTask2;
 
 public class Setting extends AppCompatActivity {
+
+    private String CHANNEL_ID = "channel1";
+    private String CHANEL_NAME = "Channel1";
+    private SharedPreferences appData;
     private boolean saveData;
     private boolean isCheckBattery;
     private boolean isCheckMotion;
-    public int flagBattery;
-    public int flagMotion;
+    int flagBattery;
+    int flagMotion;
     String phoneNo;
     String name;
-    Button btnregister;
-    Switch batterySwitch, motionSwitch;
 
-    private SharedPreferences appData;
+    Button buttonRegister;
+    Switch batterySwitch;
+    Switch motionSwitch;
+
     Context context = this;
     NotificationManager manager;
     NotificationCompat.Builder builder;
-    private String CHANNEL_ID = "channel1";
-    private String CHANEL_NAME = "Channel1";
+
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting);
-        timeCounter=0;
-        flagBattery=0;
-        flagMotion=0;
-        btnregister = findViewById(R.id.btnregister);
-        btnregister.setOnClickListener(listener);
 
+        flagBattery = 0;
+        flagMotion = 0;
+
+        // 사용자 등록 버튼 리스너
+        buttonRegister = findViewById(R.id.btnregister);
+        buttonRegister.setOnClickListener(listener);
+
+        // 배터리 스위치와 움직임 스위치 설정
         batterySwitch = findViewById(R.id.batterySwitch);
         motionSwitch = findViewById(R.id.motionSwitch);
+
         appData = getSharedPreferences("appData", MODE_PRIVATE);
         load();
         if(saveData){
@@ -285,18 +292,7 @@ public class Setting extends AppCompatActivity {
         }
     };
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
+
     private void save(){
         SharedPreferences.Editor editor = appData.edit();
         editor.putBoolean("SAVE_LOGIN_DATA", (batterySwitch.isChecked()||motionSwitch.isChecked()));
@@ -306,7 +302,6 @@ public class Setting extends AppCompatActivity {
         editor.putInt("FLAG_SETTING2", flagMotion);
 
         editor.apply();
-
     }
     private void load(){
         saveData = appData.getBoolean("SAVE_LOGIN_DATA", false);
@@ -323,11 +318,13 @@ public class Setting extends AppCompatActivity {
         //버전 오레오 이상일 경우
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             manager.createNotificationChannel(
-                    new NotificationChannel(CHANNEL_ID, CHANEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
-            ); builder = new NotificationCompat.Builder(this,CHANNEL_ID);
-            //하위 버전일 경우
-        }else{ builder = new NotificationCompat.Builder(this)
-        ; }
+                    new NotificationChannel(CHANNEL_ID, CHANEL_NAME, NotificationManager.IMPORTANCE_DEFAULT));
+            builder = new NotificationCompat.Builder(this,CHANNEL_ID);
+        }
+        //하위 버전일 경우
+        else{
+            builder = new NotificationCompat.Builder(this);
+        }
         builder.setContentTitle("배터리 부족 알림");
         builder.setContentText("배터리 부족!! 보호자에 알림을 전송하겠습니다.");
         builder.setSmallIcon(R.drawable.ic_launcher_foreground);
@@ -362,6 +359,19 @@ public class Setting extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 }
 

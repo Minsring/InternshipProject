@@ -38,7 +38,6 @@ public class User extends AppCompatActivity implements SensorEventListener {
     static Timer timer;
     static TimerTask timerTask1;
     static TimerTask timerTask2;
-    static int timeCounter;
     static int mStepDetector;
 
 
