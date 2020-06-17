@@ -12,9 +12,10 @@
         android:text="보호자 연락처 등록"
         android:textColor="@color/customBlue"
         android:layout_gravity="center"
-        android:background="#ffffff"
+        android:background="@drawable/round_white_20"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
+        android:padding="10dp"
         android:textSize="30sp" />
 
     <LinearLayout
@@ -27,39 +28,53 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pork_3"
-                android:text="보호자 이름 : "
+                android:text="보호자 이름    : "
+                android:textColor="#ffffff"
+                android:textSize="20sp"
                 android:textStyle="bold"/>
             <EditText
                 android:id="@+id/pName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="25dp"
                 android:imeOptions="actionDone"
-                android:layout_marginBottom="20dp" />
+                android:background="@drawable/round_white_5"
+                android:paddingLeft="10dp"
+                android:textColor="#296EB3"
+                android:textSize="20sp"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pork_3"
-                android:text="연락처(-제외 입력) : "
+                android:text="연락처(-제외) : "
+                android:textColor="#ffffff"
+                android:textSize="20sp"
                 android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/pPhone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="25dp"
                 android:fontFamily="@font/pork_3"
-                android:inputType="phone"
-                android:textSize="15sp" />
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:paddingLeft="10dp"
+                android:textColor="#296EB3"
+                android:background="@drawable/round_white_5"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <Button
@@ -67,11 +82,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="@font/pork_3"
-            android:layout_marginTop="10dp"
-            android:background="#ffffff"
+            android:fontFamily="@font/pork_6"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/round_white_10"
             android:text="등록"
-            android:textSize="15sp" />
+            android:textColor="@color/customBlue"
+            android:textSize="20sp" />
 
     </LinearLayout>
     <LinearLayout
