@@ -75,8 +75,8 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     float centerLng;
     boolean saveData;
     boolean switchState;
-
-
+    static LatLng nowLatLng;
+    static LatLng centerLatLng;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -229,8 +229,8 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
 
             double longitude = location.getLongitude();
             double latitude = location.getLatitude();
-            LatLng nowLatLng = new LatLng(latitude,longitude);
-            LatLng centerLatLng = new LatLng(centerLat,centerLng);
+            nowLatLng = new LatLng(latitude,longitude);
+            centerLatLng = new LatLng(centerLat,centerLng);
 
             double dis = nowLatLng.distanceTo(centerLatLng); //m단위를 double로 반환
             if(dis>radius){
