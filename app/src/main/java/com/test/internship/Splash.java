@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 public class Splash extends Activity {
 
@@ -11,9 +14,8 @@ public class Splash extends Activity {
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.splash);
-
         Handler hd = new Handler();
-        hd.postDelayed(new splashHandler(), 2000);
+        hd.postDelayed(new splashHandler(), 1500);
     }
 
     private class splashHandler implements Runnable{

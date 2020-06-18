@@ -7,30 +7,25 @@
     android:layout_height="match_parent"
     android:background="@color/forsythia">
 
-    <ImageView
-        android:id="@+id/splashImage"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:src="@drawable/grand"
+    <TextView
+        android:id="@+id/splashImg"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:drawableTop="@drawable/grand"
+        android:fontFamily="@font/typo_dabanggu"
+        android:text="또보기"
+        android:textColor="#784118"
+        android:textSize="80sp"
+        android:gravity="center"
+        android:background="@drawable/splash_circle_background"
+        android:padding="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.336" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/splashText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="또보기"
-        android:fontFamily="@font/typo_dabanggu"
-        android:textSize="80sp"
-        android:textColor="#784118"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/splashImage" />
-
-    <TextView
+        android:id="@+id/textView7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="5dp"
