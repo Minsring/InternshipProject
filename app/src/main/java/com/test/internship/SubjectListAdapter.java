@@ -89,7 +89,7 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
             if(hospital.findSubject("응급실") && User.subject.toString().equals("응급실"))
             {
                 itemOpenClosed.setText("");
-                itemOpenClosed.setBackgroundResource(R.drawable.telephone);
+                itemOpenClosed.setBackgroundResource(R.drawable.emergency_call);
                 itemDistance.setTextColor(0xFF999999);
                 itemHospitalName.setTextColor(0xFF000000);
             }
