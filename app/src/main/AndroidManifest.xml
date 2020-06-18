@@ -8,9 +8,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/forsythia_round"
+        android:icon="@mipmap/app_icon_round"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/forsythia_round"
+        android:roundIcon="@mipmap/app_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 

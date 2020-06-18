@@ -11,7 +11,7 @@
         android:id="@+id/splashImage"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:src="@drawable/forsythia_foreground_tite"
+        android:src="@drawable/grand"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
