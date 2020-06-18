@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="또보기"
-        android:fontFamily="@font/Maplestory_Bold"
+        android:fontFamily="@font/maplestory_bold"
         android:textSize="80sp"
         android:textColor="#784118"
         app:layout_constraintEnd_toEndOf="parent"

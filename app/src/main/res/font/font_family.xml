@@ -18,16 +18,16 @@
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/Typo_DabangguB"/>
+        android:font="@font/typo_dabanggu"/>
 
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/Typo_DonQuixoteB"/>
+        android:font="@font/typo_donquixoteb"/>
 
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/Maplestory_Bold"/>
+        android:font="@font/maplestory_bold"/>
 
 </font-family>
