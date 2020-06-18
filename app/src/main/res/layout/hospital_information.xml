@@ -177,11 +177,11 @@
         android:id="@+id/callHospitalBtn"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="2.5"
         android:background="#8EB695"
         android:fontFamily="@font/pork_6"
         android:text="전화걸기"
         android:textColor="#ffffff"
-        android:textSize="20sp" />
+        android:textSize="27sp" />
 
 </LinearLayout>
