@@ -17,17 +17,20 @@
 
     <font
         android:fontStyle="normal"
-        android:fontWeight="400"
-        android:font="@font/typo_dabanggu"/>
+        android:font="@font/typo_dabanggu"
+        app:font="@font/typo_dabanggu"
+        app:fontStyle="normal"/>
 
     <font
         android:fontStyle="normal"
-        android:fontWeight="400"
-        android:font="@font/typo_donquixoteb"/>
+        android:font="@font/typo_donquixoteb"
+        app:font="@font/typo_donquixoteb"
+        app:fontStyle="normal"/>
 
     <font
         android:fontStyle="normal"
-        android:fontWeight="400"
-        android:font="@font/maplestory_bold"/>
+        android:font="@font/maplestory_bold"
+        app:font="@font/maplestory_bold"
+        app:fontStyle="normal"/>
 
 </font-family>

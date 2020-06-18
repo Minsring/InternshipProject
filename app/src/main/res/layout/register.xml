@@ -48,6 +48,7 @@
                 android:imeOptions="actionNext"
                 android:inputType="textPersonName"
                 android:background="@drawable/round_white_5"
+                android:fontFamily="@font/pork_3"
                 android:privateImeOptions="defaultInputmode=korean"
                 android:paddingLeft="10dp"
                 android:maxLength="10"

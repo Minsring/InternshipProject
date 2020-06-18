@@ -10,4 +10,19 @@
         android:fontWeight="400"
         android:font="@font/pork_6"/>
 
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/maplestory_bold"/>
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/typo_dabanggu"/>
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/typo_donquixoteb"/>
+
 </font-family>
