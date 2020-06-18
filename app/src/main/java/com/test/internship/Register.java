@@ -137,16 +137,10 @@ public class Register extends AppCompatActivity {
         for(int i=0;i<5;i++){
             save(i);
         }
-        for(int i=0;i<5;i++){
-            save(i);
-        }
     }
     @Override
     public void onPause() {
         super.onPause();
-        for(int i=0;i<5;i++){
-            save(i);
-        }
         for(int i=0;i<5;i++){
             save(i);
         }
