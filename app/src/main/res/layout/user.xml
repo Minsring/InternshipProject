@@ -37,6 +37,7 @@
           android:layout_weight="1"
           android:background="#00000000"
           android:drawableTop="@drawable/hospital_icon"
+          android:textColor="#2C8803"
           android:fontFamily="@font/pork_6"
           android:stateListAnimator="@null"
           android:text="모든 병원" />
