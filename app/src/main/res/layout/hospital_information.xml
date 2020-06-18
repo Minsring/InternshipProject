@@ -41,96 +41,115 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="지도"
-            android:textColor="#000000"/>
+            android:textColor="#000000" />
     </com.google.android.material.tabs.TabLayout>
 
     <FrameLayout
         android:id="@+id/content1"
+        android:background="#FBDEA2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="20">
 
         <LinearLayout
             android:id="@+id/content_info"
-            android:background="#FBDEA2"
+            android:background="@drawable/round_content_10"
+            android:layout_margin="15dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="· 병원 주소"
+                    android:text=" 병원 주소 "
                     android:fontFamily="@font/pork_3"
-                    android:textSize="30dp"
+                    android:textSize="25dp"
+                    android:background="@drawable/round_smallcontent_10"
+                    android:padding="3dp"
                     android:textColor="#000000"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="15dp" />
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" />
                 <TextView
                     android:id="@+id/info_Address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/pork_3"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
+                    android:paddingLeft="10dp"
                     android:textColor="#000000"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="7dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"/>
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="· 전화 번호"
+                    android:text=" 전화 번호 "
                     android:fontFamily="@font/pork_3"
-                    android:textSize="30dp"
+                    android:textSize="25dp"
+                    android:background="@drawable/round_smallcontent_10"
+                    android:padding="3dp"
                     android:textColor="#000000"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginLeft="15dp"/>
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"/>
                 <TextView
                     android:id="@+id/info_Call"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/pork_3"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:textColor="#000000"
+                    android:paddingLeft="10dp"
                     android:layout_marginTop="7dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"/>
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="· 진료 과목"
+                    android:text=" 진료 과목 "
                     android:fontFamily="@font/pork_3"
-                    android:textSize="30dp"
+                    android:textSize="25dp"
+                    android:padding="3dp"
+                    android:background="@drawable/round_smallcontent_10"
                     android:textColor="#000000"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginLeft="15dp"/>
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"/>
                 <TextView
                     android:id="@+id/info_Subject"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/pork_3"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
+                    android:paddingLeft="10dp"
                     android:textColor="#000000"
                     android:layout_marginTop="7dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"/>
+                    android:layout_marginRight="15dp"
+                    android:lineSpacingExtra="5dp"/>
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="· 진료 시간"
+                    android:text=" 진료 시간 "
                     android:fontFamily="@font/pork_3"
-                    android:textSize="30dp"
+                    android:textSize="25dp"
+                    android:padding="3dp"
+                    android:background="@drawable/round_smallcontent_10"
                     android:textColor="#000000"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginLeft="15dp"/>
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"/>
 
                 <TextView
                     android:id="@+id/info_Weekday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/pork_3"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:textColor="#000000"
+                    android:paddingLeft="10dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="7dp"/>
@@ -139,8 +158,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/pork_3"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:textColor="#000000"
+                    android:paddingLeft="10dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="7dp"/>
@@ -149,8 +169,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/pork_3"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:textColor="#000000"
+                    android:paddingLeft="10dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="7dp"/>
