@@ -25,6 +25,7 @@ import androidx.core.content.ContextCompat;
 import java.util.Timer;
 import java.util.TimerTask;
 
+// 테스트
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class User extends AppCompatActivity implements SensorEventListener {
 
@@ -33,7 +34,7 @@ public class User extends AppCompatActivity implements SensorEventListener {
     private final int MY_PERMISSION_REQUEST_SMS=1001;
     private static SharedPreferences appData;
     private SensorManager sensorManager;
-    private Sensor stepSensor;
+    static Sensor stepSensor;
     static String subject;
     static Timer timer;
     static TimerTask timerTask1;
@@ -251,15 +252,4 @@ public class User extends AppCompatActivity implements SensorEventListener {
         sensorManager.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
-//    public void onRequestPermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
-//        switch(requestCode){
-//            case MY_PERMISSION_REQUEST_SMS:{
-//                if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-//                    Toast.makeText(this,"허용",Toast.LENGTH_SHORT).show();
-//                }else{
-//                    Toast.makeText(this,"거부",Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        }
-//    }
 }
