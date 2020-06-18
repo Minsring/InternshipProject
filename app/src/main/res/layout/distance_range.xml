@@ -47,10 +47,10 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="20dp"
-            android:layout_height="30dp"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/bulb_icon"
+            android:src="@drawable/bulb_icon2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
