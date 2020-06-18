@@ -15,7 +15,10 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.TableLayout;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,6 +44,8 @@ public class User extends AppCompatActivity implements SensorEventListener {
     static TimerTask timerTask2;
     static int mStepDetector;
 
+    TableLayout tableLayout;
+    Animation anim1, anim2, anim3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +124,17 @@ public class User extends AppCompatActivity implements SensorEventListener {
         emergencyRoom.setOnClickListener(listener);
         contactProtector.setOnClickListener(listener);
         fence.setOnClickListener(listener);
+
+        // 애니메이션 연결
+        anim1 = AnimationUtils.loadAnimation(this, R.anim.anim1);
+        anim2 = AnimationUtils.loadAnimation(this, R.anim.anim2);
+        anim3 = AnimationUtils.loadAnimation(this, R.anim.anim3);
+
+        // 애니메이션
+        tableLayout = findViewById(R.id.tableLayout);
+        tableLayout.startAnimation(anim1);
+        contactProtector.startAnimation(anim2);
+        fence.startAnimation(anim3);
 
         // 타이머
         timer = new Timer();

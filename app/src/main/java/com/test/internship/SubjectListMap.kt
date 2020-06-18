@@ -7,6 +7,8 @@ import android.graphics.PointF
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.UiThread
@@ -37,6 +39,8 @@ class SubjectListMap : AppCompatActivity(), OnMapReadyCallback {
     internal var simpleInfo: Button? = null
     internal var sendHospital: HospitalData? = null
     internal var myBuckets: IntArray = intArrayOf(10, 20, 50, 100, 200, 500, 1000)
+    internal var anim1: Animation? = null
+    internal var anim2: Animation? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,6 +92,8 @@ class SubjectListMap : AppCompatActivity(), OnMapReadyCallback {
 
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
 
+        anim1 = AnimationUtils.loadAnimation(this, R.anim.anim4)
+        anim2 = AnimationUtils.loadAnimation(this, R.anim.anim5)
     }
 
     internal var listener: View.OnClickListener = View.OnClickListener { v ->
@@ -161,16 +167,22 @@ class SubjectListMap : AppCompatActivity(), OnMapReadyCallback {
 
         // 지도 클릭시 simple창 숨기기
         naverMap.setOnMapClickListener{ pointF: PointF, latLng: LatLng ->
-            simpleLayout?.setVisibility(View.INVISIBLE)
-            simpleInfo?.setEnabled(false)
-            simpleCall?.setEnabled(false)
-            naverMap.setContentPadding(0, 0, 0, 0)
+            if(simpleLayout?.visibility == View.VISIBLE){
+                simpleInfo?.setEnabled(false)
+                simpleCall?.setEnabled(false)
+                naverMap.setContentPadding(0, 0, 0, 0)
+                simpleLayout?.startAnimation(anim2)
+                simpleLayout?.setVisibility(View.INVISIBLE)
+            }
         }
         naverMap.setOnMapLongClickListener{ pointF: PointF, latLng: LatLng ->
-            simpleLayout?.setVisibility(View.INVISIBLE)
-            simpleInfo?.setEnabled(false)
-            simpleCall?.setEnabled(false)
-            naverMap.setContentPadding(0, 0, 0, 0)
+            if(simpleLayout?.visibility == View.VISIBLE){
+                simpleInfo?.setEnabled(false)
+                simpleCall?.setEnabled(false)
+                naverMap.setContentPadding(0, 0, 0, 0)
+                simpleLayout?.startAnimation(anim2)
+                simpleLayout?.setVisibility(View.INVISIBLE)
+            }
         }
 
         if(openHospitals != null) {
@@ -186,17 +198,27 @@ class SubjectListMap : AppCompatActivity(), OnMapReadyCallback {
                             isHideCollidedSymbols = true
                         }
                     }
+                    .clusterClickListener { it ->
+                        if(simpleLayout?.visibility == View.VISIBLE){
+                            simpleInfo?.setEnabled(false)
+                            simpleCall?.setEnabled(false)
+                            naverMap.setContentPadding(0, 0, 0, 0)
+                            simpleLayout?.startAnimation(anim2)
+                            simpleLayout?.setVisibility(View.INVISIBLE)
+                        }
+                    }
                     .markerClickListener { hospital: HospitalData ->
                         simpleName?.setText(hospital.getHospitalName())
                         simpleAdd?.setText(hospital.getAddress())
                         simpleDistance?.setText(hospital.getDistance())
-                        simpleLayout?.setBackgroundResource(R.color.strawberryMilk)
-                        simpleLayout?.setVisibility(View.VISIBLE)
+                        simpleLayout?.setBackgroundResource(R.drawable.round_strawmilk_15)
                         simpleLayout?.bringToFront()
                         simpleInfo?.setEnabled(true)
                         simpleCall?.setEnabled(true)
                         sendHospital = hospital
                         naverMap.setContentPadding(0, 0, 0, 300)
+                        simpleLayout?.setVisibility(View.VISIBLE)
+                        simpleLayout?.startAnimation(anim1)
                     }
                     .clusterBackground{Color.rgb(255,4,152)}
                     .minClusterSize(2)
@@ -217,17 +239,28 @@ class SubjectListMap : AppCompatActivity(), OnMapReadyCallback {
                             isHideCollidedSymbols = true
                         }
                     }
+                    .clusterClickListener { it ->
+                        if(simpleLayout?.visibility == View.VISIBLE){
+                            simpleInfo?.setEnabled(false)
+                            simpleCall?.setEnabled(false)
+                            naverMap.setContentPadding(0, 0, 0, 0)
+                            simpleLayout?.startAnimation(anim2)
+                            simpleLayout?.setVisibility(View.INVISIBLE)
+                        }
+                    }
                     .markerClickListener { hospital: HospitalData ->
                         simpleName?.setText(hospital.getHospitalName())
                         simpleAdd?.setText(hospital.getAddress())
                         simpleDistance?.setText(hospital.getDistance())
-                        simpleLayout?.setBackgroundResource(R.color.hospitalGray)
-                        simpleLayout?.setVisibility(View.VISIBLE)
+                        simpleLayout?.setBackgroundResource(R.drawable.round_hosgray_15)
                         simpleLayout?.bringToFront()
                         simpleInfo?.setEnabled(true)
                         simpleCall?.setEnabled(true)
                         sendHospital = hospital
                         naverMap.setContentPadding(0, 0, 0, 300)
+                        simpleLayout?.setVisibility(View.VISIBLE)
+                        simpleLayout?.startAnimation(anim1)
+
                     }
                     .clusterBackground { Color.LTGRAY }
                     .minClusterSize(2)

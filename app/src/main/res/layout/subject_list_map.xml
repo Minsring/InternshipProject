@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.test.internship.SubjectListMap">
+    tools:context="com.test.internship.SubjectListMap"
+    android:background="#ffffff">
 
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
@@ -19,7 +20,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:fontFamily="@font/pork_6"
-        android:text="모든병원 지도"
+        android:text="모든 병원 지도"
+        android:textColor="#000000"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,11 +32,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
-        android:background="#FF0498"
+        android:background="@drawable/round_hospink_5"
         android:fontFamily="@font/pork_6"
         android:text="진료중"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
+        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,9 +46,10 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#d1d1d1"
+        android:background="@drawable/round_hosgray_5"
         android:fontFamily="@font/pork_6"
         android:text="준비중"
+        android:padding="5dp"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -141,9 +145,10 @@
               android:layout_height="wrap_content"
               android:layout_margin="10dp"
               android:layout_weight="1"
-              android:background="#fdfdfd"
+              android:background="@drawable/round_white_10"
               android:fontFamily="@font/pork_6"
-              android:text="전화걸기" />
+              android:text="전화걸기"
+              android:textSize="18sp"/>
 
           <Button
               android:id="@+id/simple_info"
@@ -151,9 +156,10 @@
               android:layout_height="wrap_content"
               android:layout_margin="10dp"
               android:layout_weight="1"
-              android:background="#fdfdfd"
+              android:background="@drawable/round_white_10"
               android:fontFamily="@font/pork_6"
-              android:text="상세정보" />
+              android:text="상세정보"
+              android:textSize="18sp"/>
         </LinearLayout>
 
         </LinearLayout>
