@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,7 @@ import static com.test.internship.Register.person4_p;
 import static com.test.internship.Register.person5_n;
 import static com.test.internship.Register.person5_p;
 import static com.test.internship.User.mStepDetector;
+import static com.test.internship.User.stepSensor;
 import static com.test.internship.User.timer;
 import static com.test.internship.User.timerTask1;
 import static com.test.internship.User.timerTask2;
@@ -242,6 +244,7 @@ public class Setting extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                 if (isChecked){
                     save();
+                    if(stepSensor == null) Toast.makeText(Setting.this, "걸음감지 센서가 없습니다.", Toast.LENGTH_SHORT).show();
                     timerTask2 = new TimerTask() {
                         @Override
                         public void run() {
