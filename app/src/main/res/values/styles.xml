@@ -19,7 +19,7 @@
     </style>
 
     <style name="Base.Widget.Design.TabLayout" parent="android:Widget">
-        <item name="tabIndicatorColor">#FCCCD4</item>
+        <item name="tabIndicatorColor">#FBDEA2</item>
         <item name="tabIndicatorHeight">50dp</item>
     </style>
 </resources>
