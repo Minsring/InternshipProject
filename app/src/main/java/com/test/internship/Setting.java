@@ -43,7 +43,6 @@ import static com.test.internship.Register.person4_p;
 import static com.test.internship.Register.person5_n;
 import static com.test.internship.Register.person5_p;
 import static com.test.internship.User.mStepDetector;
-import static com.test.internship.User.save;
 import static com.test.internship.User.stepSensor;
 import static com.test.internship.User.timer;
 import static com.test.internship.User.timerTask1;
@@ -214,48 +213,52 @@ public class Setting extends AppCompatActivity {
                     if(person1_n==null && person1_p==null && person2_n==null && person2_p==null
                             && person3_n==null && person3_p==null && person4_n==null && person4_p==null && person5_n==null && person5_p==null) {
                         Toast.makeText(getApplicationContext(), "보호자 정보를 먼저 등록해주세요.", Toast.LENGTH_SHORT).show();
+                        batterySwitch.setChecked(false);
                     }
-                    timerTask1 = new TimerTask() {
-                        @Override
-                        public void run() {
-                            flagBattery++;
-                            Intent intentBattery = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-                            int level = intentBattery.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-                            int scale = intentBattery.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-                            float batteryPct = level / (float) scale;
-                            int battery = (int) (batteryPct * 100);
+                    else{
+                        timerTask1 = new TimerTask() {
+                            @Override
+                            public void run() {
+                                flagBattery++;
+                                Intent intentBattery = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+                                int level = intentBattery.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+                                int scale = intentBattery.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+                                float batteryPct = level / (float) scale;
+                                int battery = (int) (batteryPct * 100);
 
-                            if (battery < 15) {
-                                showNoti();
-                                if(person1_n!=null && person1_p != null){
-                                    name = person1_n;
-                                    phoneNo = person1_p;
-                                    sendSMS(phoneNo, name, 1);
-                                }
-                                if(person2_n!=null && person2_p != null){
-                                    name = person2_n;
-                                    phoneNo = person2_p;
-                                    sendSMS(phoneNo, name, 1);
-                                }
-                                if(person3_n!=null && person3_p != null){
-                                    name = person3_n;
-                                    phoneNo = person3_p;
-                                    sendSMS(phoneNo, name, 1);
-                                }
-                                if(person4_n!=null && person4_p != null){
-                                    name = person4_n;
-                                    phoneNo = person4_p;
-                                    sendSMS(phoneNo, name, 1);
-                                }
-                                if(person5_n!=null && person5_p != null){
-                                    name = person5_n;
-                                    phoneNo = person5_p;
-                                    sendSMS(phoneNo, name, 1);
+                                if (battery < 15) {
+                                    showNoti();
+                                    if(person1_n!=null && person1_p != null){
+                                        name = person1_n;
+                                        phoneNo = person1_p;
+                                        sendSMS(phoneNo, name, 1);
+                                    }
+                                    if(person2_n!=null && person2_p != null){
+                                        name = person2_n;
+                                        phoneNo = person2_p;
+                                        sendSMS(phoneNo, name, 1);
+                                    }
+                                    if(person3_n!=null && person3_p != null){
+                                        name = person3_n;
+                                        phoneNo = person3_p;
+                                        sendSMS(phoneNo, name, 1);
+                                    }
+                                    if(person4_n!=null && person4_p != null){
+                                        name = person4_n;
+                                        phoneNo = person4_p;
+                                        sendSMS(phoneNo, name, 1);
+                                    }
+                                    if(person5_n!=null && person5_p != null){
+                                        name = person5_n;
+                                        phoneNo = person5_p;
+                                        sendSMS(phoneNo, name, 1);
+                                    }
                                 }
                             }
-                        }
-                    };
-                    timer.schedule(timerTask1, 0, 1800000);
+                        };
+                        timer.schedule(timerTask1, 0, 1800000);
+                    }
+
 
                 }else{
                     if(flagBattery!=0){
@@ -277,46 +280,50 @@ public class Setting extends AppCompatActivity {
                     if(person1_n==null && person1_p==null && person2_n==null && person2_p==null
                             && person3_n==null && person3_p==null && person4_n==null && person4_p==null && person5_n==null && person5_p==null) {
                         Toast.makeText(getApplicationContext(), "보호자 정보를 먼저 등록해주세요.", Toast.LENGTH_SHORT).show();
+                        motionSwitch.setChecked(false);
                     }
-                    if(stepSensor == null) Toast.makeText(Setting.this, "걸음감지 센서가 없습니다.", Toast.LENGTH_SHORT).show();
-                    timerTask2 = new TimerTask() {
-                        @Override
-                        public void run() {
-                            flagMotion++;
-                            if (mStepDetector < 20){//20걸음 미만이라면 보호자에게 메세지 보내기
+                    else{
+                        if(stepSensor == null) Toast.makeText(Setting.this, "걸음감지 센서가 없습니다.", Toast.LENGTH_SHORT).show();
+                        timerTask2 = new TimerTask() {
+                            @Override
+                            public void run() {
+                                flagMotion++;
+                                if (mStepDetector < 20){//20걸음 미만이라면 보호자에게 메세지 보내기
 
-                                if(person1_n!=null && person1_p != null){
-                                    name = person1_n;
-                                    phoneNo = person1_p;
-                                    sendSMS(phoneNo, name, 2);
+                                    if(person1_n!=null && person1_p != null){
+                                        name = person1_n;
+                                        phoneNo = person1_p;
+                                        sendSMS(phoneNo, name, 2);
+                                    }
+                                    if(person2_n!=null && person2_p != null){
+                                        name = person2_n;
+                                        phoneNo = person2_p;
+                                        sendSMS(phoneNo, name, 2);
+                                    }
+                                    if(person3_n!=null && person3_p != null){
+                                        name = person3_n;
+                                        phoneNo = person3_p;
+                                        sendSMS(phoneNo, name, 2);
+                                    }
+                                    if(person4_n!=null && person4_p != null){
+                                        name = person4_n;
+                                        phoneNo = person4_p;
+                                        sendSMS(phoneNo, name, 2);
+                                    }
+                                    if(person5_n!=null && person5_p != null){
+                                        name = person5_n;
+                                        phoneNo = person5_p;
+                                        sendSMS(phoneNo, name, 2);
+                                    }
                                 }
-                                if(person2_n!=null && person2_p != null){
-                                    name = person2_n;
-                                    phoneNo = person2_p;
-                                    sendSMS(phoneNo, name, 2);
-                                }
-                                if(person3_n!=null && person3_p != null){
-                                    name = person3_n;
-                                    phoneNo = person3_p;
-                                    sendSMS(phoneNo, name, 2);
-                                }
-                                if(person4_n!=null && person4_p != null){
-                                    name = person4_n;
-                                    phoneNo = person4_p;
-                                    sendSMS(phoneNo, name, 2);
-                                }
-                                if(person5_n!=null && person5_p != null){
-                                    name = person5_n;
-                                    phoneNo = person5_p;
-                                    sendSMS(phoneNo, name, 2);
-                                }
+                                mStepDetector=0;
+                                save();
                             }
-                            mStepDetector=0;
-                            save();
-                        }
-                    };
-                    timer.schedule(timerTask2, 0, 86400000);
-                    mStepDetector=0;
+                        };
+                        timer.schedule(timerTask2, 0, 86400000);
+                        mStepDetector=0;
+                    }
+
                 }else{
                     if(flagMotion!=0){
                         timerTask2.cancel();
