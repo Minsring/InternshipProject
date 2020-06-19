@@ -146,6 +146,7 @@ public class Setting extends AppCompatActivity {
             }
             motionSwitch.setChecked(isCheckMotion);
             if(isCheckMotion){
+                mStepDetector=30;
                 timerTask2 = new TimerTask() {
                     @Override
                     public void run() {
@@ -270,45 +271,50 @@ public class Setting extends AppCompatActivity {
                         motionSwitch.setChecked(false);
                     }
                     else{
-                        if(stepSensor == null) Toast.makeText(Setting.this, "걸음감지 센서가 없습니다.", Toast.LENGTH_SHORT).show();
-                        timerTask2 = new TimerTask() {
-                            @Override
-                            public void run() {
-                                flagMotion++;
-                                if (mStepDetector < 20){//20걸음 미만이라면 보호자에게 메세지 보내기
 
-                                    if(person1_n!=null && person1_p != null){
-                                        name = person1_n;
-                                        phoneNo = person1_p;
-                                        sendSMS(phoneNo, name, 2);
+                        if(stepSensor == null) Toast.makeText(Setting.this, "걸음감지 센서가 없습니다.", Toast.LENGTH_SHORT).show();
+                        else{
+                            mStepDetector=30;
+                            timerTask2 = new TimerTask() {
+                                @Override
+                                public void run() {
+                                    flagMotion++;
+                                    if (mStepDetector < 20){//20걸음 미만이라면 보호자에게 메세지 보내기
+
+                                        if(person1_n!=null && person1_p != null){
+                                            name = person1_n;
+                                            phoneNo = person1_p;
+                                            sendSMS(phoneNo, name, 2);
+                                        }
+                                        if(person2_n!=null && person2_p != null){
+                                            name = person2_n;
+                                            phoneNo = person2_p;
+                                            sendSMS(phoneNo, name, 2);
+                                        }
+                                        if(person3_n!=null && person3_p != null){
+                                            name = person3_n;
+                                            phoneNo = person3_p;
+                                            sendSMS(phoneNo, name, 2);
+                                        }
+                                        if(person4_n!=null && person4_p != null){
+                                            name = person4_n;
+                                            phoneNo = person4_p;
+                                            sendSMS(phoneNo, name, 2);
+                                        }
+                                        if(person5_n!=null && person5_p != null){
+                                            name = person5_n;
+                                            phoneNo = person5_p;
+                                            sendSMS(phoneNo, name, 2);
+                                        }
                                     }
-                                    if(person2_n!=null && person2_p != null){
-                                        name = person2_n;
-                                        phoneNo = person2_p;
-                                        sendSMS(phoneNo, name, 2);
-                                    }
-                                    if(person3_n!=null && person3_p != null){
-                                        name = person3_n;
-                                        phoneNo = person3_p;
-                                        sendSMS(phoneNo, name, 2);
-                                    }
-                                    if(person4_n!=null && person4_p != null){
-                                        name = person4_n;
-                                        phoneNo = person4_p;
-                                        sendSMS(phoneNo, name, 2);
-                                    }
-                                    if(person5_n!=null && person5_p != null){
-                                        name = person5_n;
-                                        phoneNo = person5_p;
-                                        sendSMS(phoneNo, name, 2);
-                                    }
+                                    mStepDetector=0;
+                                    save();
                                 }
-                                mStepDetector=0;
-                                save();
-                            }
-                        };
-                        timer.schedule(timerTask2, 0, 60000);
-                        mStepDetector=0;
+                            };
+                            timer.schedule(timerTask2, 0, 60000);
+                            mStepDetector=0;
+                        }
+
                     }
 
                 }else{
