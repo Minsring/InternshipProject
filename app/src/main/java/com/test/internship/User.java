@@ -1,12 +1,8 @@
 package com.test.internship;
 
-import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -22,19 +18,15 @@ import android.widget.TableLayout;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-// 테스트
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class User extends AppCompatActivity implements SensorEventListener {
 
     Button allSub, entSub, internalSub, obstSub, eyeSub, boneSub, neuroSub, childSub, dentalSub, skinSub,
             hanSub, binyoSub, bogun, chkCenter, emergencyRoom, contactProtector, fence;
-    private final int MY_PERMISSION_REQUEST_SMS=1001;
     private static SharedPreferences appData;
     private SensorManager sensorManager;
     static Sensor stepSensor;
@@ -63,28 +55,6 @@ public class User extends AppCompatActivity implements SensorEventListener {
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         stepSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
 
-        //문자 기능
-        if(ContextCompat.checkSelfPermission(this,Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.SEND_SMS)){
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("알림");
-                builder.setMessage("이 어플리케이션은 SMS 접근을 허용하지 않으면 작동하지 않습니다.");
-                builder.setIcon(R.drawable.ic_launcher_foreground);
-
-                builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ActivityCompat.requestPermissions(User.this, new String[]{Manifest.permission.SEND_SMS},MY_PERMISSION_REQUEST_SMS);
-                    }
-                });
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-            else{
-                ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.SEND_SMS},MY_PERMISSION_REQUEST_SMS);
-            }
-        }
 
         // 버튼 연결
         allSub = findViewById(R.id.allSub);                     // 전체

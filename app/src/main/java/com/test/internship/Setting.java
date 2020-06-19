@@ -1,12 +1,16 @@
 package com.test.internship;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Build;
@@ -21,7 +25,9 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import java.util.TimerTask;
 
@@ -50,6 +56,7 @@ public class Setting extends AppCompatActivity {
     private boolean saveData;
     private boolean isCheckBattery;
     private boolean isCheckMotion;
+    private final int MY_PERMISSION_REQUEST_SMS=1001;
     int flagBattery;
     int flagMotion;
     String phoneNo;
@@ -106,7 +113,7 @@ public class Setting extends AppCompatActivity {
                         float batteryPct = level / (float) scale;
                         int battery = (int) (batteryPct * 100);
 
-                        if (battery < 15) {
+                        if (battery < 60) {
                             showNoti();
                             if(person1_n!=null && person1_p != null){
                                 name = person1_n;
@@ -186,6 +193,24 @@ public class Setting extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                 if (isChecked){
                     save();
+                    if(ContextCompat.checkSelfPermission(Setting.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
+                        if(ActivityCompat.shouldShowRequestPermissionRationale(Setting.this,Manifest.permission.SEND_SMS)){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
+
+                            builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ActivityCompat.requestPermissions(Setting.this, new String[]{Manifest.permission.SEND_SMS},MY_PERMISSION_REQUEST_SMS);
+                                }
+                            });
+
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                        else{
+                            ActivityCompat.requestPermissions(Setting.this,new String[] {Manifest.permission.SEND_SMS},MY_PERMISSION_REQUEST_SMS);
+                        }
+                    }
                     timerTask1 = new TimerTask() {
                         @Override
                         public void run() {
@@ -245,6 +270,24 @@ public class Setting extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                 if (isChecked){
                     save();
+                    if(ContextCompat.checkSelfPermission(Setting.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
+                        if(ActivityCompat.shouldShowRequestPermissionRationale(Setting.this,Manifest.permission.SEND_SMS)){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
+
+                            builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ActivityCompat.requestPermissions(Setting.this, new String[]{Manifest.permission.SEND_SMS},MY_PERMISSION_REQUEST_SMS);
+                                }
+                            });
+
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                        else{
+                            ActivityCompat.requestPermissions(Setting.this,new String[] {Manifest.permission.SEND_SMS},MY_PERMISSION_REQUEST_SMS);
+                        }
+                    }
                     if(stepSensor == null) Toast.makeText(Setting.this, "걸음감지 센서가 없습니다.", Toast.LENGTH_SHORT).show();
                     timerTask2 = new TimerTask() {
                         @Override

@@ -41,7 +41,8 @@
           android:textColor="#2C8803"
           android:fontFamily="@font/pork_6"
           android:stateListAnimator="@null"
-          android:text="모든 병원" />
+          android:text="모든 병원"
+          />
 
       <Button
           android:id="@+id/internalSub"
