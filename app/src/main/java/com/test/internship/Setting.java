@@ -189,16 +189,14 @@ public class Setting extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(Setting.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(Setting.this, Manifest.permission.SEND_SMS)) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
-
-                builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ActivityCompat.requestPermissions(Setting.this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
-                    }
-                });
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
+//                builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        ActivityCompat.requestPermissions(Setting.this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
+//                    }
+//                });
+//                AlertDialog dialog = builder.create();
+//                dialog.show();
             } else {
                 ActivityCompat.requestPermissions(Setting.this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
             }
