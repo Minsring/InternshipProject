@@ -1,10 +1,12 @@
 package com.test.internship;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -186,7 +188,8 @@ public class Setting extends AppCompatActivity {
 
         if (ContextCompat.checkSelfPermission(Setting.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(Setting.this, Manifest.permission.SEND_SMS)) {
-            } else {
+            }
+            else {
                 ActivityCompat.requestPermissions(Setting.this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
             }
         }

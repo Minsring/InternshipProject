@@ -1,6 +1,9 @@
 package com.test.internship;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,6 +28,7 @@ import androidx.annotation.RequiresApi;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
@@ -77,6 +81,13 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     boolean switchState;
     static LatLng nowLatLng;
     static LatLng centerLatLng;
+
+
+    private String CHANNEL_ID = "channel1";
+    private String CHANEL_NAME = "Channel1";
+    Context context = this;
+    NotificationManager manager;
+    NotificationCompat.Builder builder;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -222,6 +233,27 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         });
     }
 
+    //알림창
+    public void showNoti(){
+        builder = null;
+        manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        //버전 오레오 이상일 경우
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            manager.createNotificationChannel(
+                    new NotificationChannel(CHANNEL_ID, CHANEL_NAME, NotificationManager.IMPORTANCE_DEFAULT));
+            builder = new NotificationCompat.Builder(this,CHANNEL_ID);
+        }
+        //하위 버전일 경우
+        else{
+            builder = new NotificationCompat.Builder(this);
+        }
+        builder.setContentTitle("반경 벗어남 알림");
+        builder.setContentText("설정된 반경을 벗어났습니다!! 보호자에 알림을 전송하겠습니다.");
+        builder.setSmallIcon(R.drawable.ic_launcher_foreground);
+        Notification notification = builder.build();
+        manager.notify(1,notification);
+    }
+
     // 현재위치가 바뀌면 호출되는 리스너너
     final LocationListener gpsLocationListener = new LocationListener() {
         @Override
@@ -236,18 +268,23 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             if(dis>radius){
                 if(switchRadius.isChecked()==true){
                     if(person1_n!=null && person1_p != null){
+                        showNoti();
                         Setting.sendSMS(person1_p, person1_n, 3);
                     }
                     if(person2_n!=null && person2_p != null){
+                        showNoti();
                         Setting.sendSMS(person2_p, person2_n, 3);
                     }
                     if(person3_n!=null && person3_p != null){
+                        showNoti();
                         Setting.sendSMS(person3_p, person3_n, 3);
                     }
                     if(person4_n!=null && person4_p != null){
+                        showNoti();
                         Setting.sendSMS(person4_p, person4_n, 3);
                     }
                     if(person5_n!=null && person5_p != null){
+                        showNoti();
                         Setting.sendSMS(person5_p, person5_n, 3);
                     }
                 }
