@@ -142,7 +142,7 @@ public class Setting extends AppCompatActivity {
                         }
                     }
                 };
-                timer.schedule(timerTask1, 0, 1800000);
+                timer.schedule(timerTask1, 0, 30000);
             }
             motionSwitch.setChecked(isCheckMotion);
             if(isCheckMotion){
@@ -179,7 +179,7 @@ public class Setting extends AppCompatActivity {
                         }
                     }
                 };
-                timer.schedule(timerTask2, 0, 86400000);
+                timer.schedule(timerTask2, 0, 60000);
                 mStepDetector=0;
             }
         }
@@ -243,7 +243,7 @@ public class Setting extends AppCompatActivity {
                                 }
                             }
                         };
-                        timer.schedule(timerTask1, 0, 1800000);
+                        timer.schedule(timerTask1, 0, 30000);
                     }
 
 
@@ -307,7 +307,7 @@ public class Setting extends AppCompatActivity {
                                 save();
                             }
                         };
-                        timer.schedule(timerTask2, 0, 86400000);
+                        timer.schedule(timerTask2, 0, 60000);
                         mStepDetector=0;
                     }
 
