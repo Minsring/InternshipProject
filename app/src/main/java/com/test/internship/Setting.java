@@ -187,6 +187,23 @@ public class Setting extends AppCompatActivity {
             }
         }
 
+        if (ContextCompat.checkSelfPermission(Setting.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(Setting.this, Manifest.permission.SEND_SMS)) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
+
+                builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ActivityCompat.requestPermissions(Setting.this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            } else {
+                ActivityCompat.requestPermissions(Setting.this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
+            }
+        }
 
         batterySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
@@ -197,25 +214,6 @@ public class Setting extends AppCompatActivity {
                     if(person1_n==null && person1_p==null && person2_n==null && person2_p==null
                             && person3_n==null && person3_p==null && person4_n==null && person4_p==null && person5_n==null && person5_p==null) {
                         Toast.makeText(getApplicationContext(), "보호자 정보를 먼저 등록해주세요.", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        if (ContextCompat.checkSelfPermission(Setting.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-                            if (ActivityCompat.shouldShowRequestPermissionRationale(Setting.this, Manifest.permission.SEND_SMS)) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
-
-                                builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        ActivityCompat.requestPermissions(Setting.this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
-                                    }
-                                });
-
-                                AlertDialog dialog = builder.create();
-                                dialog.show();
-                            } else {
-                                ActivityCompat.requestPermissions(Setting.this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
-                            }
-                        }
                     }
                     timerTask1 = new TimerTask() {
                         @Override
@@ -279,25 +277,6 @@ public class Setting extends AppCompatActivity {
                     if(person1_n==null && person1_p==null && person2_n==null && person2_p==null
                             && person3_n==null && person3_p==null && person4_n==null && person4_p==null && person5_n==null && person5_p==null) {
                         Toast.makeText(getApplicationContext(), "보호자 정보를 먼저 등록해주세요.", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        if (ContextCompat.checkSelfPermission(Setting.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-                            if (ActivityCompat.shouldShowRequestPermissionRationale(Setting.this, Manifest.permission.SEND_SMS)) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
-
-                                builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        ActivityCompat.requestPermissions(Setting.this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
-                                    }
-                                });
-
-                                AlertDialog dialog = builder.create();
-                                dialog.show();
-                            } else {
-                                ActivityCompat.requestPermissions(Setting.this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
-                            }
-                        }
                     }
                     if(stepSensor == null) Toast.makeText(Setting.this, "걸음감지 센서가 없습니다.", Toast.LENGTH_SHORT).show();
                     timerTask2 = new TimerTask() {
