@@ -3,6 +3,28 @@
 <!--응급실진료시간은 따로 있는 경우도 있으니 응급실이있다면 응급실시간 정보넣기-->
 <hospitals>
     <hospital>
+        <name>신평면보건지소</name>
+        <openweekday>09:00</openweekday>
+        <closeweekday>18:00</closeweekday>
+        <address>경북 의성군 신평면 봉호로 2446-3</address>
+        <callnumber>054-862-2082</callnumber>
+        <subject>보건소</subject>
+        <distance>0.16km</distance>
+        <lat>36.473225</lat>
+        <lng>128.503400</lng>
+    </hospital>
+    <hospital>
+        <name>안사면보건지소</name>
+        <openweekday>09:00</openweekday>
+        <closeweekday>18:00</closeweekday>
+        <address>경북 의성군 안사면 안신로 645</address>
+        <callnumber>054-862-1656</callnumber>
+        <subject>보건소</subject>
+        <distance>10.51km </distance>
+        <lat>36.430873</lat>
+        <lng>128.461545</lng>
+    </hospital>
+    <hospital>
         <name>삼성연합의원</name>
         <openweekday>08:00</openweekday>
         <opensaturday>08:00</opensaturday>
@@ -34,6 +56,17 @@
         <distance>17.32km </distance>
         <lat>36.38650149</lat>
         <lng>128.43376942</lng>
+    </hospital>
+    <hospital>
+        <name>안계면보건지소</name>
+        <openweekday>09:00</openweekday>
+        <closeweekday>18:00</closeweekday>
+        <address>경북 의성군 안계면 서부로 1776-40</address>
+        <callnumber>054-861-2388</callnumber>
+        <subject>보건소</subject>
+        <distance>17.32km</distance>
+        <lat>36.392116</lat>
+        <lng>128.433618</lng>
     </hospital>
     <hospital>
         <name>대구부부치과의원</name>
@@ -170,6 +203,17 @@
         <distance>18.15km</distance>
         <lat>36.38324219</lat>
         <lng>128.43835907</lng>
+    </hospital>
+    <hospital>
+        <name>일직보건지소</name>
+        <openweekday>09:00</openweekday>
+        <closeweekday>18:00</closeweekday>
+        <address>경북 안동시 일직면 논들길 25</address>
+        <callnumber>054-858-4507</callnumber>
+        <subject>보건소</subject>
+        <distance>22.60km</distance>
+        <lat>36.473563</lat>
+        <lng>128.658925</lng>
     </hospital>
     <hospital>
         <name>박준모치과의원</name>
