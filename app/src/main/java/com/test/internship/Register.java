@@ -86,6 +86,7 @@ public class Register extends AppCompatActivity {
                             Toast.makeText(Register.this, "보호자 정보가 등록되었습니다.", Toast.LENGTH_SHORT).show();
                             num++;
                             listView.setAdapter(registerAdapter);
+                            save();
                         } else {
                             Toast.makeText(Register.this, "보호자는 최대 5명까지 등록 가능합니다!", Toast.LENGTH_SHORT).show();
                         }
@@ -127,11 +128,13 @@ public class Register extends AppCompatActivity {
         SharedPreferences.Editor editor = appData.edit();
         editor.putBoolean("SAVE_ON", true);
         editor.putInt("NUM",num);
-        int i = 1;
-        for(ProtectorData protectorData: personData) {
-            editor.putString("PERSON"+i+"_NAME", protectorData.getPersonName());
-            editor.putString("PERSON"+i+"_PHONE",protectorData.getPersonNum());
-            i++;
+        for(int i = 1; i<=num; i++) {
+            editor.putString("PERSON"+i+"_NAME", personData.get(i).getPersonName());
+            editor.putString("PERSON"+i+"_PHONE",personData.get(i).getPersonNum());
+        }
+        for(int i = num+1; i<=5; i++){
+            editor.putString("PERSON"+i+"_NAME", null);
+            editor.putString("PERSON"+i+"_PHONE",null);
         }
         editor.apply();
     }
@@ -139,6 +142,7 @@ public class Register extends AppCompatActivity {
     private void load() {
         num = appData.getInt("NUM", 0);
         saveData = appData.getBoolean("SAVE_ON", false);
+
         person1_n = appData.getString("PERSON1_NAME",null);
         person1_p = appData.getString("PERSON1_PHONE", null);
         person2_n = appData.getString("PERSON2_NAME", null);
