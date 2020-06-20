@@ -324,7 +324,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
-
+    //dd
     // 지도가 생성되면 자동으로 호출
     @UiThread
     @Override
