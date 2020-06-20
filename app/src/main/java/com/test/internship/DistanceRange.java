@@ -161,7 +161,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 }
             }
         }
-        System.out.println(centerLng+", "+centerLat);
 
 
         // 접근 권한 설정
@@ -330,20 +329,13 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     @Override
     public void onMapReady(@NonNull final NaverMap naverMap) {
         this.naverMap = naverMap;
-        System.out.println("1");
         naverMap.setLocationSource(locationSource);
-        System.out.println("2");
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
-        System.out.println("3");
         circle.setMap(null);
         marker.setMap(null);
-        System.out.println("4");
         if(switchRadius.isChecked()==true&&okayFlag==true){
-            System.out.println("5");
             smsFlag = true;
-            System.out.println("6");
             okayFlag = false;
-            System.out.println("7");
             regMarker.setPosition(new LatLng(centerLat, centerLng));
             regMarker.setIcon(MarkerIcons.BLACK);
             regMarker.setIconTintColor(Color.RED);
@@ -357,7 +349,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             circle.setMap(null);
             marker.setMap(null);
         }
-        System.out.println("8");
         saveData = false;
 
         // 지도 타입 설정
