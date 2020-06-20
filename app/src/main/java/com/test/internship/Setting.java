@@ -29,6 +29,7 @@ import androidx.core.content.ContextCompat;
 
 import java.util.TimerTask;
 
+import static com.test.internship.DistanceRange.nowLatLng;
 import static com.test.internship.Register.person1_n;
 import static com.test.internship.Register.person1_p;
 import static com.test.internship.Register.person2_n;
@@ -404,8 +405,8 @@ public class Setting extends AppCompatActivity {
         else if (flag==3){
             try {
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자님께서 설정한 이동 반경을 벗어나셨습니다 !!\n 현재 위도: "+DistanceRange.nowLatLng.latitude+", 경도: "
-                        +DistanceRange.nowLatLng.longitude, null, null);
+                smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자님께서 설정한 이동 반경을 벗어나셨습니다 !!\n 현재 위도: "+ nowLatLng.latitude+", 경도: "
+                        +nowLatLng.longitude, null, null);
             } catch (Exception e) {
                 e.printStackTrace();
             }
