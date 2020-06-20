@@ -72,7 +72,7 @@ public class RegisterAdapter extends BaseAdapter {
         item_layout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                if(mData.get(position) != null) {
+                if(personData.get(position) != null) {
                     Toast.makeText(mContext, mData.get(position).getPersonName(), Toast.LENGTH_LONG).show();
                     personData.remove(position);
                     Register.num--;
