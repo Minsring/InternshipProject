@@ -237,5 +237,4 @@ public class User extends AppCompatActivity implements SensorEventListener {
         super.onStart();
         sensorManager.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
-
 }
