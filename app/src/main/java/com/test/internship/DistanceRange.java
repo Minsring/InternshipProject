@@ -180,8 +180,8 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         buttonOkay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(person1_n!=null && person1_p != null&&person2_n!=null && person2_p != null&&person3_n!=null && person3_p != null
-                &&person4_n!=null && person4_p != null&&person5_n!=null && person5_p != null) {
+                if(person1_n==null && person1_p == null&&person2_n==null && person2_p == null&&person3_n==null && person3_p == null
+                &&person4_n==null && person4_p == null&&person5_n==null && person5_p == null) {
                     Toast.makeText(getApplicationContext(), "보호자 정보를 먼저 등록해주세요.", Toast.LENGTH_SHORT).show();
                 }
                 else{
