@@ -176,6 +176,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                     okayFlag = true;
                     Toast.makeText(getApplicationContext(), "등록되었습니다.", Toast.LENGTH_SHORT).show();
                     onMapReady(naverMap);
+                    okayFlag = false;
                     save();
                 }
             }
@@ -255,14 +256,14 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             double longitude = location.getLongitude();
             double latitude = location.getLatitude();
             nowLatLng = new LatLng(latitude,longitude);
-            centerLatLng = new LatLng(centerLat,centerLng);
-
+            centerLatLng = new LatLng(regMarker.getPosition().latitude, regMarker.getPosition().longitude);
             double dis = nowLatLng.distanceTo(centerLatLng); //m단위를 double로 반환
             if(dis>radius){
                 if(switchRadius.isChecked()==true&&smsFlag == true){
                     showNoti();
                     for(ProtectorData protectorData: Register.personData){
                         Setting.sendSMS(protectorData.personNum, protectorData.personName, 3);
+                        System.out.println(protectorData.personName+", "+protectorData.personNum);
                     }
                 }
             }
@@ -415,6 +416,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     protected void onStart() {
         super.onStart();
         load();
+        System.out.println(num);
         if(saveData){
             switchRadius.setChecked(switchState);
 
@@ -450,6 +452,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     protected void onRestart() {
         super.onRestart();
         load();
+        System.out.println(num);
         if(saveData){
             switchRadius.setChecked(switchState);
 
@@ -480,6 +483,4 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             }
         }
     }
-
-
 }

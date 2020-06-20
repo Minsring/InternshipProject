@@ -1,6 +1,5 @@
 package com.test.internship;
 
-import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -8,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Build;
@@ -23,9 +21,7 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
 
 import java.util.TimerTask;
 
@@ -300,13 +296,8 @@ public class Setting extends AppCompatActivity {
         }
         else if (flag==3){
             try {
-                System.out.println("2");
                 SmsManager smsManager = SmsManager.getDefault();
-                System.out.println("3");
-                smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자님께서 설정한 이동 반경을 벗어나셨습니다 !!\n 현재 위도: "+ nowLatLng.latitude+", 경도: "
-                        +nowLatLng.longitude, null, null);
-                System.out.println(nowLatLng.latitude+", "+nowLatLng.longitude);
-                System.out.println("4");
+                smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자님께서 설정한 이동 반경을 벗어나셨습니다 !!\n 현재 위도: "+ nowLatLng.latitude+", 경도: "+nowLatLng.longitude, null, null);
             } catch (Exception e) {
                 e.printStackTrace();
             }
