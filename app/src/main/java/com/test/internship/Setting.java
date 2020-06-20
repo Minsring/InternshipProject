@@ -305,6 +305,7 @@ public class Setting extends AppCompatActivity {
                 System.out.println("3");
                 smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자님께서 설정한 이동 반경을 벗어나셨습니다 !!\n 현재 위도: "+ nowLatLng.latitude+", 경도: "
                         +nowLatLng.longitude, null, null);
+                System.out.println(nowLatLng.latitude+", "+nowLatLng.longitude);
                 System.out.println("4");
             } catch (Exception e) {
                 e.printStackTrace();

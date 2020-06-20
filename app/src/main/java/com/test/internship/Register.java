@@ -121,7 +121,7 @@ public class Register extends AppCompatActivity {
     @Override
     public void onRestart() {
         super.onRestart();
-        save();
+        load();
     }
 
     private void save() {
