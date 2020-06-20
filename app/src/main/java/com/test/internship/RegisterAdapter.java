@@ -12,16 +12,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import static com.test.internship.Register.person1_n;
-import static com.test.internship.Register.person1_p;
-import static com.test.internship.Register.person2_n;
-import static com.test.internship.Register.person2_p;
-import static com.test.internship.Register.person3_n;
-import static com.test.internship.Register.person3_p;
-import static com.test.internship.Register.person4_n;
-import static com.test.internship.Register.person4_p;
-import static com.test.internship.Register.person5_n;
-import static com.test.internship.Register.person5_p;
 import static com.test.internship.Register.personData;
 
 public class RegisterAdapter extends BaseAdapter {
@@ -87,4 +77,3 @@ public class RegisterAdapter extends BaseAdapter {
         return convertView;
     }
 }
-

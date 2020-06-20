@@ -180,7 +180,8 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         buttonOkay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(num==0) {
+                if(person1_n!=null && person1_p != null&&person2_n!=null && person2_p != null&&person3_n!=null && person3_p != null
+                &&person4_n!=null && person4_p != null&&person5_n!=null && person5_p != null) {
                     Toast.makeText(getApplicationContext(), "보호자 정보를 먼저 등록해주세요.", Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -272,7 +273,9 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             if(dis>radius){
                 if(switchRadius.isChecked()==true&&smsFlag == true){
                     showNoti();
+                    System.out.println(person1_n+", "+person1_p);
                     if(person1_n!=null && person1_p != null){
+                        System.out.println("1");
                         Setting.sendSMS(person1_p, person1_n, 3);
                     }
                     if(person2_n!=null && person2_p != null){
