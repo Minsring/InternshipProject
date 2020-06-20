@@ -40,6 +40,7 @@ import static com.test.internship.Register.person4_n;
 import static com.test.internship.Register.person4_p;
 import static com.test.internship.Register.person5_n;
 import static com.test.internship.Register.person5_p;
+import static com.test.internship.Register.personData;
 import static com.test.internship.User.mStepDetector;
 import static com.test.internship.User.stepSensor;
 import static com.test.internship.User.timer;
@@ -57,8 +58,7 @@ public class Setting extends AppCompatActivity {
     private final int MY_PERMISSION_REQUEST_SMS=1001;
     int flagBattery;
     int flagMotion;
-    String phoneNo;
-    String name;
+    public int num = 0;
 
     ImageView healthImage;
     Button buttonRegister;
@@ -113,31 +113,8 @@ public class Setting extends AppCompatActivity {
 
                         if (battery < 15) {
                             showNoti();
-                            if(person1_n!=null && person1_p != null){
-                                name = person1_n;
-                                phoneNo = person1_p;
-                                sendSMS(phoneNo, name, 1);
-                            }
-
-                            if(person2_n!=null && person2_p != null){
-                                name = person2_n;
-                                phoneNo = person2_p;
-                                sendSMS(phoneNo, name, 1);
-                            }
-                            if(person3_n!=null && person3_p != null){
-                                name = person3_n;
-                                phoneNo = person3_p;
-                                sendSMS(phoneNo, name, 1);
-                            }
-                            if(person4_n!=null && person4_p != null){
-                                name = person4_n;
-                                phoneNo = person4_p;
-                                sendSMS(phoneNo, name, 1);
-                            }
-                            if(person5_n!=null && person5_p != null){
-                                name = person5_n;
-                                phoneNo = person5_p;
-                                sendSMS(phoneNo, name, 1);
+                            for(ProtectorData protectorData: Register.personData){
+                                sendSMS(protectorData.personNum, protectorData.personName, 1);
                             }
                         }
                     }
@@ -152,30 +129,8 @@ public class Setting extends AppCompatActivity {
                     public void run() {
                         flagMotion++;
                         if (mStepDetector < 20){ //20걸음 미만이라면 보호자에게 메세지 보내기
-                            if(person1_n!=null && person1_p != null){
-                                name = person1_n;
-                                phoneNo = person1_p;
-                                sendSMS(phoneNo, name, 2);
-                            }
-                            if(person2_n!=null && person2_p != null){
-                                name = person2_n;
-                                phoneNo = person2_p;
-                                sendSMS(phoneNo, name, 2);
-                            }
-                            if(person3_n!=null && person3_p != null){
-                                name = person3_n;
-                                phoneNo = person3_p;
-                                sendSMS(phoneNo, name, 2);
-                            }
-                            if(person4_n!=null && person4_p != null){
-                                name = person4_n;
-                                phoneNo = person4_p;
-                                sendSMS(phoneNo, name, 2);
-                            }
-                            if(person5_n!=null && person5_p != null){
-                                name = person5_n;
-                                phoneNo = person5_p;
-                                sendSMS(phoneNo, name, 2);
+                            for(ProtectorData protectorData: Register.personData){
+                                sendSMS(protectorData.personNum, protectorData.personName, 2);
                             }
                         }
                     }
@@ -199,8 +154,7 @@ public class Setting extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                 if (isChecked){
                     save();
-                    if(person1_n==null && person1_p==null && person2_n==null && person2_p==null
-                            && person3_n==null && person3_p==null && person4_n==null && person4_p==null && person5_n==null && person5_p==null) {
+                    if(num==0) {
                         Toast.makeText(getApplicationContext(), "보호자 정보를 먼저 등록해주세요.", Toast.LENGTH_SHORT).show();
                         batterySwitch.setChecked(false);
                     }
@@ -217,30 +171,8 @@ public class Setting extends AppCompatActivity {
 
                                 if (battery < 90) {
                                     showNoti();
-                                    if(person1_n!=null && person1_p != null){
-                                        name = person1_n;
-                                        phoneNo = person1_p;
-                                        sendSMS(phoneNo, name, 1);
-                                    }
-                                    if(person2_n!=null && person2_p != null){
-                                        name = person2_n;
-                                        phoneNo = person2_p;
-                                        sendSMS(phoneNo, name, 1);
-                                    }
-                                    if(person3_n!=null && person3_p != null){
-                                        name = person3_n;
-                                        phoneNo = person3_p;
-                                        sendSMS(phoneNo, name, 1);
-                                    }
-                                    if(person4_n!=null && person4_p != null){
-                                        name = person4_n;
-                                        phoneNo = person4_p;
-                                        sendSMS(phoneNo, name, 1);
-                                    }
-                                    if(person5_n!=null && person5_p != null){
-                                        name = person5_n;
-                                        phoneNo = person5_p;
-                                        sendSMS(phoneNo, name, 1);
+                                    for(ProtectorData protectorData: Register.personData){
+                                        sendSMS(protectorData.personNum, protectorData.personName, 1);
                                     }
                                 }
                             }
@@ -265,8 +197,7 @@ public class Setting extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                 if (isChecked){
                     save();
-                    if(person1_n==null && person1_p==null && person2_n==null && person2_p==null
-                            && person3_n==null && person3_p==null && person4_n==null && person4_p==null && person5_n==null && person5_p==null) {
+                    if(num==0) {
                         Toast.makeText(getApplicationContext(), "보호자 정보를 먼저 등록해주세요.", Toast.LENGTH_SHORT).show();
                         motionSwitch.setChecked(false);
                     }
@@ -280,31 +211,8 @@ public class Setting extends AppCompatActivity {
                                 public void run() {
                                     flagMotion++;
                                     if (mStepDetector < 20){//20걸음 미만이라면 보호자에게 메세지 보내기
-
-                                        if(person1_n!=null && person1_p != null){
-                                            name = person1_n;
-                                            phoneNo = person1_p;
-                                            sendSMS(phoneNo, name, 2);
-                                        }
-                                        if(person2_n!=null && person2_p != null){
-                                            name = person2_n;
-                                            phoneNo = person2_p;
-                                            sendSMS(phoneNo, name, 2);
-                                        }
-                                        if(person3_n!=null && person3_p != null){
-                                            name = person3_n;
-                                            phoneNo = person3_p;
-                                            sendSMS(phoneNo, name, 2);
-                                        }
-                                        if(person4_n!=null && person4_p != null){
-                                            name = person4_n;
-                                            phoneNo = person4_p;
-                                            sendSMS(phoneNo, name, 2);
-                                        }
-                                        if(person5_n!=null && person5_p != null){
-                                            name = person5_n;
-                                            phoneNo = person5_p;
-                                            sendSMS(phoneNo, name, 2);
+                                        for(ProtectorData protectorData: Register.personData){
+                                            sendSMS(protectorData.personNum, protectorData.personName, 2);
                                         }
                                     }
                                     mStepDetector=0;
@@ -359,6 +267,7 @@ public class Setting extends AppCompatActivity {
         isCheckMotion=appData.getBoolean("CHECK2", false);
         flagBattery=appData.getInt("FLAG_SETTING1", 0);
         flagMotion=appData.getInt("FLAG_SETTING2", 0);
+        num=appData.getInt("NUM",0);
     }
 
     //알림창 실행
@@ -409,19 +318,6 @@ public class Setting extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-    @Override
-    public void onStart() {
-        super.onStart();
     }
 }
 
