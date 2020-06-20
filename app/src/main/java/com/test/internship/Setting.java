@@ -30,17 +30,6 @@ import androidx.core.content.ContextCompat;
 import java.util.TimerTask;
 
 import static com.test.internship.DistanceRange.nowLatLng;
-import static com.test.internship.Register.person1_n;
-import static com.test.internship.Register.person1_p;
-import static com.test.internship.Register.person2_n;
-import static com.test.internship.Register.person2_p;
-import static com.test.internship.Register.person3_n;
-import static com.test.internship.Register.person3_p;
-import static com.test.internship.Register.person4_n;
-import static com.test.internship.Register.person4_p;
-import static com.test.internship.Register.person5_n;
-import static com.test.internship.Register.person5_p;
-import static com.test.internship.Register.personData;
 import static com.test.internship.User.mStepDetector;
 import static com.test.internship.User.stepSensor;
 import static com.test.internship.User.timer;
@@ -311,9 +300,12 @@ public class Setting extends AppCompatActivity {
         }
         else if (flag==3){
             try {
+                System.out.println("2");
                 SmsManager smsManager = SmsManager.getDefault();
+                System.out.println("3");
                 smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자님께서 설정한 이동 반경을 벗어나셨습니다 !!\n 현재 위도: "+ nowLatLng.latitude+", 경도: "
                         +nowLatLng.longitude, null, null);
+                System.out.println("4");
             } catch (Exception e) {
                 e.printStackTrace();
             }
