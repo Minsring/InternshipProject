@@ -77,10 +77,9 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     public int num = 0;
     private String CHANNEL_ID = "channel1";
     private String CHANEL_NAME = "Channel1";
-    Context context = this;
+
     NotificationManager manager;
     NotificationCompat.Builder builder;
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,7 +146,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             }
         }
 
-
         // 접근 권한 설정
         int permissionCheck= ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         if(permissionCheck!= PackageManager.PERMISSION_GRANTED){
@@ -159,6 +157,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 Toast.makeText(this, "위치접근 권한 필요", Toast.LENGTH_LONG).show();
             }
         }
+
         // Map 생성
         FragmentManager fm = getSupportFragmentManager();
         MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.mapRadius);
@@ -261,8 +260,8 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             if (dis > radius) {
                 if (switchRadius.isChecked() == true && smsFlag == true) {
                     showNoti();
-                    for (ProtectorData protectorData : Register.personData) {
-                        Setting.sendSMS(protectorData.personNum, protectorData.personName, 3);
+                    for(int i = 1; i<=num; i++){
+                        Setting.sendSMS(Register.personData.get(i-1).getPersonNum(), Register.personData.get(i-1).getPersonName(),3);
                     }
                 }
             }
@@ -295,7 +294,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
-    //dd
+
     // 지도가 생성되면 자동으로 호출
     @UiThread
     @Override

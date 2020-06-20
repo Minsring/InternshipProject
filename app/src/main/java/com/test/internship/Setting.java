@@ -40,7 +40,7 @@ public class Setting extends AppCompatActivity {
     private boolean saveData;
     private boolean isCheckBattery;
     private boolean isCheckMotion;
-//    private final int MY_PERMISSION_REQUEST_SMS=1001;
+
     int flagBattery;
     int flagMotion;
     public int num = 0;
@@ -125,13 +125,6 @@ public class Setting extends AppCompatActivity {
             }
         }
 
-//        if (ContextCompat.checkSelfPermission(Setting.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-//            if (ActivityCompat.shouldShowRequestPermissionRationale(Setting.this, Manifest.permission.SEND_SMS)) {
-//            }
-//            else {
-//                ActivityCompat.requestPermissions(Setting.this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
-//            }
-//        }
 
         batterySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)

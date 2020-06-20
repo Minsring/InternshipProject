@@ -20,8 +20,7 @@ public class Register extends AppCompatActivity {
 
     static ArrayList<ProtectorData> personData = null;
     static RegisterAdapter registerAdapter = null;
-    static String person1_n, person1_p, person2_n, person2_p, person3_n, person3_p,
-            person4_n, person4_p, person5_n, person5_p;
+    static String person1_n, person1_p, person2_n, person2_p, person3_n, person3_p, person4_n, person4_p, person5_n, person5_p;
     static int num;
 
     EditText idEdit_n;

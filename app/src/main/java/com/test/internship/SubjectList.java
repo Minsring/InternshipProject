@@ -58,7 +58,7 @@ public class SubjectList extends AppCompatActivity {
         final SubjectListAdapter subjectListAdapter = new SubjectListAdapter();
         xmlParser(subjectListAdapter);
         subjectListAdapter.combineItems();     // 진료중-준비중 순서대로 들어가게 하는 메소드 호출
-        openHospital= subjectListAdapter.getOpenItem(); //얘가 어댑터에서 받아와야 Map에 전달해줄수있다 !
+        openHospital= subjectListAdapter.getOpenItem(); //얘가 어댑터에서 받아와야 Map에 전달해줄수있다
         closedHospital= subjectListAdapter.getClosedItem();
 
         recyclerView.setAdapter(subjectListAdapter);
