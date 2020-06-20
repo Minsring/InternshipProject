@@ -311,5 +311,17 @@ public class Setting extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        load();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        load();
+    }
 }
 
