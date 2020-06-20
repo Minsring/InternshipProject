@@ -71,7 +71,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     static LatLng nowLatLng;
     static LatLng centerLatLng;
     boolean okayFlag;
-    boolean smsFlag;
 
 
     public int num = 0;
@@ -94,7 +93,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         buttonRegister=findViewById(R.id.buttonRegister);
         okayFlag = false;
         saveData = false;
-        smsFlag = false;
         marker = new Marker();
         regMarker = new Marker();
         circle = new CircleOverlay();
@@ -122,11 +120,9 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 }
                 else{
                     lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 30000, 1, gpsLocationListener);
-                    lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 30000, 1, gpsLocationListener);
                 }
             }
             else{
-                smsFlag = false;
                 okayFlag = false;
                 regCircle.setMap(null);
                 regMarker.setMap(null);
@@ -259,7 +255,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             centerLatLng = new LatLng(regMarker.getPosition().latitude, regMarker.getPosition().longitude);
             double dis = nowLatLng.distanceTo(centerLatLng); //m단위를 double로 반환
             if(dis>radius){
-                if(switchRadius.isChecked()==true&&smsFlag == true){
+                if(switchRadius.isChecked()==true){
                     showNoti();
                     for(ProtectorData protectorData: Register.personData){
                         Setting.sendSMS(protectorData.personNum, protectorData.personName, 3);
@@ -307,7 +303,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         circle.setMap(null);
         marker.setMap(null);
         if(switchRadius.isChecked()==true&&okayFlag==true){
-            smsFlag = true;
             okayFlag = false;
             regMarker.setPosition(new LatLng(centerLat, centerLng));
             regMarker.setIcon(MarkerIcons.BLACK);
@@ -386,7 +381,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         editor.putFloat("LAT", centerLat);
         editor.putFloat("LNG", centerLng);
         editor.putBoolean("OKAY", okayFlag);
-        editor.putBoolean("SMS", smsFlag);
         editor.apply();
     }
 
@@ -399,7 +393,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         centerLat = appData.getFloat("LAT", 0F);
         centerLng = appData.getFloat("LNG", 0F);
         okayFlag = appData.getBoolean("OKAY", false);
-        smsFlag = appData.getBoolean("SMS", false);
     }
 
     @Override
@@ -427,7 +420,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 okayFlag=true;
             }
             else{
-                smsFlag = false;
                 okayFlag = false;
                 regCircle.setMap(null);
                 regMarker.setMap(null);
@@ -463,7 +455,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 okayFlag=true;
             }
             else{
-                smsFlag = false;
                 okayFlag = false;
                 regCircle.setMap(null);
                 regMarker.setMap(null);
