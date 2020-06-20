@@ -31,8 +31,6 @@ public class RegisterAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private int layout;
 
-    int numPerson, time;
-
     public RegisterAdapter(Context context, int layout, ArrayList<ProtectorData> mData) {
         this.mContext = context;
         this.layout = layout;
@@ -73,16 +71,10 @@ public class RegisterAdapter extends BaseAdapter {
             @Override
             public boolean onLongClick(View v) {
                 if(personData.get(position) != null) {
-                    Toast.makeText(mContext, mData.get(position).getPersonName(), Toast.LENGTH_LONG).show();
                     personData.remove(position);
                     Register.num--;
                     Register.registerAdapter.notifyDataSetChanged();
                     Toast.makeText(mContext, "선택한 보호자의 정보를 삭제하였습니다.", Toast.LENGTH_SHORT).show();
-                    String name = "";
-                    for(int i = 0; i<Register.num; i++){
-                        name+= mData.get(i).getPersonName();
-                    }
-                    Toast.makeText(mContext, name, Toast.LENGTH_LONG).show();
                 }
                 return false;
             }

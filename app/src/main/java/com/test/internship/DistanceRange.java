@@ -85,6 +85,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     boolean smsFlag;
 
 
+    public int num = 0;
     private String CHANNEL_ID = "channel1";
     private String CHANEL_NAME = "Channel1";
     Context context = this;
@@ -184,8 +185,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         buttonOkay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(person1_n==null && person1_p==null && person2_n==null && person2_p==null
-                        && person3_n==null && person3_p==null && person4_n==null && person4_p==null && person5_n==null && person5_p==null) {
+                if(num==0) {
                     Toast.makeText(getApplicationContext(), "보호자 정보를 먼저 등록해주세요.", Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -419,6 +419,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
 
     // 데이터 로딩
     private void load(){
+        num = appData.getInt("NUM", 0);
         switchState= appData.getBoolean("ISCHECKED",false);
         saveData = appData.getBoolean("SAVEDATA", false);
         radius = appData.getFloat("RADIUS", 0.2F);
