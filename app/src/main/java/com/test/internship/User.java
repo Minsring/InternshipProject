@@ -1,8 +1,10 @@
 package com.test.internship;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -18,6 +20,8 @@ import android.widget.TableLayout;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -35,6 +39,7 @@ public class User extends AppCompatActivity implements SensorEventListener {
     static TimerTask timerTask1;
     static TimerTask timerTask2;
     static int mStepDetector;
+    private final int MY_PERMISSION_REQUEST_SMS=1001;
 
     TableLayout tableLayout;
     Animation anim1, anim2, anim3;
@@ -108,6 +113,15 @@ public class User extends AppCompatActivity implements SensorEventListener {
 
         // 타이머
         timer = new Timer();
+
+        //sms 허가
+        if (ContextCompat.checkSelfPermission(User.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(User.this, Manifest.permission.SEND_SMS)) {
+            }
+            else {
+                ActivityCompat.requestPermissions(User.this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
+            }
+        }
     }
 
     // 각 버튼 별 처리
