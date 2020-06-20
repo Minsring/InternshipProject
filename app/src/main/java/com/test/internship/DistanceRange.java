@@ -257,7 +257,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             builder = new NotificationCompat.Builder(this);
         }
         builder.setContentTitle("반경 벗어남 알림");
-        builder.setContentText("설정된 반경을 벗어났습니다!! 보호자에 알림을 전송하겠습니다.");
+        builder.setContentText("설정된 반경을 벗어났습니다!! 보호자에게 알림을 전송합니다!");
         builder.setSmallIcon(R.mipmap.app_icon);
         Notification notification = builder.build();
         manager.notify(1,notification);
