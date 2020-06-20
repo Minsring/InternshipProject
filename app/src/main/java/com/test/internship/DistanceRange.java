@@ -76,7 +76,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
 
     public int num = 0;
     private String CHANNEL_ID = "channel1";
-    private String CHANEL_NAME = "Channel1";
+    private String CHANNEL_NAME = "Channel1";
 
     NotificationManager manager;
     NotificationCompat.Builder builder;
@@ -113,7 +113,6 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                 mapRadius.setVisibility(View.VISIBLE);
                 buttonOkay.setVisibility(View.VISIBLE);
                 okayFlag=true;
-                //onMapReady(naverMap);
                 if ( Build.VERSION.SDK_INT >= 23 &&
                         ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
                     ActivityCompat.requestPermissions( DistanceRange.this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
@@ -233,7 +232,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         //버전 오레오 이상일 경우
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             manager.createNotificationChannel(
-                    new NotificationChannel(CHANNEL_ID, CHANEL_NAME, NotificationManager.IMPORTANCE_DEFAULT));
+                    new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT));
             builder = new NotificationCompat.Builder(this,CHANNEL_ID);
         }
         //하위 버전일 경우

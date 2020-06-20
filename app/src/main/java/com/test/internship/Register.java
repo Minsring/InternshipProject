@@ -102,7 +102,7 @@ public class Register extends AppCompatActivity {
         super.onResume();
         save();
     }
-        @Override
+    @Override
     public void onPause() {
         super.onPause();
         save();

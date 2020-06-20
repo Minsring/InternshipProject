@@ -35,7 +35,7 @@ import static com.test.internship.User.timerTask2;
 public class Setting extends AppCompatActivity {
 
     private String CHANNEL_ID = "channel1";
-    private String CHANEL_NAME = "Channel1";
+    private String CHANNEL_NAME = "Channel1";
     private SharedPreferences appData;
     private boolean saveData;
     private boolean isCheckBattery;
@@ -256,7 +256,7 @@ public class Setting extends AppCompatActivity {
         //버전 오레오 이상일 경우
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             manager.createNotificationChannel(
-                    new NotificationChannel(CHANNEL_ID, CHANEL_NAME, NotificationManager.IMPORTANCE_DEFAULT));
+                    new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT));
             builder = new NotificationCompat.Builder(this,CHANNEL_ID);
         }
         //하위 버전일 경우
