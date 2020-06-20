@@ -253,6 +253,7 @@ public class Setting extends AppCompatActivity {
         flagBattery=appData.getInt("FLAG_SETTING1", 0);
         flagMotion=appData.getInt("FLAG_SETTING2", 0);
         num=appData.getInt("NUM",0);
+        if(num<0) num=0;
     }
 
     //알림창 실행

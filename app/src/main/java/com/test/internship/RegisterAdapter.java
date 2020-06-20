@@ -63,6 +63,7 @@ public class RegisterAdapter extends BaseAdapter {
                 if(personData.get(position) != null) {
                     personData.remove(position);
                     Register.num--;
+                    if(Register.num<0) Register.num=0;
                     Register.registerAdapter.notifyDataSetChanged();
                     Toast.makeText(mContext, "선택한 보호자의 정보를 삭제하였습니다.", Toast.LENGTH_SHORT).show();
                     String name = "";

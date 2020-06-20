@@ -122,6 +122,7 @@ public class Register extends AppCompatActivity {
     private void save() {
         SharedPreferences.Editor editor = appData.edit();
         editor.putBoolean("SAVE_ON", true);
+        if(num<0) num=0;
         editor.putInt("NUM",num);
         for(int i = 1; i<=num; i++) {
             editor.putString("PERSON"+i+"_NAME", personData.get(i-1).getPersonName());
@@ -136,6 +137,7 @@ public class Register extends AppCompatActivity {
 
     private void load() {
         num = appData.getInt("NUM", 0);
+        if(num<0) num=0;
         saveData = appData.getBoolean("SAVE_ON", false);
 
         person1_n = appData.getString("PERSON1_NAME",null);
