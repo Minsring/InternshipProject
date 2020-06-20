@@ -129,8 +129,8 @@ public class Register extends AppCompatActivity {
         editor.putBoolean("SAVE_ON", true);
         editor.putInt("NUM",num);
         for(int i = 1; i<=num; i++) {
-            editor.putString("PERSON"+i+"_NAME", personData.get(i).getPersonName());
-            editor.putString("PERSON"+i+"_PHONE",personData.get(i).getPersonNum());
+            editor.putString("PERSON"+i+"_NAME", personData.get(i-1).getPersonName());
+            editor.putString("PERSON"+i+"_PHONE",personData.get(i-1).getPersonNum());
         }
         for(int i = num+1; i<=5; i++){
             editor.putString("PERSON"+i+"_NAME", null);
