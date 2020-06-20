@@ -47,17 +47,6 @@ import com.naver.maps.map.util.MarkerIcons;
 
 import java.util.Locale;
 
-import static com.test.internship.Register.person1_n;
-import static com.test.internship.Register.person1_p;
-import static com.test.internship.Register.person2_n;
-import static com.test.internship.Register.person2_p;
-import static com.test.internship.Register.person3_n;
-import static com.test.internship.Register.person3_p;
-import static com.test.internship.Register.person4_n;
-import static com.test.internship.Register.person4_p;
-import static com.test.internship.Register.person5_n;
-import static com.test.internship.Register.person5_p;
-
 public class DistanceRange extends AppCompatActivity implements OnMapReadyCallback {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private final int MY_PERMISSIONS_REQUEST_LOCATION = 1001;
@@ -426,12 +415,70 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     protected void onStart() {
         super.onStart();
         load();
+        if(saveData){
+            switchRadius.setChecked(switchState);
+
+            if(switchRadius.isChecked()==true){
+                layoutRadius.setVisibility(View.VISIBLE);
+                mapRadius.setVisibility(View.VISIBLE);
+                buttonOkay.setVisibility(View.VISIBLE);
+                okayFlag=true;
+            }
+            else{
+                smsFlag = false;
+                okayFlag = false;
+                regCircle.setMap(null);
+                regMarker.setMap(null);
+                circle.setMap(null);
+                marker.setMap(null);
+                layoutRadius.setVisibility(View.INVISIBLE);
+                mapRadius.setVisibility(View.INVISIBLE);
+                buttonOkay.setVisibility(View.INVISIBLE);
+            }
+        }
+        else{
+            if(!switchRadius.isChecked()){
+                okayFlag = false;
+                layoutRadius.setVisibility(View.INVISIBLE);
+                mapRadius.setVisibility(View.INVISIBLE);
+                buttonOkay.setVisibility(View.INVISIBLE);
+            }
+        }
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
         load();
+        if(saveData){
+            switchRadius.setChecked(switchState);
+
+            if(switchRadius.isChecked()==true){
+                layoutRadius.setVisibility(View.VISIBLE);
+                mapRadius.setVisibility(View.VISIBLE);
+                buttonOkay.setVisibility(View.VISIBLE);
+                okayFlag=true;
+            }
+            else{
+                smsFlag = false;
+                okayFlag = false;
+                regCircle.setMap(null);
+                regMarker.setMap(null);
+                circle.setMap(null);
+                marker.setMap(null);
+                layoutRadius.setVisibility(View.INVISIBLE);
+                mapRadius.setVisibility(View.INVISIBLE);
+                buttonOkay.setVisibility(View.INVISIBLE);
+            }
+        }
+        else{
+            if(!switchRadius.isChecked()){
+                okayFlag = false;
+                layoutRadius.setVisibility(View.INVISIBLE);
+                mapRadius.setVisibility(View.INVISIBLE);
+                buttonOkay.setVisibility(View.INVISIBLE);
+            }
+        }
     }
 
 
