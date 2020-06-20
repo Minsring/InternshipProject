@@ -126,8 +126,8 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                             MY_PERMISSIONS_REQUEST_LOCATION );
                 }
                 else{
-                    lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 300000, 1, gpsLocationListener);
-                    lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 300000, 1, gpsLocationListener);
+                    lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 30000, 1, gpsLocationListener);
+                    lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 30000, 1, gpsLocationListener);
                 }
             }
             else{
@@ -267,24 +267,20 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             double dis = nowLatLng.distanceTo(centerLatLng); //m단위를 double로 반환
             if(dis>radius){
                 if(switchRadius.isChecked()==true){
+                    showNoti();
                     if(person1_n!=null && person1_p != null){
-                        showNoti();
                         Setting.sendSMS(person1_p, person1_n, 3);
                     }
                     if(person2_n!=null && person2_p != null){
-                        showNoti();
                         Setting.sendSMS(person2_p, person2_n, 3);
                     }
                     if(person3_n!=null && person3_p != null){
-                        showNoti();
                         Setting.sendSMS(person3_p, person3_n, 3);
                     }
                     if(person4_n!=null && person4_p != null){
-                        showNoti();
                         Setting.sendSMS(person4_p, person4_n, 3);
                     }
                     if(person5_n!=null && person5_p != null){
-                        showNoti();
                         Setting.sendSMS(person5_p, person5_n, 3);
                     }
                 }
