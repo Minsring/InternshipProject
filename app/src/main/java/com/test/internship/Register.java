@@ -99,6 +99,11 @@ public class Register extends AppCompatActivity {
     };
 
     @Override
+    public void onResume() {
+        super.onResume();
+        save();
+    }
+        @Override
     public void onPause() {
         super.onPause();
         save();
