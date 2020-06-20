@@ -215,7 +215,7 @@ public class Setting extends AppCompatActivity {
                                 float batteryPct = level / (float) scale;
                                 int battery = (int) (batteryPct * 100);
 
-                                if (battery < 15) {
+                                if (battery < 90) {
                                     showNoti();
                                     if(person1_n!=null && person1_p != null){
                                         name = person1_n;
@@ -260,7 +260,6 @@ public class Setting extends AppCompatActivity {
         });
 
         motionSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
@@ -378,14 +377,13 @@ public class Setting extends AppCompatActivity {
         }
         builder.setContentTitle("배터리 부족 알림");
         builder.setContentText("배터리 부족!! 보호자에 알림을 전송하겠습니다.");
-        builder.setSmallIcon(R.drawable.ic_launcher_foreground);
+        builder.setSmallIcon(R.mipmap.app_icon);
         Notification notification = builder.build();
         manager.notify(1,notification);
     }
 
     //문자전송
     public static void sendSMS(String phoneNo, String name, int flag){
-
         if(flag==1){
             try {
                 SmsManager smsManager = SmsManager.getDefault();
