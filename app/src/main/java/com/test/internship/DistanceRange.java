@@ -272,20 +272,8 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             if(dis>radius){
                 if(switchRadius.isChecked()==true&&smsFlag == true){
                     showNoti();
-                    if(person1_n!=null && person1_p != null){
-                        Setting.sendSMS(person1_p, person1_n, 3);
-                    }
-                    if(person2_n!=null && person2_p != null){
-                        Setting.sendSMS(person2_p, person2_n, 3);
-                    }
-                    if(person3_n!=null && person3_p != null){
-                        Setting.sendSMS(person3_p, person3_n, 3);
-                    }
-                    if(person4_n!=null && person4_p != null){
-                        Setting.sendSMS(person4_p, person4_n, 3);
-                    }
-                    if(person5_n!=null && person5_p != null){
-                        Setting.sendSMS(person5_p, person5_n, 3);
+                    for(ProtectorData protectorData: Register.personData){
+                        Setting.sendSMS(protectorData.personNum, protectorData.personName, 3);
                     }
                 }
             }
@@ -433,5 +421,18 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     public void onStop() {
         super.onStop();
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        load();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        load();
+    }
+
 
 }
