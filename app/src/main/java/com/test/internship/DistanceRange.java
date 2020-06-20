@@ -214,8 +214,8 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                                 MY_PERMISSIONS_REQUEST_LOCATION );
                     }
                     else{
-                        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 300000, 1, gpsLocationListener);
-                        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 300000, 1, gpsLocationListener);
+                        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 30000, 1, gpsLocationListener);
+                        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 30000, 1, gpsLocationListener);
                     }
                 }
                 else{
