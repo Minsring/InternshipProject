@@ -117,49 +117,44 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
 
         // 저장된 기록 로딩
         load();
-        if (centerLng ==0F&&centerLat==0F){
+        if(saveData){
+            switchRadius.setChecked(switchState);
 
-        }
-        else{
-            if(saveData){
-                switchRadius.setChecked(switchState);
-
-                if(switchRadius.isChecked()==true){
-                    layoutRadius.setVisibility(View.VISIBLE);
-                    mapRadius.setVisibility(View.VISIBLE);
-                    buttonOkay.setVisibility(View.VISIBLE);
-                    okayFlag=true;
-                    //onMapReady(naverMap);
-                    if ( Build.VERSION.SDK_INT >= 23 &&
-                            ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
-                        ActivityCompat.requestPermissions( DistanceRange.this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
-                                MY_PERMISSIONS_REQUEST_LOCATION );
-                    }
-                    else{
-                        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 30000, 1, gpsLocationListener);
-                        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 30000, 1, gpsLocationListener);
-                    }
+            if(switchRadius.isChecked()==true){
+                layoutRadius.setVisibility(View.VISIBLE);
+                mapRadius.setVisibility(View.VISIBLE);
+                buttonOkay.setVisibility(View.VISIBLE);
+                okayFlag=true;
+                //onMapReady(naverMap);
+                if ( Build.VERSION.SDK_INT >= 23 &&
+                        ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
+                    ActivityCompat.requestPermissions( DistanceRange.this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  },
+                            MY_PERMISSIONS_REQUEST_LOCATION );
                 }
                 else{
-                    smsFlag = false;
-                    okayFlag = false;
-                    regCircle.setMap(null);
-                    regMarker.setMap(null);
-                    circle.setMap(null);
-                    marker.setMap(null);
-                    lm.removeUpdates(gpsLocationListener);
-                    layoutRadius.setVisibility(View.INVISIBLE);
-                    mapRadius.setVisibility(View.INVISIBLE);
-                    buttonOkay.setVisibility(View.INVISIBLE);
+                    lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 30000, 1, gpsLocationListener);
+                    lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 30000, 1, gpsLocationListener);
                 }
             }
             else{
-                if(!switchRadius.isChecked()){
-                    okayFlag = false;
-                    layoutRadius.setVisibility(View.INVISIBLE);
-                    mapRadius.setVisibility(View.INVISIBLE);
-                    buttonOkay.setVisibility(View.INVISIBLE);
-                }
+                smsFlag = false;
+                okayFlag = false;
+                regCircle.setMap(null);
+                regMarker.setMap(null);
+                circle.setMap(null);
+                marker.setMap(null);
+                lm.removeUpdates(gpsLocationListener);
+                layoutRadius.setVisibility(View.INVISIBLE);
+                mapRadius.setVisibility(View.INVISIBLE);
+                buttonOkay.setVisibility(View.INVISIBLE);
+            }
+        }
+        else{
+            if(!switchRadius.isChecked()){
+                okayFlag = false;
+                layoutRadius.setVisibility(View.INVISIBLE);
+                mapRadius.setVisibility(View.INVISIBLE);
+                buttonOkay.setVisibility(View.INVISIBLE);
             }
         }
 
