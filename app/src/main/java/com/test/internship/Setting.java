@@ -97,7 +97,7 @@ public class Setting extends AppCompatActivity {
                         int battery = (int) (batteryPct * 100);
 
                         if (battery < 15) {
-                            showNoti();
+                            showNoti(1);
                             for(ProtectorData protectorData: Register.personData){
                                 sendSMS(protectorData.personNum, protectorData.personName, 1);
                             }
@@ -147,8 +147,8 @@ public class Setting extends AppCompatActivity {
                                 float batteryPct = level / (float) scale;
                                 int battery = (int) (batteryPct * 100);
 
-                                if (battery < 90) {
-                                    showNoti();
+                                if (battery < 15) {
+                                    showNoti(1);
                                     for(ProtectorData protectorData: Register.personData){
                                         sendSMS(protectorData.personNum, protectorData.personName, 1);
                                     }
@@ -189,6 +189,7 @@ public class Setting extends AppCompatActivity {
                                 public void run() {
                                     flagMotion++;
                                     if (mStepDetector < 20){//20걸음 미만이라면 보호자에게 메세지 보내기
+                                        showNoti(2);
                                         for(ProtectorData protectorData: Register.personData){
                                             sendSMS(protectorData.personNum, protectorData.personName, 2);
                                         }
@@ -250,7 +251,7 @@ public class Setting extends AppCompatActivity {
     }
 
     //알림창 실행
-    public void showNoti(){
+    public void showNoti(int flag){
         builder = null;
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         //버전 오레오 이상일 경우
@@ -263,11 +264,20 @@ public class Setting extends AppCompatActivity {
         else{
             builder = new NotificationCompat.Builder(this);
         }
-        builder.setContentTitle("배터리 부족 알림");
-        builder.setContentText("배터리 부족!! 보호자에 알림을 전송하겠습니다.");
-        builder.setSmallIcon(R.mipmap.app_icon);
-        Notification notification = builder.build();
-        manager.notify(1,notification);
+        if(flag==1) {
+            builder.setContentTitle("배터리 부족 알림");
+            builder.setContentText("배터리 부족!! 보호자에 알림을 전송합니다.");
+            builder.setSmallIcon(R.mipmap.app_icon);
+            Notification notification = builder.build();
+            manager.notify(1, notification);
+        }
+        else{
+            builder.setContentTitle("걸음수 부족 알림");
+            builder.setContentText("걸음수 20걸음 미만!! 보호자에 알림을 전송합니다.");
+            builder.setSmallIcon(R.mipmap.app_icon);
+            Notification notification = builder.build();
+            manager.notify(1, notification);
+        }
     }
 
     //문자전송
