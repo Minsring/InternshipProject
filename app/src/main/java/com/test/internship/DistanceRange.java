@@ -1,11 +1,15 @@
 package com.test.internship;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -15,6 +19,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -81,6 +86,8 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
     NotificationManager manager;
     NotificationCompat.Builder builder;
 
+    String person1_n, person1_p, person2_n, person2_p, person3_n, person3_p, person4_n, person4_p, person5_n, person5_p;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.distance_range);
@@ -119,8 +126,8 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                             MY_PERMISSIONS_REQUEST_LOCATION );
                 }
                 else{
-                    lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 30000, 1, gpsLocationListener);
-                    lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 30000, 1, gpsLocationListener);
+                    lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 600000, 1, gpsLocationListener);
+                    lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 600000, 1, gpsLocationListener);
                 }
             }
             else{
@@ -205,7 +212,7 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
                                 MY_PERMISSIONS_REQUEST_LOCATION );
                     }
                     else{
-                        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 30000, 1, gpsLocationListener);
+                        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 600000, 1, gpsLocationListener);
                     }
                     save();
                 }
@@ -246,6 +253,63 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         manager.notify(1,notification);
     }
 
+    //문자전송
+    public void sendSMS(String phoneNo, String name) {
+        try {
+            PendingIntent sentIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, new Intent("SMS_SENT_ACTION"), 0);
+            PendingIntent deliveredIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, new Intent("SMS_DELIVERED_ACTION"), 0);
+
+            registerReceiver(new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    switch(getResultCode()){
+                        case Activity.RESULT_CANCELED:
+                            // 작업이 취소됨
+                            Toast.makeText(getApplicationContext(), "전송이 취소되었습니다", Toast.LENGTH_SHORT).show();
+                            break;
+                        case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
+                            // 전송 실패
+                            Toast.makeText(getApplicationContext(), "전송 실패 (RESULT_ERROR_GENERIC_FAILURE)", Toast.LENGTH_SHORT).show();
+                            break;
+                        case SmsManager.RESULT_ERROR_NO_SERVICE:
+                            // 문자 지원 단말 아님
+                            Toast.makeText(getApplicationContext(), "단말기가 문자 서비스를 지원하지 않습니다", Toast.LENGTH_SHORT).show();
+                            break;
+                        case SmsManager.RESULT_ERROR_RADIO_OFF:
+                            // 무선 꺼짐
+                            Toast.makeText(getApplicationContext(), "통신이 꺼져있습니다", Toast.LENGTH_SHORT).show();
+                            break;
+                        case SmsManager.RESULT_ERROR_NULL_PDU:
+                            // PDU 실패
+                            Toast.makeText(getApplicationContext(), "PDU Null", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
+            }, new IntentFilter("SMS_SENT_ACTION"));
+
+            registerReceiver(new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    switch (getResultCode()) {
+                        case Activity.RESULT_OK:
+                            Toast.makeText(getApplicationContext(), "SMS 도착 완료", Toast.LENGTH_SHORT).show();
+                            break;
+                        case Activity.RESULT_CANCELED:
+                            Toast.makeText(getApplicationContext(), "SMS 도착 실패", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
+            }, new IntentFilter("SMS_DELIVERED_ACTION"));
+
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자님께서 설정한 이동 반경을 벗어나셨습니다 !!\n 현재 위도: " + nowLatLng.latitude + ", 경도: " + nowLatLng.longitude,
+                    sentIntent, deliveredIntent);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     // 현재위치가 바뀌면 호출되는 리스너너
     final LocationListener gpsLocationListener = new LocationListener() {
         @Override
@@ -259,8 +323,20 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
             if (dis > radius) {
                 if (switchRadius.isChecked() == true && smsFlag == true) {
                     showNoti();
-                    for(int i = 1; i<=num; i++){
-                        Setting.sendSMS(Register.personData.get(i-1).getPersonNum(), Register.personData.get(i-1).getPersonName(),3);
+                    if(person1_n != null && person1_p != null){
+                        sendSMS(person1_p, person1_n);
+                    }
+                    if(person2_n != null && person2_p != null){
+                        sendSMS(person2_p, person2_n);
+                    }
+                    if(person3_n != null && person3_p != null){
+                        sendSMS(person3_p, person3_n);
+                    }
+                    if(person4_n != null && person4_p != null){
+                        sendSMS(person4_p, person4_n);
+                    }
+                    if(person5_n != null && person5_p != null){
+                        sendSMS(person5_p, person5_n);
                     }
                 }
             }
@@ -397,6 +473,17 @@ public class DistanceRange extends AppCompatActivity implements OnMapReadyCallba
         centerLng = appData.getFloat("LNG", 0F);
         okayFlag = appData.getBoolean("OKAY", false);
         smsFlag = appData.getBoolean("SMS", false);
+
+        person1_n = appData.getString("PERSON1_NAME",null);
+        person1_p = appData.getString("PERSON1_PHONE", null);
+        person2_n = appData.getString("PERSON2_NAME", null);
+        person2_p = appData.getString("PERSON2_PHONE", null);
+        person3_n = appData.getString("PERSON3_NAME", null);
+        person3_p = appData.getString("PERSON3_PHONE", null);
+        person4_n = appData.getString("PERSON4_NAME", null);
+        person4_p = appData.getString("PERSON4_PHONE", null);
+        person5_n = appData.getString("PERSON5_NAME", null);
+        person5_p = appData.getString("PERSON5_PHONE", null);
     }
 
     @Override

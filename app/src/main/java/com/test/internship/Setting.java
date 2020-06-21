@@ -280,11 +280,12 @@ public class Setting extends AppCompatActivity {
     }
 
     //문자전송
-    public static void sendSMS(String phoneNo, String name, int flag){
+    public void sendSMS(String phoneNo, String name, int flag){
         if(flag==1){
             try {
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자의 휴대전화 배터리가 15% 미만입니다 !!", null, null);
+                smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자의 휴대전화 배터리가 15% 미만입니다 !!",
+                        null, null);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -292,16 +293,8 @@ public class Setting extends AppCompatActivity {
         else if(flag==2){
             try {
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자의 일일 걸음 수가 20보 미만입니다 !!", null, null);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        else if (flag==3){
-            try {
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자님께서 설정한 이동 반경을 벗어나셨습니다 !!\n 현재 위도: "+ nowLatLng.latitude+", 경도: "+nowLatLng.longitude, null, null);
-
+                smsManager.sendTextMessage(phoneNo, null, name + "님 보호대상자의 일일 걸음 수가 20보 미만입니다 !!",
+                        null, null);
             } catch (Exception e) {
                 e.printStackTrace();
             }
