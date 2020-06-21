@@ -183,12 +183,11 @@ public class Setting extends AppCompatActivity {
 
                         if(stepSensor == null) Toast.makeText(Setting.this, "걸음감지 센서가 없습니다.", Toast.LENGTH_SHORT).show();
                         else{
-                            mStepDetector=30;
                             timerTask2 = new TimerTask() {
                                 @Override
                                 public void run() {
                                     flagMotion++;
-                                    if (mStepDetector < 20){//20걸음 미만이라면 보호자에게 메세지 보내기
+                                    if (mStepDetector < 20&&flagMotion!=1){//20걸음 미만이라면 보호자에게 메세지 보내기
                                         showNoti(2);
                                         for(ProtectorData protectorData: Register.personData){
                                             sendSMS(protectorData.personNum, protectorData.personName, 2);
@@ -199,7 +198,6 @@ public class Setting extends AppCompatActivity {
                                 }
                             };
                             timer.schedule(timerTask2, 0, 86400000);
-                            mStepDetector=0;
                         }
 
                     }

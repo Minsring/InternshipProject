@@ -223,6 +223,7 @@ public class User extends AppCompatActivity implements SensorEventListener {
     }
     private void load() {
         mStepDetector = appData.getInt("SAVE_STEP_DATA", 0);
+
     }
 
     @Override
