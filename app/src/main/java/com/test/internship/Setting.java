@@ -113,7 +113,8 @@ public class Setting extends AppCompatActivity {
                     @Override
                     public void run() {
                         flagMotion++;
-                        if (mStepDetector < 20){ //20걸음 미만이라면 보호자에게 메세지 보내기
+                        if (mStepDetector < 20&&flagMotion!=1){ //20걸음 미만이라면 보호자에게 메세지 보내기
+                            showNoti(2);
                             for(ProtectorData protectorData: Register.personData){
                                 sendSMS(protectorData.personNum, protectorData.personName, 2);
                             }
