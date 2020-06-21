@@ -108,7 +108,6 @@ public class Setting extends AppCompatActivity {
             }
             motionSwitch.setChecked(isCheckMotion);
             if(isCheckMotion){
-                mStepDetector=30;
                 timerTask2 = new TimerTask() {
                     @Override
                     public void run() {
@@ -199,6 +198,7 @@ public class Setting extends AppCompatActivity {
                                 }
                             };
                             timer.schedule(timerTask2, 0, 86400000);
+                            mStepDetector=0;
                         }
 
                     }
